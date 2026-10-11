@@ -14,6 +14,7 @@ import (
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 	systempasswordmanagement "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/passwordmanagement"
+	systemrpc "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/rpc"
 )
 
 // AUDIT_POLICY_INFORMATION: https://learn.microsoft.com/windows/win32/api/ntsecapi/ns-ntsecapi-audit_policy_information
@@ -724,9 +725,25 @@ type LSA_FOREST_TRUST_INFORMATION2 struct {
 }
 
 // LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union struct {
 	Data [5]uint64
+}
+
+// TopLevelName reinterprets the union as its TopLevelName member.
+func (u *LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union) TopLevelName() *LSA_UNICODE_STRING {
+	return (*LSA_UNICODE_STRING)(unsafe.Pointer(u))
+}
+
+// DomainInfo reinterprets the union as its DomainInfo member.
+func (u *LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union) DomainInfo() *LSA_FOREST_TRUST_DOMAIN_INFO {
+	return (*LSA_FOREST_TRUST_DOMAIN_INFO)(unsafe.Pointer(u))
+}
+
+// Data_ reinterprets the union as its Data member.
+func (u *LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union) Data_() *LSA_FOREST_TRUST_BINARY_DATA {
+	return (*LSA_FOREST_TRUST_BINARY_DATA)(unsafe.Pointer(u))
 }
 
 // LSA_FOREST_TRUST_RECORD: https://learn.microsoft.com/windows/win32/api/ntsecapi/ns-ntsecapi-lsa_forest_trust_record
@@ -738,9 +755,30 @@ type LSA_FOREST_TRUST_RECORD struct {
 }
 
 // LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union struct {
 	Data [5]uint64
+}
+
+// TopLevelName reinterprets the union as its TopLevelName member.
+func (u *LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union) TopLevelName() *LSA_UNICODE_STRING {
+	return (*LSA_UNICODE_STRING)(unsafe.Pointer(u))
+}
+
+// DomainInfo reinterprets the union as its DomainInfo member.
+func (u *LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union) DomainInfo() *LSA_FOREST_TRUST_DOMAIN_INFO {
+	return (*LSA_FOREST_TRUST_DOMAIN_INFO)(unsafe.Pointer(u))
+}
+
+// BinaryData reinterprets the union as its BinaryData member.
+func (u *LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union) BinaryData() *LSA_FOREST_TRUST_BINARY_DATA {
+	return (*LSA_FOREST_TRUST_BINARY_DATA)(unsafe.Pointer(u))
+}
+
+// ScannerInfo reinterprets the union as its ScannerInfo member.
+func (u *LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union) ScannerInfo() *LSA_FOREST_TRUST_SCANNER_INFO {
+	return (*LSA_FOREST_TRUST_SCANNER_INFO)(unsafe.Pointer(u))
 }
 
 type LSA_FOREST_TRUST_RECORD2 struct {
@@ -1570,9 +1608,40 @@ type SECPKG_EVENT_ROLE_CHANGE struct {
 }
 
 // SECPKG_EXTENDED_INFORMATION_Info_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SECPKG_EXTENDED_INFORMATION_Info_e__Union struct {
 	Data [6]uint64
+}
+
+// GssInfo reinterprets the union as its GssInfo member.
+func (u *SECPKG_EXTENDED_INFORMATION_Info_e__Union) GssInfo() *SECPKG_GSS_INFO {
+	return (*SECPKG_GSS_INFO)(unsafe.Pointer(u))
+}
+
+// ContextThunks reinterprets the union as its ContextThunks member.
+func (u *SECPKG_EXTENDED_INFORMATION_Info_e__Union) ContextThunks() *SECPKG_CONTEXT_THUNKS {
+	return (*SECPKG_CONTEXT_THUNKS)(unsafe.Pointer(u))
+}
+
+// MutualAuthLevel reinterprets the union as its MutualAuthLevel member.
+func (u *SECPKG_EXTENDED_INFORMATION_Info_e__Union) MutualAuthLevel() *SECPKG_MUTUAL_AUTH_LEVEL {
+	return (*SECPKG_MUTUAL_AUTH_LEVEL)(unsafe.Pointer(u))
+}
+
+// WowClientDll reinterprets the union as its WowClientDll member.
+func (u *SECPKG_EXTENDED_INFORMATION_Info_e__Union) WowClientDll() *SECPKG_WOW_CLIENT_DLL {
+	return (*SECPKG_WOW_CLIENT_DLL)(unsafe.Pointer(u))
+}
+
+// ExtraOids reinterprets the union as its ExtraOids member.
+func (u *SECPKG_EXTENDED_INFORMATION_Info_e__Union) ExtraOids() *SECPKG_EXTRA_OIDS {
+	return (*SECPKG_EXTRA_OIDS)(unsafe.Pointer(u))
+}
+
+// Nego2Info reinterprets the union as its Nego2Info member.
+func (u *SECPKG_EXTENDED_INFORMATION_Info_e__Union) Nego2Info() *SECPKG_NEGO2_INFO {
+	return (*SECPKG_NEGO2_INFO)(unsafe.Pointer(u))
 }
 
 // SECPKG_EXTENDED_INFORMATION: https://learn.microsoft.com/windows/win32/api/ntsecpkg/ns-ntsecpkg-secpkg_extended_information
@@ -2089,9 +2158,35 @@ type SEC_WINNT_AUTH_IDENTITY_EXW struct {
 
 // SEC_WINNT_AUTH_IDENTITY_INFO: https://learn.microsoft.com/windows/win32/api/sspi/ns-sspi-sec_winnt_auth_identity_info
 // SEC_WINNT_AUTH_IDENTITY_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SEC_WINNT_AUTH_IDENTITY_INFO struct {
 	Data [9]uint64
+}
+
+// AuthIdExw reinterprets the union as its AuthIdExw member.
+func (u *SEC_WINNT_AUTH_IDENTITY_INFO) AuthIdExw() *SEC_WINNT_AUTH_IDENTITY_EXW {
+	return (*SEC_WINNT_AUTH_IDENTITY_EXW)(unsafe.Pointer(u))
+}
+
+// AuthIdExa reinterprets the union as its AuthIdExa member.
+func (u *SEC_WINNT_AUTH_IDENTITY_INFO) AuthIdExa() *SEC_WINNT_AUTH_IDENTITY_EXA {
+	return (*SEC_WINNT_AUTH_IDENTITY_EXA)(unsafe.Pointer(u))
+}
+
+// AuthId_a reinterprets the union as its AuthId_a member.
+func (u *SEC_WINNT_AUTH_IDENTITY_INFO) AuthId_a() *systemrpc.SEC_WINNT_AUTH_IDENTITY_A {
+	return (*systemrpc.SEC_WINNT_AUTH_IDENTITY_A)(unsafe.Pointer(u))
+}
+
+// AuthId_w reinterprets the union as its AuthId_w member.
+func (u *SEC_WINNT_AUTH_IDENTITY_INFO) AuthId_w() *systemrpc.SEC_WINNT_AUTH_IDENTITY_W {
+	return (*systemrpc.SEC_WINNT_AUTH_IDENTITY_W)(unsafe.Pointer(u))
+}
+
+// AuthIdEx2 reinterprets the union as its AuthIdEx2 member.
+func (u *SEC_WINNT_AUTH_IDENTITY_INFO) AuthIdEx2() *SEC_WINNT_AUTH_IDENTITY_EX2 {
+	return (*SEC_WINNT_AUTH_IDENTITY_EX2)(unsafe.Pointer(u))
 }
 
 type SEND_GENERIC_TLS_EXTENSION struct {

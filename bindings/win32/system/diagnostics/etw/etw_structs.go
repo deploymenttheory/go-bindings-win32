@@ -48,10 +48,26 @@ type ETW_BUFFER_CALLBACK_INFORMATION struct {
 	BuffersRead   uint32
 }
 
+type ETW_BUFFER_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct struct {
+	ProcessorNumber byte
+	Alignment       byte
+}
+
 // ETW_BUFFER_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ETW_BUFFER_CONTEXT_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *ETW_BUFFER_CONTEXT_Anonymous_e__Union) Anonymous() *ETW_BUFFER_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*ETW_BUFFER_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// ProcessorIndex reinterprets the union as its ProcessorIndex member.
+func (u *ETW_BUFFER_CONTEXT_Anonymous_e__Union) ProcessorIndex() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 // ETW_BUFFER_CONTEXT: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-etw_buffer_context
@@ -115,10 +131,27 @@ type ETW_TRACE_PARTITION_INFORMATION_V2 struct {
 	ParentId          foundation.PWSTR
 }
 
+type EVENT_DATA_DESCRIPTOR_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Type      byte
+	Reserved1 byte
+	Reserved2 uint16
+}
+
 // EVENT_DATA_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_DATA_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *EVENT_DATA_DESCRIPTOR_Anonymous_e__Union) Reserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *EVENT_DATA_DESCRIPTOR_Anonymous_e__Union) Anonymous() *EVENT_DATA_DESCRIPTOR_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*EVENT_DATA_DESCRIPTOR_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // EVENT_DATA_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/evntprov/ns-evntprov-event_data_descriptor
@@ -244,10 +277,26 @@ type EVENT_FILTER_LEVEL_KW struct {
 	FilterIn        foundation.BOOLEAN
 }
 
+type EVENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct struct {
+	KernelTime uint32
+	UserTime   uint32
+}
+
 // EVENT_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_HEADER_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *EVENT_HEADER_Anonymous_e__Union) Anonymous() *EVENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*EVENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// ProcessorTime reinterprets the union as its ProcessorTime member.
+func (u *EVENT_HEADER_Anonymous_e__Union) ProcessorTime() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // EVENT_HEADER: https://learn.microsoft.com/windows/win32/api/evntcons/ns-evntcons-event_header
@@ -278,22 +327,81 @@ type EVENT_HEADER_EXTENDED_DATA_ITEM struct {
 	DataPtr   uint64
 }
 
+type EVENT_INSTANCE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	HeaderType  byte
+	MarkerFlags byte
+}
+
 // EVENT_INSTANCE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_INSTANCE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
+// FieldTypeFlags reinterprets the union as its FieldTypeFlags member.
+func (u *EVENT_INSTANCE_HEADER_Anonymous1_e__Union) FieldTypeFlags() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *EVENT_INSTANCE_HEADER_Anonymous1_e__Union) Anonymous() *EVENT_INSTANCE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*EVENT_INSTANCE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct struct {
+	Type    byte
+	Level   byte
+	Version uint16
+}
+
 // EVENT_INSTANCE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_INSTANCE_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Version reinterprets the union as its Version member.
+func (u *EVENT_INSTANCE_HEADER_Anonymous2_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Class reinterprets the union as its Class member.
+func (u *EVENT_INSTANCE_HEADER_Anonymous2_e__Union) Class() *EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct {
+	return (*EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct)(unsafe.Pointer(u))
+}
+
+type EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous1_e__Struct struct {
+	KernelTime uint32
+	UserTime   uint32
+}
+
+type EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous2_e__Struct struct {
+	EventId uint32
+	Flags   uint32
+}
+
 // EVENT_INSTANCE_HEADER_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_INSTANCE_HEADER_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *EVENT_INSTANCE_HEADER_Anonymous3_e__Union) Anonymous1() *EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous1_e__Struct {
+	return (*EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// ProcessorTime reinterprets the union as its ProcessorTime member.
+func (u *EVENT_INSTANCE_HEADER_Anonymous3_e__Union) ProcessorTime() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *EVENT_INSTANCE_HEADER_Anonymous3_e__Union) Anonymous2() *EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous2_e__Struct {
+	return (*EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 // EVENT_INSTANCE_HEADER: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_instance_header
@@ -318,9 +426,20 @@ type EVENT_INSTANCE_INFO struct {
 }
 
 // EVENT_MAP_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_MAP_ENTRY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Value reinterprets the union as its Value member.
+func (u *EVENT_MAP_ENTRY_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// InputOffset reinterprets the union as its InputOffset member.
+func (u *EVENT_MAP_ENTRY_Anonymous_e__Union) InputOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // EVENT_MAP_ENTRY: https://learn.microsoft.com/windows/win32/api/tdh/ns-tdh-event_map_entry
@@ -330,9 +449,20 @@ type EVENT_MAP_ENTRY struct {
 }
 
 // EVENT_MAP_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_MAP_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// MapEntryValueType reinterprets the union as its MapEntryValueType member.
+func (u *EVENT_MAP_INFO_Anonymous_e__Union) MapEntryValueType() *MAP_VALUETYPE {
+	return (*MAP_VALUETYPE)(unsafe.Pointer(u))
+}
+
+// FormatStringOffset reinterprets the union as its FormatStringOffset member.
+func (u *EVENT_MAP_INFO_Anonymous_e__Union) FormatStringOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // EVENT_MAP_INFO: https://learn.microsoft.com/windows/win32/api/tdh/ns-tdh-event_map_info
@@ -344,28 +474,99 @@ type EVENT_MAP_INFO struct {
 	MapEntryArray [1]EVENT_MAP_ENTRY
 }
 
+type EVENT_PROPERTY_INFO_Anonymous1_e__Union_customSchemaType struct {
+	InType             uint16
+	OutType            uint16
+	CustomSchemaOffset uint32
+}
+
+type EVENT_PROPERTY_INFO_Anonymous1_e__Union_nonStructType struct {
+	InType        uint16
+	OutType       uint16
+	MapNameOffset uint32
+}
+
+type EVENT_PROPERTY_INFO_Anonymous1_e__Union_structType struct {
+	StructStartIndex   uint16
+	NumOfStructMembers uint16
+	Padding            uint32
+}
+
 // EVENT_PROPERTY_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_PROPERTY_INFO_Anonymous1_e__Union struct {
 	Data [2]uint32
 }
 
+// NonStructType reinterprets the union as its nonStructType member.
+func (u *EVENT_PROPERTY_INFO_Anonymous1_e__Union) NonStructType() *EVENT_PROPERTY_INFO_Anonymous1_e__Union_nonStructType {
+	return (*EVENT_PROPERTY_INFO_Anonymous1_e__Union_nonStructType)(unsafe.Pointer(u))
+}
+
+// StructType reinterprets the union as its structType member.
+func (u *EVENT_PROPERTY_INFO_Anonymous1_e__Union) StructType() *EVENT_PROPERTY_INFO_Anonymous1_e__Union_structType {
+	return (*EVENT_PROPERTY_INFO_Anonymous1_e__Union_structType)(unsafe.Pointer(u))
+}
+
+// CustomSchemaType reinterprets the union as its customSchemaType member.
+func (u *EVENT_PROPERTY_INFO_Anonymous1_e__Union) CustomSchemaType() *EVENT_PROPERTY_INFO_Anonymous1_e__Union_customSchemaType {
+	return (*EVENT_PROPERTY_INFO_Anonymous1_e__Union_customSchemaType)(unsafe.Pointer(u))
+}
+
 // EVENT_PROPERTY_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_PROPERTY_INFO_Anonymous2_e__Union struct {
 	Data [1]uint16
 }
 
+// Count reinterprets the union as its count member.
+func (u *EVENT_PROPERTY_INFO_Anonymous2_e__Union) Count() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// CountPropertyIndex reinterprets the union as its countPropertyIndex member.
+func (u *EVENT_PROPERTY_INFO_Anonymous2_e__Union) CountPropertyIndex() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
 // EVENT_PROPERTY_INFO_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_PROPERTY_INFO_Anonymous3_e__Union struct {
 	Data [1]uint16
 }
 
+// Length reinterprets the union as its length member.
+func (u *EVENT_PROPERTY_INFO_Anonymous3_e__Union) Length() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// LengthPropertyIndex reinterprets the union as its lengthPropertyIndex member.
+func (u *EVENT_PROPERTY_INFO_Anonymous3_e__Union) LengthPropertyIndex() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type EVENT_PROPERTY_INFO_Anonymous4_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // EVENT_PROPERTY_INFO_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_PROPERTY_INFO_Anonymous4_e__Union struct {
 	Data [1]uint32
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *EVENT_PROPERTY_INFO_Anonymous4_e__Union) Reserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *EVENT_PROPERTY_INFO_Anonymous4_e__Union) Anonymous() *EVENT_PROPERTY_INFO_Anonymous4_e__Union_Anonymous_e__Struct {
+	return (*EVENT_PROPERTY_INFO_Anonymous4_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // EVENT_PROPERTY_INFO: https://learn.microsoft.com/windows/win32/api/tdh/ns-tdh-event_property_info
@@ -390,9 +591,20 @@ type EVENT_RECORD struct {
 }
 
 // EVENT_TRACE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ClientContext reinterprets the union as its ClientContext member.
+func (u *EVENT_TRACE_Anonymous_e__Union) ClientContext() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// BufferContext reinterprets the union as its BufferContext member.
+func (u *EVENT_TRACE_Anonymous_e__Union) BufferContext() *ETW_BUFFER_CONTEXT {
+	return (*ETW_BUFFER_CONTEXT)(unsafe.Pointer(u))
 }
 
 // EVENT_TRACE: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace
@@ -406,28 +618,98 @@ type EVENT_TRACE struct {
 	Anonymous        EVENT_TRACE_Anonymous_e__Union
 }
 
+type EVENT_TRACE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	HeaderType  byte
+	MarkerFlags byte
+}
+
 // EVENT_TRACE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
+// FieldTypeFlags reinterprets the union as its FieldTypeFlags member.
+func (u *EVENT_TRACE_HEADER_Anonymous1_e__Union) FieldTypeFlags() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *EVENT_TRACE_HEADER_Anonymous1_e__Union) Anonymous() *EVENT_TRACE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*EVENT_TRACE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct struct {
+	Type    byte
+	Level   byte
+	Version uint16
+}
+
 // EVENT_TRACE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Version reinterprets the union as its Version member.
+func (u *EVENT_TRACE_HEADER_Anonymous2_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Class reinterprets the union as its Class member.
+func (u *EVENT_TRACE_HEADER_Anonymous2_e__Union) Class() *EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct {
+	return (*EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct)(unsafe.Pointer(u))
+}
+
 // EVENT_TRACE_HEADER_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_HEADER_Anonymous3_e__Union struct {
 	Data [2]uint64
 }
 
+// Guid reinterprets the union as its Guid member.
+func (u *EVENT_TRACE_HEADER_Anonymous3_e__Union) Guid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// GuidPtr reinterprets the union as its GuidPtr member.
+func (u *EVENT_TRACE_HEADER_Anonymous3_e__Union) GuidPtr() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous1_e__Struct struct {
+	KernelTime uint32
+	UserTime   uint32
+}
+
+type EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous2_e__Struct struct {
+	ClientContext uint32
+	Flags         uint32
+}
+
 // EVENT_TRACE_HEADER_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_HEADER_Anonymous4_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *EVENT_TRACE_HEADER_Anonymous4_e__Union) Anonymous1() *EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous1_e__Struct {
+	return (*EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// ProcessorTime reinterprets the union as its ProcessorTime member.
+func (u *EVENT_TRACE_HEADER_Anonymous4_e__Union) ProcessorTime() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *EVENT_TRACE_HEADER_Anonymous4_e__Union) Anonymous2() *EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous2_e__Struct {
+	return (*EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 // EVENT_TRACE_HEADER: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace_header
@@ -443,15 +725,37 @@ type EVENT_TRACE_HEADER struct {
 }
 
 // EVENT_TRACE_LOGFILEA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_LOGFILEA_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// LogFileMode reinterprets the union as its LogFileMode member.
+func (u *EVENT_TRACE_LOGFILEA_Anonymous1_e__Union) LogFileMode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ProcessTraceMode reinterprets the union as its ProcessTraceMode member.
+func (u *EVENT_TRACE_LOGFILEA_Anonymous1_e__Union) ProcessTraceMode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // EVENT_TRACE_LOGFILEA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_LOGFILEA_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// EventCallback reinterprets the union as its EventCallback member.
+func (u *EVENT_TRACE_LOGFILEA_Anonymous2_e__Union) EventCallback() *PEVENT_CALLBACK {
+	return (*PEVENT_CALLBACK)(unsafe.Pointer(u))
+}
+
+// EventRecordCallback reinterprets the union as its EventRecordCallback member.
+func (u *EVENT_TRACE_LOGFILEA_Anonymous2_e__Union) EventRecordCallback() *PEVENT_RECORD_CALLBACK {
+	return (*PEVENT_RECORD_CALLBACK)(unsafe.Pointer(u))
 }
 
 // EVENT_TRACE_LOGFILEA: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace_logfilea
@@ -473,15 +777,37 @@ type EVENT_TRACE_LOGFILEA struct {
 }
 
 // EVENT_TRACE_LOGFILEW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_LOGFILEW_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// LogFileMode reinterprets the union as its LogFileMode member.
+func (u *EVENT_TRACE_LOGFILEW_Anonymous1_e__Union) LogFileMode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ProcessTraceMode reinterprets the union as its ProcessTraceMode member.
+func (u *EVENT_TRACE_LOGFILEW_Anonymous1_e__Union) ProcessTraceMode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // EVENT_TRACE_LOGFILEW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_LOGFILEW_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// EventCallback reinterprets the union as its EventCallback member.
+func (u *EVENT_TRACE_LOGFILEW_Anonymous2_e__Union) EventCallback() *PEVENT_CALLBACK {
+	return (*PEVENT_CALLBACK)(unsafe.Pointer(u))
+}
+
+// EventRecordCallback reinterprets the union as its EventRecordCallback member.
+func (u *EVENT_TRACE_LOGFILEW_Anonymous2_e__Union) EventRecordCallback() *PEVENT_RECORD_CALLBACK {
+	return (*PEVENT_RECORD_CALLBACK)(unsafe.Pointer(u))
 }
 
 // EVENT_TRACE_LOGFILEW: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace_logfilew
@@ -503,9 +829,20 @@ type EVENT_TRACE_LOGFILEW struct {
 }
 
 // EVENT_TRACE_PROPERTIES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_PROPERTIES_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// AgeLimit reinterprets the union as its AgeLimit member.
+func (u *EVENT_TRACE_PROPERTIES_Anonymous_e__Union) AgeLimit() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// FlushThreshold reinterprets the union as its FlushThreshold member.
+func (u *EVENT_TRACE_PROPERTIES_Anonymous_e__Union) FlushThreshold() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 // EVENT_TRACE_PROPERTIES: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace_properties
@@ -531,21 +868,62 @@ type EVENT_TRACE_PROPERTIES struct {
 }
 
 // EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// AgeLimit reinterprets the union as its AgeLimit member.
+func (u *EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union) AgeLimit() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// FlushThreshold reinterprets the union as its FlushThreshold member.
+func (u *EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union) FlushThreshold() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+type EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union) Anonymous() *EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// V2Control reinterprets the union as its V2Control member.
+func (u *EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union) V2Control() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union) Anonymous() *EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union_Anonymous_e__Struct {
+	return (*EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// V2Options reinterprets the union as its V2Options member.
+func (u *EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union) V2Options() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // EVENT_TRACE_PROPERTIES_V2: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-event_trace_properties_v2
@@ -672,21 +1050,58 @@ type TRACE_ENABLE_INFO struct {
 }
 
 // TRACE_EVENT_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_EVENT_INFO_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// EventNameOffset reinterprets the union as its EventNameOffset member.
+func (u *TRACE_EVENT_INFO_Anonymous1_e__Union) EventNameOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ActivityIDNameOffset reinterprets the union as its ActivityIDNameOffset member.
+func (u *TRACE_EVENT_INFO_Anonymous1_e__Union) ActivityIDNameOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // TRACE_EVENT_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_EVENT_INFO_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// EventAttributesOffset reinterprets the union as its EventAttributesOffset member.
+func (u *TRACE_EVENT_INFO_Anonymous2_e__Union) EventAttributesOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RelatedActivityIDNameOffset reinterprets the union as its RelatedActivityIDNameOffset member.
+func (u *TRACE_EVENT_INFO_Anonymous2_e__Union) RelatedActivityIDNameOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type TRACE_EVENT_INFO_Anonymous3_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // TRACE_EVENT_INFO_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_EVENT_INFO_Anonymous3_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *TRACE_EVENT_INFO_Anonymous3_e__Union) Flags() *TEMPLATE_FLAGS {
+	return (*TEMPLATE_FLAGS)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *TRACE_EVENT_INFO_Anonymous3_e__Union) Anonymous() *TRACE_EVENT_INFO_Anonymous3_e__Union_Anonymous_e__Struct {
+	return (*TRACE_EVENT_INFO_Anonymous3_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // TRACE_EVENT_INFO: https://learn.microsoft.com/windows/win32/api/tdh/ns-tdh-trace_event_info
@@ -735,16 +1150,52 @@ type TRACE_GUID_REGISTRATION struct {
 	RegHandle foundation.HANDLE
 }
 
+type TRACE_LOGFILE_HEADER_Anonymous1_e__Union_VersionDetail_e__Struct struct {
+	MajorVersion    byte
+	MinorVersion    byte
+	SubVersion      byte
+	SubMinorVersion byte
+}
+
 // TRACE_LOGFILE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_LOGFILE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// Version reinterprets the union as its Version member.
+func (u *TRACE_LOGFILE_HEADER_Anonymous1_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// VersionDetail reinterprets the union as its VersionDetail member.
+func (u *TRACE_LOGFILE_HEADER_Anonymous1_e__Union) VersionDetail() *TRACE_LOGFILE_HEADER_Anonymous1_e__Union_VersionDetail_e__Struct {
+	return (*TRACE_LOGFILE_HEADER_Anonymous1_e__Union_VersionDetail_e__Struct)(unsafe.Pointer(u))
+}
+
+type TRACE_LOGFILE_HEADER_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	StartBuffers  uint32
+	PointerSize   uint32
+	EventsLost    uint32
+	CpuSpeedInMHz uint32
+}
+
 // TRACE_LOGFILE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_LOGFILE_HEADER_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// LogInstanceGuid reinterprets the union as its LogInstanceGuid member.
+func (u *TRACE_LOGFILE_HEADER_Anonymous2_e__Union) LogInstanceGuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *TRACE_LOGFILE_HEADER_Anonymous2_e__Union) Anonymous() *TRACE_LOGFILE_HEADER_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*TRACE_LOGFILE_HEADER_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // TRACE_LOGFILE_HEADER: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-trace_logfile_header
@@ -769,16 +1220,52 @@ type TRACE_LOGFILE_HEADER struct {
 	BuffersLost        uint32
 }
 
+type TRACE_LOGFILE_HEADER32_Anonymous1_e__Union_VersionDetail_e__Struct struct {
+	MajorVersion    byte
+	MinorVersion    byte
+	SubVersion      byte
+	SubMinorVersion byte
+}
+
 // TRACE_LOGFILE_HEADER32_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_LOGFILE_HEADER32_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// Version reinterprets the union as its Version member.
+func (u *TRACE_LOGFILE_HEADER32_Anonymous1_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// VersionDetail reinterprets the union as its VersionDetail member.
+func (u *TRACE_LOGFILE_HEADER32_Anonymous1_e__Union) VersionDetail() *TRACE_LOGFILE_HEADER32_Anonymous1_e__Union_VersionDetail_e__Struct {
+	return (*TRACE_LOGFILE_HEADER32_Anonymous1_e__Union_VersionDetail_e__Struct)(unsafe.Pointer(u))
+}
+
+type TRACE_LOGFILE_HEADER32_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	StartBuffers  uint32
+	PointerSize   uint32
+	EventsLost    uint32
+	CpuSpeedInMHz uint32
+}
+
 // TRACE_LOGFILE_HEADER32_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_LOGFILE_HEADER32_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// LogInstanceGuid reinterprets the union as its LogInstanceGuid member.
+func (u *TRACE_LOGFILE_HEADER32_Anonymous2_e__Union) LogInstanceGuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *TRACE_LOGFILE_HEADER32_Anonymous2_e__Union) Anonymous() *TRACE_LOGFILE_HEADER32_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*TRACE_LOGFILE_HEADER32_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type TRACE_LOGFILE_HEADER32 struct {
@@ -802,16 +1289,52 @@ type TRACE_LOGFILE_HEADER32 struct {
 	BuffersLost        uint32
 }
 
+type TRACE_LOGFILE_HEADER64_Anonymous1_e__Union_VersionDetail_e__Struct struct {
+	MajorVersion    byte
+	MinorVersion    byte
+	SubVersion      byte
+	SubMinorVersion byte
+}
+
 // TRACE_LOGFILE_HEADER64_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_LOGFILE_HEADER64_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// Version reinterprets the union as its Version member.
+func (u *TRACE_LOGFILE_HEADER64_Anonymous1_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// VersionDetail reinterprets the union as its VersionDetail member.
+func (u *TRACE_LOGFILE_HEADER64_Anonymous1_e__Union) VersionDetail() *TRACE_LOGFILE_HEADER64_Anonymous1_e__Union_VersionDetail_e__Struct {
+	return (*TRACE_LOGFILE_HEADER64_Anonymous1_e__Union_VersionDetail_e__Struct)(unsafe.Pointer(u))
+}
+
+type TRACE_LOGFILE_HEADER64_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	StartBuffers  uint32
+	PointerSize   uint32
+	EventsLost    uint32
+	CpuSpeedInMHz uint32
+}
+
 // TRACE_LOGFILE_HEADER64_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRACE_LOGFILE_HEADER64_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// LogInstanceGuid reinterprets the union as its LogInstanceGuid member.
+func (u *TRACE_LOGFILE_HEADER64_Anonymous2_e__Union) LogInstanceGuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *TRACE_LOGFILE_HEADER64_Anonymous2_e__Union) Anonymous() *TRACE_LOGFILE_HEADER64_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*TRACE_LOGFILE_HEADER64_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type TRACE_LOGFILE_HEADER64 struct {
@@ -875,9 +1398,30 @@ type TRACE_VERSION_INFO struct {
 }
 
 // WMIREGGUIDW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WMIREGGUIDW_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// InstanceNameList reinterprets the union as its InstanceNameList member.
+func (u *WMIREGGUIDW_Anonymous_e__Union) InstanceNameList() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// BaseNameOffset reinterprets the union as its BaseNameOffset member.
+func (u *WMIREGGUIDW_Anonymous_e__Union) BaseNameOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Pdo reinterprets the union as its Pdo member.
+func (u *WMIREGGUIDW_Anonymous_e__Union) Pdo() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// InstanceInfo reinterprets the union as its InstanceInfo member.
+func (u *WMIREGGUIDW_Anonymous_e__Union) InstanceInfo() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 type WMIREGGUIDW struct {
@@ -897,9 +1441,20 @@ type WMIREGINFOW struct {
 }
 
 // WNODE_ALL_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WNODE_ALL_DATA_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// FixedInstanceSize reinterprets the union as its FixedInstanceSize member.
+func (u *WNODE_ALL_DATA_Anonymous_e__Union) FixedInstanceSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// OffsetInstanceDataAndLength reinterprets the union as its OffsetInstanceDataAndLength member.
+func (u *WNODE_ALL_DATA_Anonymous_e__Union) OffsetInstanceDataAndLength() *[1]OFFSETINSTANCEDATAANDLENGTH {
+	return (*[1]OFFSETINSTANCEDATAANDLENGTH)(unsafe.Pointer(u))
 }
 
 type WNODE_ALL_DATA struct {
@@ -915,9 +1470,20 @@ type WNODE_EVENT_ITEM struct {
 }
 
 // WNODE_EVENT_REFERENCE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WNODE_EVENT_REFERENCE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// TargetInstanceIndex reinterprets the union as its TargetInstanceIndex member.
+func (u *WNODE_EVENT_REFERENCE_Anonymous_e__Union) TargetInstanceIndex() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// TargetInstanceName reinterprets the union as its TargetInstanceName member.
+func (u *WNODE_EVENT_REFERENCE_Anonymous_e__Union) TargetInstanceName() *[1]uint16 {
+	return (*[1]uint16)(unsafe.Pointer(u))
 }
 
 type WNODE_EVENT_REFERENCE struct {
@@ -927,16 +1493,48 @@ type WNODE_EVENT_REFERENCE struct {
 	Anonymous           WNODE_EVENT_REFERENCE_Anonymous_e__Union
 }
 
+type WNODE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Version uint32
+	Linkage uint32
+}
+
 // WNODE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WNODE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// HistoricalContext reinterprets the union as its HistoricalContext member.
+func (u *WNODE_HEADER_Anonymous1_e__Union) HistoricalContext() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WNODE_HEADER_Anonymous1_e__Union) Anonymous() *WNODE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*WNODE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
 // WNODE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WNODE_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// CountLost reinterprets the union as its CountLost member.
+func (u *WNODE_HEADER_Anonymous2_e__Union) CountLost() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// KernelHandle reinterprets the union as its KernelHandle member.
+func (u *WNODE_HEADER_Anonymous2_e__Union) KernelHandle() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// TimeStamp reinterprets the union as its TimeStamp member.
+func (u *WNODE_HEADER_Anonymous2_e__Union) TimeStamp() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 // WNODE_HEADER: https://learn.microsoft.com/windows/win32/ETW/wnode-header

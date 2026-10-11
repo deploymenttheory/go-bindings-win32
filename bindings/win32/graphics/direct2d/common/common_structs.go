@@ -5,6 +5,8 @@
 package common
 
 import (
+	"unsafe"
+
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 )
 
@@ -43,10 +45,44 @@ type D2D_COLOR_F struct {
 	A float32
 }
 
+type D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	M11 float32
+	M12 float32
+	M21 float32
+	M22 float32
+	Dx  float32
+	Dy  float32
+}
+
+type D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	F11 float32
+	F12 float32
+	F21 float32
+	F22 float32
+	F31 float32
+	F32 float32
+}
+
 // D2D_MATRIX_3X2_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D2D_MATRIX_3X2_F_Anonymous_e__Union struct {
 	Data [6]uint32
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *D2D_MATRIX_3X2_F_Anonymous_e__Union) Anonymous1() *D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *D2D_MATRIX_3X2_F_Anonymous_e__Union) Anonymous2() *D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+// M reinterprets the union as its m member.
+func (u *D2D_MATRIX_3X2_F_Anonymous_e__Union) M() *[6]float32 {
+	return (*[6]float32)(unsafe.Pointer(u))
 }
 
 // D2D_MATRIX_3X2_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_3x2_f
@@ -54,10 +90,36 @@ type D2D_MATRIX_3X2_F struct {
 	Anonymous D2D_MATRIX_3X2_F_Anonymous_e__Union
 }
 
+type D2D_MATRIX_4X3_F_Anonymous_e__Union_Anonymous_e__Struct struct {
+	F11 float32
+	F12 float32
+	F13 float32
+	F21 float32
+	F22 float32
+	F23 float32
+	F31 float32
+	F32 float32
+	F33 float32
+	F41 float32
+	F42 float32
+	F43 float32
+}
+
 // D2D_MATRIX_4X3_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D2D_MATRIX_4X3_F_Anonymous_e__Union struct {
 	Data [12]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *D2D_MATRIX_4X3_F_Anonymous_e__Union) Anonymous() *D2D_MATRIX_4X3_F_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*D2D_MATRIX_4X3_F_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// M reinterprets the union as its m member.
+func (u *D2D_MATRIX_4X3_F_Anonymous_e__Union) M() *[12]float32 {
+	return (*[12]float32)(unsafe.Pointer(u))
 }
 
 // D2D_MATRIX_4X3_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_4x3_f
@@ -65,10 +127,40 @@ type D2D_MATRIX_4X3_F struct {
 	Anonymous D2D_MATRIX_4X3_F_Anonymous_e__Union
 }
 
+type D2D_MATRIX_4X4_F_Anonymous_e__Union_Anonymous_e__Struct struct {
+	F11 float32
+	F12 float32
+	F13 float32
+	F14 float32
+	F21 float32
+	F22 float32
+	F23 float32
+	F24 float32
+	F31 float32
+	F32 float32
+	F33 float32
+	F34 float32
+	F41 float32
+	F42 float32
+	F43 float32
+	F44 float32
+}
+
 // D2D_MATRIX_4X4_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D2D_MATRIX_4X4_F_Anonymous_e__Union struct {
 	Data [16]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *D2D_MATRIX_4X4_F_Anonymous_e__Union) Anonymous() *D2D_MATRIX_4X4_F_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*D2D_MATRIX_4X4_F_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// M reinterprets the union as its m member.
+func (u *D2D_MATRIX_4X4_F_Anonymous_e__Union) M() *[16]float32 {
+	return (*[16]float32)(unsafe.Pointer(u))
 }
 
 // D2D_MATRIX_4X4_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_4x4_f
@@ -76,10 +168,44 @@ type D2D_MATRIX_4X4_F struct {
 	Anonymous D2D_MATRIX_4X4_F_Anonymous_e__Union
 }
 
+type D2D_MATRIX_5X4_F_Anonymous_e__Union_Anonymous_e__Struct struct {
+	F11 float32
+	F12 float32
+	F13 float32
+	F14 float32
+	F21 float32
+	F22 float32
+	F23 float32
+	F24 float32
+	F31 float32
+	F32 float32
+	F33 float32
+	F34 float32
+	F41 float32
+	F42 float32
+	F43 float32
+	F44 float32
+	F51 float32
+	F52 float32
+	F53 float32
+	F54 float32
+}
+
 // D2D_MATRIX_5X4_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D2D_MATRIX_5X4_F_Anonymous_e__Union struct {
 	Data [20]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *D2D_MATRIX_5X4_F_Anonymous_e__Union) Anonymous() *D2D_MATRIX_5X4_F_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*D2D_MATRIX_5X4_F_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// M reinterprets the union as its m member.
+func (u *D2D_MATRIX_5X4_F_Anonymous_e__Union) M() *[20]float32 {
+	return (*[20]float32)(unsafe.Pointer(u))
 }
 
 // D2D_MATRIX_5X4_F: https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_5x4_f

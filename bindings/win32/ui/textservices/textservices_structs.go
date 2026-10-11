@@ -5,6 +5,8 @@
 package textservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
@@ -30,9 +32,20 @@ type MSAAControl struct {
 }
 
 // TF_DA_COLOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TF_DA_COLOR_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// NIndex reinterprets the union as its nIndex member.
+func (u *TF_DA_COLOR_Anonymous_e__Union) NIndex() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Cr reinterprets the union as its cr member.
+func (u *TF_DA_COLOR_Anonymous_e__Union) Cr() *foundation.COLORREF {
+	return (*foundation.COLORREF)(unsafe.Pointer(u))
 }
 
 // TF_DA_COLOR: https://learn.microsoft.com/windows/win32/api/msctf/ns-msctf-tf_da_color
@@ -96,9 +109,15 @@ type TF_LBBALLOONINFO struct {
 }
 
 // TF_LMLATTELEMENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TF_LMLATTELEMENT_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ICost reinterprets the union as its iCost member.
+func (u *TF_LMLATTELEMENT_Anonymous_e__Union) ICost() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 // TF_LMLATTELEMENT: https://learn.microsoft.com/windows/win32/api/ctffunc/ns-ctffunc-tf_lmlattelement

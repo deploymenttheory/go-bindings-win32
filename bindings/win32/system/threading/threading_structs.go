@@ -46,9 +46,15 @@ type CRITICAL_SECTION_DEBUG struct {
 }
 
 // INIT_ONCE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INIT_ONCE struct {
 	Data [1]uint64
+}
+
+// Ptr reinterprets the union as its Ptr member.
+func (u *INIT_ONCE) Ptr() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 // IO_COUNTERS: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-io_counters
@@ -177,10 +183,28 @@ type PROCESS_PROTECTION_LEVEL_INFORMATION struct {
 	ProtectionLevel PROCESS_PROTECTION_LEVEL
 }
 
+type REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct struct {
+	LocalizedReasonModule foundation.HMODULE
+	LocalizedReasonId     uint32
+	ReasonStringCount     uint32
+	ReasonStrings         *foundation.PWSTR
+}
+
 // REASON_CONTEXT_Reason_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type REASON_CONTEXT_Reason_e__Union struct {
 	Data [3]uint64
+}
+
+// Detailed reinterprets the union as its Detailed member.
+func (u *REASON_CONTEXT_Reason_e__Union) Detailed() *REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct {
+	return (*REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct)(unsafe.Pointer(u))
+}
+
+// SimpleReasonString reinterprets the union as its SimpleReasonString member.
+func (u *REASON_CONTEXT_Reason_e__Union) SimpleReasonString() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // REASON_CONTEXT: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-reason_context
@@ -287,10 +311,25 @@ type THREAD_POWER_THROTTLING_STATE struct {
 	StateMask   uint32
 }
 
+type TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct struct {
+	Bitfield uint32
+}
+
 // TP_CALLBACK_ENVIRON_V3_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TP_CALLBACK_ENVIRON_V3_u_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *TP_CALLBACK_ENVIRON_V3_u_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// S reinterprets the union as its s member.
+func (u *TP_CALLBACK_ENVIRON_V3_u_e__Union) S() *TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct {
+	return (*TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct)(unsafe.Pointer(u))
 }
 
 type TP_CALLBACK_ENVIRON_V3 struct {
@@ -319,10 +358,25 @@ type UMS_SCHEDULER_STARTUP_INFO struct {
 	SchedulerParam unsafe.Pointer
 }
 
+type UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union) Anonymous() *UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// ThreadUmsFlags reinterprets the union as its ThreadUmsFlags member.
+func (u *UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union) ThreadUmsFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // UMS_SYSTEM_THREAD_INFORMATION: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-ums_system_thread_information

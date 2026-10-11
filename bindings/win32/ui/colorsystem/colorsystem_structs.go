@@ -26,11 +26,67 @@ type CMYKCOLOR struct {
 	Black   uint16
 }
 
+type COLOR_Anonymous_e__Struct struct {
+	Reserved1 uint32
+	Reserved2 unsafe.Pointer
+}
+
 // COLOR: https://learn.microsoft.com/windows/win32/api/icm/ns-icm-color
 // COLOR is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type COLOR struct {
 	Data [2]uint64
+}
+
+// Gray reinterprets the union as its gray member.
+func (u *COLOR) Gray() *GRAYCOLOR {
+	return (*GRAYCOLOR)(unsafe.Pointer(u))
+}
+
+// Rgb reinterprets the union as its rgb member.
+func (u *COLOR) Rgb() *RGBCOLOR {
+	return (*RGBCOLOR)(unsafe.Pointer(u))
+}
+
+// Cmyk reinterprets the union as its cmyk member.
+func (u *COLOR) Cmyk() *CMYKCOLOR {
+	return (*CMYKCOLOR)(unsafe.Pointer(u))
+}
+
+// XYZ reinterprets the union as its XYZ member.
+func (u *COLOR) XYZ() *XYZCOLOR {
+	return (*XYZCOLOR)(unsafe.Pointer(u))
+}
+
+// Yxy reinterprets the union as its Yxy member.
+func (u *COLOR) Yxy() *YxyCOLOR {
+	return (*YxyCOLOR)(unsafe.Pointer(u))
+}
+
+// Lab reinterprets the union as its Lab member.
+func (u *COLOR) Lab() *LabCOLOR {
+	return (*LabCOLOR)(unsafe.Pointer(u))
+}
+
+// Gen3ch reinterprets the union as its gen3ch member.
+func (u *COLOR) Gen3ch() *GENERIC3CHANNEL {
+	return (*GENERIC3CHANNEL)(unsafe.Pointer(u))
+}
+
+// Named reinterprets the union as its named member.
+func (u *COLOR) Named() *NAMEDCOLOR {
+	return (*NAMEDCOLOR)(unsafe.Pointer(u))
+}
+
+// Hifi reinterprets the union as its hifi member.
+func (u *COLOR) Hifi() *HiFiCOLOR {
+	return (*HiFiCOLOR)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *COLOR) Anonymous() *COLOR_Anonymous_e__Struct {
+	return (*COLOR_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // COLORMATCHSETUPA: https://learn.microsoft.com/windows/win32/api/icm/ns-icm-colormatchsetupa

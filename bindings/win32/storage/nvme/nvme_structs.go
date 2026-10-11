@@ -5,13 +5,33 @@
 package nvme
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+// ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union struct {
 	Data [2]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union) Anonymous() *ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUshort reinterprets the union as its AsUshort member.
+func (u *ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union) AsUshort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type ACTIVE_LATENCY_CONFIGURATION struct {
@@ -47,10 +67,25 @@ type IO_COMMAND_SET_VECTOR struct {
 	Bitfield uint64
 }
 
+type LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union) Anonymous() *LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type LATENCY_MONITOR_FEATURE_STATUS struct {
@@ -195,10 +230,25 @@ type NVMEOF_AUTH_SEND_RESPONSE struct {
 	STS       uint16
 }
 
+type NVMEOF_CONNECT_COMMAND_CATTR_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVMEOF_CONNECT_COMMAND_CATTR_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVMEOF_CONNECT_COMMAND_CATTR_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVMEOF_CONNECT_COMMAND_CATTR_e__Union) Anonymous() *NVMEOF_CONNECT_COMMAND_CATTR_e__Union_Anonymous_e__Struct {
+	return (*NVMEOF_CONNECT_COMMAND_CATTR_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVMEOF_CONNECT_COMMAND_CATTR_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVMEOF_CONNECT_COMMAND struct {
@@ -226,10 +276,47 @@ type NVMEOF_CONNECT_DATA struct {
 	Reserved1 [256]byte
 }
 
+type NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
+// NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union struct {
+	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union) Anonymous() *NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union_Anonymous_e__Struct {
+	return (*NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUshort reinterprets the union as its AsUshort member.
+func (u *NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union) AsUshort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct struct {
+	CNTLID  uint16
+	AUTHREQ NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct_AUTHREQ_e__Union
+}
+
 // NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union struct {
 	Data [1]uint32
+}
+
+// Success reinterprets the union as its Success member.
+func (u *NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union) Success() *NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct {
+	return (*NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union_Success_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVMEOF_CONNECT_RESPONSE_SCSpecific_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVMEOF_CONNECT_RESPONSE struct {
@@ -293,10 +380,26 @@ type NVMEOF_PROPERTY_GET_COMMAND struct {
 	Reserved3 [16]byte
 }
 
+type NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union_FourBytes_e__Struct struct {
+	Value    uint32
+	Reserved uint32
+}
+
 // NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union struct {
 	Data [1]uint64
+}
+
+// FourBytes reinterprets the union as its FourBytes member.
+func (u *NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union) FourBytes() *NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union_FourBytes_e__Struct {
+	return (*NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union_FourBytes_e__Struct)(unsafe.Pointer(u))
+}
+
+// EightBytes reinterprets the union as its EightBytes member.
+func (u *NVMEOF_PROPERTY_GET_RESPONSE_VALUE_e__Union) EightBytes() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type NVMEOF_PROPERTY_GET_RESPONSE struct {
@@ -311,10 +414,26 @@ type NVMEOF_PROPERTY_SET_COMMAND_ATTRIB_e__Struct struct {
 	Bitfield byte
 }
 
+type NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union_FourBytes_e__Struct struct {
+	Value    uint32
+	Reserved uint32
+}
+
 // NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union struct {
 	Data [1]uint64
+}
+
+// FourBytes reinterprets the union as its FourBytes member.
+func (u *NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union) FourBytes() *NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union_FourBytes_e__Struct {
+	return (*NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union_FourBytes_e__Struct)(unsafe.Pointer(u))
+}
+
+// EightBytes reinterprets the union as its EightBytes member.
+func (u *NVMEOF_PROPERTY_SET_COMMAND_VALUE_e__Union) EightBytes() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type NVMEOF_PROPERTY_SET_COMMAND struct {
@@ -342,25 +461,70 @@ type NVME_ACTIVE_NAMESPACE_ID_LIST struct {
 	NSID [1024]uint32
 }
 
+type NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_admin_completion_queue_base_address
 // NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS) Anonymous() *NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS_Anonymous_e__Struct {
+	return (*NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlonglong reinterprets the union as its AsUlonglong member.
+func (u *NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS) AsUlonglong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type NVME_ADMIN_QUEUE_ATTRIBUTES_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_ADMIN_QUEUE_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_admin_queue_attributes
 // NVME_ADMIN_QUEUE_ATTRIBUTES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_ADMIN_QUEUE_ATTRIBUTES struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_ADMIN_QUEUE_ATTRIBUTES) Anonymous() *NVME_ADMIN_QUEUE_ATTRIBUTES_Anonymous_e__Struct {
+	return (*NVME_ADMIN_QUEUE_ATTRIBUTES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_ADMIN_QUEUE_ATTRIBUTES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_admin_submission_queue_base_address
 // NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS) Anonymous() *NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS_Anonymous_e__Struct {
+	return (*NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlonglong reinterprets the union as its AsUlonglong member.
+func (u *NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS) AsUlonglong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // NVME_AUTO_POWER_STATE_TRANSITION_ENTRY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_auto_power_state_transition_entry
@@ -369,65 +533,200 @@ type NVME_AUTO_POWER_STATE_TRANSITION_ENTRY struct {
 	Reserved1 uint32
 }
 
+type NVME_CDW0_FEATURE_DSSD_POWER_STATE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW0_FEATURE_DSSD_POWER_STATE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW0_FEATURE_DSSD_POWER_STATE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW0_FEATURE_DSSD_POWER_STATE) Anonymous() *NVME_CDW0_FEATURE_DSSD_POWER_STATE_Anonymous_e__Struct {
+	return (*NVME_CDW0_FEATURE_DSSD_POWER_STATE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW0_FEATURE_DSSD_POWER_STATE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO) Anonymous() *NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO_Anonymous_e__Struct {
+	return (*NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW0_FEATURE_ERROR_INJECTION_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW0_FEATURE_ERROR_INJECTION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW0_FEATURE_ERROR_INJECTION struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW0_FEATURE_ERROR_INJECTION) Anonymous() *NVME_CDW0_FEATURE_ERROR_INJECTION_Anonymous_e__Struct {
+	return (*NVME_CDW0_FEATURE_ERROR_INJECTION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW0_FEATURE_ERROR_INJECTION) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE) Anonymous() *NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE_Anonymous_e__Struct {
+	return (*NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVME_CDW0_RESERVATION_PERSISTENCE struct {
 	Bitfield uint32
 }
 
+type NVME_CDW10_ABORT_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_ABORT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_abort
 // NVME_CDW10_ABORT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_ABORT struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_ABORT) Anonymous() *NVME_CDW10_ABORT_Anonymous_e__Struct {
+	return (*NVME_CDW10_ABORT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_ABORT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_CREATE_IO_QUEUE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_CREATE_IO_QUEUE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_create_io_queue
 // NVME_CDW10_CREATE_IO_QUEUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_CREATE_IO_QUEUE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_CREATE_IO_QUEUE) Anonymous() *NVME_CDW10_CREATE_IO_QUEUE_Anonymous_e__Struct {
+	return (*NVME_CDW10_CREATE_IO_QUEUE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_CREATE_IO_QUEUE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_DATASET_MANAGEMENT_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_DATASET_MANAGEMENT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_dataset_management
 // NVME_CDW10_DATASET_MANAGEMENT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_DATASET_MANAGEMENT struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_DATASET_MANAGEMENT) Anonymous() *NVME_CDW10_DATASET_MANAGEMENT_Anonymous_e__Struct {
+	return (*NVME_CDW10_DATASET_MANAGEMENT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_DATASET_MANAGEMENT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_DELETE_IO_QUEUE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_DELETE_IO_QUEUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_DELETE_IO_QUEUE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_DELETE_IO_QUEUE) Anonymous() *NVME_CDW10_DELETE_IO_QUEUE_Anonymous_e__Struct {
+	return (*NVME_CDW10_DELETE_IO_QUEUE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_DELETE_IO_QUEUE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_DEVICE_SELF_TEST_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_DEVICE_SELF_TEST is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_DEVICE_SELF_TEST struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_DEVICE_SELF_TEST) Anonymous() *NVME_CDW10_DEVICE_SELF_TEST_Anonymous_e__Struct {
+	return (*NVME_CDW10_DEVICE_SELF_TEST_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_DEVICE_SELF_TEST) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_CDW10_DIRECTIVE_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_directive_receive
@@ -440,17 +739,47 @@ type NVME_CDW10_DIRECTIVE_SEND struct {
 	NUMD uint32
 }
 
+type NVME_CDW10_DISCOVERY_INFO_MGMT_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_DISCOVERY_INFO_MGMT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_DISCOVERY_INFO_MGMT struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_DISCOVERY_INFO_MGMT) Anonymous() *NVME_CDW10_DISCOVERY_INFO_MGMT_Anonymous_e__Struct {
+	return (*NVME_CDW10_DISCOVERY_INFO_MGMT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_DISCOVERY_INFO_MGMT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_FIRMWARE_ACTIVATE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_FIRMWARE_ACTIVATE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_firmware_activate
 // NVME_CDW10_FIRMWARE_ACTIVATE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_FIRMWARE_ACTIVATE struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_FIRMWARE_ACTIVATE) Anonymous() *NVME_CDW10_FIRMWARE_ACTIVATE_Anonymous_e__Struct {
+	return (*NVME_CDW10_FIRMWARE_ACTIVATE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_FIRMWARE_ACTIVATE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_CDW10_FIRMWARE_DOWNLOAD: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_firmware_download
@@ -458,95 +787,305 @@ type NVME_CDW10_FIRMWARE_DOWNLOAD struct {
 	NUMD uint32
 }
 
+type NVME_CDW10_FORMAT_NVM_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_FORMAT_NVM: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_format_nvm
 // NVME_CDW10_FORMAT_NVM is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_FORMAT_NVM struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_FORMAT_NVM) Anonymous() *NVME_CDW10_FORMAT_NVM_Anonymous_e__Struct {
+	return (*NVME_CDW10_FORMAT_NVM_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_FORMAT_NVM) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_GET_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_GET_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_get_features
 // NVME_CDW10_GET_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_GET_FEATURES struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_GET_FEATURES) Anonymous() *NVME_CDW10_GET_FEATURES_Anonymous_e__Struct {
+	return (*NVME_CDW10_GET_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_GET_FEATURES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_GET_LOG_PAGE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_GET_LOG_PAGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_get_log_page
 // NVME_CDW10_GET_LOG_PAGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_GET_LOG_PAGE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_GET_LOG_PAGE) Anonymous() *NVME_CDW10_GET_LOG_PAGE_Anonymous_e__Struct {
+	return (*NVME_CDW10_GET_LOG_PAGE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_GET_LOG_PAGE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_GET_LOG_PAGE_V121_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_GET_LOG_PAGE_V121 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_GET_LOG_PAGE_V121 struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_GET_LOG_PAGE_V121) Anonymous() *NVME_CDW10_GET_LOG_PAGE_V121_Anonymous_e__Struct {
+	return (*NVME_CDW10_GET_LOG_PAGE_V121_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_GET_LOG_PAGE_V121) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_GET_LOG_PAGE_V13_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_GET_LOG_PAGE_V13: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_get_log_page_v13
 // NVME_CDW10_GET_LOG_PAGE_V13 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_GET_LOG_PAGE_V13 struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_GET_LOG_PAGE_V13) Anonymous() *NVME_CDW10_GET_LOG_PAGE_V13_Anonymous_e__Struct {
+	return (*NVME_CDW10_GET_LOG_PAGE_V13_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_GET_LOG_PAGE_V13) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_GET_LOG_PAGE_V20_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_GET_LOG_PAGE_V20 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_GET_LOG_PAGE_V20 struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_GET_LOG_PAGE_V20) Anonymous() *NVME_CDW10_GET_LOG_PAGE_V20_Anonymous_e__Struct {
+	return (*NVME_CDW10_GET_LOG_PAGE_V20_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_GET_LOG_PAGE_V20) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_IDENTIFY_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_IDENTIFY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_identify
 // NVME_CDW10_IDENTIFY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_IDENTIFY struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_IDENTIFY) Anonymous() *NVME_CDW10_IDENTIFY_Anonymous_e__Struct {
+	return (*NVME_CDW10_IDENTIFY_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_IDENTIFY) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_RESERVATION_ACQUIRE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_RESERVATION_ACQUIRE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_RESERVATION_ACQUIRE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_RESERVATION_ACQUIRE) Anonymous() *NVME_CDW10_RESERVATION_ACQUIRE_Anonymous_e__Struct {
+	return (*NVME_CDW10_RESERVATION_ACQUIRE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_RESERVATION_ACQUIRE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_RESERVATION_REGISTER_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_RESERVATION_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_RESERVATION_REGISTER struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_RESERVATION_REGISTER) Anonymous() *NVME_CDW10_RESERVATION_REGISTER_Anonymous_e__Struct {
+	return (*NVME_CDW10_RESERVATION_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_RESERVATION_REGISTER) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_RESERVATION_RELEASE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_RESERVATION_RELEASE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_RESERVATION_RELEASE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_RESERVATION_RELEASE) Anonymous() *NVME_CDW10_RESERVATION_RELEASE_Anonymous_e__Struct {
+	return (*NVME_CDW10_RESERVATION_RELEASE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_RESERVATION_RELEASE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_RESERVATION_REPORT_Anonymous_e__Struct struct {
+	NUMD uint32
+}
+
 // NVME_CDW10_RESERVATION_REPORT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_RESERVATION_REPORT struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_RESERVATION_REPORT) Anonymous() *NVME_CDW10_RESERVATION_REPORT_Anonymous_e__Struct {
+	return (*NVME_CDW10_RESERVATION_REPORT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_RESERVATION_REPORT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_SANITIZE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_SANITIZE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_SANITIZE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_SANITIZE) Anonymous() *NVME_CDW10_SANITIZE_Anonymous_e__Struct {
+	return (*NVME_CDW10_SANITIZE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_SANITIZE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_SECURITY_SEND_RECEIVE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_SECURITY_SEND_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_security_send_receive
 // NVME_CDW10_SECURITY_SEND_RECEIVE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_SECURITY_SEND_RECEIVE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_SECURITY_SEND_RECEIVE) Anonymous() *NVME_CDW10_SECURITY_SEND_RECEIVE_Anonymous_e__Struct {
+	return (*NVME_CDW10_SECURITY_SEND_RECEIVE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_SECURITY_SEND_RECEIVE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW10_SET_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW10_SET_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw10_set_features
 // NVME_CDW10_SET_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW10_SET_FEATURES struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW10_SET_FEATURES) Anonymous() *NVME_CDW10_SET_FEATURES_Anonymous_e__Struct {
+	return (*NVME_CDW10_SET_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW10_SET_FEATURES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVME_CDW10_ZONE_APPEND struct {
@@ -561,162 +1100,603 @@ type NVME_CDW10_ZONE_MANAGEMENT_SEND struct {
 	SLBA uint64
 }
 
+type NVME_CDW11_CREATE_IO_CQ_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_CREATE_IO_CQ: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_create_io_cq
 // NVME_CDW11_CREATE_IO_CQ is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_CREATE_IO_CQ struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_CREATE_IO_CQ) Anonymous() *NVME_CDW11_CREATE_IO_CQ_Anonymous_e__Struct {
+	return (*NVME_CDW11_CREATE_IO_CQ_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_CREATE_IO_CQ) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_CREATE_IO_SQ_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_CREATE_IO_SQ: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_create_io_sq
 // NVME_CDW11_CREATE_IO_SQ is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_CREATE_IO_SQ struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_CREATE_IO_SQ) Anonymous() *NVME_CDW11_CREATE_IO_SQ_Anonymous_e__Struct {
+	return (*NVME_CDW11_CREATE_IO_SQ_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_CREATE_IO_SQ) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_DATASET_MANAGEMENT_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_DATASET_MANAGEMENT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_dataset_management
 // NVME_CDW11_DATASET_MANAGEMENT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_DATASET_MANAGEMENT struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_DATASET_MANAGEMENT) Anonymous() *NVME_CDW11_DATASET_MANAGEMENT_Anonymous_e__Struct {
+	return (*NVME_CDW11_DATASET_MANAGEMENT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_DATASET_MANAGEMENT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_DIRECTIVE_RECEIVE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_DIRECTIVE_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_directive_receive
 // NVME_CDW11_DIRECTIVE_RECEIVE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_DIRECTIVE_RECEIVE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_DIRECTIVE_RECEIVE) Anonymous() *NVME_CDW11_DIRECTIVE_RECEIVE_Anonymous_e__Struct {
+	return (*NVME_CDW11_DIRECTIVE_RECEIVE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_DIRECTIVE_RECEIVE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_DIRECTIVE_SEND_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_DIRECTIVE_SEND: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_directive_send
 // NVME_CDW11_DIRECTIVE_SEND is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_DIRECTIVE_SEND struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_DIRECTIVE_SEND) Anonymous() *NVME_CDW11_DIRECTIVE_SEND_Anonymous_e__Struct {
+	return (*NVME_CDW11_DIRECTIVE_SEND_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_DIRECTIVE_SEND) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW11_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_features
 // NVME_CDW11_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURES struct {
 	Data [1]uint32
 }
 
+// NumberOfQueues reinterprets the union as its NumberOfQueues member.
+func (u *NVME_CDW11_FEATURES) NumberOfQueues() *NVME_CDW11_FEATURE_NUMBER_OF_QUEUES {
+	return (*NVME_CDW11_FEATURE_NUMBER_OF_QUEUES)(unsafe.Pointer(u))
+}
+
+// InterruptCoalescing reinterprets the union as its InterruptCoalescing member.
+func (u *NVME_CDW11_FEATURES) InterruptCoalescing() *NVME_CDW11_FEATURE_INTERRUPT_COALESCING {
+	return (*NVME_CDW11_FEATURE_INTERRUPT_COALESCING)(unsafe.Pointer(u))
+}
+
+// InterruptVectorConfig reinterprets the union as its InterruptVectorConfig member.
+func (u *NVME_CDW11_FEATURES) InterruptVectorConfig() *NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG {
+	return (*NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG)(unsafe.Pointer(u))
+}
+
+// LbaRangeType reinterprets the union as its LbaRangeType member.
+func (u *NVME_CDW11_FEATURES) LbaRangeType() *NVME_CDW11_FEATURE_LBA_RANGE_TYPE {
+	return (*NVME_CDW11_FEATURE_LBA_RANGE_TYPE)(unsafe.Pointer(u))
+}
+
+// Arbitration reinterprets the union as its Arbitration member.
+func (u *NVME_CDW11_FEATURES) Arbitration() *NVME_CDW11_FEATURE_ARBITRATION {
+	return (*NVME_CDW11_FEATURE_ARBITRATION)(unsafe.Pointer(u))
+}
+
+// VolatileWriteCache reinterprets the union as its VolatileWriteCache member.
+func (u *NVME_CDW11_FEATURES) VolatileWriteCache() *NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE {
+	return (*NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE)(unsafe.Pointer(u))
+}
+
+// AsyncEventConfig reinterprets the union as its AsyncEventConfig member.
+func (u *NVME_CDW11_FEATURES) AsyncEventConfig() *NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG {
+	return (*NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG)(unsafe.Pointer(u))
+}
+
+// PowerManagement reinterprets the union as its PowerManagement member.
+func (u *NVME_CDW11_FEATURES) PowerManagement() *NVME_CDW11_FEATURE_POWER_MANAGEMENT {
+	return (*NVME_CDW11_FEATURE_POWER_MANAGEMENT)(unsafe.Pointer(u))
+}
+
+// AutoPowerStateTransition reinterprets the union as its AutoPowerStateTransition member.
+func (u *NVME_CDW11_FEATURES) AutoPowerStateTransition() *NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION {
+	return (*NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION)(unsafe.Pointer(u))
+}
+
+// TemperatureThreshold reinterprets the union as its TemperatureThreshold member.
+func (u *NVME_CDW11_FEATURES) TemperatureThreshold() *NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD {
+	return (*NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD)(unsafe.Pointer(u))
+}
+
+// ErrorRecovery reinterprets the union as its ErrorRecovery member.
+func (u *NVME_CDW11_FEATURES) ErrorRecovery() *NVME_CDW11_FEATURE_ERROR_RECOVERY {
+	return (*NVME_CDW11_FEATURE_ERROR_RECOVERY)(unsafe.Pointer(u))
+}
+
+// HostMemoryBuffer reinterprets the union as its HostMemoryBuffer member.
+func (u *NVME_CDW11_FEATURES) HostMemoryBuffer() *NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER {
+	return (*NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER)(unsafe.Pointer(u))
+}
+
+// WriteAtomicityNormal reinterprets the union as its WriteAtomicityNormal member.
+func (u *NVME_CDW11_FEATURES) WriteAtomicityNormal() *NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL {
+	return (*NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL)(unsafe.Pointer(u))
+}
+
+// NonOperationalPowerState reinterprets the union as its NonOperationalPowerState member.
+func (u *NVME_CDW11_FEATURES) NonOperationalPowerState() *NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE {
+	return (*NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE)(unsafe.Pointer(u))
+}
+
+// IoCommandSetProfile reinterprets the union as its IoCommandSetProfile member.
+func (u *NVME_CDW11_FEATURES) IoCommandSetProfile() *NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE {
+	return (*NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE)(unsafe.Pointer(u))
+}
+
+// ErrorInjection reinterprets the union as its ErrorInjection member.
+func (u *NVME_CDW11_FEATURES) ErrorInjection() *NVME_CDW0_FEATURE_ERROR_INJECTION {
+	return (*NVME_CDW0_FEATURE_ERROR_INJECTION)(unsafe.Pointer(u))
+}
+
+// HostIdentifier reinterprets the union as its HostIdentifier member.
+func (u *NVME_CDW11_FEATURES) HostIdentifier() *NVME_CDW11_FEATURE_HOST_IDENTIFIER {
+	return (*NVME_CDW11_FEATURE_HOST_IDENTIFIER)(unsafe.Pointer(u))
+}
+
+// ReservationPersistence reinterprets the union as its ReservationPersistence member.
+func (u *NVME_CDW11_FEATURES) ReservationPersistence() *NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE {
+	return (*NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE)(unsafe.Pointer(u))
+}
+
+// ReservationNotificationMask reinterprets the union as its ReservationNotificationMask member.
+func (u *NVME_CDW11_FEATURES) ReservationNotificationMask() *NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK {
+	return (*NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK)(unsafe.Pointer(u))
+}
+
+// GetHostMetadata reinterprets the union as its GetHostMetadata member.
+func (u *NVME_CDW11_FEATURES) GetHostMetadata() *NVME_CDW11_FEATURE_GET_HOST_METADATA {
+	return (*NVME_CDW11_FEATURE_GET_HOST_METADATA)(unsafe.Pointer(u))
+}
+
+// SetHostMetadata reinterprets the union as its SetHostMetadata member.
+func (u *NVME_CDW11_FEATURES) SetHostMetadata() *NVME_CDW11_FEATURE_SET_HOST_METADATA {
+	return (*NVME_CDW11_FEATURE_SET_HOST_METADATA)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_ARBITRATION_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_ARBITRATION: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_arbitration
 // NVME_CDW11_FEATURE_ARBITRATION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_ARBITRATION struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_ARBITRATION) Anonymous() *NVME_CDW11_FEATURE_ARBITRATION_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_ARBITRATION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_ARBITRATION) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_async_event_config
 // NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG) Anonymous() *NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_auto_power_state_transition
 // NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION) Anonymous() *NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY) Anonymous() *NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS) Anonymous() *NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO) Anonymous() *NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_ERROR_RECOVERY_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_ERROR_RECOVERY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_ERROR_RECOVERY struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_ERROR_RECOVERY) Anonymous() *NVME_CDW11_FEATURE_ERROR_RECOVERY_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_ERROR_RECOVERY_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_ERROR_RECOVERY) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_GET_HOST_METADATA_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_GET_HOST_METADATA is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_GET_HOST_METADATA struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_GET_HOST_METADATA) Anonymous() *NVME_CDW11_FEATURE_GET_HOST_METADATA_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_GET_HOST_METADATA_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_GET_HOST_METADATA) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVME_CDW11_FEATURE_HOST_IDENTIFIER struct {
 	Bitfield uint32
 }
 
+type NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_host_memory_buffer
 // NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER) Anonymous() *NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_INTERRUPT_COALESCING_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_INTERRUPT_COALESCING: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_interrupt_coalescing
 // NVME_CDW11_FEATURE_INTERRUPT_COALESCING is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_INTERRUPT_COALESCING struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_INTERRUPT_COALESCING) Anonymous() *NVME_CDW11_FEATURE_INTERRUPT_COALESCING_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_INTERRUPT_COALESCING_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_INTERRUPT_COALESCING) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_interrupt_vector_config
 // NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG) Anonymous() *NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE) Anonymous() *NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_LBA_RANGE_TYPE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_LBA_RANGE_TYPE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_lba_range_type
 // NVME_CDW11_FEATURE_LBA_RANGE_TYPE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_LBA_RANGE_TYPE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_LBA_RANGE_TYPE) Anonymous() *NVME_CDW11_FEATURE_LBA_RANGE_TYPE_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_LBA_RANGE_TYPE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_LBA_RANGE_TYPE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_non_operational_power_state
 // NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE) Anonymous() *NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_NUMBER_OF_QUEUES_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_NUMBER_OF_QUEUES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_number_of_queues
 // NVME_CDW11_FEATURE_NUMBER_OF_QUEUES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_NUMBER_OF_QUEUES struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_NUMBER_OF_QUEUES) Anonymous() *NVME_CDW11_FEATURE_NUMBER_OF_QUEUES_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_NUMBER_OF_QUEUES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_NUMBER_OF_QUEUES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_POWER_MANAGEMENT_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_POWER_MANAGEMENT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_power_management
 // NVME_CDW11_FEATURE_POWER_MANAGEMENT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_POWER_MANAGEMENT struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_POWER_MANAGEMENT) Anonymous() *NVME_CDW11_FEATURE_POWER_MANAGEMENT_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_POWER_MANAGEMENT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_POWER_MANAGEMENT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE) Anonymous() *NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK struct {
@@ -727,38 +1707,113 @@ type NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE struct {
 	Bitfield uint32
 }
 
+type NVME_CDW11_FEATURE_SET_HOST_METADATA_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_SET_HOST_METADATA is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_SET_HOST_METADATA struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_SET_HOST_METADATA) Anonymous() *NVME_CDW11_FEATURE_SET_HOST_METADATA_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_SET_HOST_METADATA_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_SET_HOST_METADATA) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_supported_capability
 // NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY) Anonymous() *NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_temperature_threshold
 // NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD) Anonymous() *NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_volatile_write_cache
 // NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE) Anonymous() *NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_feature_write_atomicity_normal
 // NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL) Anonymous() *NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL_Anonymous_e__Struct {
+	return (*NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_CDW11_FIRMWARE_DOWNLOAD: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_firmware_download
@@ -766,30 +1821,100 @@ type NVME_CDW11_FIRMWARE_DOWNLOAD struct {
 	OFST uint32
 }
 
+type NVME_CDW11_GET_LOG_PAGE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_GET_LOG_PAGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_get_log_page
 // NVME_CDW11_GET_LOG_PAGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_GET_LOG_PAGE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_GET_LOG_PAGE) Anonymous() *NVME_CDW11_GET_LOG_PAGE_Anonymous_e__Struct {
+	return (*NVME_CDW11_GET_LOG_PAGE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_GET_LOG_PAGE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_IDENTIFY_Anonymous1_e__Struct struct {
+	NVMSETID uint16
+	Reserved uint16
+}
+
+type NVME_CDW11_IDENTIFY_Anonymous2_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_IDENTIFY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_identify
 // NVME_CDW11_IDENTIFY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_IDENTIFY struct {
 	Data [1]uint32
 }
 
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *NVME_CDW11_IDENTIFY) Anonymous1() *NVME_CDW11_IDENTIFY_Anonymous1_e__Struct {
+	return (*NVME_CDW11_IDENTIFY_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *NVME_CDW11_IDENTIFY) Anonymous2() *NVME_CDW11_IDENTIFY_Anonymous2_e__Struct {
+	return (*NVME_CDW11_IDENTIFY_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_IDENTIFY) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_RESERVATION_REPORT_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW11_RESERVATION_REPORT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_RESERVATION_REPORT struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_RESERVATION_REPORT) Anonymous() *NVME_CDW11_RESERVATION_REPORT_Anonymous_e__Struct {
+	return (*NVME_CDW11_RESERVATION_REPORT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_RESERVATION_REPORT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW11_SANITIZE_Anonymous_e__Struct struct {
+	OVRPAT uint32
+}
+
 // NVME_CDW11_SANITIZE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW11_SANITIZE struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW11_SANITIZE) Anonymous() *NVME_CDW11_SANITIZE_Anonymous_e__Struct {
+	return (*NVME_CDW11_SANITIZE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW11_SANITIZE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_CDW11_SECURITY_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw11_security_receive
@@ -804,175 +1929,539 @@ type NVME_CDW11_SECURITY_SEND struct {
 
 // NVME_CDW12_DIRECTIVE_RECEIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_directive_receive
 // NVME_CDW12_DIRECTIVE_RECEIVE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_DIRECTIVE_RECEIVE struct {
 	Data [1]uint32
 }
 
+// AllocateResources reinterprets the union as its AllocateResources member.
+func (u *NVME_CDW12_DIRECTIVE_RECEIVE) AllocateResources() *NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES {
+	return (*NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_DIRECTIVE_RECEIVE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_directive_receive_streams_allocate_resources
 // NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES) Anonymous() *NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES_Anonymous_e__Struct {
+	return (*NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW12_DIRECTIVE_SEND: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_directive_send
 // NVME_CDW12_DIRECTIVE_SEND is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_DIRECTIVE_SEND struct {
 	Data [1]uint32
 }
 
+// EnableDirective reinterprets the union as its EnableDirective member.
+func (u *NVME_CDW12_DIRECTIVE_SEND) EnableDirective() *NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE {
+	return (*NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_DIRECTIVE_SEND) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_directive_send_identify_enable_directive
 // NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE) Anonymous() *NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE_Anonymous_e__Struct {
+	return (*NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW12_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_features
 // NVME_CDW12_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_FEATURES struct {
 	Data [1]uint32
 }
 
+// HostMemoryBuffer reinterprets the union as its HostMemoryBuffer member.
+func (u *NVME_CDW12_FEATURES) HostMemoryBuffer() *NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER {
+	return (*NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_FEATURES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct struct {
+	HSIZE uint32
+}
+
 // NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_feature_host_memory_buffer
 // NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER) Anonymous() *NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct {
+	return (*NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW12_GET_LOG_PAGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_get_log_page
 // NVME_CDW12_GET_LOG_PAGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_GET_LOG_PAGE struct {
 	Data [1]uint32
 }
 
+// LPOL reinterprets the union as its LPOL member.
+func (u *NVME_CDW12_GET_LOG_PAGE) LPOL() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_GET_LOG_PAGE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW12_READ_WRITE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW12_READ_WRITE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw12_read_write
 // NVME_CDW12_READ_WRITE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_READ_WRITE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW12_READ_WRITE) Anonymous() *NVME_CDW12_READ_WRITE_Anonymous_e__Struct {
+	return (*NVME_CDW12_READ_WRITE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_READ_WRITE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW12_VERIFYCOMMAND_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW12_VERIFYCOMMAND is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_VERIFYCOMMAND struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW12_VERIFYCOMMAND) Anonymous() *NVME_CDW12_VERIFYCOMMAND_Anonymous_e__Struct {
+	return (*NVME_CDW12_VERIFYCOMMAND_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_VERIFYCOMMAND) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW12_ZONE_APPEND_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW12_ZONE_APPEND is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW12_ZONE_APPEND struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW12_ZONE_APPEND) Anonymous() *NVME_CDW12_ZONE_APPEND_Anonymous_e__Struct {
+	return (*NVME_CDW12_ZONE_APPEND_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW12_ZONE_APPEND) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW13_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw13_features
 // NVME_CDW13_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW13_FEATURES struct {
 	Data [1]uint32
 }
 
+// HostMemoryBuffer reinterprets the union as its HostMemoryBuffer member.
+func (u *NVME_CDW13_FEATURES) HostMemoryBuffer() *NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER {
+	return (*NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW13_FEATURES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw13_feature_host_memory_buffer
 // NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER) Anonymous() *NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct {
+	return (*NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW13_GET_LOG_PAGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw13_get_log_page
 // NVME_CDW13_GET_LOG_PAGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW13_GET_LOG_PAGE struct {
 	Data [1]uint32
 }
 
+// LPOU reinterprets the union as its LPOU member.
+func (u *NVME_CDW13_GET_LOG_PAGE) LPOU() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW13_GET_LOG_PAGE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW13_READ_WRITE_Anonymous_e__Struct_DSM_e__Struct struct {
+	Bitfield byte
+}
+
+type NVME_CDW13_READ_WRITE_Anonymous_e__Struct struct {
+	DSM      NVME_CDW13_READ_WRITE_Anonymous_e__Struct_DSM_e__Struct
+	Reserved byte
+	DSPEC    uint16
+}
+
 // NVME_CDW13_READ_WRITE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw13_read_write
 // NVME_CDW13_READ_WRITE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW13_READ_WRITE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW13_READ_WRITE) Anonymous() *NVME_CDW13_READ_WRITE_Anonymous_e__Struct {
+	return (*NVME_CDW13_READ_WRITE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW13_READ_WRITE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW13_ZONE_MANAGEMENT_RECEIVE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW13_ZONE_MANAGEMENT_RECEIVE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW13_ZONE_MANAGEMENT_RECEIVE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW13_ZONE_MANAGEMENT_RECEIVE) Anonymous() *NVME_CDW13_ZONE_MANAGEMENT_RECEIVE_Anonymous_e__Struct {
+	return (*NVME_CDW13_ZONE_MANAGEMENT_RECEIVE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW13_ZONE_MANAGEMENT_RECEIVE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW13_ZONE_MANAGEMENT_SEND_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW13_ZONE_MANAGEMENT_SEND is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW13_ZONE_MANAGEMENT_SEND struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW13_ZONE_MANAGEMENT_SEND) Anonymous() *NVME_CDW13_ZONE_MANAGEMENT_SEND_Anonymous_e__Struct {
+	return (*NVME_CDW13_ZONE_MANAGEMENT_SEND_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW13_ZONE_MANAGEMENT_SEND) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW14_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw14_features
 // NVME_CDW14_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW14_FEATURES struct {
 	Data [1]uint32
 }
 
+// HostMemoryBuffer reinterprets the union as its HostMemoryBuffer member.
+func (u *NVME_CDW14_FEATURES) HostMemoryBuffer() *NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER {
+	return (*NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW14_FEATURES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct struct {
+	HMDLUA uint32
+}
+
 // NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw14_feature_host_memory_buffer
 // NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER) Anonymous() *NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct {
+	return (*NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW14_GET_LOG_PAGE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW14_GET_LOG_PAGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW14_GET_LOG_PAGE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW14_GET_LOG_PAGE) Anonymous() *NVME_CDW14_GET_LOG_PAGE_Anonymous_e__Struct {
+	return (*NVME_CDW14_GET_LOG_PAGE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW14_GET_LOG_PAGE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW14_GET_LOG_PAGE_V20_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW14_GET_LOG_PAGE_V20 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW14_GET_LOG_PAGE_V20 struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW14_GET_LOG_PAGE_V20) Anonymous() *NVME_CDW14_GET_LOG_PAGE_V20_Anonymous_e__Struct {
+	return (*NVME_CDW14_GET_LOG_PAGE_V20_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW14_GET_LOG_PAGE_V20) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW14_IDENTIFY_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW14_IDENTIFY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW14_IDENTIFY struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW14_IDENTIFY) Anonymous() *NVME_CDW14_IDENTIFY_Anonymous_e__Struct {
+	return (*NVME_CDW14_IDENTIFY_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW14_IDENTIFY) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // NVME_CDW15_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw15_features
 // NVME_CDW15_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW15_FEATURES struct {
 	Data [1]uint32
 }
 
+// HostMemoryBuffer reinterprets the union as its HostMemoryBuffer member.
+func (u *NVME_CDW15_FEATURES) HostMemoryBuffer() *NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER {
+	return (*NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW15_FEATURES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct struct {
+	HMDLEC uint32
+}
+
 // NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw15_feature_host_memory_buffer
 // NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER) Anonymous() *NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct {
+	return (*NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW15_READ_WRITE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW15_READ_WRITE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_cdw15_read_write
 // NVME_CDW15_READ_WRITE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW15_READ_WRITE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW15_READ_WRITE) Anonymous() *NVME_CDW15_READ_WRITE_Anonymous_e__Struct {
+	return (*NVME_CDW15_READ_WRITE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW15_READ_WRITE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW15_VERIFY_COMMAND_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW15_VERIFY_COMMAND is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW15_VERIFY_COMMAND struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW15_VERIFY_COMMAND) Anonymous() *NVME_CDW15_VERIFY_COMMAND_Anonymous_e__Struct {
+	return (*NVME_CDW15_VERIFY_COMMAND_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW15_VERIFY_COMMAND) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CDW15_ZONE_APPEND_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CDW15_ZONE_APPEND is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CDW15_ZONE_APPEND struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CDW15_ZONE_APPEND) Anonymous() *NVME_CDW15_ZONE_APPEND_Anonymous_e__Struct {
+	return (*NVME_CDW15_ZONE_APPEND_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CDW15_ZONE_APPEND) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_CHANGED_NAMESPACE_LIST_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_changed_namespace_list_log
@@ -986,16 +2475,506 @@ type NVME_CHANGED_ZONE_LIST_LOG struct {
 	ZoneIdentifier       [511]uint64
 }
 
+type NVME_COMMAND_Anonymous_e__Union_Anonymous_e__Struct struct {
+	PRP1 uint64
+	PRP2 uint64
+}
+
 // NVME_COMMAND_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMMAND_Anonymous_e__Union struct {
 	Data [2]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_COMMAND_Anonymous_e__Union) Anonymous() *NVME_COMMAND_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*NVME_COMMAND_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// SGL1 reinterprets the union as its SGL1 member.
+func (u *NVME_COMMAND_Anonymous_e__Union) SGL1() *[2]uint64 {
+	return (*[2]uint64)(unsafe.Pointer(u))
+}
+
+type NVME_COMMAND_u_e__Union_ABORT_e__Struct struct {
+	CDW10 NVME_CDW10_ABORT
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_CREATEIOCQ_e__Struct struct {
+	CDW10 NVME_CDW10_CREATE_IO_QUEUE
+	CDW11 NVME_CDW11_CREATE_IO_CQ
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_CREATEIOSQ_e__Struct struct {
+	CDW10 NVME_CDW10_CREATE_IO_QUEUE
+	CDW11 NVME_CDW11_CREATE_IO_SQ
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_DATASETMANAGEMENT_e__Struct struct {
+	CDW10 NVME_CDW10_DATASET_MANAGEMENT
+	CDW11 NVME_CDW11_DATASET_MANAGEMENT
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_DELETEIOQUEUE_e__Struct struct {
+	CDW10 NVME_CDW10_DELETE_IO_QUEUE
+}
+
+type NVME_COMMAND_u_e__Union_DEVICESELFTEST_e__Struct struct {
+	CDW10 NVME_CDW10_DEVICE_SELF_TEST
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_DIRECTIVERECEIVE_e__Struct struct {
+	CDW10 NVME_CDW10_DIRECTIVE_RECEIVE
+	CDW11 NVME_CDW11_DIRECTIVE_RECEIVE
+	CDW12 NVME_CDW12_DIRECTIVE_RECEIVE
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_DIRECTIVESEND_e__Struct struct {
+	CDW10 NVME_CDW10_DIRECTIVE_SEND
+	CDW11 NVME_CDW11_DIRECTIVE_SEND
+	CDW12 NVME_CDW12_DIRECTIVE_SEND
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_DISCOVERYINFOMGMT_e__Struct struct {
+	CDW10 NVME_CDW10_DISCOVERY_INFO_MGMT
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_FIRMWAREACTIVATE_e__Struct struct {
+	CDW10 NVME_CDW10_FIRMWARE_ACTIVATE
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_FIRMWAREDOWNLOAD_e__Struct struct {
+	CDW10 NVME_CDW10_FIRMWARE_DOWNLOAD
+	CDW11 NVME_CDW11_FIRMWARE_DOWNLOAD
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_FORMATNVM_e__Struct struct {
+	CDW10 NVME_CDW10_FORMAT_NVM
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_GENERAL_e__Struct struct {
+	CDW10 uint32
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_GETFEATURES_e__Struct struct {
+	CDW10 NVME_CDW10_GET_FEATURES
+	CDW11 NVME_CDW11_FEATURES
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+// NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous1_e__Union struct {
+	Data [1]uint32
+}
+
+// CDW10 reinterprets the union as its CDW10 member.
+func (u *NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous1_e__Union) CDW10() *NVME_CDW10_GET_LOG_PAGE {
+	return (*NVME_CDW10_GET_LOG_PAGE)(unsafe.Pointer(u))
+}
+
+// CDW10_V121 reinterprets the union as its CDW10_V121 member.
+func (u *NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous1_e__Union) CDW10_V121() *NVME_CDW10_GET_LOG_PAGE_V121 {
+	return (*NVME_CDW10_GET_LOG_PAGE_V121)(unsafe.Pointer(u))
+}
+
+// CDW10_V13 reinterprets the union as its CDW10_V13 member.
+func (u *NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous1_e__Union) CDW10_V13() *NVME_CDW10_GET_LOG_PAGE_V13 {
+	return (*NVME_CDW10_GET_LOG_PAGE_V13)(unsafe.Pointer(u))
+}
+
+// CDW10_V20 reinterprets the union as its CDW10_V20 member.
+func (u *NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous1_e__Union) CDW10_V20() *NVME_CDW10_GET_LOG_PAGE_V20 {
+	return (*NVME_CDW10_GET_LOG_PAGE_V20)(unsafe.Pointer(u))
+}
+
+// NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous2_e__Union struct {
+	Data [1]uint32
+}
+
+// CDW14 reinterprets the union as its CDW14 member.
+func (u *NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous2_e__Union) CDW14() *NVME_CDW14_GET_LOG_PAGE {
+	return (*NVME_CDW14_GET_LOG_PAGE)(unsafe.Pointer(u))
+}
+
+// CDW14_V20 reinterprets the union as its CDW14_V20 member.
+func (u *NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous2_e__Union) CDW14_V20() *NVME_CDW14_GET_LOG_PAGE_V20 {
+	return (*NVME_CDW14_GET_LOG_PAGE_V20)(unsafe.Pointer(u))
+}
+
+type NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct struct {
+	Anonymous1 NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous1_e__Union
+	CDW11      NVME_CDW11_GET_LOG_PAGE
+	CDW12      NVME_CDW12_GET_LOG_PAGE
+	CDW13      NVME_CDW13_GET_LOG_PAGE
+	Anonymous2 NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct_Anonymous2_e__Union
+	CDW15      uint32
+}
+
+// NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint32
+}
+
+// CDW14 reinterprets the union as its CDW14 member.
+func (u *NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct_Anonymous_e__Union) CDW14() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CDW14_V20 reinterprets the union as its CDW14_V20 member.
+func (u *NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct_Anonymous_e__Union) CDW14_V20() *NVME_CDW14_IDENTIFY {
+	return (*NVME_CDW14_IDENTIFY)(unsafe.Pointer(u))
+}
+
+type NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct struct {
+	CDW10     NVME_CDW10_IDENTIFY
+	CDW11     NVME_CDW11_IDENTIFY
+	CDW12     uint32
+	CDW13     uint32
+	Anonymous NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct_Anonymous_e__Union
+	CDW15     uint32
+}
+
+type NVME_COMMAND_u_e__Union_READWRITE_e__Struct struct {
+	LBALOW  uint32
+	LBAHIGH uint32
+	CDW12   NVME_CDW12_READ_WRITE
+	CDW13   NVME_CDW13_READ_WRITE
+	CDW14   uint32
+	CDW15   NVME_CDW15_READ_WRITE
+}
+
+type NVME_COMMAND_u_e__Union_RESERVATIONACQUIRE_e__Struct struct {
+	CDW10 NVME_CDW10_RESERVATION_ACQUIRE
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_RESERVATIONREGISTER_e__Struct struct {
+	CDW10 NVME_CDW10_RESERVATION_REGISTER
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_RESERVATIONRELEASE_e__Struct struct {
+	CDW10 NVME_CDW10_RESERVATION_RELEASE
+	CDW11 uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_RESERVATIONREPORT_e__Struct struct {
+	CDW10 NVME_CDW10_RESERVATION_REPORT
+	CDW11 NVME_CDW11_RESERVATION_REPORT
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_SANITIZE_e__Struct struct {
+	CDW10 NVME_CDW10_SANITIZE
+	CDW11 NVME_CDW11_SANITIZE
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_SECURITYRECEIVE_e__Struct struct {
+	CDW10 NVME_CDW10_SECURITY_SEND_RECEIVE
+	CDW11 NVME_CDW11_SECURITY_RECEIVE
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_SECURITYSEND_e__Struct struct {
+	CDW10 NVME_CDW10_SECURITY_SEND_RECEIVE
+	CDW11 NVME_CDW11_SECURITY_SEND
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_SETFEATURES_e__Struct struct {
+	CDW10 NVME_CDW10_SET_FEATURES
+	CDW11 NVME_CDW11_FEATURES
+	CDW12 NVME_CDW12_FEATURES
+	CDW13 NVME_CDW13_FEATURES
+	CDW14 NVME_CDW14_FEATURES
+	CDW15 NVME_CDW15_FEATURES
+}
+
+type NVME_COMMAND_u_e__Union_VENDORSPECIFIC_e__Struct struct {
+	NDT   uint32
+	NDM   uint32
+	CDW12 uint32
+	CDW13 uint32
+	CDW14 uint32
+	CDW15 uint32
+}
+
+type NVME_COMMAND_u_e__Union_VERIFYCOMMAND_e__Struct struct {
+	LBALOW  uint32
+	LBAHIGH uint32
+	CDW12   NVME_CDW12_VERIFYCOMMAND
+	CDW13   uint32
+	EILBRT  uint32
+	CDW15   NVME_CDW15_VERIFY_COMMAND
+}
+
+type NVME_COMMAND_u_e__Union_ZONEAPPEND_e__Struct struct {
+	CDW1011 NVME_CDW10_ZONE_APPEND
+	CDW12   NVME_CDW12_ZONE_APPEND
+	CDW13   uint32
+	ILBRT   uint32
+	CDW15   NVME_CDW15_ZONE_APPEND
+}
+
+type NVME_COMMAND_u_e__Union_ZONEMANAGEMENTRECEIVE_e__Struct struct {
+	CDW1011    NVME_CDW10_ZONE_MANAGEMENT_RECEIVE
+	DWORDCOUNT uint32
+	CDW13      NVME_CDW13_ZONE_MANAGEMENT_RECEIVE
+	CDW14      uint32
+	CDW15      uint32
+}
+
+type NVME_COMMAND_u_e__Union_ZONEMANAGEMENTSEND_e__Struct struct {
+	CDW1011 NVME_CDW10_ZONE_MANAGEMENT_SEND
+	CDW12   uint32
+	CDW13   NVME_CDW13_ZONE_MANAGEMENT_SEND
+	CDW14   uint32
+	CDW15   uint32
+}
+
 // NVME_COMMAND_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMMAND_u_e__Union struct {
 	Data [3]uint64
+}
+
+// GENERAL reinterprets the union as its GENERAL member.
+func (u *NVME_COMMAND_u_e__Union) GENERAL() *NVME_COMMAND_u_e__Union_GENERAL_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_GENERAL_e__Struct)(unsafe.Pointer(u))
+}
+
+// IDENTIFY reinterprets the union as its IDENTIFY member.
+func (u *NVME_COMMAND_u_e__Union) IDENTIFY() *NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_IDENTIFY_e__Struct)(unsafe.Pointer(u))
+}
+
+// ABORT reinterprets the union as its ABORT member.
+func (u *NVME_COMMAND_u_e__Union) ABORT() *NVME_COMMAND_u_e__Union_ABORT_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_ABORT_e__Struct)(unsafe.Pointer(u))
+}
+
+// GETFEATURES reinterprets the union as its GETFEATURES member.
+func (u *NVME_COMMAND_u_e__Union) GETFEATURES() *NVME_COMMAND_u_e__Union_GETFEATURES_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_GETFEATURES_e__Struct)(unsafe.Pointer(u))
+}
+
+// SETFEATURES reinterprets the union as its SETFEATURES member.
+func (u *NVME_COMMAND_u_e__Union) SETFEATURES() *NVME_COMMAND_u_e__Union_SETFEATURES_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_SETFEATURES_e__Struct)(unsafe.Pointer(u))
+}
+
+// GETLOGPAGE reinterprets the union as its GETLOGPAGE member.
+func (u *NVME_COMMAND_u_e__Union) GETLOGPAGE() *NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_GETLOGPAGE_e__Struct)(unsafe.Pointer(u))
+}
+
+// CREATEIOCQ reinterprets the union as its CREATEIOCQ member.
+func (u *NVME_COMMAND_u_e__Union) CREATEIOCQ() *NVME_COMMAND_u_e__Union_CREATEIOCQ_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_CREATEIOCQ_e__Struct)(unsafe.Pointer(u))
+}
+
+// CREATEIOSQ reinterprets the union as its CREATEIOSQ member.
+func (u *NVME_COMMAND_u_e__Union) CREATEIOSQ() *NVME_COMMAND_u_e__Union_CREATEIOSQ_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_CREATEIOSQ_e__Struct)(unsafe.Pointer(u))
+}
+
+// DELETEIOQUEUE reinterprets the union as its DELETEIOQUEUE member.
+func (u *NVME_COMMAND_u_e__Union) DELETEIOQUEUE() *NVME_COMMAND_u_e__Union_DELETEIOQUEUE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_DELETEIOQUEUE_e__Struct)(unsafe.Pointer(u))
+}
+
+// DATASETMANAGEMENT reinterprets the union as its DATASETMANAGEMENT member.
+func (u *NVME_COMMAND_u_e__Union) DATASETMANAGEMENT() *NVME_COMMAND_u_e__Union_DATASETMANAGEMENT_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_DATASETMANAGEMENT_e__Struct)(unsafe.Pointer(u))
+}
+
+// SECURITYSEND reinterprets the union as its SECURITYSEND member.
+func (u *NVME_COMMAND_u_e__Union) SECURITYSEND() *NVME_COMMAND_u_e__Union_SECURITYSEND_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_SECURITYSEND_e__Struct)(unsafe.Pointer(u))
+}
+
+// SECURITYRECEIVE reinterprets the union as its SECURITYRECEIVE member.
+func (u *NVME_COMMAND_u_e__Union) SECURITYRECEIVE() *NVME_COMMAND_u_e__Union_SECURITYRECEIVE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_SECURITYRECEIVE_e__Struct)(unsafe.Pointer(u))
+}
+
+// FIRMWAREDOWNLOAD reinterprets the union as its FIRMWAREDOWNLOAD member.
+func (u *NVME_COMMAND_u_e__Union) FIRMWAREDOWNLOAD() *NVME_COMMAND_u_e__Union_FIRMWAREDOWNLOAD_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_FIRMWAREDOWNLOAD_e__Struct)(unsafe.Pointer(u))
+}
+
+// FIRMWAREACTIVATE reinterprets the union as its FIRMWAREACTIVATE member.
+func (u *NVME_COMMAND_u_e__Union) FIRMWAREACTIVATE() *NVME_COMMAND_u_e__Union_FIRMWAREACTIVATE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_FIRMWAREACTIVATE_e__Struct)(unsafe.Pointer(u))
+}
+
+// FORMATNVM reinterprets the union as its FORMATNVM member.
+func (u *NVME_COMMAND_u_e__Union) FORMATNVM() *NVME_COMMAND_u_e__Union_FORMATNVM_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_FORMATNVM_e__Struct)(unsafe.Pointer(u))
+}
+
+// DIRECTIVERECEIVE reinterprets the union as its DIRECTIVERECEIVE member.
+func (u *NVME_COMMAND_u_e__Union) DIRECTIVERECEIVE() *NVME_COMMAND_u_e__Union_DIRECTIVERECEIVE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_DIRECTIVERECEIVE_e__Struct)(unsafe.Pointer(u))
+}
+
+// DIRECTIVESEND reinterprets the union as its DIRECTIVESEND member.
+func (u *NVME_COMMAND_u_e__Union) DIRECTIVESEND() *NVME_COMMAND_u_e__Union_DIRECTIVESEND_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_DIRECTIVESEND_e__Struct)(unsafe.Pointer(u))
+}
+
+// SANITIZE reinterprets the union as its SANITIZE member.
+func (u *NVME_COMMAND_u_e__Union) SANITIZE() *NVME_COMMAND_u_e__Union_SANITIZE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_SANITIZE_e__Struct)(unsafe.Pointer(u))
+}
+
+// READWRITE reinterprets the union as its READWRITE member.
+func (u *NVME_COMMAND_u_e__Union) READWRITE() *NVME_COMMAND_u_e__Union_READWRITE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_READWRITE_e__Struct)(unsafe.Pointer(u))
+}
+
+// RESERVATIONACQUIRE reinterprets the union as its RESERVATIONACQUIRE member.
+func (u *NVME_COMMAND_u_e__Union) RESERVATIONACQUIRE() *NVME_COMMAND_u_e__Union_RESERVATIONACQUIRE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_RESERVATIONACQUIRE_e__Struct)(unsafe.Pointer(u))
+}
+
+// RESERVATIONREGISTER reinterprets the union as its RESERVATIONREGISTER member.
+func (u *NVME_COMMAND_u_e__Union) RESERVATIONREGISTER() *NVME_COMMAND_u_e__Union_RESERVATIONREGISTER_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_RESERVATIONREGISTER_e__Struct)(unsafe.Pointer(u))
+}
+
+// RESERVATIONRELEASE reinterprets the union as its RESERVATIONRELEASE member.
+func (u *NVME_COMMAND_u_e__Union) RESERVATIONRELEASE() *NVME_COMMAND_u_e__Union_RESERVATIONRELEASE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_RESERVATIONRELEASE_e__Struct)(unsafe.Pointer(u))
+}
+
+// RESERVATIONREPORT reinterprets the union as its RESERVATIONREPORT member.
+func (u *NVME_COMMAND_u_e__Union) RESERVATIONREPORT() *NVME_COMMAND_u_e__Union_RESERVATIONREPORT_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_RESERVATIONREPORT_e__Struct)(unsafe.Pointer(u))
+}
+
+// ZONEMANAGEMENTSEND reinterprets the union as its ZONEMANAGEMENTSEND member.
+func (u *NVME_COMMAND_u_e__Union) ZONEMANAGEMENTSEND() *NVME_COMMAND_u_e__Union_ZONEMANAGEMENTSEND_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_ZONEMANAGEMENTSEND_e__Struct)(unsafe.Pointer(u))
+}
+
+// ZONEMANAGEMENTRECEIVE reinterprets the union as its ZONEMANAGEMENTRECEIVE member.
+func (u *NVME_COMMAND_u_e__Union) ZONEMANAGEMENTRECEIVE() *NVME_COMMAND_u_e__Union_ZONEMANAGEMENTRECEIVE_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_ZONEMANAGEMENTRECEIVE_e__Struct)(unsafe.Pointer(u))
+}
+
+// ZONEAPPEND reinterprets the union as its ZONEAPPEND member.
+func (u *NVME_COMMAND_u_e__Union) ZONEAPPEND() *NVME_COMMAND_u_e__Union_ZONEAPPEND_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_ZONEAPPEND_e__Struct)(unsafe.Pointer(u))
+}
+
+// DEVICESELFTEST reinterprets the union as its DEVICESELFTEST member.
+func (u *NVME_COMMAND_u_e__Union) DEVICESELFTEST() *NVME_COMMAND_u_e__Union_DEVICESELFTEST_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_DEVICESELFTEST_e__Struct)(unsafe.Pointer(u))
+}
+
+// DISCOVERYINFOMGMT reinterprets the union as its DISCOVERYINFOMGMT member.
+func (u *NVME_COMMAND_u_e__Union) DISCOVERYINFOMGMT() *NVME_COMMAND_u_e__Union_DISCOVERYINFOMGMT_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_DISCOVERYINFOMGMT_e__Struct)(unsafe.Pointer(u))
+}
+
+// VENDORSPECIFIC reinterprets the union as its VENDORSPECIFIC member.
+func (u *NVME_COMMAND_u_e__Union) VENDORSPECIFIC() *NVME_COMMAND_u_e__Union_VENDORSPECIFIC_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_VENDORSPECIFIC_e__Struct)(unsafe.Pointer(u))
+}
+
+// VERIFYCOMMAND reinterprets the union as its VERIFYCOMMAND member.
+func (u *NVME_COMMAND_u_e__Union) VERIFYCOMMAND() *NVME_COMMAND_u_e__Union_VERIFYCOMMAND_e__Struct {
+	return (*NVME_COMMAND_u_e__Union_VERIFYCOMMAND_e__Struct)(unsafe.Pointer(u))
 }
 
 // NVME_COMMAND: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command
@@ -1008,18 +2987,48 @@ type NVME_COMMAND struct {
 	U         NVME_COMMAND_u_e__Union
 }
 
+type NVME_COMMAND_DWORD0_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_COMMAND_DWORD0: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command_dword0
 // NVME_COMMAND_DWORD0 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMMAND_DWORD0 struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_COMMAND_DWORD0) Anonymous() *NVME_COMMAND_DWORD0_Anonymous_e__Struct {
+	return (*NVME_COMMAND_DWORD0_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_COMMAND_DWORD0) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_COMMAND_EFFECTS_DATA_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_COMMAND_EFFECTS_DATA: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command_effects_data
 // NVME_COMMAND_EFFECTS_DATA is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMMAND_EFFECTS_DATA struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_COMMAND_EFFECTS_DATA) Anonymous() *NVME_COMMAND_EFFECTS_DATA_Anonymous_e__Struct {
+	return (*NVME_COMMAND_EFFECTS_DATA_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_COMMAND_EFFECTS_DATA) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_COMMAND_EFFECTS_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command_effects_log
@@ -1029,11 +3038,26 @@ type NVME_COMMAND_EFFECTS_LOG struct {
 	Reserved [2048]byte
 }
 
+type NVME_COMMAND_STATUS_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // NVME_COMMAND_STATUS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_command_status
 // NVME_COMMAND_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMMAND_STATUS struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_COMMAND_STATUS) Anonymous() *NVME_COMMAND_STATUS_Anonymous_e__Struct {
+	return (*NVME_COMMAND_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUshort reinterprets the union as its AsUshort member.
+func (u *NVME_COMMAND_STATUS) AsUshort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 // NVME_COMPLETION_DW0_ASYNC_EVENT_REQUEST: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_completion_dw0_async_event_request
@@ -1051,16 +3075,48 @@ type NVME_COMPLETION_DW0_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES struct {
 	AsUlong   uint32
 }
 
+type NVME_COMPLETION_ENTRY_DW2_e__Union_Anonymous_e__Struct struct {
+	SQHD uint16
+	SQID uint16
+}
+
 // NVME_COMPLETION_ENTRY_DW2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMPLETION_ENTRY_DW2_e__Union struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_COMPLETION_ENTRY_DW2_e__Union) Anonymous() *NVME_COMPLETION_ENTRY_DW2_e__Union_Anonymous_e__Struct {
+	return (*NVME_COMPLETION_ENTRY_DW2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_COMPLETION_ENTRY_DW2_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_COMPLETION_ENTRY_DW3_e__Union_Anonymous_e__Struct struct {
+	CID    uint16
+	Status NVME_COMMAND_STATUS
+}
+
 // NVME_COMPLETION_ENTRY_DW3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMPLETION_ENTRY_DW3_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_COMPLETION_ENTRY_DW3_e__Union) Anonymous() *NVME_COMPLETION_ENTRY_DW3_e__Union_Anonymous_e__Struct {
+	return (*NVME_COMPLETION_ENTRY_DW3_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_COMPLETION_ENTRY_DW3_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_COMPLETION_ENTRY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_completion_entry
@@ -1071,32 +3127,92 @@ type NVME_COMPLETION_ENTRY struct {
 	DW3 NVME_COMPLETION_ENTRY_DW3_e__Union
 }
 
+type NVME_COMPLETION_QUEUE_HEAD_DOORBELL_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_COMPLETION_QUEUE_HEAD_DOORBELL: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_completion_queue_head_doorbell
 // NVME_COMPLETION_QUEUE_HEAD_DOORBELL is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_COMPLETION_QUEUE_HEAD_DOORBELL struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_COMPLETION_QUEUE_HEAD_DOORBELL) Anonymous() *NVME_COMPLETION_QUEUE_HEAD_DOORBELL_Anonymous_e__Struct {
+	return (*NVME_COMPLETION_QUEUE_HEAD_DOORBELL_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_COMPLETION_QUEUE_HEAD_DOORBELL) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CONTEXT_ATTRIBUTES_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CONTEXT_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_context_attributes
 // NVME_CONTEXT_ATTRIBUTES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CONTEXT_ATTRIBUTES struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CONTEXT_ATTRIBUTES) Anonymous() *NVME_CONTEXT_ATTRIBUTES_Anonymous_e__Struct {
+	return (*NVME_CONTEXT_ATTRIBUTES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CONTEXT_ATTRIBUTES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CONTROLLER_CAPABILITIES_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // NVME_CONTROLLER_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_capabilities
 // NVME_CONTROLLER_CAPABILITIES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CONTROLLER_CAPABILITIES struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CONTROLLER_CAPABILITIES) Anonymous() *NVME_CONTROLLER_CAPABILITIES_Anonymous_e__Struct {
+	return (*NVME_CONTROLLER_CAPABILITIES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlonglong reinterprets the union as its AsUlonglong member.
+func (u *NVME_CONTROLLER_CAPABILITIES) AsUlonglong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type NVME_CONTROLLER_CONFIGURATION_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CONTROLLER_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_configuration
 // NVME_CONTROLLER_CONFIGURATION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CONTROLLER_CONFIGURATION struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CONTROLLER_CONFIGURATION) Anonymous() *NVME_CONTROLLER_CONFIGURATION_Anonymous_e__Struct {
+	return (*NVME_CONTROLLER_CONFIGURATION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CONTROLLER_CONFIGURATION) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_CONTROLLER_LIST: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_list
@@ -1105,24 +3221,70 @@ type NVME_CONTROLLER_LIST struct {
 	ControllerID        [2047]uint16
 }
 
+type NVME_CONTROLLER_MEMORY_BUFFER_LOCATION_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CONTROLLER_MEMORY_BUFFER_LOCATION: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_memory_buffer_location
 // NVME_CONTROLLER_MEMORY_BUFFER_LOCATION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CONTROLLER_MEMORY_BUFFER_LOCATION struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CONTROLLER_MEMORY_BUFFER_LOCATION) Anonymous() *NVME_CONTROLLER_MEMORY_BUFFER_LOCATION_Anonymous_e__Struct {
+	return (*NVME_CONTROLLER_MEMORY_BUFFER_LOCATION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CONTROLLER_MEMORY_BUFFER_LOCATION) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CONTROLLER_MEMORY_BUFFER_SIZE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CONTROLLER_MEMORY_BUFFER_SIZE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_memory_buffer_size
 // NVME_CONTROLLER_MEMORY_BUFFER_SIZE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CONTROLLER_MEMORY_BUFFER_SIZE struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CONTROLLER_MEMORY_BUFFER_SIZE) Anonymous() *NVME_CONTROLLER_MEMORY_BUFFER_SIZE_Anonymous_e__Struct {
+	return (*NVME_CONTROLLER_MEMORY_BUFFER_SIZE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CONTROLLER_MEMORY_BUFFER_SIZE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_CONTROLLER_READY_TIMEOUTS_Anonymous_e__Struct struct {
+	CRWMT uint16
+	CRIMT uint16
+}
+
 // NVME_CONTROLLER_READY_TIMEOUTS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CONTROLLER_READY_TIMEOUTS struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CONTROLLER_READY_TIMEOUTS) Anonymous() *NVME_CONTROLLER_READY_TIMEOUTS_Anonymous_e__Struct {
+	return (*NVME_CONTROLLER_READY_TIMEOUTS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CONTROLLER_READY_TIMEOUTS) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_CONTROLLER_REGISTERS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_registers
@@ -1148,11 +3310,26 @@ type NVME_CONTROLLER_REGISTERS struct {
 	Doorbells [1]uint32
 }
 
+type NVME_CONTROLLER_STATUS_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_CONTROLLER_STATUS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_controller_status
 // NVME_CONTROLLER_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_CONTROLLER_STATUS struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_CONTROLLER_STATUS) Anonymous() *NVME_CONTROLLER_STATUS_Anonymous_e__Struct {
+	return (*NVME_CONTROLLER_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_CONTROLLER_STATUS) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVME_DEVICE_SELF_TEST_LOG_CurrentCompletion_e__Struct struct {
@@ -1210,16 +3387,46 @@ type NVME_DIRECTIVE_STREAMS_RETURN_PARAMETERS struct {
 	Reserved1 [6]byte
 }
 
+type NVME_DISCOVERY_ENTRY_EFLAGS_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // NVME_DISCOVERY_ENTRY_EFLAGS_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_DISCOVERY_ENTRY_EFLAGS_e__Union struct {
 	Data [1]uint16
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_DISCOVERY_ENTRY_EFLAGS_e__Union) Anonymous() *NVME_DISCOVERY_ENTRY_EFLAGS_e__Union_Anonymous_e__Struct {
+	return (*NVME_DISCOVERY_ENTRY_EFLAGS_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUshort reinterprets the union as its AsUshort member.
+func (u *NVME_DISCOVERY_ENTRY_EFLAGS_e__Union) AsUshort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type NVME_DISCOVERY_ENTRY_TREQ_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_DISCOVERY_ENTRY_TREQ_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_DISCOVERY_ENTRY_TREQ_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_DISCOVERY_ENTRY_TREQ_e__Union) Anonymous() *NVME_DISCOVERY_ENTRY_TREQ_e__Union_Anonymous_e__Struct {
+	return (*NVME_DISCOVERY_ENTRY_TREQ_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_DISCOVERY_ENTRY_TREQ_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_DISCOVERY_ENTRY struct {
@@ -1239,10 +3446,25 @@ type NVME_DISCOVERY_ENTRY struct {
 	TSAS      [256]byte
 }
 
+type NVME_DISCOVERY_HEADER_DLPF_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_DISCOVERY_HEADER_DLPF_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_DISCOVERY_HEADER_DLPF_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_DISCOVERY_HEADER_DLPF_e__Union) Anonymous() *NVME_DISCOVERY_HEADER_DLPF_e__Union_Anonymous_e__Struct {
+	return (*NVME_DISCOVERY_HEADER_DLPF_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_DISCOVERY_HEADER_DLPF_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_DISCOVERY_HEADER struct {
@@ -1255,10 +3477,25 @@ type NVME_DISCOVERY_HEADER struct {
 	Reserved1 [1000]byte
 }
 
+type NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union) Anonymous() *NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union_Anonymous_e__Struct {
+	return (*NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUshort reinterprets the union as its AsUshort member.
+func (u *NVME_DISCOVERY_INFO_MGMT_HEADER_EKTYPE_e__Union) AsUshort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type NVME_DISCOVERY_INFO_MGMT_HEADER struct {
@@ -1305,10 +3542,25 @@ type NVME_ERROR_INFO_LOG struct {
 	Reserved1                 [22]byte
 }
 
+type NVME_ERROR_INJECTION_ENTRY_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_ERROR_INJECTION_ENTRY_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_ERROR_INJECTION_ENTRY_Flags_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_ERROR_INJECTION_ENTRY_Flags_e__Union) Anonymous() *NVME_ERROR_INJECTION_ENTRY_Flags_e__Union_Anonymous_e__Struct {
+	return (*NVME_ERROR_INJECTION_ENTRY_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_ERROR_INJECTION_ENTRY_Flags_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_ERROR_INJECTION_ENTRY struct {
@@ -1324,16 +3576,46 @@ type NVME_EXTENDED_ATTR struct {
 	EXATVAL  [1]byte
 }
 
+type NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union struct {
 	Data [1]uint16
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union) Anonymous() *NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union_Anonymous_e__Struct {
+	return (*NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUshort reinterprets the union as its AsUshort member.
+func (u *NVME_EXTENDED_DISCOVERY_ENTRY_EFLAGS_e__Union) AsUshort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union) Anonymous() *NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union_Anonymous_e__Struct {
+	return (*NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_EXTENDED_DISCOVERY_ENTRY_TREQ_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_EXTENDED_DISCOVERY_ENTRY struct {
@@ -1401,10 +3683,25 @@ type NVME_GET_FEATURE_TIMESTAMP struct {
 	AsUlonglong uint64
 }
 
+type NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union) Anonymous() *NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union_Anonymous_e__Struct {
+	return (*NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_HEALTH_INFO_LOG_CriticalWarning_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 // NVME_HEALTH_INFO_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_health_info_log
@@ -1789,11 +4086,28 @@ type NVME_LATENCY_MONITORING_ENTRY struct {
 	Data [4096]byte
 }
 
+type NVME_LBA_FORMAT_Anonymous_e__Struct struct {
+	MS       uint16
+	LBADS    byte
+	Bitfield byte
+}
+
 // NVME_LBA_FORMAT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_lba_format
 // NVME_LBA_FORMAT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_LBA_FORMAT struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_LBA_FORMAT) Anonymous() *NVME_LBA_FORMAT_Anonymous_e__Struct {
+	return (*NVME_LBA_FORMAT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_LBA_FORMAT) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NVME_LBA_RANGE: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_lba_range
@@ -1939,11 +4253,26 @@ type NVME_POWER_STATE_DESC struct {
 	Reserved9 [9]byte
 }
 
+type NVME_PRP_ENTRY_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // NVME_PRP_ENTRY: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_prp_entry
 // NVME_PRP_ENTRY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_PRP_ENTRY struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_PRP_ENTRY) Anonymous() *NVME_PRP_ENTRY_Anonymous_e__Struct {
+	return (*NVME_PRP_ENTRY_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlonglong reinterprets the union as its AsUlonglong member.
+func (u *NVME_PRP_ENTRY) AsUlonglong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type NVME_REGISTERED_CONTROLLER_DATA_RCSTS_e__Struct struct {
@@ -2056,10 +4385,25 @@ type NVME_SET_ATTRIBUTES_ENTRY struct {
 	Reserved2            [80]byte
 }
 
+type NVME_SGL_BITBUCKET_DESC_Identifier_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_SGL_BITBUCKET_DESC_Identifier_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SGL_BITBUCKET_DESC_Identifier_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SGL_BITBUCKET_DESC_Identifier_e__Union) Anonymous() *NVME_SGL_BITBUCKET_DESC_Identifier_e__Union_Anonymous_e__Struct {
+	return (*NVME_SGL_BITBUCKET_DESC_Identifier_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_SGL_BITBUCKET_DESC_Identifier_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_SGL_BITBUCKET_DESC struct {
@@ -2069,10 +4413,25 @@ type NVME_SGL_BITBUCKET_DESC struct {
 	Identifier NVME_SGL_BITBUCKET_DESC_Identifier_e__Union
 }
 
+type NVME_SGL_DATABLOCK_DESC_Identifier_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_SGL_DATABLOCK_DESC_Identifier_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SGL_DATABLOCK_DESC_Identifier_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SGL_DATABLOCK_DESC_Identifier_e__Union) Anonymous() *NVME_SGL_DATABLOCK_DESC_Identifier_e__Union_Anonymous_e__Struct {
+	return (*NVME_SGL_DATABLOCK_DESC_Identifier_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_SGL_DATABLOCK_DESC_Identifier_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_SGL_DATABLOCK_DESC struct {
@@ -2082,10 +4441,25 @@ type NVME_SGL_DATABLOCK_DESC struct {
 	Identifier NVME_SGL_DATABLOCK_DESC_Identifier_e__Union
 }
 
+type NVME_SGL_DESC_Identifier_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_SGL_DESC_Identifier_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SGL_DESC_Identifier_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SGL_DESC_Identifier_e__Union) Anonymous() *NVME_SGL_DESC_Identifier_e__Union_Anonymous_e__Struct {
+	return (*NVME_SGL_DESC_Identifier_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_SGL_DESC_Identifier_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_SGL_DESC struct {
@@ -2093,10 +4467,25 @@ type NVME_SGL_DESC struct {
 	Identifier NVME_SGL_DESC_Identifier_e__Union
 }
 
+type NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union) Anonymous() *NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union_Anonymous_e__Struct {
+	return (*NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_SGL_KEYDATABLOCK_DESC struct {
@@ -2106,10 +4495,25 @@ type NVME_SGL_KEYDATABLOCK_DESC struct {
 	Identifier NVME_SGL_KEYDATABLOCK_DESC_Identifier_e__Union
 }
 
+type NVME_SGL_LASTSEG_DESC_Identifier_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_SGL_LASTSEG_DESC_Identifier_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SGL_LASTSEG_DESC_Identifier_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SGL_LASTSEG_DESC_Identifier_e__Union) Anonymous() *NVME_SGL_LASTSEG_DESC_Identifier_e__Union_Anonymous_e__Struct {
+	return (*NVME_SGL_LASTSEG_DESC_Identifier_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_SGL_LASTSEG_DESC_Identifier_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_SGL_LASTSEG_DESC struct {
@@ -2119,10 +4523,25 @@ type NVME_SGL_LASTSEG_DESC struct {
 	Identifier NVME_SGL_LASTSEG_DESC_Identifier_e__Union
 }
 
+type NVME_SGL_SEGMENT_DESC_Identifier_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_SGL_SEGMENT_DESC_Identifier_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SGL_SEGMENT_DESC_Identifier_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SGL_SEGMENT_DESC_Identifier_e__Union) Anonymous() *NVME_SGL_SEGMENT_DESC_Identifier_e__Union_Anonymous_e__Struct {
+	return (*NVME_SGL_SEGMENT_DESC_Identifier_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_SGL_SEGMENT_DESC_Identifier_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_SGL_SEGMENT_DESC struct {
@@ -2132,10 +4551,25 @@ type NVME_SGL_SEGMENT_DESC struct {
 	Identifier NVME_SGL_SEGMENT_DESC_Identifier_e__Union
 }
 
+type NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union) Anonymous() *NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union_Anonymous_e__Struct {
+	return (*NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_SGL_TRANSPORTDATA_DESC struct {
@@ -2145,10 +4579,25 @@ type NVME_SGL_TRANSPORTDATA_DESC struct {
 	Identifier NVME_SGL_TRANSPORTDATA_DESC_Identifier_e__Union
 }
 
+type NVME_SUBMISSION_QUEUE_TAIL_DOORBELL_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_SUBMISSION_QUEUE_TAIL_DOORBELL is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_SUBMISSION_QUEUE_TAIL_DOORBELL struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_SUBMISSION_QUEUE_TAIL_DOORBELL) Anonymous() *NVME_SUBMISSION_QUEUE_TAIL_DOORBELL_Anonymous_e__Struct {
+	return (*NVME_SUBMISSION_QUEUE_TAIL_DOORBELL_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_SUBMISSION_QUEUE_TAIL_DOORBELL) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVME_SUPPORTED_LOG_PAGES_LOG struct {
@@ -2197,17 +4646,47 @@ type NVME_UUID_LIST_ENTRY struct {
 	UUID      [16]byte
 }
 
+type NVME_VERSION_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_VERSION: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_version
 // NVME_VERSION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_VERSION struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_VERSION) Anonymous() *NVME_VERSION_Anonymous_e__Struct {
+	return (*NVME_VERSION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *NVME_VERSION) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union) Anonymous() *NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsULONG reinterprets the union as its AsULONG member.
+func (u *NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union) AsULONG() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NVME_WCS_DEVICE_CAPABILITIES struct {
@@ -2221,10 +4700,25 @@ type NVME_WCS_DEVICE_ERROR_RECOVERY_LOG struct {
 	Data [512]byte
 }
 
+type NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union) Anonymous() *NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUCHAR reinterprets the union as its AsUCHAR member.
+func (u *NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union) AsUCHAR() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NVME_WCS_DEVICE_RESET_ACTION struct {
@@ -2277,10 +4771,25 @@ type NVME_ZONE_EXTENDED_REPORT_ZONE_DESC struct {
 	ZoneDescriptorExtension [1]NVME_ZONE_DESCRIPTOR_EXTENSION
 }
 
+type NVM_RESERVATION_CAPABILITIES_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // NVM_RESERVATION_CAPABILITIES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NVM_RESERVATION_CAPABILITIES struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NVM_RESERVATION_CAPABILITIES) Anonymous() *NVM_RESERVATION_CAPABILITIES_Anonymous_e__Struct {
+	return (*NVM_RESERVATION_CAPABILITIES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *NVM_RESERVATION_CAPABILITIES) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 // NVM_SET_LIST: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvm_set_list

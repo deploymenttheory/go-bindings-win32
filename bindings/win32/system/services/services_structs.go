@@ -99,10 +99,26 @@ type SERVICE_CONTROL_STATUS_REASON_PARAMSW struct {
 	ServiceStatus SERVICE_STATUS_PROCESS
 }
 
+type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union_s_e__Struct struct {
+	DataOffset uint32
+	Data       [1]byte
+}
+
 // SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union struct {
 	Data [2]uint32
+}
+
+// CustomStateId reinterprets the union as its CustomStateId member.
+func (u *SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union) CustomStateId() *SERVICE_TRIGGER_CUSTOM_STATE_ID {
+	return (*SERVICE_TRIGGER_CUSTOM_STATE_ID)(unsafe.Pointer(u))
+}
+
+// S reinterprets the union as its s member.
+func (u *SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union) S() *SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union_s_e__Struct {
+	return (*SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union_s_e__Struct)(unsafe.Pointer(u))
 }
 
 type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM struct {

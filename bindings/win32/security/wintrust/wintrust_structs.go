@@ -75,9 +75,15 @@ type CRYPT_PROVIDER_CERT struct {
 }
 
 // CRYPT_PROVIDER_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPT_PROVIDER_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PPDSip reinterprets the union as its pPDSip member.
+func (u *CRYPT_PROVIDER_DATA_Anonymous_e__Union) PPDSip() **PROVDATA_SIP {
+	return (**PROVDATA_SIP)(unsafe.Pointer(u))
 }
 
 // CRYPT_PROVIDER_DATA: https://learn.microsoft.com/windows/win32/api/wintrust/ns-wintrust-crypt_provider_data
@@ -304,9 +310,25 @@ type SPC_INDIRECT_DATA_CONTENT struct {
 }
 
 // SPC_LINK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SPC_LINK_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// PwszUrl reinterprets the union as its pwszUrl member.
+func (u *SPC_LINK_Anonymous_e__Union) PwszUrl() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Moniker reinterprets the union as its Moniker member.
+func (u *SPC_LINK_Anonymous_e__Union) Moniker() *SPC_SERIALIZED_OBJECT {
+	return (*SPC_SERIALIZED_OBJECT)(unsafe.Pointer(u))
+}
+
+// PwszFile reinterprets the union as its pwszFile member.
+func (u *SPC_LINK_Anonymous_e__Union) PwszFile() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 type SPC_LINK struct {
@@ -389,9 +411,40 @@ type WINTRUST_CERT_INFO struct {
 }
 
 // WINTRUST_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINTRUST_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PFile reinterprets the union as its pFile member.
+func (u *WINTRUST_DATA_Anonymous_e__Union) PFile() **WINTRUST_FILE_INFO {
+	return (**WINTRUST_FILE_INFO)(unsafe.Pointer(u))
+}
+
+// PCatalog reinterprets the union as its pCatalog member.
+func (u *WINTRUST_DATA_Anonymous_e__Union) PCatalog() **WINTRUST_CATALOG_INFO {
+	return (**WINTRUST_CATALOG_INFO)(unsafe.Pointer(u))
+}
+
+// PBlob reinterprets the union as its pBlob member.
+func (u *WINTRUST_DATA_Anonymous_e__Union) PBlob() **WINTRUST_BLOB_INFO {
+	return (**WINTRUST_BLOB_INFO)(unsafe.Pointer(u))
+}
+
+// PSgnr reinterprets the union as its pSgnr member.
+func (u *WINTRUST_DATA_Anonymous_e__Union) PSgnr() **WINTRUST_SGNR_INFO {
+	return (**WINTRUST_SGNR_INFO)(unsafe.Pointer(u))
+}
+
+// PCert reinterprets the union as its pCert member.
+func (u *WINTRUST_DATA_Anonymous_e__Union) PCert() **WINTRUST_CERT_INFO {
+	return (**WINTRUST_CERT_INFO)(unsafe.Pointer(u))
+}
+
+// PDetachedSig reinterprets the union as its pDetachedSig member.
+func (u *WINTRUST_DATA_Anonymous_e__Union) PDetachedSig() **WINTRUST_DETACHED_SIG_INFO {
+	return (**WINTRUST_DETACHED_SIG_INFO)(unsafe.Pointer(u))
 }
 
 // WINTRUST_DATA: https://learn.microsoft.com/windows/win32/api/wintrust/ns-wintrust-wintrust_data
@@ -424,9 +477,20 @@ type WINTRUST_DETACHED_SIG_FILE_HANDLES struct {
 }
 
 // WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PDetachedSigHandles reinterprets the union as its pDetachedSigHandles member.
+func (u *WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union) PDetachedSigHandles() **WINTRUST_DETACHED_SIG_FILE_HANDLES {
+	return (**WINTRUST_DETACHED_SIG_FILE_HANDLES)(unsafe.Pointer(u))
+}
+
+// PDetachedSigBlobs reinterprets the union as its pDetachedSigBlobs member.
+func (u *WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union) PDetachedSigBlobs() **WINTRUST_DETACHED_SIG_BLOBS {
+	return (**WINTRUST_DETACHED_SIG_BLOBS)(unsafe.Pointer(u))
 }
 
 type WINTRUST_DETACHED_SIG_INFO struct {
@@ -498,9 +562,20 @@ type WIN_TRUST_SUBJECT_FILE_AND_DISPLAY struct {
 }
 
 // WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// CbStruct reinterprets the union as its cbStruct member.
+func (u *WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union) CbStruct() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CbSize reinterprets the union as its cbSize member.
+func (u *WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union) CbSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type WTD_GENERIC_CHAIN_POLICY_CREATE_INFO struct {
@@ -512,9 +587,20 @@ type WTD_GENERIC_CHAIN_POLICY_CREATE_INFO struct {
 }
 
 // WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// CbStruct reinterprets the union as its cbStruct member.
+func (u *WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union) CbStruct() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CbSize reinterprets the union as its cbSize member.
+func (u *WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union) CbSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type WTD_GENERIC_CHAIN_POLICY_DATA struct {
@@ -526,9 +612,20 @@ type WTD_GENERIC_CHAIN_POLICY_DATA struct {
 }
 
 // WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// CbStruct reinterprets the union as its cbStruct member.
+func (u *WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union) CbStruct() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CbSize reinterprets the union as its cbSize member.
+func (u *WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union) CbSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO struct {

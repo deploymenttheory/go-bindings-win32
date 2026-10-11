@@ -5,6 +5,8 @@
 package windowsfirewall
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
@@ -39,9 +41,20 @@ type INET_FIREWALL_AC_CAPABILITIES struct {
 }
 
 // INET_FIREWALL_AC_CHANGE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INET_FIREWALL_AC_CHANGE_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Capabilities reinterprets the union as its capabilities member.
+func (u *INET_FIREWALL_AC_CHANGE_Anonymous_e__Union) Capabilities() *INET_FIREWALL_AC_CAPABILITIES {
+	return (*INET_FIREWALL_AC_CAPABILITIES)(unsafe.Pointer(u))
+}
+
+// Binaries reinterprets the union as its binaries member.
+func (u *INET_FIREWALL_AC_CHANGE_Anonymous_e__Union) Binaries() *INET_FIREWALL_AC_BINARIES {
+	return (*INET_FIREWALL_AC_BINARIES)(unsafe.Pointer(u))
 }
 
 // INET_FIREWALL_AC_CHANGE: https://learn.microsoft.com/windows/win32/api/netfw/ns-netfw-inet_firewall_ac_change

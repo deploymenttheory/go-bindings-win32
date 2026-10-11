@@ -2225,9 +2225,25 @@ type D3D12_VIDEO_ENCODER_CODEC_AV1_QUANTIZATION_DELTA_CONFIG struct {
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264Config reinterprets the union as its pH264Config member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union) PH264Config() **D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264 {
+	return (**D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCConfig reinterprets the union as its pHEVCConfig member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union) PHEVCConfig() **D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC {
+	return (**D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC)(unsafe.Pointer(u))
+}
+
+// PAV1Config reinterprets the union as its pAV1Config member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union) PAV1Config() **D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION {
+	return (**D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_configuration
@@ -2255,9 +2271,30 @@ type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC struct {
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264Support reinterprets the union as its pH264Support member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union) PH264Support() **D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264 {
+	return (**D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCSupport reinterprets the union as its pHEVCSupport member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union) PHEVCSupport() **D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC {
+	return (**D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC)(unsafe.Pointer(u))
+}
+
+// PHEVCSupport1 reinterprets the union as its pHEVCSupport1 member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union) PHEVCSupport1() **D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1 {
+	return (**D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1)(unsafe.Pointer(u))
+}
+
+// PAV1Support reinterprets the union as its pAV1Support member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union) PAV1Support() **D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION_SUPPORT {
+	return (**D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION_SUPPORT)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_configuration_support
@@ -2302,9 +2339,25 @@ type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1 struct {
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264Support reinterprets the union as its pH264Support member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union) PH264Support() **D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264 {
+	return (**D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCSupport reinterprets the union as its pHEVCSupport member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union) PHEVCSupport() **D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC {
+	return (**D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC)(unsafe.Pointer(u))
+}
+
+// PAV1Support reinterprets the union as its pAV1Support member.
+func (u *D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union) PAV1Support() **D3D12_VIDEO_ENCODER_CODEC_AV1_PICTURE_CONTROL_SUPPORT {
+	return (**D3D12_VIDEO_ENCODER_CODEC_AV1_PICTURE_CONTROL_SUPPORT)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_codec_picture_control_support
@@ -2338,9 +2391,20 @@ type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM struct {
 }
 
 // D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union struct {
 	Data [7]uint64
+}
+
+// FrameOutputBuffer reinterprets the union as its FrameOutputBuffer member.
+func (u *D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union) FrameOutputBuffer() *D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM {
+	return (*D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM)(unsafe.Pointer(u))
+}
+
+// SubregionOutputBuffers reinterprets the union as its SubregionOutputBuffers member.
+func (u *D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union) SubregionOutputBuffers() *D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM {
+	return (*D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM)(unsafe.Pointer(u))
 }
 
 type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1 struct {
@@ -2368,9 +2432,20 @@ type D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO struct {
 }
 
 // D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// POpaqueLayoutBuffer reinterprets the union as its pOpaqueLayoutBuffer member.
+func (u *D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union) POpaqueLayoutBuffer() **graphicsdirect3d12.ID3D12Resource {
+	return (**graphicsdirect3d12.ID3D12Resource)(unsafe.Pointer(u))
+}
+
+// PCPUBuffer reinterprets the union as its pCPUBuffer member.
+func (u *D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union) PCPUBuffer() **D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO {
+	return (**D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO)(unsafe.Pointer(u))
 }
 
 type D3D12_VIDEO_ENCODER_DIRTY_REGIONS struct {
@@ -2439,9 +2514,20 @@ type D3D12_VIDEO_ENCODER_FRAME_MOTION_SEARCH_MODE_CONFIG struct {
 }
 
 // D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// POpaqueLayoutBuffer reinterprets the union as its pOpaqueLayoutBuffer member.
+func (u *D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union) POpaqueLayoutBuffer() **graphicsdirect3d12.ID3D12Resource {
+	return (**graphicsdirect3d12.ID3D12Resource)(unsafe.Pointer(u))
+}
+
+// PCPUBuffer reinterprets the union as its pCPUBuffer member.
+func (u *D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union) PCPUBuffer() **D3D12_VIDEO_ENCODER_MOVEREGION_INFO {
+	return (**D3D12_VIDEO_ENCODER_MOVEREGION_INFO)(unsafe.Pointer(u))
 }
 
 type D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS struct {
@@ -2450,9 +2536,15 @@ type D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS struct {
 }
 
 // D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PAV1Support reinterprets the union as its pAV1Support member.
+func (u *D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union) PAV1Support() **D3D12_VIDEO_ENCODER_AV1_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT {
+	return (**D3D12_VIDEO_ENCODER_AV1_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT)(unsafe.Pointer(u))
 }
 
 type D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT struct {
@@ -2490,9 +2582,25 @@ type D3D12_VIDEO_ENCODER_HEAP_DESC1 struct {
 }
 
 // D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union struct {
 	Data [9]uint64
+}
+
+// Quantization reinterprets the union as its Quantization member.
+func (u *D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union) Quantization() *D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_QUANTIZATION_MATRIX {
+	return (*D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_QUANTIZATION_MATRIX)(unsafe.Pointer(u))
+}
+
+// DirtyRegions reinterprets the union as its DirtyRegions member.
+func (u *D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union) DirtyRegions() *D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS {
+	return (*D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS)(unsafe.Pointer(u))
+}
+
+// MotionVectors reinterprets the union as its MotionVectors member.
+func (u *D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union) MotionVectors() *D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_MOTION_VECTORS {
+	return (*D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_MOTION_VECTORS)(unsafe.Pointer(u))
 }
 
 type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA struct {
@@ -2540,9 +2648,25 @@ type D3D12_VIDEO_ENCODER_INTRA_REFRESH struct {
 }
 
 // D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264LevelSetting reinterprets the union as its pH264LevelSetting member.
+func (u *D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union) PH264LevelSetting() **D3D12_VIDEO_ENCODER_LEVELS_H264 {
+	return (**D3D12_VIDEO_ENCODER_LEVELS_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCLevelSetting reinterprets the union as its pHEVCLevelSetting member.
+func (u *D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union) PHEVCLevelSetting() **D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC {
+	return (**D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC)(unsafe.Pointer(u))
+}
+
+// PAV1LevelSetting reinterprets the union as its pAV1LevelSetting member.
+func (u *D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union) PAV1LevelSetting() **D3D12_VIDEO_ENCODER_AV1_LEVEL_TIER_CONSTRAINTS {
+	return (**D3D12_VIDEO_ENCODER_AV1_LEVEL_TIER_CONSTRAINTS)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_LEVEL_SETTING: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_level_setting
@@ -2597,9 +2721,30 @@ type D3D12_VIDEO_ENCODER_OUTPUT_METADATA_STATISTICS struct {
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264PicData reinterprets the union as its pH264PicData member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union) PH264PicData() **D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264 {
+	return (**D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCPicData reinterprets the union as its pHEVCPicData member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union) PHEVCPicData() **D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC {
+	return (**D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC)(unsafe.Pointer(u))
+}
+
+// PHEVCPicData1 reinterprets the union as its pHEVCPicData1 member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union) PHEVCPicData1() **D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC1 {
+	return (**D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC1)(unsafe.Pointer(u))
+}
+
+// PAV1PicData reinterprets the union as its pAV1PicData member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union) PAV1PicData() **D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA {
+	return (**D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_control_codec_data
@@ -2609,9 +2754,25 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA struct {
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264PicData reinterprets the union as its pH264PicData member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union) PH264PicData() **D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264 {
+	return (**D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCPicData reinterprets the union as its pHEVCPicData member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union) PHEVCPicData() **D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC2 {
+	return (**D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC2)(unsafe.Pointer(u))
+}
+
+// PAV1PicData reinterprets the union as its pAV1PicData member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union) PAV1PicData() **D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA {
+	return (**D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA)(unsafe.Pointer(u))
 }
 
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1 struct {
@@ -2758,9 +2919,25 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC1 struct {
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PSlicesPartition_H264 reinterprets the union as its pSlicesPartition_H264 member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union) PSlicesPartition_H264() **D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES {
+	return (**D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES)(unsafe.Pointer(u))
+}
+
+// PSlicesPartition_HEVC reinterprets the union as its pSlicesPartition_HEVC member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union) PSlicesPartition_HEVC() **D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES {
+	return (**D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES)(unsafe.Pointer(u))
+}
+
+// PTilesPartition_AV1 reinterprets the union as its pTilesPartition_AV1 member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union) PTilesPartition_AV1() **D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_TILES {
+	return (**D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_TILES)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_control_subregions_layout_data
@@ -2770,9 +2947,30 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA struct {
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// MaxBytesPerSlice reinterprets the union as its MaxBytesPerSlice member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union) MaxBytesPerSlice() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// NumberOfCodingUnitsPerSlice reinterprets the union as its NumberOfCodingUnitsPerSlice member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union) NumberOfCodingUnitsPerSlice() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// NumberOfRowsPerSlice reinterprets the union as its NumberOfRowsPerSlice member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union) NumberOfRowsPerSlice() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// NumberOfSlicesPerFrame reinterprets the union as its NumberOfSlicesPerFrame member.
+func (u *D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union) NumberOfSlicesPerFrame() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_picture_control_subregions_layout_data_slices
@@ -2793,9 +2991,25 @@ type D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC struct {
 }
 
 // D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264Profile reinterprets the union as its pH264Profile member.
+func (u *D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union) PH264Profile() **D3D12_VIDEO_ENCODER_PROFILE_H264 {
+	return (**D3D12_VIDEO_ENCODER_PROFILE_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCProfile reinterprets the union as its pHEVCProfile member.
+func (u *D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union) PHEVCProfile() **D3D12_VIDEO_ENCODER_PROFILE_HEVC {
+	return (**D3D12_VIDEO_ENCODER_PROFILE_HEVC)(unsafe.Pointer(u))
+}
+
+// PAV1Profile reinterprets the union as its pAV1Profile member.
+func (u *D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union) PAV1Profile() **D3D12_VIDEO_ENCODER_AV1_PROFILE {
+	return (**D3D12_VIDEO_ENCODER_AV1_PROFILE)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_PROFILE_DESC: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_profile_desc
@@ -2848,9 +3062,55 @@ type D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1 struct {
 }
 
 // D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PConfiguration_CQP reinterprets the union as its pConfiguration_CQP member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_CQP() **D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP)(unsafe.Pointer(u))
+}
+
+// PConfiguration_CBR reinterprets the union as its pConfiguration_CBR member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_CBR() **D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR)(unsafe.Pointer(u))
+}
+
+// PConfiguration_VBR reinterprets the union as its pConfiguration_VBR member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_VBR() **D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR)(unsafe.Pointer(u))
+}
+
+// PConfiguration_QVBR reinterprets the union as its pConfiguration_QVBR member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_QVBR() **D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR)(unsafe.Pointer(u))
+}
+
+// PConfiguration_CQP1 reinterprets the union as its pConfiguration_CQP1 member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_CQP1() **D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP1 {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP1)(unsafe.Pointer(u))
+}
+
+// PConfiguration_CBR1 reinterprets the union as its pConfiguration_CBR1 member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_CBR1() **D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1 {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1)(unsafe.Pointer(u))
+}
+
+// PConfiguration_VBR1 reinterprets the union as its pConfiguration_VBR1 member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_VBR1() **D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR1 {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR1)(unsafe.Pointer(u))
+}
+
+// PConfiguration_QVBR1 reinterprets the union as its pConfiguration_QVBR1 member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_QVBR1() **D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR1 {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR1)(unsafe.Pointer(u))
+}
+
+// PConfiguration_AbsoluteQPMap reinterprets the union as its pConfiguration_AbsoluteQPMap member.
+func (u *D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union) PConfiguration_AbsoluteQPMap() **D3D12_VIDEO_ENCODER_RATE_CONTROL_ABSOLUTE_QP_MAP {
+	return (**D3D12_VIDEO_ENCODER_RATE_CONTROL_ABSOLUTE_QP_MAP)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_rate_control_configuration_params
@@ -3006,9 +3266,25 @@ type D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC struct {
 }
 
 // D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PH264GroupOfPictures reinterprets the union as its pH264GroupOfPictures member.
+func (u *D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union) PH264GroupOfPictures() **D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264 {
+	return (**D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264)(unsafe.Pointer(u))
+}
+
+// PHEVCGroupOfPictures reinterprets the union as its pHEVCGroupOfPictures member.
+func (u *D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union) PHEVCGroupOfPictures() **D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC {
+	return (**D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC)(unsafe.Pointer(u))
+}
+
+// PAV1SequenceStructure reinterprets the union as its pAV1SequenceStructure member.
+func (u *D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union) PAV1SequenceStructure() **D3D12_VIDEO_ENCODER_AV1_SEQUENCE_STRUCTURE {
+	return (**D3D12_VIDEO_ENCODER_AV1_SEQUENCE_STRUCTURE)(unsafe.Pointer(u))
 }
 
 // D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE: https://learn.microsoft.com/windows/win32/api/d3d12video/ns-d3d12video-d3d12_video_encoder_sequence_gop_structure
@@ -3351,10 +3627,25 @@ type DXVA2_DecodeExtensionData struct {
 	PrivateOutputDataSize uint32
 }
 
+type DXVA2_ExtendedFormat_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DXVA2_ExtendedFormat_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DXVA2_ExtendedFormat_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DXVA2_ExtendedFormat_Anonymous_e__Union) Anonymous() *DXVA2_ExtendedFormat_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DXVA2_ExtendedFormat_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DXVA2_ExtendedFormat_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DXVA2_ExtendedFormat: https://learn.microsoft.com/windows/win32/api/dxva2api/ns-dxva2api-dxva2_extendedformat
@@ -3369,10 +3660,26 @@ type DXVA2_FilterValues struct {
 	Radius    DXVA2_Fixed32
 }
 
+type DXVA2_Fixed32_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Fraction uint16
+	Value    int16
+}
+
 // DXVA2_Fixed32_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DXVA2_Fixed32_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DXVA2_Fixed32_Anonymous_e__Union) Anonymous() *DXVA2_Fixed32_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DXVA2_Fixed32_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Ll reinterprets the union as its ll member.
+func (u *DXVA2_Fixed32_Anonymous_e__Union) Ll() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 // DXVA2_Fixed32: https://learn.microsoft.com/windows/win32/api/dxva2api/ns-dxva2api-dxva2_fixed32
@@ -3565,10 +3872,25 @@ type DXVAHD_BLT_STATE_CONSTRICTION_DATA struct {
 	Size   foundation.SIZE
 }
 
+type DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union) Anonymous() *DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_blt_state_output_color_space_data
@@ -3591,9 +3913,20 @@ type DXVAHD_BLT_STATE_TARGET_RECT_DATA struct {
 
 // DXVAHD_COLOR: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_color
 // DXVAHD_COLOR is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DXVAHD_COLOR struct {
 	Data [4]uint32
+}
+
+// RGB reinterprets the union as its RGB member.
+func (u *DXVAHD_COLOR) RGB() *DXVAHD_COLOR_RGBA {
+	return (*DXVAHD_COLOR_RGBA)(unsafe.Pointer(u))
+}
+
+// YCbCr reinterprets the union as its YCbCr member.
+func (u *DXVAHD_COLOR) YCbCr() *DXVAHD_COLOR_YCbCrA {
+	return (*DXVAHD_COLOR_YCbCrA)(unsafe.Pointer(u))
 }
 
 // DXVAHD_COLOR_RGBA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_color_rgba
@@ -3692,10 +4025,25 @@ type DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA struct {
 	FrameFormat DXVAHD_FRAME_FORMAT
 }
 
+type DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union) Anonymous() *DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_stream_state_input_color_space_data
@@ -4322,9 +4670,20 @@ type MFP_STOP_EVENT struct {
 
 // MFPaletteEntry: https://learn.microsoft.com/windows/win32/api/mfobjects/ns-mfobjects-mfpaletteentry
 // MFPaletteEntry is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MFPaletteEntry struct {
 	Data [4]byte
+}
+
+// ARGB reinterprets the union as its ARGB member.
+func (u *MFPaletteEntry) ARGB() *MFARGB {
+	return (*MFARGB)(unsafe.Pointer(u))
+}
+
+// AYCbCr reinterprets the union as its AYCbCr member.
+func (u *MFPaletteEntry) AYCbCr() *MFAYUVSample {
+	return (*MFAYUVSample)(unsafe.Pointer(u))
 }
 
 // MFPinholeCameraIntrinsic_IntrinsicModel: https://learn.microsoft.com/windows/win32/api/mfapi/ns-mfapi-mfpinholecameraintrinsic_intrinsicmodel
@@ -4369,9 +4728,25 @@ type MFSampleExtensionPsnrYuv struct {
 }
 
 // MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// U32 reinterprets the union as its u32 member.
+func (u *MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union) U32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// U64 reinterprets the union as its u64 member.
+func (u *MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union) U64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// D reinterprets the union as its d member.
+func (u *MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union) D() *float64 {
+	return (*float64)(unsafe.Pointer(u))
 }
 
 // MFTOPONODE_ATTRIBUTE_UPDATE: https://learn.microsoft.com/windows/win32/api/mfidl/ns-mfidl-mftoponode_attribute_update
@@ -4439,9 +4814,20 @@ type MFVIDEOFORMAT struct {
 }
 
 // MFVideoAlphaBitmap_bitmap_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MFVideoAlphaBitmap_bitmap_e__Union struct {
 	Data [1]uint64
+}
+
+// Hdc reinterprets the union as its hdc member.
+func (u *MFVideoAlphaBitmap_bitmap_e__Union) Hdc() *graphicsgdi.HDC {
+	return (*graphicsgdi.HDC)(unsafe.Pointer(u))
+}
+
+// PDDS reinterprets the union as its pDDS member.
+func (u *MFVideoAlphaBitmap_bitmap_e__Union) PDDS() **graphicsdirect3d9.IDirect3DSurface9 {
+	return (**graphicsdirect3d9.IDirect3DSurface9)(unsafe.Pointer(u))
 }
 
 // MFVideoAlphaBitmap: https://learn.microsoft.com/windows/win32/api/evr9/ns-evr9-mfvideoalphabitmap
@@ -4827,9 +5213,20 @@ type VIDEOINFOHEADER struct {
 }
 
 // VIDEOINFOHEADER2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIDEOINFOHEADER2_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwControlFlags reinterprets the union as its dwControlFlags member.
+func (u *VIDEOINFOHEADER2_Anonymous_e__Union) DwControlFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwReserved1 reinterprets the union as its dwReserved1 member.
+func (u *VIDEOINFOHEADER2_Anonymous_e__Union) DwReserved1() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // VIDEOINFOHEADER2: https://learn.microsoft.com/windows/win32/api/dvdmedia/ns-dvdmedia-videoinfoheader2

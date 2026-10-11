@@ -35,9 +35,20 @@ type AD_GUARANTEED struct {
 }
 
 // CONTROL_SERVICE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CONTROL_SERVICE_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Guaranteed reinterprets the union as its Guaranteed member.
+func (u *CONTROL_SERVICE_Anonymous_e__Union) Guaranteed() *AD_GUARANTEED {
+	return (*AD_GUARANTEED)(unsafe.Pointer(u))
+}
+
+// ParamBuffer reinterprets the union as its ParamBuffer member.
+func (u *CONTROL_SERVICE_Anonymous_e__Union) ParamBuffer() *[1]PARAM_BUFFER {
+	return (*[1]PARAM_BUFFER)(unsafe.Pointer(u))
 }
 
 // CONTROL_SERVICE: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-control_service
@@ -76,9 +87,20 @@ type IDPE_ATTR struct {
 
 // IN_ADDR_IPV4: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-in_addr_ipv4
 // IN_ADDR_IPV4 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IN_ADDR_IPV4 struct {
 	Data [1]uint32
+}
+
+// Addr reinterprets the union as its Addr member.
+func (u *IN_ADDR_IPV4) Addr() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// AddrBytes reinterprets the union as its AddrBytes member.
+func (u *IN_ADDR_IPV4) AddrBytes() *[4]byte {
+	return (*[4]byte)(unsafe.Pointer(u))
 }
 
 // IN_ADDR_IPV6: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-in_addr_ipv6
@@ -98,10 +120,37 @@ type IPX_PATTERN struct {
 	Dest IPX_PATTERN_Src_e__Struct
 }
 
+type IP_PATTERN_S_un_e__Union_S_un_icmp_e__Struct struct {
+	S_type byte
+	S_code byte
+	Filler uint16
+}
+
+type IP_PATTERN_S_un_e__Union_S_un_ports_e__Struct struct {
+	S_srcport uint16
+	S_dstport uint16
+}
+
 // IP_PATTERN_S_un_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_PATTERN_S_un_e__Union struct {
 	Data [1]uint32
+}
+
+// S_un_ports reinterprets the union as its S_un_ports member.
+func (u *IP_PATTERN_S_un_e__Union) S_un_ports() *IP_PATTERN_S_un_e__Union_S_un_ports_e__Struct {
+	return (*IP_PATTERN_S_un_e__Union_S_un_ports_e__Struct)(unsafe.Pointer(u))
+}
+
+// S_un_icmp reinterprets the union as its S_un_icmp member.
+func (u *IP_PATTERN_S_un_e__Union) S_un_icmp() *IP_PATTERN_S_un_e__Union_S_un_icmp_e__Struct {
+	return (*IP_PATTERN_S_un_e__Union_S_un_icmp_e__Struct)(unsafe.Pointer(u))
+}
+
+// S_Spi reinterprets the union as its S_Spi member.
+func (u *IP_PATTERN_S_un_e__Union) S_Spi() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // IP_PATTERN: https://learn.microsoft.com/windows/win32/api/traffic/ns-traffic-ip_pattern
@@ -233,9 +282,35 @@ type RSVP_ADSPEC struct {
 }
 
 // RSVP_FILTERSPEC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RSVP_FILTERSPEC_Anonymous_e__Union struct {
 	Data [5]uint32
+}
+
+// FilterSpecV4 reinterprets the union as its FilterSpecV4 member.
+func (u *RSVP_FILTERSPEC_Anonymous_e__Union) FilterSpecV4() *RSVP_FILTERSPEC_V4 {
+	return (*RSVP_FILTERSPEC_V4)(unsafe.Pointer(u))
+}
+
+// FilterSpecV6 reinterprets the union as its FilterSpecV6 member.
+func (u *RSVP_FILTERSPEC_Anonymous_e__Union) FilterSpecV6() *RSVP_FILTERSPEC_V6 {
+	return (*RSVP_FILTERSPEC_V6)(unsafe.Pointer(u))
+}
+
+// FilterSpecV6Flow reinterprets the union as its FilterSpecV6Flow member.
+func (u *RSVP_FILTERSPEC_Anonymous_e__Union) FilterSpecV6Flow() *RSVP_FILTERSPEC_V6_FLOW {
+	return (*RSVP_FILTERSPEC_V6_FLOW)(unsafe.Pointer(u))
+}
+
+// FilterSpecV4Gpi reinterprets the union as its FilterSpecV4Gpi member.
+func (u *RSVP_FILTERSPEC_Anonymous_e__Union) FilterSpecV4Gpi() *RSVP_FILTERSPEC_V4_GPI {
+	return (*RSVP_FILTERSPEC_V4_GPI)(unsafe.Pointer(u))
+}
+
+// FilterSpecV6Gpi reinterprets the union as its FilterSpecV6Gpi member.
+func (u *RSVP_FILTERSPEC_Anonymous_e__Union) FilterSpecV6Gpi() *RSVP_FILTERSPEC_V6_GPI {
+	return (*RSVP_FILTERSPEC_V6_GPI)(unsafe.Pointer(u))
 }
 
 // RSVP_FILTERSPEC: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-rsvp_filterspec

@@ -122,10 +122,35 @@ type PDH_BROWSE_DLG_CONFIG_W struct {
 	SzDialogBoxCaption   foundation.PWSTR
 }
 
+type PDH_COUNTER_INFO_A_Anonymous_e__Union_Anonymous_e__Struct struct {
+	SzMachineName    foundation.PSTR
+	SzObjectName     foundation.PSTR
+	SzInstanceName   foundation.PSTR
+	SzParentInstance foundation.PSTR
+	DwInstanceIndex  uint32
+	SzCounterName    foundation.PSTR
+}
+
 // PDH_COUNTER_INFO_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PDH_COUNTER_INFO_A_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// DataItemPath reinterprets the union as its DataItemPath member.
+func (u *PDH_COUNTER_INFO_A_Anonymous_e__Union) DataItemPath() *PDH_DATA_ITEM_PATH_ELEMENTS_A {
+	return (*PDH_DATA_ITEM_PATH_ELEMENTS_A)(unsafe.Pointer(u))
+}
+
+// CounterPath reinterprets the union as its CounterPath member.
+func (u *PDH_COUNTER_INFO_A_Anonymous_e__Union) CounterPath() *PDH_COUNTER_PATH_ELEMENTS_A {
+	return (*PDH_COUNTER_PATH_ELEMENTS_A)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PDH_COUNTER_INFO_A_Anonymous_e__Union) Anonymous() *PDH_COUNTER_INFO_A_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PDH_COUNTER_INFO_A_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PDH_COUNTER_INFO_A: https://learn.microsoft.com/windows/win32/api/pdh/ns-pdh-pdh_counter_info_a
@@ -144,10 +169,35 @@ type PDH_COUNTER_INFO_A struct {
 	DataBuffer      [1]uint32
 }
 
+type PDH_COUNTER_INFO_W_Anonymous_e__Union_Anonymous_e__Struct struct {
+	SzMachineName    foundation.PWSTR
+	SzObjectName     foundation.PWSTR
+	SzInstanceName   foundation.PWSTR
+	SzParentInstance foundation.PWSTR
+	DwInstanceIndex  uint32
+	SzCounterName    foundation.PWSTR
+}
+
 // PDH_COUNTER_INFO_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PDH_COUNTER_INFO_W_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// DataItemPath reinterprets the union as its DataItemPath member.
+func (u *PDH_COUNTER_INFO_W_Anonymous_e__Union) DataItemPath() *PDH_DATA_ITEM_PATH_ELEMENTS_W {
+	return (*PDH_DATA_ITEM_PATH_ELEMENTS_W)(unsafe.Pointer(u))
+}
+
+// CounterPath reinterprets the union as its CounterPath member.
+func (u *PDH_COUNTER_INFO_W_Anonymous_e__Union) CounterPath() *PDH_COUNTER_PATH_ELEMENTS_W {
+	return (*PDH_COUNTER_PATH_ELEMENTS_W)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PDH_COUNTER_INFO_W_Anonymous_e__Union) Anonymous() *PDH_COUNTER_INFO_W_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PDH_COUNTER_INFO_W_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PDH_COUNTER_INFO_W: https://learn.microsoft.com/windows/win32/api/pdh/ns-pdh-pdh_counter_info_w
@@ -203,9 +253,35 @@ type PDH_DATA_ITEM_PATH_ELEMENTS_W struct {
 }
 
 // PDH_FMT_COUNTERVALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PDH_FMT_COUNTERVALUE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// LongValue reinterprets the union as its longValue member.
+func (u *PDH_FMT_COUNTERVALUE_Anonymous_e__Union) LongValue() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// DoubleValue reinterprets the union as its doubleValue member.
+func (u *PDH_FMT_COUNTERVALUE_Anonymous_e__Union) DoubleValue() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// LargeValue reinterprets the union as its largeValue member.
+func (u *PDH_FMT_COUNTERVALUE_Anonymous_e__Union) LargeValue() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// AnsiStringValue reinterprets the union as its AnsiStringValue member.
+func (u *PDH_FMT_COUNTERVALUE_Anonymous_e__Union) AnsiStringValue() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// WideStringValue reinterprets the union as its WideStringValue member.
+func (u *PDH_FMT_COUNTERVALUE_Anonymous_e__Union) WideStringValue() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // PDH_FMT_COUNTERVALUE: https://learn.microsoft.com/windows/win32/api/pdh/ns-pdh-pdh_fmt_countervalue
@@ -226,10 +302,45 @@ type PDH_FMT_COUNTERVALUE_ITEM_W struct {
 	FmtValue PDH_FMT_COUNTERVALUE
 }
 
+type PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	PdlAutoNameInterval uint32
+	PdlAutoNameUnits    uint32
+	PdlCommandFilename  foundation.PSTR
+	PdlCounterList      foundation.PSTR
+	PdlAutoNameFormat   uint32
+	PdlSampleInterval   uint32
+	PdlLogStartTime     foundation.FILETIME
+	PdlLogEndTime       foundation.FILETIME
+}
+
+type PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	TlNumberOfBuffers uint32
+	TlMinimumBuffers  uint32
+	TlMaximumBuffers  uint32
+	TlFreeBuffers     uint32
+	TlBufferSize      uint32
+	TlEventsLost      uint32
+	TlLoggerThreadId  uint32
+	TlBuffersWritten  uint32
+	TlLogHandle       uint32
+	TlLogFileName     foundation.PSTR
+}
+
 // PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union) Anonymous1() *PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union) Anonymous2() *PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 type PDH_LOG_SERVICE_QUERY_INFO_A struct {
@@ -244,10 +355,45 @@ type PDH_LOG_SERVICE_QUERY_INFO_A struct {
 	Anonymous        PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union
 }
 
+type PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	PdlAutoNameInterval uint32
+	PdlAutoNameUnits    uint32
+	PdlCommandFilename  foundation.PWSTR
+	PdlCounterList      foundation.PWSTR
+	PdlAutoNameFormat   uint32
+	PdlSampleInterval   uint32
+	PdlLogStartTime     foundation.FILETIME
+	PdlLogEndTime       foundation.FILETIME
+}
+
+type PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	TlNumberOfBuffers uint32
+	TlMinimumBuffers  uint32
+	TlMaximumBuffers  uint32
+	TlFreeBuffers     uint32
+	TlBufferSize      uint32
+	TlEventsLost      uint32
+	TlLoggerThreadId  uint32
+	TlBuffersWritten  uint32
+	TlLogHandle       uint32
+	TlLogFileName     foundation.PWSTR
+}
+
 // PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union) Anonymous1() *PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union) Anonymous2() *PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 type PDH_LOG_SERVICE_QUERY_INFO_W struct {

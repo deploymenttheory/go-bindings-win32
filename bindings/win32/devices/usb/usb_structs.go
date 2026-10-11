@@ -15,10 +15,25 @@ type ALTERNATE_INTERFACE struct {
 	AlternateInterfaceNumber uint16
 }
 
+type BM_REQUEST_TYPE_BM struct {
+	Bitfield byte
+}
+
 // BM_REQUEST_TYPE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BM_REQUEST_TYPE struct {
 	Data [1]byte
+}
+
+// S reinterprets the union as its s member.
+func (u *BM_REQUEST_TYPE) S() *BM_REQUEST_TYPE_BM {
+	return (*BM_REQUEST_TYPE_BM)(unsafe.Pointer(u))
+}
+
+// B reinterprets the union as its B member.
+func (u *BM_REQUEST_TYPE) B() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type CHANNEL_INFO struct {
@@ -100,9 +115,20 @@ type IO_BLOCK_EX struct {
 }
 
 // OS_STRING_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OS_STRING_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// BPad reinterprets the union as its bPad member.
+func (u *OS_STRING_Anonymous_e__Union) BPad() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// BFlags reinterprets the union as its bFlags member.
+func (u *OS_STRING_Anonymous_e__Union) BFlags() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type OS_STRING struct {
@@ -142,9 +168,115 @@ type RAW_ROOTPORT_PARAMETERS struct {
 }
 
 // URB_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type URB_Anonymous_e__Union struct {
 	Data [19]uint64
+}
+
+// UrbHeader reinterprets the union as its UrbHeader member.
+func (u *URB_Anonymous_e__Union) UrbHeader() *URB_HEADER {
+	return (*URB_HEADER)(unsafe.Pointer(u))
+}
+
+// UrbSelectInterface reinterprets the union as its UrbSelectInterface member.
+func (u *URB_Anonymous_e__Union) UrbSelectInterface() *URB_SELECT_INTERFACE {
+	return (*URB_SELECT_INTERFACE)(unsafe.Pointer(u))
+}
+
+// UrbSelectConfiguration reinterprets the union as its UrbSelectConfiguration member.
+func (u *URB_Anonymous_e__Union) UrbSelectConfiguration() *URB_SELECT_CONFIGURATION {
+	return (*URB_SELECT_CONFIGURATION)(unsafe.Pointer(u))
+}
+
+// UrbPipeRequest reinterprets the union as its UrbPipeRequest member.
+func (u *URB_Anonymous_e__Union) UrbPipeRequest() *URB_PIPE_REQUEST {
+	return (*URB_PIPE_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbFrameLengthControl reinterprets the union as its UrbFrameLengthControl member.
+func (u *URB_Anonymous_e__Union) UrbFrameLengthControl() *URB_FRAME_LENGTH_CONTROL {
+	return (*URB_FRAME_LENGTH_CONTROL)(unsafe.Pointer(u))
+}
+
+// UrbGetFrameLength reinterprets the union as its UrbGetFrameLength member.
+func (u *URB_Anonymous_e__Union) UrbGetFrameLength() *URB_GET_FRAME_LENGTH {
+	return (*URB_GET_FRAME_LENGTH)(unsafe.Pointer(u))
+}
+
+// UrbSetFrameLength reinterprets the union as its UrbSetFrameLength member.
+func (u *URB_Anonymous_e__Union) UrbSetFrameLength() *URB_SET_FRAME_LENGTH {
+	return (*URB_SET_FRAME_LENGTH)(unsafe.Pointer(u))
+}
+
+// UrbGetCurrentFrameNumber reinterprets the union as its UrbGetCurrentFrameNumber member.
+func (u *URB_Anonymous_e__Union) UrbGetCurrentFrameNumber() *URB_GET_CURRENT_FRAME_NUMBER {
+	return (*URB_GET_CURRENT_FRAME_NUMBER)(unsafe.Pointer(u))
+}
+
+// UrbControlTransfer reinterprets the union as its UrbControlTransfer member.
+func (u *URB_Anonymous_e__Union) UrbControlTransfer() *URB_CONTROL_TRANSFER {
+	return (*URB_CONTROL_TRANSFER)(unsafe.Pointer(u))
+}
+
+// UrbControlTransferEx reinterprets the union as its UrbControlTransferEx member.
+func (u *URB_Anonymous_e__Union) UrbControlTransferEx() *URB_CONTROL_TRANSFER_EX {
+	return (*URB_CONTROL_TRANSFER_EX)(unsafe.Pointer(u))
+}
+
+// UrbBulkOrInterruptTransfer reinterprets the union as its UrbBulkOrInterruptTransfer member.
+func (u *URB_Anonymous_e__Union) UrbBulkOrInterruptTransfer() *URB_BULK_OR_INTERRUPT_TRANSFER {
+	return (*URB_BULK_OR_INTERRUPT_TRANSFER)(unsafe.Pointer(u))
+}
+
+// UrbIsochronousTransfer reinterprets the union as its UrbIsochronousTransfer member.
+func (u *URB_Anonymous_e__Union) UrbIsochronousTransfer() *URB_ISOCH_TRANSFER {
+	return (*URB_ISOCH_TRANSFER)(unsafe.Pointer(u))
+}
+
+// UrbControlDescriptorRequest reinterprets the union as its UrbControlDescriptorRequest member.
+func (u *URB_Anonymous_e__Union) UrbControlDescriptorRequest() *URB_CONTROL_DESCRIPTOR_REQUEST {
+	return (*URB_CONTROL_DESCRIPTOR_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbControlGetStatusRequest reinterprets the union as its UrbControlGetStatusRequest member.
+func (u *URB_Anonymous_e__Union) UrbControlGetStatusRequest() *URB_CONTROL_GET_STATUS_REQUEST {
+	return (*URB_CONTROL_GET_STATUS_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbControlFeatureRequest reinterprets the union as its UrbControlFeatureRequest member.
+func (u *URB_Anonymous_e__Union) UrbControlFeatureRequest() *URB_CONTROL_FEATURE_REQUEST {
+	return (*URB_CONTROL_FEATURE_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbControlVendorClassRequest reinterprets the union as its UrbControlVendorClassRequest member.
+func (u *URB_Anonymous_e__Union) UrbControlVendorClassRequest() *URB_CONTROL_VENDOR_OR_CLASS_REQUEST {
+	return (*URB_CONTROL_VENDOR_OR_CLASS_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbControlGetInterfaceRequest reinterprets the union as its UrbControlGetInterfaceRequest member.
+func (u *URB_Anonymous_e__Union) UrbControlGetInterfaceRequest() *URB_CONTROL_GET_INTERFACE_REQUEST {
+	return (*URB_CONTROL_GET_INTERFACE_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbControlGetConfigurationRequest reinterprets the union as its UrbControlGetConfigurationRequest member.
+func (u *URB_Anonymous_e__Union) UrbControlGetConfigurationRequest() *URB_CONTROL_GET_CONFIGURATION_REQUEST {
+	return (*URB_CONTROL_GET_CONFIGURATION_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbOSFeatureDescriptorRequest reinterprets the union as its UrbOSFeatureDescriptorRequest member.
+func (u *URB_Anonymous_e__Union) UrbOSFeatureDescriptorRequest() *URB_OS_FEATURE_DESCRIPTOR_REQUEST {
+	return (*URB_OS_FEATURE_DESCRIPTOR_REQUEST)(unsafe.Pointer(u))
+}
+
+// UrbOpenStaticStreams reinterprets the union as its UrbOpenStaticStreams member.
+func (u *URB_Anonymous_e__Union) UrbOpenStaticStreams() *URB_OPEN_STATIC_STREAMS {
+	return (*URB_OPEN_STATIC_STREAMS)(unsafe.Pointer(u))
+}
+
+// UrbGetIsochPipeTransferPathDelays reinterprets the union as its UrbGetIsochPipeTransferPathDelays member.
+func (u *URB_Anonymous_e__Union) UrbGetIsochPipeTransferPathDelays() *URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS {
+	return (*URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS)(unsafe.Pointer(u))
 }
 
 type URB struct {
@@ -276,9 +408,35 @@ type USBFN_INTERFACE_INFO struct {
 }
 
 // USBFN_NOTIFICATION_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USBFN_NOTIFICATION_u_e__Union struct {
 	Data [2]uint32
+}
+
+// BusSpeed reinterprets the union as its BusSpeed member.
+func (u *USBFN_NOTIFICATION_u_e__Union) BusSpeed() *USBFN_BUS_SPEED {
+	return (*USBFN_BUS_SPEED)(unsafe.Pointer(u))
+}
+
+// SetupPacket reinterprets the union as its SetupPacket member.
+func (u *USBFN_NOTIFICATION_u_e__Union) SetupPacket() *USB_DEFAULT_PIPE_SETUP_PACKET {
+	return (*USB_DEFAULT_PIPE_SETUP_PACKET)(unsafe.Pointer(u))
+}
+
+// ConfigurationValue reinterprets the union as its ConfigurationValue member.
+func (u *USBFN_NOTIFICATION_u_e__Union) ConfigurationValue() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// PortType reinterprets the union as its PortType member.
+func (u *USBFN_NOTIFICATION_u_e__Union) PortType() *USBFN_PORT_TYPE {
+	return (*USBFN_PORT_TYPE)(unsafe.Pointer(u))
+}
+
+// AlternateInterface reinterprets the union as its AlternateInterface member.
+func (u *USBFN_NOTIFICATION_u_e__Union) AlternateInterface() *ALTERNATE_INTERFACE {
+	return (*ALTERNATE_INTERFACE)(unsafe.Pointer(u))
 }
 
 type USBFN_NOTIFICATION struct {
@@ -416,16 +574,52 @@ type USBUSER_SEND_RAW_COMMAND struct {
 	Parameters USB_SEND_RAW_COMMAND_PARAMETERS
 }
 
+// USB_20_PORT_CHANGE_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_20_PORT_CHANGE_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_20_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_20_PORT_CHANGE struct {
 	Data [2]byte
 }
 
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_20_PORT_CHANGE) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_20_PORT_CHANGE) Anonymous() *USB_20_PORT_CHANGE_Anonymous_e__Struct {
+	return (*USB_20_PORT_CHANGE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// USB_20_PORT_STATUS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_20_PORT_STATUS_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_20_PORT_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_20_PORT_STATUS struct {
 	Data [2]byte
+}
+
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_20_PORT_STATUS) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_20_PORT_STATUS) Anonymous() *USB_20_PORT_STATUS_Anonymous_e__Struct {
+	return (*USB_20_PORT_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_30_HUB_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
@@ -435,16 +629,52 @@ type USB_30_HUB_DESCRIPTOR struct {
 	Data [12]byte
 }
 
+// USB_30_PORT_CHANGE_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_30_PORT_CHANGE_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_30_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_30_PORT_CHANGE struct {
 	Data [2]byte
 }
 
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_30_PORT_CHANGE) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_30_PORT_CHANGE) Anonymous() *USB_30_PORT_CHANGE_Anonymous_e__Struct {
+	return (*USB_30_PORT_CHANGE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// USB_30_PORT_STATUS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_30_PORT_STATUS_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_30_PORT_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_30_PORT_STATUS struct {
 	Data [2]byte
+}
+
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_30_PORT_STATUS) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_30_PORT_STATUS) Anonymous() *USB_30_PORT_STATUS_Anonymous_e__Struct {
+	return (*USB_30_PORT_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_ACQUIRE_INFO is a packed C struct (non-default field alignment), exposed as
@@ -590,10 +820,28 @@ type USB_DEVICE_CAPABILITY_DESCRIPTOR struct {
 	BDevCapabilityType byte
 }
 
+// USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union struct {
 	Data [4]byte
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union) Anonymous() *USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct {
+	return (*USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR struct {
@@ -625,10 +873,28 @@ type USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR struct {
 	Data [18]byte
 }
 
+// USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED struct {
 	Data [4]byte
+}
+
+// AsUlong32 reinterprets the union as its AsUlong32 member.
+func (u *USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED) AsUlong32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED) Anonymous() *USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct {
+	return (*USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
@@ -645,10 +911,28 @@ type USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR struct {
 	Data [10]byte
 }
 
+// USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union struct {
 	Data [4]byte
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union) Anonymous() *USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct {
+	return (*USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR struct {
@@ -707,10 +991,28 @@ type USB_DEVICE_STATE struct {
 	Data [4]byte
 }
 
+// USB_DEVICE_STATUS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_STATUS_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_DEVICE_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_DEVICE_STATUS struct {
 	Data [2]byte
+}
+
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_DEVICE_STATUS) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_DEVICE_STATUS) Anonymous() *USB_DEVICE_STATUS_Anonymous_e__Struct {
+	return (*USB_DEVICE_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_DRIVER_VERSION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_driver_version_parameters
@@ -728,10 +1030,28 @@ type USB_ENDPOINT_DESCRIPTOR struct {
 	Data [7]byte
 }
 
+// USB_ENDPOINT_STATUS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_ENDPOINT_STATUS_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_ENDPOINT_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_ENDPOINT_STATUS struct {
 	Data [2]byte
+}
+
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_ENDPOINT_STATUS) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_ENDPOINT_STATUS) Anonymous() *USB_ENDPOINT_STATUS_Anonymous_e__Struct {
+	return (*USB_ENDPOINT_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION is a packed C struct (non-default field alignment), exposed as
@@ -741,10 +1061,25 @@ type USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION struct {
 	Data [60]byte
 }
 
+type USB_FUNCTION_SUSPEND_OPTIONS_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // USB_FUNCTION_SUSPEND_OPTIONS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_FUNCTION_SUSPEND_OPTIONS struct {
 	Data [1]byte
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *USB_FUNCTION_SUSPEND_OPTIONS) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_FUNCTION_SUSPEND_OPTIONS) Anonymous() *USB_FUNCTION_SUSPEND_OPTIONS_Anonymous_e__Struct {
+	return (*USB_FUNCTION_SUSPEND_OPTIONS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_HCD_DRIVERKEY_NAME is a packed C struct (non-default field alignment), exposed as
@@ -754,16 +1089,44 @@ type USB_HCD_DRIVERKEY_NAME struct {
 	Data [6]byte
 }
 
+// USB_HIGH_SPEED_MAXPACKET_MP is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HIGH_SPEED_MAXPACKET_MP struct {
+	Data [2]byte
+}
+
 // USB_HIGH_SPEED_MAXPACKET is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_HIGH_SPEED_MAXPACKET struct {
 	Data [2]byte
 }
 
+// Us reinterprets the union as its us member.
+func (u *USB_HIGH_SPEED_MAXPACKET) Us() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type USB_HUB_30_PORT_REMOTE_WAKE_MASK_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // USB_HUB_30_PORT_REMOTE_WAKE_MASK is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_HUB_30_PORT_REMOTE_WAKE_MASK struct {
 	Data [1]byte
+}
+
+// AsUchar8 reinterprets the union as its AsUchar8 member.
+func (u *USB_HUB_30_PORT_REMOTE_WAKE_MASK) AsUchar8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_HUB_30_PORT_REMOTE_WAKE_MASK) Anonymous() *USB_HUB_30_PORT_REMOTE_WAKE_MASK_Anonymous_e__Struct {
+	return (*USB_HUB_30_PORT_REMOTE_WAKE_MASK_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_HUB_CAPABILITIES is a packed C struct (non-default field alignment), exposed as
@@ -777,16 +1140,52 @@ type USB_HUB_CAPABILITIES_EX struct {
 	CapabilityFlags USB_HUB_CAP_FLAGS
 }
 
+// USB_HUB_CAP_FLAGS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_CAP_FLAGS_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_HUB_CAP_FLAGS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_HUB_CAP_FLAGS struct {
 	Data [4]byte
 }
 
+// Ul reinterprets the union as its ul member.
+func (u *USB_HUB_CAP_FLAGS) Ul() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_HUB_CAP_FLAGS) Anonymous() *USB_HUB_CAP_FLAGS_Anonymous_e__Struct {
+	return (*USB_HUB_CAP_FLAGS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// USB_HUB_CHANGE_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_CHANGE_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_HUB_CHANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_HUB_CHANGE struct {
 	Data [2]byte
+}
+
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_HUB_CHANGE) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_HUB_CHANGE) Anonymous() *USB_HUB_CHANGE_Anonymous_e__Struct {
+	return (*USB_HUB_CHANGE_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_HUB_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
@@ -836,16 +1235,50 @@ type USB_HUB_PORT_INFORMATION struct {
 	Data [16]byte
 }
 
+// USB_HUB_STATUS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_STATUS_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_HUB_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_HUB_STATUS struct {
 	Data [2]byte
 }
 
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_HUB_STATUS) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_HUB_STATUS) Anonymous() *USB_HUB_STATUS_Anonymous_e__Struct {
+	return (*USB_HUB_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type USB_HUB_STATUS_AND_CHANGE_Anonymous_e__Struct struct {
+	HubStatus USB_HUB_STATUS
+	HubChange USB_HUB_CHANGE
+}
+
 // USB_HUB_STATUS_AND_CHANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_HUB_STATUS_AND_CHANGE struct {
 	Data [4]byte
+}
+
+// AsUlong32 reinterprets the union as its AsUlong32 member.
+func (u *USB_HUB_STATUS_AND_CHANGE) AsUlong32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_HUB_STATUS_AND_CHANGE) Anonymous() *USB_HUB_STATUS_AND_CHANGE_Anonymous_e__Struct {
+	return (*USB_HUB_STATUS_AND_CHANGE_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type USB_IDLE_CALLBACK_INFO struct {
@@ -890,10 +1323,28 @@ type USB_INTERFACE_POWER_DESCRIPTOR struct {
 	Data [15]byte
 }
 
+// USB_INTERFACE_STATUS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_INTERFACE_STATUS_Anonymous_e__Struct struct {
+	Data [2]byte
+}
+
 // USB_INTERFACE_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_INTERFACE_STATUS struct {
 	Data [2]byte
+}
+
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_INTERFACE_STATUS) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_INTERFACE_STATUS) Anonymous() *USB_INTERFACE_STATUS_Anonymous_e__Struct {
+	return (*USB_INTERFACE_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_MI_PARENT_INFORMATION is a packed C struct (non-default field alignment), exposed as
@@ -938,10 +1389,28 @@ type USB_NODE_CONNECTION_INFORMATION_EX_V2 struct {
 	Data [16]byte
 }
 
+// USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS struct {
 	Data [4]byte
+}
+
+// Ul reinterprets the union as its ul member.
+func (u *USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS) Ul() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS) Anonymous() *USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS_Anonymous_e__Struct {
+	return (*USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_NODE_CONNECTION_NAME is a packed C struct (non-default field alignment), exposed as
@@ -995,9 +1464,25 @@ type USB_PIPE_INFO struct {
 }
 
 // USB_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_PORT_CHANGE struct {
 	Data [2]byte
+}
+
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_PORT_CHANGE) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Usb20PortChange reinterprets the union as its Usb20PortChange member.
+func (u *USB_PORT_CHANGE) Usb20PortChange() *USB_20_PORT_CHANGE {
+	return (*USB_20_PORT_CHANGE)(unsafe.Pointer(u))
+}
+
+// Usb30PortChange reinterprets the union as its Usb30PortChange member.
+func (u *USB_PORT_CHANGE) Usb30PortChange() *USB_30_PORT_CHANGE {
+	return (*USB_30_PORT_CHANGE)(unsafe.Pointer(u))
 }
 
 // USB_PORT_CONNECTOR_PROPERTIES is a packed C struct (non-default field alignment), exposed as
@@ -1007,34 +1492,118 @@ type USB_PORT_CONNECTOR_PROPERTIES struct {
 	Data [18]byte
 }
 
+// USB_PORT_EXT_STATUS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_PORT_EXT_STATUS_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_PORT_EXT_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_PORT_EXT_STATUS struct {
 	Data [4]byte
 }
 
+// AsUlong32 reinterprets the union as its AsUlong32 member.
+func (u *USB_PORT_EXT_STATUS) AsUlong32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_PORT_EXT_STATUS) Anonymous() *USB_PORT_EXT_STATUS_Anonymous_e__Struct {
+	return (*USB_PORT_EXT_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type USB_PORT_EXT_STATUS_AND_CHANGE_Anonymous_e__Struct struct {
+	PortStatusChange USB_PORT_STATUS_AND_CHANGE
+	PortExtStatus    USB_PORT_EXT_STATUS
+}
+
 // USB_PORT_EXT_STATUS_AND_CHANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_PORT_EXT_STATUS_AND_CHANGE struct {
 	Data [8]byte
 }
 
+// AsUlong64 reinterprets the union as its AsUlong64 member.
+func (u *USB_PORT_EXT_STATUS_AND_CHANGE) AsUlong64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_PORT_EXT_STATUS_AND_CHANGE) Anonymous() *USB_PORT_EXT_STATUS_AND_CHANGE_Anonymous_e__Struct {
+	return (*USB_PORT_EXT_STATUS_AND_CHANGE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// USB_PORT_PROPERTIES_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_PORT_PROPERTIES_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_PORT_PROPERTIES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_PORT_PROPERTIES struct {
 	Data [4]byte
 }
 
+// Ul reinterprets the union as its ul member.
+func (u *USB_PORT_PROPERTIES) Ul() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_PORT_PROPERTIES) Anonymous() *USB_PORT_PROPERTIES_Anonymous_e__Struct {
+	return (*USB_PORT_PROPERTIES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
 // USB_PORT_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_PORT_STATUS struct {
 	Data [2]byte
 }
 
+// AsUshort16 reinterprets the union as its AsUshort16 member.
+func (u *USB_PORT_STATUS) AsUshort16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Usb20PortStatus reinterprets the union as its Usb20PortStatus member.
+func (u *USB_PORT_STATUS) Usb20PortStatus() *USB_20_PORT_STATUS {
+	return (*USB_20_PORT_STATUS)(unsafe.Pointer(u))
+}
+
+// Usb30PortStatus reinterprets the union as its Usb30PortStatus member.
+func (u *USB_PORT_STATUS) Usb30PortStatus() *USB_30_PORT_STATUS {
+	return (*USB_30_PORT_STATUS)(unsafe.Pointer(u))
+}
+
+type USB_PORT_STATUS_AND_CHANGE_Anonymous_e__Struct struct {
+	PortStatus USB_PORT_STATUS
+	PortChange USB_PORT_CHANGE
+}
+
 // USB_PORT_STATUS_AND_CHANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_PORT_STATUS_AND_CHANGE struct {
 	Data [4]byte
+}
+
+// AsUlong32 reinterprets the union as its AsUlong32 member.
+func (u *USB_PORT_STATUS_AND_CHANGE) AsUlong32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_PORT_STATUS_AND_CHANGE) Anonymous() *USB_PORT_STATUS_AND_CHANGE_Anonymous_e__Struct {
+	return (*USB_PORT_STATUS_AND_CHANGE_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_POWER_INFO: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_power_info
@@ -1045,10 +1614,28 @@ type USB_POWER_INFO struct {
 	Data [34]byte
 }
 
+// USB_PROTOCOLS_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_PROTOCOLS_Anonymous_e__Struct struct {
+	Data [4]byte
+}
+
 // USB_PROTOCOLS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USB_PROTOCOLS struct {
 	Data [4]byte
+}
+
+// Ul reinterprets the union as its ul member.
+func (u *USB_PROTOCOLS) Ul() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *USB_PROTOCOLS) Anonymous() *USB_PROTOCOLS_Anonymous_e__Struct {
+	return (*USB_PROTOCOLS_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // USB_ROOT_HUB_NAME is a packed C struct (non-default field alignment), exposed as

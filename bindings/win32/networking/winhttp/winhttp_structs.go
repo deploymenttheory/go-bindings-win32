@@ -108,15 +108,37 @@ type WINHTTP_CURRENT_USER_IE_PROXY_CONFIG struct {
 }
 
 // WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PwszName reinterprets the union as its pwszName member.
+func (u *WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union) PwszName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PszName reinterprets the union as its pszName member.
+func (u *WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union) PszName() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// PwszValue reinterprets the union as its pwszValue member.
+func (u *WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union) PwszValue() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PszValue reinterprets the union as its pszValue member.
+func (u *WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union) PszValue() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // WINHTTP_EXTENDED_HEADER: https://learn.microsoft.com/windows/win32/api/winhttp/ns-winhttp-winhttp_extended_header
@@ -139,9 +161,20 @@ type WINHTTP_FAST_FORWARDING_STATUS struct {
 
 // WINHTTP_HEADER_NAME: https://learn.microsoft.com/windows/win32/api/winhttp/ns-winhttp-winhttp_header_name
 // WINHTTP_HEADER_NAME is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINHTTP_HEADER_NAME struct {
 	Data [1]uint64
+}
+
+// PwszName reinterprets the union as its pwszName member.
+func (u *WINHTTP_HEADER_NAME) PwszName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PszName reinterprets the union as its pszName member.
+func (u *WINHTTP_HEADER_NAME) PszName() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // WINHTTP_HOST_CONNECTION_GROUP: https://learn.microsoft.com/windows/win32/api/winhttp/ns-winhttp-winhttp_host_connection_group

@@ -5,13 +5,40 @@
 package installablefilesystems
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+type FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_LegacyFilter_e__Struct struct {
+	FilterNameLength       uint16
+	FilterNameBufferOffset uint16
+}
+
+type FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_MiniFilter_e__Struct struct {
+	FrameID                    uint32
+	NumberOfInstances          uint32
+	FilterNameLength           uint16
+	FilterNameBufferOffset     uint16
+	FilterAltitudeLength       uint16
+	FilterAltitudeBufferOffset uint16
+}
+
 // FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union struct {
 	Data [4]uint32
+}
+
+// MiniFilter reinterprets the union as its MiniFilter member.
+func (u *FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union) MiniFilter() *FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_MiniFilter_e__Struct {
+	return (*FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_MiniFilter_e__Struct)(unsafe.Pointer(u))
+}
+
+// LegacyFilter reinterprets the union as its LegacyFilter member.
+func (u *FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union) LegacyFilter() *FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_LegacyFilter_e__Struct {
+	return (*FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_LegacyFilter_e__Struct)(unsafe.Pointer(u))
 }
 
 type FILTER_AGGREGATE_BASIC_INFORMATION struct {
@@ -20,10 +47,39 @@ type FILTER_AGGREGATE_BASIC_INFORMATION struct {
 	Type            FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union
 }
 
+type FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct struct {
+	Flags                      uint32
+	FilterNameLength           uint16
+	FilterNameBufferOffset     uint16
+	FilterAltitudeLength       uint16
+	FilterAltitudeBufferOffset uint16
+}
+
+type FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct struct {
+	Flags                      uint32
+	FrameID                    uint32
+	NumberOfInstances          uint32
+	FilterNameLength           uint16
+	FilterNameBufferOffset     uint16
+	FilterAltitudeLength       uint16
+	FilterAltitudeBufferOffset uint16
+}
+
 // FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union struct {
 	Data [5]uint32
+}
+
+// MiniFilter reinterprets the union as its MiniFilter member.
+func (u *FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union) MiniFilter() *FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct {
+	return (*FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct)(unsafe.Pointer(u))
+}
+
+// LegacyFilter reinterprets the union as its LegacyFilter member.
+func (u *FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union) LegacyFilter() *FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct {
+	return (*FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct)(unsafe.Pointer(u))
 }
 
 type FILTER_AGGREGATE_STANDARD_INFORMATION struct {
@@ -64,10 +120,47 @@ type FILTER_VOLUME_STANDARD_INFORMATION struct {
 	FilterVolumeName       [1]uint16
 }
 
+type INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct struct {
+	Flags                  uint32
+	AltitudeLength         uint16
+	AltitudeBufferOffset   uint16
+	VolumeNameLength       uint16
+	VolumeNameBufferOffset uint16
+	FilterNameLength       uint16
+	FilterNameBufferOffset uint16
+	SupportedFeatures      uint32
+}
+
+type INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct struct {
+	Flags                    uint32
+	FrameID                  uint32
+	VolumeFileSystemType     FLT_FILESYSTEM_TYPE
+	InstanceNameLength       uint16
+	InstanceNameBufferOffset uint16
+	AltitudeLength           uint16
+	AltitudeBufferOffset     uint16
+	VolumeNameLength         uint16
+	VolumeNameBufferOffset   uint16
+	FilterNameLength         uint16
+	FilterNameBufferOffset   uint16
+	SupportedFeatures        uint32
+}
+
 // INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union struct {
 	Data [8]uint32
+}
+
+// MiniFilter reinterprets the union as its MiniFilter member.
+func (u *INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union) MiniFilter() *INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct {
+	return (*INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct)(unsafe.Pointer(u))
+}
+
+// LegacyFilter reinterprets the union as its LegacyFilter member.
+func (u *INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union) LegacyFilter() *INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct {
+	return (*INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct)(unsafe.Pointer(u))
 }
 
 type INSTANCE_AGGREGATE_STANDARD_INFORMATION struct {

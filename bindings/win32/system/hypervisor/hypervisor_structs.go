@@ -24,10 +24,34 @@ type GPA_MEMORY_CHUNK struct {
 	PageCount                   uint64
 }
 
+type GUEST_OS_INFO_ClosedSource_e__Struct struct {
+	Bitfield uint64
+}
+
+type GUEST_OS_INFO_OpenSource_e__Struct struct {
+	Bitfield uint64
+}
+
 // GUEST_OS_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GUEST_OS_INFO struct {
 	Data [1]uint64
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *GUEST_OS_INFO) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// ClosedSource reinterprets the union as its ClosedSource member.
+func (u *GUEST_OS_INFO) ClosedSource() *GUEST_OS_INFO_ClosedSource_e__Struct {
+	return (*GUEST_OS_INFO_ClosedSource_e__Struct)(unsafe.Pointer(u))
+}
+
+// OpenSource reinterprets the union as its OpenSource member.
+func (u *GUEST_OS_INFO) OpenSource() *GUEST_OS_INFO_OpenSource_e__Struct {
+	return (*GUEST_OS_INFO_OpenSource_e__Struct)(unsafe.Pointer(u))
 }
 
 type HDV_PCI_DEVICE_INTERFACE struct {
@@ -75,10 +99,165 @@ type SOCKADDR_HV struct {
 	ServiceId win32.GUID
 }
 
+type VIRTUAL_PROCESSOR_REGISTER_Reg128_e__Struct struct {
+	Low64  uint64
+	High64 uint64
+}
+
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	LastFpEip uint32
+	LastFpCs  uint16
+}
+
+// VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint64
+}
+
+// LastFpRip reinterprets the union as its LastFpRip member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union) LastFpRip() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union) Anonymous() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct struct {
+	FpControl uint16
+	FpStatus  uint16
+	FpTag     byte
+	Reserved  byte
+	LastFpOp  uint16
+	Anonymous VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union
+}
+
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
+// VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint16
+}
+
+// Attributes reinterprets the union as its Attributes member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union) Attributes() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union) Anonymous() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct struct {
+	Base      uint64
+	Limit     uint32
+	Selector  uint16
+	Anonymous VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union
+}
+
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Table_e__Struct struct {
+	Limit uint16
+	Base  uint64
+}
+
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	LastFpDp uint32
+	LastFpDs uint16
+}
+
+// VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint64
+}
+
+// LastFpRdp reinterprets the union as its LastFpRdp member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union) LastFpRdp() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union) Anonymous() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct struct {
+	Anonymous            VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union
+	XmmStatusControl     uint32
+	XmmStatusControlMask uint32
+}
+
+// VIRTUAL_PROCESSOR_REGISTER_X64_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type VIRTUAL_PROCESSOR_REGISTER_X64_e__Union struct {
+	Data [2]uint64
+}
+
+// Segment reinterprets the union as its Segment member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union) Segment() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct)(unsafe.Pointer(u))
+}
+
+// Table reinterprets the union as its Table member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union) Table() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Table_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Table_e__Struct)(unsafe.Pointer(u))
+}
+
+// FpControlStatus reinterprets the union as its FpControlStatus member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union) FpControlStatus() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct)(unsafe.Pointer(u))
+}
+
+// XmmControlStatus reinterprets the union as its XmmControlStatus member.
+func (u *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union) XmmControlStatus() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct)(unsafe.Pointer(u))
+}
+
 // VIRTUAL_PROCESSOR_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIRTUAL_PROCESSOR_REGISTER struct {
 	Data [2]uint64
+}
+
+// Reg64 reinterprets the union as its Reg64 member.
+func (u *VIRTUAL_PROCESSOR_REGISTER) Reg64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Reg32 reinterprets the union as its Reg32 member.
+func (u *VIRTUAL_PROCESSOR_REGISTER) Reg32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Reg16 reinterprets the union as its Reg16 member.
+func (u *VIRTUAL_PROCESSOR_REGISTER) Reg16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Reg8 reinterprets the union as its Reg8 member.
+func (u *VIRTUAL_PROCESSOR_REGISTER) Reg8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Reg128 reinterprets the union as its Reg128 member.
+func (u *VIRTUAL_PROCESSOR_REGISTER) Reg128() *VIRTUAL_PROCESSOR_REGISTER_Reg128_e__Struct {
+	return (*VIRTUAL_PROCESSOR_REGISTER_Reg128_e__Struct)(unsafe.Pointer(u))
+}
+
+// X64 reinterprets the union as its X64 member.
+func (u *VIRTUAL_PROCESSOR_REGISTER) X64() *VIRTUAL_PROCESSOR_REGISTER_X64_e__Union {
+	return (*VIRTUAL_PROCESSOR_REGISTER_X64_e__Union)(unsafe.Pointer(u))
 }
 
 // VM_GENCOUNTER: https://learn.microsoft.com/windows/win32/api/vmgenerationcounter/ns-vmgenerationcounter-vm_gencounter
@@ -87,16 +266,38 @@ type VM_GENCOUNTER struct {
 	GenerationCountHigh uint64
 }
 
+type WHV_ACCESS_GPA_CONTROLS_Anonymous_e__Struct struct {
+	CacheType WHV_CACHE_TYPE
+	Reserved  uint32
+}
+
 // WHV_ACCESS_GPA_CONTROLS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_ACCESS_GPA_CONTROLS struct {
 	Data [1]uint64
 }
 
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_ACCESS_GPA_CONTROLS) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_ACCESS_GPA_CONTROLS) Anonymous() *WHV_ACCESS_GPA_CONTROLS_Anonymous_e__Struct {
+	return (*WHV_ACCESS_GPA_CONTROLS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
 // WHV_ADVISE_GPA_RANGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_ADVISE_GPA_RANGE struct {
 	Data [2]uint32
+}
+
+// Populate reinterprets the union as its Populate member.
+func (u *WHV_ADVISE_GPA_RANGE) Populate() *WHV_ADVISE_GPA_RANGE_POPULATE {
+	return (*WHV_ADVISE_GPA_RANGE_POPULATE)(unsafe.Pointer(u))
 }
 
 type WHV_ADVISE_GPA_RANGE_POPULATE struct {
@@ -104,22 +305,138 @@ type WHV_ADVISE_GPA_RANGE_POPULATE struct {
 	AccessType WHV_MEMORY_ACCESS_TYPE
 }
 
+type WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS struct {
 	Data [1]uint32
 }
 
+// AsUINT32 reinterprets the union as its AsUINT32 member.
+func (u *WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS) AsUINT32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS) Anonymous() *WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS_Anonymous_e__Struct {
+	return (*WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
 // WHV_CAPABILITY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_CAPABILITY struct {
 	Data [3]uint64
 }
 
+// HypervisorPresent reinterprets the union as its HypervisorPresent member.
+func (u *WHV_CAPABILITY) HypervisorPresent() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// Features reinterprets the union as its Features member.
+func (u *WHV_CAPABILITY) Features() *WHV_CAPABILITY_FEATURES {
+	return (*WHV_CAPABILITY_FEATURES)(unsafe.Pointer(u))
+}
+
+// ExtendedVmExits reinterprets the union as its ExtendedVmExits member.
+func (u *WHV_CAPABILITY) ExtendedVmExits() *WHV_EXTENDED_VM_EXITS {
+	return (*WHV_EXTENDED_VM_EXITS)(unsafe.Pointer(u))
+}
+
+// ProcessorVendor reinterprets the union as its ProcessorVendor member.
+func (u *WHV_CAPABILITY) ProcessorVendor() *WHV_PROCESSOR_VENDOR {
+	return (*WHV_PROCESSOR_VENDOR)(unsafe.Pointer(u))
+}
+
+// ProcessorFeatures reinterprets the union as its ProcessorFeatures member.
+func (u *WHV_CAPABILITY) ProcessorFeatures() *WHV_PROCESSOR_FEATURES {
+	return (*WHV_PROCESSOR_FEATURES)(unsafe.Pointer(u))
+}
+
+// SyntheticProcessorFeaturesBanks reinterprets the union as its SyntheticProcessorFeaturesBanks member.
+func (u *WHV_CAPABILITY) SyntheticProcessorFeaturesBanks() *WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS {
+	return (*WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS)(unsafe.Pointer(u))
+}
+
+// ProcessorXsaveFeatures reinterprets the union as its ProcessorXsaveFeatures member.
+func (u *WHV_CAPABILITY) ProcessorXsaveFeatures() *WHV_PROCESSOR_XSAVE_FEATURES {
+	return (*WHV_PROCESSOR_XSAVE_FEATURES)(unsafe.Pointer(u))
+}
+
+// ProcessorClFlushSize reinterprets the union as its ProcessorClFlushSize member.
+func (u *WHV_CAPABILITY) ProcessorClFlushSize() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// ExceptionExitBitmap reinterprets the union as its ExceptionExitBitmap member.
+func (u *WHV_CAPABILITY) ExceptionExitBitmap() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// X64MsrExitBitmap reinterprets the union as its X64MsrExitBitmap member.
+func (u *WHV_CAPABILITY) X64MsrExitBitmap() *WHV_X64_MSR_EXIT_BITMAP {
+	return (*WHV_X64_MSR_EXIT_BITMAP)(unsafe.Pointer(u))
+}
+
+// ProcessorClockFrequency reinterprets the union as its ProcessorClockFrequency member.
+func (u *WHV_CAPABILITY) ProcessorClockFrequency() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// InterruptClockFrequency reinterprets the union as its InterruptClockFrequency member.
+func (u *WHV_CAPABILITY) InterruptClockFrequency() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// ProcessorFeaturesBanks reinterprets the union as its ProcessorFeaturesBanks member.
+func (u *WHV_CAPABILITY) ProcessorFeaturesBanks() *WHV_PROCESSOR_FEATURES_BANKS {
+	return (*WHV_PROCESSOR_FEATURES_BANKS)(unsafe.Pointer(u))
+}
+
+// GpaRangePopulateFlags reinterprets the union as its GpaRangePopulateFlags member.
+func (u *WHV_CAPABILITY) GpaRangePopulateFlags() *WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS {
+	return (*WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS)(unsafe.Pointer(u))
+}
+
+// ProcessorFrequencyCap reinterprets the union as its ProcessorFrequencyCap member.
+func (u *WHV_CAPABILITY) ProcessorFrequencyCap() *WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP {
+	return (*WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP)(unsafe.Pointer(u))
+}
+
+// ProcessorPerfmonFeatures reinterprets the union as its ProcessorPerfmonFeatures member.
+func (u *WHV_CAPABILITY) ProcessorPerfmonFeatures() *WHV_PROCESSOR_PERFMON_FEATURES {
+	return (*WHV_PROCESSOR_PERFMON_FEATURES)(unsafe.Pointer(u))
+}
+
+// SchedulerFeatures reinterprets the union as its SchedulerFeatures member.
+func (u *WHV_CAPABILITY) SchedulerFeatures() *WHV_SCHEDULER_FEATURES {
+	return (*WHV_SCHEDULER_FEATURES)(unsafe.Pointer(u))
+}
+
+type WHV_CAPABILITY_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_CAPABILITY_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_CAPABILITY_FEATURES struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_CAPABILITY_FEATURES) Anonymous() *WHV_CAPABILITY_FEATURES_Anonymous_e__Struct {
+	return (*WHV_CAPABILITY_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_CAPABILITY_FEATURES) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP struct {
@@ -168,16 +485,46 @@ type WHV_EMULATOR_MEMORY_ACCESS_INFO struct {
 	Data       [8]byte
 }
 
+type WHV_EMULATOR_STATUS_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // WHV_EMULATOR_STATUS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_EMULATOR_STATUS struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_EMULATOR_STATUS) Anonymous() *WHV_EMULATOR_STATUS_Anonymous_e__Struct {
+	return (*WHV_EMULATOR_STATUS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT32 reinterprets the union as its AsUINT32 member.
+func (u *WHV_EMULATOR_STATUS) AsUINT32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type WHV_EXTENDED_VM_EXITS_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_EXTENDED_VM_EXITS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_EXTENDED_VM_EXITS struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_EXTENDED_VM_EXITS) Anonymous() *WHV_EXTENDED_VM_EXITS_Anonymous_e__Struct {
+	return (*WHV_EXTENDED_VM_EXITS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_EXTENDED_VM_EXITS) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_HYPERCALL_CONTEXT struct {
@@ -193,10 +540,25 @@ type WHV_HYPERCALL_CONTEXT struct {
 	Reserved1    [2]uint64
 }
 
+type WHV_INTERNAL_ACTIVITY_REGISTER_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_INTERNAL_ACTIVITY_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_INTERNAL_ACTIVITY_REGISTER struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_INTERNAL_ACTIVITY_REGISTER) Anonymous() *WHV_INTERNAL_ACTIVITY_REGISTER_Anonymous_e__Struct {
+	return (*WHV_INTERNAL_ACTIVITY_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_INTERNAL_ACTIVITY_REGISTER) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_INTERRUPT_CONTROL struct {
@@ -214,10 +576,25 @@ type WHV_MEMORY_ACCESS_CONTEXT struct {
 	Gva                  uint64
 }
 
+type WHV_MEMORY_ACCESS_INFO_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // WHV_MEMORY_ACCESS_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_MEMORY_ACCESS_INFO struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_MEMORY_ACCESS_INFO) Anonymous() *WHV_MEMORY_ACCESS_INFO_Anonymous_e__Struct {
+	return (*WHV_MEMORY_ACCESS_INFO_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT32 reinterprets the union as its AsUINT32 member.
+func (u *WHV_MEMORY_ACCESS_INFO) AsUINT32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type WHV_MEMORY_RANGE_ENTRY struct {
@@ -232,10 +609,25 @@ type WHV_MSR_ACTION_ENTRY struct {
 	Reserved    uint16
 }
 
+type WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union_Event_e__Struct struct {
+	ConnectionId uint32
+}
+
 // WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Doorbell reinterprets the union as its Doorbell member.
+func (u *WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union) Doorbell() *WHV_DOORBELL_MATCH_DATA {
+	return (*WHV_DOORBELL_MATCH_DATA)(unsafe.Pointer(u))
+}
+
+// Event reinterprets the union as its Event member.
+func (u *WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union) Event() *WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union_Event_e__Struct {
+	return (*WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union_Event_e__Struct)(unsafe.Pointer(u))
 }
 
 type WHV_NOTIFICATION_PORT_PARAMETERS struct {
@@ -251,9 +643,160 @@ type WHV_PARTITION_MEMORY_COUNTERS struct {
 }
 
 // WHV_PARTITION_PROPERTY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_PARTITION_PROPERTY struct {
 	Data [6]uint64
+}
+
+// ExtendedVmExits reinterprets the union as its ExtendedVmExits member.
+func (u *WHV_PARTITION_PROPERTY) ExtendedVmExits() *WHV_EXTENDED_VM_EXITS {
+	return (*WHV_EXTENDED_VM_EXITS)(unsafe.Pointer(u))
+}
+
+// ProcessorFeatures reinterprets the union as its ProcessorFeatures member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorFeatures() *WHV_PROCESSOR_FEATURES {
+	return (*WHV_PROCESSOR_FEATURES)(unsafe.Pointer(u))
+}
+
+// SyntheticProcessorFeaturesBanks reinterprets the union as its SyntheticProcessorFeaturesBanks member.
+func (u *WHV_PARTITION_PROPERTY) SyntheticProcessorFeaturesBanks() *WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS {
+	return (*WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS)(unsafe.Pointer(u))
+}
+
+// ProcessorXsaveFeatures reinterprets the union as its ProcessorXsaveFeatures member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorXsaveFeatures() *WHV_PROCESSOR_XSAVE_FEATURES {
+	return (*WHV_PROCESSOR_XSAVE_FEATURES)(unsafe.Pointer(u))
+}
+
+// ProcessorClFlushSize reinterprets the union as its ProcessorClFlushSize member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorClFlushSize() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// ProcessorCount reinterprets the union as its ProcessorCount member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CpuidExitList reinterprets the union as its CpuidExitList member.
+func (u *WHV_PARTITION_PROPERTY) CpuidExitList() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
+}
+
+// CpuidResultList reinterprets the union as its CpuidResultList member.
+func (u *WHV_PARTITION_PROPERTY) CpuidResultList() *[1]WHV_X64_CPUID_RESULT {
+	return (*[1]WHV_X64_CPUID_RESULT)(unsafe.Pointer(u))
+}
+
+// CpuidResultList2 reinterprets the union as its CpuidResultList2 member.
+func (u *WHV_PARTITION_PROPERTY) CpuidResultList2() *[1]WHV_X64_CPUID_RESULT2 {
+	return (*[1]WHV_X64_CPUID_RESULT2)(unsafe.Pointer(u))
+}
+
+// MsrActionList reinterprets the union as its MsrActionList member.
+func (u *WHV_PARTITION_PROPERTY) MsrActionList() *[1]WHV_MSR_ACTION_ENTRY {
+	return (*[1]WHV_MSR_ACTION_ENTRY)(unsafe.Pointer(u))
+}
+
+// UnimplementedMsrAction reinterprets the union as its UnimplementedMsrAction member.
+func (u *WHV_PARTITION_PROPERTY) UnimplementedMsrAction() *WHV_MSR_ACTION {
+	return (*WHV_MSR_ACTION)(unsafe.Pointer(u))
+}
+
+// ExceptionExitBitmap reinterprets the union as its ExceptionExitBitmap member.
+func (u *WHV_PARTITION_PROPERTY) ExceptionExitBitmap() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// LocalApicEmulationMode reinterprets the union as its LocalApicEmulationMode member.
+func (u *WHV_PARTITION_PROPERTY) LocalApicEmulationMode() *WHV_X64_LOCAL_APIC_EMULATION_MODE {
+	return (*WHV_X64_LOCAL_APIC_EMULATION_MODE)(unsafe.Pointer(u))
+}
+
+// SeparateSecurityDomain reinterprets the union as its SeparateSecurityDomain member.
+func (u *WHV_PARTITION_PROPERTY) SeparateSecurityDomain() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// NestedVirtualization reinterprets the union as its NestedVirtualization member.
+func (u *WHV_PARTITION_PROPERTY) NestedVirtualization() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// X64MsrExitBitmap reinterprets the union as its X64MsrExitBitmap member.
+func (u *WHV_PARTITION_PROPERTY) X64MsrExitBitmap() *WHV_X64_MSR_EXIT_BITMAP {
+	return (*WHV_X64_MSR_EXIT_BITMAP)(unsafe.Pointer(u))
+}
+
+// ProcessorClockFrequency reinterprets the union as its ProcessorClockFrequency member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorClockFrequency() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// InterruptClockFrequency reinterprets the union as its InterruptClockFrequency member.
+func (u *WHV_PARTITION_PROPERTY) InterruptClockFrequency() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// ApicRemoteRead reinterprets the union as its ApicRemoteRead member.
+func (u *WHV_PARTITION_PROPERTY) ApicRemoteRead() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// ProcessorFeaturesBanks reinterprets the union as its ProcessorFeaturesBanks member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorFeaturesBanks() *WHV_PROCESSOR_FEATURES_BANKS {
+	return (*WHV_PROCESSOR_FEATURES_BANKS)(unsafe.Pointer(u))
+}
+
+// ReferenceTime reinterprets the union as its ReferenceTime member.
+func (u *WHV_PARTITION_PROPERTY) ReferenceTime() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// PrimaryNumaNode reinterprets the union as its PrimaryNumaNode member.
+func (u *WHV_PARTITION_PROPERTY) PrimaryNumaNode() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// CpuReserve reinterprets the union as its CpuReserve member.
+func (u *WHV_PARTITION_PROPERTY) CpuReserve() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CpuCap reinterprets the union as its CpuCap member.
+func (u *WHV_PARTITION_PROPERTY) CpuCap() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CpuWeight reinterprets the union as its CpuWeight member.
+func (u *WHV_PARTITION_PROPERTY) CpuWeight() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CpuGroupId reinterprets the union as its CpuGroupId member.
+func (u *WHV_PARTITION_PROPERTY) CpuGroupId() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// ProcessorFrequencyCap reinterprets the union as its ProcessorFrequencyCap member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorFrequencyCap() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// AllowDeviceAssignment reinterprets the union as its AllowDeviceAssignment member.
+func (u *WHV_PARTITION_PROPERTY) AllowDeviceAssignment() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// ProcessorPerfmonFeatures reinterprets the union as its ProcessorPerfmonFeatures member.
+func (u *WHV_PARTITION_PROPERTY) ProcessorPerfmonFeatures() *WHV_PROCESSOR_PERFMON_FEATURES {
+	return (*WHV_PROCESSOR_PERFMON_FEATURES)(unsafe.Pointer(u))
+}
+
+// DisableSmt reinterprets the union as its DisableSmt member.
+func (u *WHV_PARTITION_PROPERTY) DisableSmt() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
 }
 
 type WHV_PROCESSOR_APIC_COUNTERS struct {
@@ -270,22 +813,68 @@ type WHV_PROCESSOR_EVENT_COUNTERS struct {
 	InterruptCount uint64
 }
 
+type WHV_PROCESSOR_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_PROCESSOR_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_PROCESSOR_FEATURES struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_PROCESSOR_FEATURES) Anonymous() *WHV_PROCESSOR_FEATURES_Anonymous_e__Struct {
+	return (*WHV_PROCESSOR_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_PROCESSOR_FEATURES) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type WHV_PROCESSOR_FEATURES1_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_PROCESSOR_FEATURES1 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_PROCESSOR_FEATURES1 struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_PROCESSOR_FEATURES1) Anonymous() *WHV_PROCESSOR_FEATURES1_Anonymous_e__Struct {
+	return (*WHV_PROCESSOR_FEATURES1_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_PROCESSOR_FEATURES1) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bank0 WHV_PROCESSOR_FEATURES
+	Bank1 WHV_PROCESSOR_FEATURES1
+}
+
 // WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union) Anonymous() *WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union) AsUINT64() *[2]uint64 {
+	return (*[2]uint64)(unsafe.Pointer(u))
 }
 
 type WHV_PROCESSOR_FEATURES_BANKS struct {
@@ -316,10 +905,25 @@ type WHV_PROCESSOR_INTERCEPT_COUNTERS struct {
 	RdpmcInstructions         WHV_PROCESSOR_INTERCEPT_COUNTER
 }
 
+type WHV_PROCESSOR_PERFMON_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_PROCESSOR_PERFMON_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_PROCESSOR_PERFMON_FEATURES struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_PROCESSOR_PERFMON_FEATURES) Anonymous() *WHV_PROCESSOR_PERFMON_FEATURES_Anonymous_e__Struct {
+	return (*WHV_PROCESSOR_PERFMON_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_PROCESSOR_PERFMON_FEATURES) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_PROCESSOR_RUNTIME_COUNTERS struct {
@@ -336,16 +940,117 @@ type WHV_PROCESSOR_SYNTHETIC_FEATURES_COUNTERS struct {
 	VirtualMmuHypercallsCount         uint64
 }
 
+type WHV_PROCESSOR_XSAVE_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_PROCESSOR_XSAVE_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_PROCESSOR_XSAVE_FEATURES struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_PROCESSOR_XSAVE_FEATURES) Anonymous() *WHV_PROCESSOR_XSAVE_FEATURES_Anonymous_e__Struct {
+	return (*WHV_PROCESSOR_XSAVE_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_PROCESSOR_XSAVE_FEATURES) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
 // WHV_REGISTER_VALUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_REGISTER_VALUE struct {
 	Data [2]uint64
+}
+
+// Reg128 reinterprets the union as its Reg128 member.
+func (u *WHV_REGISTER_VALUE) Reg128() *WHV_UINT128 {
+	return (*WHV_UINT128)(unsafe.Pointer(u))
+}
+
+// Reg64 reinterprets the union as its Reg64 member.
+func (u *WHV_REGISTER_VALUE) Reg64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Reg32 reinterprets the union as its Reg32 member.
+func (u *WHV_REGISTER_VALUE) Reg32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Reg16 reinterprets the union as its Reg16 member.
+func (u *WHV_REGISTER_VALUE) Reg16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Reg8 reinterprets the union as its Reg8 member.
+func (u *WHV_REGISTER_VALUE) Reg8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Fp reinterprets the union as its Fp member.
+func (u *WHV_REGISTER_VALUE) Fp() *WHV_X64_FP_REGISTER {
+	return (*WHV_X64_FP_REGISTER)(unsafe.Pointer(u))
+}
+
+// FpControlStatus reinterprets the union as its FpControlStatus member.
+func (u *WHV_REGISTER_VALUE) FpControlStatus() *WHV_X64_FP_CONTROL_STATUS_REGISTER {
+	return (*WHV_X64_FP_CONTROL_STATUS_REGISTER)(unsafe.Pointer(u))
+}
+
+// XmmControlStatus reinterprets the union as its XmmControlStatus member.
+func (u *WHV_REGISTER_VALUE) XmmControlStatus() *WHV_X64_XMM_CONTROL_STATUS_REGISTER {
+	return (*WHV_X64_XMM_CONTROL_STATUS_REGISTER)(unsafe.Pointer(u))
+}
+
+// Segment reinterprets the union as its Segment member.
+func (u *WHV_REGISTER_VALUE) Segment() *WHV_X64_SEGMENT_REGISTER {
+	return (*WHV_X64_SEGMENT_REGISTER)(unsafe.Pointer(u))
+}
+
+// Table reinterprets the union as its Table member.
+func (u *WHV_REGISTER_VALUE) Table() *WHV_X64_TABLE_REGISTER {
+	return (*WHV_X64_TABLE_REGISTER)(unsafe.Pointer(u))
+}
+
+// InterruptState reinterprets the union as its InterruptState member.
+func (u *WHV_REGISTER_VALUE) InterruptState() *WHV_X64_INTERRUPT_STATE_REGISTER {
+	return (*WHV_X64_INTERRUPT_STATE_REGISTER)(unsafe.Pointer(u))
+}
+
+// PendingInterruption reinterprets the union as its PendingInterruption member.
+func (u *WHV_REGISTER_VALUE) PendingInterruption() *WHV_X64_PENDING_INTERRUPTION_REGISTER {
+	return (*WHV_X64_PENDING_INTERRUPTION_REGISTER)(unsafe.Pointer(u))
+}
+
+// DeliverabilityNotifications reinterprets the union as its DeliverabilityNotifications member.
+func (u *WHV_REGISTER_VALUE) DeliverabilityNotifications() *WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER {
+	return (*WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER)(unsafe.Pointer(u))
+}
+
+// ExceptionEvent reinterprets the union as its ExceptionEvent member.
+func (u *WHV_REGISTER_VALUE) ExceptionEvent() *WHV_X64_PENDING_EXCEPTION_EVENT {
+	return (*WHV_X64_PENDING_EXCEPTION_EVENT)(unsafe.Pointer(u))
+}
+
+// ExtIntEvent reinterprets the union as its ExtIntEvent member.
+func (u *WHV_REGISTER_VALUE) ExtIntEvent() *WHV_X64_PENDING_EXT_INT_EVENT {
+	return (*WHV_X64_PENDING_EXT_INT_EVENT)(unsafe.Pointer(u))
+}
+
+// InternalActivity reinterprets the union as its InternalActivity member.
+func (u *WHV_REGISTER_VALUE) InternalActivity() *WHV_INTERNAL_ACTIVITY_REGISTER {
+	return (*WHV_INTERNAL_ACTIVITY_REGISTER)(unsafe.Pointer(u))
+}
+
+// PendingDebugException reinterprets the union as its PendingDebugException member.
+func (u *WHV_REGISTER_VALUE) PendingDebugException() *WHV_X64_PENDING_DEBUG_EXCEPTION {
+	return (*WHV_X64_PENDING_DEBUG_EXCEPTION)(unsafe.Pointer(u))
 }
 
 type WHV_RUN_VP_CANCELED_CONTEXT struct {
@@ -353,9 +1058,85 @@ type WHV_RUN_VP_CANCELED_CONTEXT struct {
 }
 
 // WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union struct {
 	Data [22]uint64
+}
+
+// MemoryAccess reinterprets the union as its MemoryAccess member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) MemoryAccess() *WHV_MEMORY_ACCESS_CONTEXT {
+	return (*WHV_MEMORY_ACCESS_CONTEXT)(unsafe.Pointer(u))
+}
+
+// IoPortAccess reinterprets the union as its IoPortAccess member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) IoPortAccess() *WHV_X64_IO_PORT_ACCESS_CONTEXT {
+	return (*WHV_X64_IO_PORT_ACCESS_CONTEXT)(unsafe.Pointer(u))
+}
+
+// MsrAccess reinterprets the union as its MsrAccess member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) MsrAccess() *WHV_X64_MSR_ACCESS_CONTEXT {
+	return (*WHV_X64_MSR_ACCESS_CONTEXT)(unsafe.Pointer(u))
+}
+
+// CpuidAccess reinterprets the union as its CpuidAccess member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) CpuidAccess() *WHV_X64_CPUID_ACCESS_CONTEXT {
+	return (*WHV_X64_CPUID_ACCESS_CONTEXT)(unsafe.Pointer(u))
+}
+
+// VpException reinterprets the union as its VpException member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) VpException() *WHV_VP_EXCEPTION_CONTEXT {
+	return (*WHV_VP_EXCEPTION_CONTEXT)(unsafe.Pointer(u))
+}
+
+// InterruptWindow reinterprets the union as its InterruptWindow member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) InterruptWindow() *WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT {
+	return (*WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT)(unsafe.Pointer(u))
+}
+
+// UnsupportedFeature reinterprets the union as its UnsupportedFeature member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) UnsupportedFeature() *WHV_X64_UNSUPPORTED_FEATURE_CONTEXT {
+	return (*WHV_X64_UNSUPPORTED_FEATURE_CONTEXT)(unsafe.Pointer(u))
+}
+
+// CancelReason reinterprets the union as its CancelReason member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) CancelReason() *WHV_RUN_VP_CANCELED_CONTEXT {
+	return (*WHV_RUN_VP_CANCELED_CONTEXT)(unsafe.Pointer(u))
+}
+
+// ApicEoi reinterprets the union as its ApicEoi member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) ApicEoi() *WHV_X64_APIC_EOI_CONTEXT {
+	return (*WHV_X64_APIC_EOI_CONTEXT)(unsafe.Pointer(u))
+}
+
+// ReadTsc reinterprets the union as its ReadTsc member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) ReadTsc() *WHV_X64_RDTSC_CONTEXT {
+	return (*WHV_X64_RDTSC_CONTEXT)(unsafe.Pointer(u))
+}
+
+// ApicSmi reinterprets the union as its ApicSmi member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) ApicSmi() *WHV_X64_APIC_SMI_CONTEXT {
+	return (*WHV_X64_APIC_SMI_CONTEXT)(unsafe.Pointer(u))
+}
+
+// Hypercall reinterprets the union as its Hypercall member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) Hypercall() *WHV_HYPERCALL_CONTEXT {
+	return (*WHV_HYPERCALL_CONTEXT)(unsafe.Pointer(u))
+}
+
+// ApicInitSipi reinterprets the union as its ApicInitSipi member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) ApicInitSipi() *WHV_X64_APIC_INIT_SIPI_CONTEXT {
+	return (*WHV_X64_APIC_INIT_SIPI_CONTEXT)(unsafe.Pointer(u))
+}
+
+// ApicWrite reinterprets the union as its ApicWrite member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) ApicWrite() *WHV_X64_APIC_WRITE_CONTEXT {
+	return (*WHV_X64_APIC_WRITE_CONTEXT)(unsafe.Pointer(u))
+}
+
+// SynicSintDeliverable reinterprets the union as its SynicSintDeliverable member.
+func (u *WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union) SynicSintDeliverable() *WHV_SYNIC_SINT_DELIVERABLE_CONTEXT {
+	return (*WHV_SYNIC_SINT_DELIVERABLE_CONTEXT)(unsafe.Pointer(u))
 }
 
 type WHV_RUN_VP_EXIT_CONTEXT struct {
@@ -365,10 +1146,25 @@ type WHV_RUN_VP_EXIT_CONTEXT struct {
 	Anonymous  WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union
 }
 
+type WHV_SCHEDULER_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_SCHEDULER_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_SCHEDULER_FEATURES struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_SCHEDULER_FEATURES) Anonymous() *WHV_SCHEDULER_FEATURES_Anonymous_e__Struct {
+	return (*WHV_SCHEDULER_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_SCHEDULER_FEATURES) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_SRIOV_RESOURCE_DESCRIPTOR struct {
@@ -391,16 +1187,46 @@ type WHV_SYNIC_SINT_DELIVERABLE_CONTEXT struct {
 	Reserved2        uint32
 }
 
+type WHV_SYNTHETIC_PROCESSOR_FEATURES_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_SYNTHETIC_PROCESSOR_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_SYNTHETIC_PROCESSOR_FEATURES struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_SYNTHETIC_PROCESSOR_FEATURES) Anonymous() *WHV_SYNTHETIC_PROCESSOR_FEATURES_Anonymous_e__Struct {
+	return (*WHV_SYNTHETIC_PROCESSOR_FEATURES_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_SYNTHETIC_PROCESSOR_FEATURES) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bank0 WHV_SYNTHETIC_PROCESSOR_FEATURES
+}
+
 // WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union) Anonymous() *WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union) AsUINT64() *[1]uint64 {
+	return (*[1]uint64)(unsafe.Pointer(u))
 }
 
 type WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS struct {
@@ -414,10 +1240,33 @@ type WHV_TRANSLATE_GVA_RESULT struct {
 	Reserved   uint32
 }
 
+type WHV_TRIGGER_PARAMETERS_Anonymous_e__Union_DeviceInterrupt_e__Struct struct {
+	LogicalDeviceId uint64
+	MsiAddress      uint64
+	MsiData         uint32
+	Reserved        uint32
+}
+
 // WHV_TRIGGER_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_TRIGGER_PARAMETERS_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Interrupt reinterprets the union as its Interrupt member.
+func (u *WHV_TRIGGER_PARAMETERS_Anonymous_e__Union) Interrupt() *WHV_INTERRUPT_CONTROL {
+	return (*WHV_INTERRUPT_CONTROL)(unsafe.Pointer(u))
+}
+
+// SynicEvent reinterprets the union as its SynicEvent member.
+func (u *WHV_TRIGGER_PARAMETERS_Anonymous_e__Union) SynicEvent() *WHV_SYNIC_EVENT_PARAMETERS {
+	return (*WHV_SYNIC_EVENT_PARAMETERS)(unsafe.Pointer(u))
+}
+
+// DeviceInterrupt reinterprets the union as its DeviceInterrupt member.
+func (u *WHV_TRIGGER_PARAMETERS_Anonymous_e__Union) DeviceInterrupt() *WHV_TRIGGER_PARAMETERS_Anonymous_e__Union_DeviceInterrupt_e__Struct {
+	return (*WHV_TRIGGER_PARAMETERS_Anonymous_e__Union_DeviceInterrupt_e__Struct)(unsafe.Pointer(u))
 }
 
 type WHV_TRIGGER_PARAMETERS struct {
@@ -426,16 +1275,43 @@ type WHV_TRIGGER_PARAMETERS struct {
 	Anonymous   WHV_TRIGGER_PARAMETERS_Anonymous_e__Union
 }
 
+type WHV_UINT128_Anonymous_e__Struct struct {
+	Low64  uint64
+	High64 uint64
+}
+
 // WHV_UINT128 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_UINT128 struct {
 	Data [2]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_UINT128) Anonymous() *WHV_UINT128_Anonymous_e__Struct {
+	return (*WHV_UINT128_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Dword reinterprets the union as its Dword member.
+func (u *WHV_UINT128) Dword() *[4]uint32 {
+	return (*[4]uint32)(unsafe.Pointer(u))
+}
+
 // WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// NumaNode reinterprets the union as its NumaNode member.
+func (u *WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union) NumaNode() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Padding reinterprets the union as its Padding member.
+func (u *WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union) Padding() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_VIRTUAL_PROCESSOR_PROPERTY struct {
@@ -445,9 +1321,15 @@ type WHV_VIRTUAL_PROCESSOR_PROPERTY struct {
 }
 
 // WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Reserved2 reinterprets the union as its Reserved2 member.
+func (u *WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union) Reserved2() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_VPCI_DEVICE_NOTIFICATION struct {
@@ -503,10 +1385,25 @@ type WHV_VP_EXCEPTION_CONTEXT struct {
 	ExceptionParameter   uint64
 }
 
+type WHV_VP_EXCEPTION_INFO_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // WHV_VP_EXCEPTION_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_VP_EXCEPTION_INFO struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_VP_EXCEPTION_INFO) Anonymous() *WHV_VP_EXCEPTION_INFO_Anonymous_e__Struct {
+	return (*WHV_VP_EXCEPTION_INFO_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT32 reinterprets the union as its AsUINT32 member.
+func (u *WHV_VP_EXCEPTION_INFO) AsUINT32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type WHV_VP_EXIT_CONTEXT struct {
@@ -566,32 +1463,121 @@ type WHV_X64_CPUID_RESULT2 struct {
 	Mask     WHV_CPUID_OUTPUT
 }
 
+type WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER) Anonymous() *WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER_Anonymous_e__Struct {
+	return (*WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	LastFpEip uint32
+	LastFpCs  uint16
+	Reserved2 uint16
+}
+
+// WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint64
+}
+
+// LastFpRip reinterprets the union as its LastFpRip member.
+func (u *WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union) LastFpRip() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union) Anonymous() *WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct struct {
+	FpControl uint16
+	FpStatus  uint16
+	FpTag     byte
+	Reserved  byte
+	LastFpOp  uint16
+	Anonymous WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union
+}
+
 // WHV_X64_FP_CONTROL_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_FP_CONTROL_STATUS_REGISTER struct {
 	Data [2]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_FP_CONTROL_STATUS_REGISTER) Anonymous() *WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct {
+	return (*WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT128 reinterprets the union as its AsUINT128 member.
+func (u *WHV_X64_FP_CONTROL_STATUS_REGISTER) AsUINT128() *WHV_UINT128 {
+	return (*WHV_UINT128)(unsafe.Pointer(u))
+}
+
+type WHV_X64_FP_REGISTER_Anonymous_e__Struct struct {
+	Mantissa uint64
+	Bitfield uint64
+}
+
 // WHV_X64_FP_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_FP_REGISTER struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_FP_REGISTER) Anonymous() *WHV_X64_FP_REGISTER_Anonymous_e__Struct {
+	return (*WHV_X64_FP_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT128 reinterprets the union as its AsUINT128 member.
+func (u *WHV_X64_FP_REGISTER) AsUINT128() *WHV_UINT128 {
+	return (*WHV_UINT128)(unsafe.Pointer(u))
 }
 
 type WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT struct {
 	DeliverableType WHV_X64_PENDING_INTERRUPTION_TYPE
 }
 
+type WHV_X64_INTERRUPT_STATE_REGISTER_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_X64_INTERRUPT_STATE_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_INTERRUPT_STATE_REGISTER struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_INTERRUPT_STATE_REGISTER) Anonymous() *WHV_X64_INTERRUPT_STATE_REGISTER_Anonymous_e__Struct {
+	return (*WHV_X64_INTERRUPT_STATE_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_X64_INTERRUPT_STATE_REGISTER) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_X64_IO_PORT_ACCESS_CONTEXT struct {
@@ -609,10 +1595,25 @@ type WHV_X64_IO_PORT_ACCESS_CONTEXT struct {
 	Es                   WHV_X64_SEGMENT_REGISTER
 }
 
+type WHV_X64_IO_PORT_ACCESS_INFO_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // WHV_X64_IO_PORT_ACCESS_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_IO_PORT_ACCESS_INFO struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_IO_PORT_ACCESS_INFO) Anonymous() *WHV_X64_IO_PORT_ACCESS_INFO_Anonymous_e__Struct {
+	return (*WHV_X64_IO_PORT_ACCESS_INFO_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT32 reinterprets the union as its AsUINT32 member.
+func (u *WHV_X64_IO_PORT_ACCESS_INFO) AsUINT32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type WHV_X64_MSR_ACCESS_CONTEXT struct {
@@ -622,40 +1623,134 @@ type WHV_X64_MSR_ACCESS_CONTEXT struct {
 	Rdx        uint64
 }
 
+type WHV_X64_MSR_ACCESS_INFO_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // WHV_X64_MSR_ACCESS_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_MSR_ACCESS_INFO struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_MSR_ACCESS_INFO) Anonymous() *WHV_X64_MSR_ACCESS_INFO_Anonymous_e__Struct {
+	return (*WHV_X64_MSR_ACCESS_INFO_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT32 reinterprets the union as its AsUINT32 member.
+func (u *WHV_X64_MSR_ACCESS_INFO) AsUINT32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type WHV_X64_MSR_EXIT_BITMAP_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_X64_MSR_EXIT_BITMAP is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_MSR_EXIT_BITMAP struct {
 	Data [1]uint64
 }
 
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_X64_MSR_EXIT_BITMAP) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_MSR_EXIT_BITMAP) Anonymous() *WHV_X64_MSR_EXIT_BITMAP_Anonymous_e__Struct {
+	return (*WHV_X64_MSR_EXIT_BITMAP_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type WHV_X64_PENDING_DEBUG_EXCEPTION_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_X64_PENDING_DEBUG_EXCEPTION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_PENDING_DEBUG_EXCEPTION struct {
 	Data [1]uint64
 }
 
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_X64_PENDING_DEBUG_EXCEPTION) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_PENDING_DEBUG_EXCEPTION) Anonymous() *WHV_X64_PENDING_DEBUG_EXCEPTION_Anonymous_e__Struct {
+	return (*WHV_X64_PENDING_DEBUG_EXCEPTION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type WHV_X64_PENDING_EXCEPTION_EVENT_Anonymous_e__Struct struct {
+	Bitfield           uint32
+	ErrorCode          uint32
+	ExceptionParameter uint64
+}
+
 // WHV_X64_PENDING_EXCEPTION_EVENT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_PENDING_EXCEPTION_EVENT struct {
 	Data [2]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_PENDING_EXCEPTION_EVENT) Anonymous() *WHV_X64_PENDING_EXCEPTION_EVENT_Anonymous_e__Struct {
+	return (*WHV_X64_PENDING_EXCEPTION_EVENT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT128 reinterprets the union as its AsUINT128 member.
+func (u *WHV_X64_PENDING_EXCEPTION_EVENT) AsUINT128() *WHV_UINT128 {
+	return (*WHV_UINT128)(unsafe.Pointer(u))
+}
+
+type WHV_X64_PENDING_EXT_INT_EVENT_Anonymous_e__Struct struct {
+	Bitfield  uint64
+	Reserved2 uint64
+}
+
 // WHV_X64_PENDING_EXT_INT_EVENT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_PENDING_EXT_INT_EVENT struct {
 	Data [2]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_PENDING_EXT_INT_EVENT) Anonymous() *WHV_X64_PENDING_EXT_INT_EVENT_Anonymous_e__Struct {
+	return (*WHV_X64_PENDING_EXT_INT_EVENT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT128 reinterprets the union as its AsUINT128 member.
+func (u *WHV_X64_PENDING_EXT_INT_EVENT) AsUINT128() *WHV_UINT128 {
+	return (*WHV_UINT128)(unsafe.Pointer(u))
+}
+
+type WHV_X64_PENDING_INTERRUPTION_REGISTER_Anonymous_e__Struct struct {
+	Bitfield  uint32
+	ErrorCode uint32
+}
+
 // WHV_X64_PENDING_INTERRUPTION_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_PENDING_INTERRUPTION_REGISTER struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_PENDING_INTERRUPTION_REGISTER) Anonymous() *WHV_X64_PENDING_INTERRUPTION_REGISTER_Anonymous_e__Struct {
+	return (*WHV_X64_PENDING_INTERRUPTION_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_X64_PENDING_INTERRUPTION_REGISTER) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type WHV_X64_RDTSC_CONTEXT struct {
@@ -666,16 +1761,46 @@ type WHV_X64_RDTSC_CONTEXT struct {
 	RdtscInfo     WHV_X64_RDTSC_INFO
 }
 
+type WHV_X64_RDTSC_INFO_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // WHV_X64_RDTSC_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_RDTSC_INFO struct {
 	Data [1]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_RDTSC_INFO) Anonymous() *WHV_X64_RDTSC_INFO_Anonymous_e__Struct {
+	return (*WHV_X64_RDTSC_INFO_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT64 reinterprets the union as its AsUINT64 member.
+func (u *WHV_X64_RDTSC_INFO) AsUINT64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+type WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union) Anonymous() *WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Attributes reinterprets the union as its Attributes member.
+func (u *WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union) Attributes() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type WHV_X64_SEGMENT_REGISTER struct {
@@ -697,14 +1822,69 @@ type WHV_X64_UNSUPPORTED_FEATURE_CONTEXT struct {
 	FeatureParameter uint64
 }
 
+type WHV_X64_VP_EXECUTION_STATE_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // WHV_X64_VP_EXECUTION_STATE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_VP_EXECUTION_STATE struct {
 	Data [1]uint16
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_VP_EXECUTION_STATE) Anonymous() *WHV_X64_VP_EXECUTION_STATE_Anonymous_e__Struct {
+	return (*WHV_X64_VP_EXECUTION_STATE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT16 reinterprets the union as its AsUINT16 member.
+func (u *WHV_X64_VP_EXECUTION_STATE) AsUINT16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	LastFpDp uint32
+	LastFpDs uint16
+	Reserved uint16
+}
+
+// WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint64
+}
+
+// LastFpRdp reinterprets the union as its LastFpRdp member.
+func (u *WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union) LastFpRdp() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union) Anonymous() *WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct struct {
+	Anonymous            WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union
+	XmmStatusControl     uint32
+	XmmStatusControlMask uint32
+}
+
 // WHV_X64_XMM_CONTROL_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WHV_X64_XMM_CONTROL_STATUS_REGISTER struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WHV_X64_XMM_CONTROL_STATUS_REGISTER) Anonymous() *WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct {
+	return (*WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT128 reinterprets the union as its AsUINT128 member.
+func (u *WHV_X64_XMM_CONTROL_STATUS_REGISTER) AsUINT128() *WHV_UINT128 {
+	return (*WHV_UINT128)(unsafe.Pointer(u))
 }

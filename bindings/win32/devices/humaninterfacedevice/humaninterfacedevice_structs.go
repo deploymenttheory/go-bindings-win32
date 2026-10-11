@@ -18,9 +18,20 @@ type CPOINT struct {
 }
 
 // DIACTIONA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DIACTIONA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// LptszActionName reinterprets the union as its lptszActionName member.
+func (u *DIACTIONA_Anonymous_e__Union) LptszActionName() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// UResIdString reinterprets the union as its uResIdString member.
+func (u *DIACTIONA_Anonymous_e__Union) UResIdString() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DIACTIONA struct {
@@ -68,9 +79,20 @@ type DIACTIONFORMATW struct {
 }
 
 // DIACTIONW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DIACTIONW_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// LptszActionName reinterprets the union as its lptszActionName member.
+func (u *DIACTIONW_Anonymous_e__Union) LptszActionName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// UResIdString reinterprets the union as its uResIdString member.
+func (u *DIACTIONW_Anonymous_e__Union) UResIdString() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DIACTIONW struct {
@@ -676,10 +698,43 @@ type HIDP_BUTTON_ARRAY_DATA struct {
 	On         foundation.BOOLEAN
 }
 
+type HIDP_BUTTON_CAPS_Anonymous_e__Union_NotRange_e__Struct struct {
+	Usage           uint16
+	Reserved1       uint16
+	StringIndex     uint16
+	Reserved2       uint16
+	DesignatorIndex uint16
+	Reserved3       uint16
+	DataIndex       uint16
+	Reserved4       uint16
+}
+
+type HIDP_BUTTON_CAPS_Anonymous_e__Union_Range_e__Struct struct {
+	UsageMin      uint16
+	UsageMax      uint16
+	StringMin     uint16
+	StringMax     uint16
+	DesignatorMin uint16
+	DesignatorMax uint16
+	DataIndexMin  uint16
+	DataIndexMax  uint16
+}
+
 // HIDP_BUTTON_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HIDP_BUTTON_CAPS_Anonymous_e__Union struct {
 	Data [8]uint16
+}
+
+// Range reinterprets the union as its Range member.
+func (u *HIDP_BUTTON_CAPS_Anonymous_e__Union) Range() *HIDP_BUTTON_CAPS_Anonymous_e__Union_Range_e__Struct {
+	return (*HIDP_BUTTON_CAPS_Anonymous_e__Union_Range_e__Struct)(unsafe.Pointer(u))
+}
+
+// NotRange reinterprets the union as its NotRange member.
+func (u *HIDP_BUTTON_CAPS_Anonymous_e__Union) NotRange() *HIDP_BUTTON_CAPS_Anonymous_e__Union_NotRange_e__Struct {
+	return (*HIDP_BUTTON_CAPS_Anonymous_e__Union_NotRange_e__Struct)(unsafe.Pointer(u))
 }
 
 type HIDP_BUTTON_CAPS struct {
@@ -720,9 +775,20 @@ type HIDP_CAPS struct {
 }
 
 // HIDP_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HIDP_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// RawValue reinterprets the union as its RawValue member.
+func (u *HIDP_DATA_Anonymous_e__Union) RawValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// On reinterprets the union as its On member.
+func (u *HIDP_DATA_Anonymous_e__Union) On() *foundation.BOOLEAN {
+	return (*foundation.BOOLEAN)(unsafe.Pointer(u))
 }
 
 type HIDP_DATA struct {
@@ -738,10 +804,25 @@ type HIDP_EXTENDED_ATTRIBUTES struct {
 	Data [4]uint32
 }
 
+type HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union) Anonymous() *HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Ul reinterprets the union as its ul member.
+func (u *HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union) Ul() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type HIDP_KEYBOARD_MODIFIER_STATE struct {
@@ -761,10 +842,43 @@ type HIDP_UNKNOWN_TOKEN struct {
 	BitField uint32
 }
 
+type HIDP_VALUE_CAPS_Anonymous_e__Union_NotRange_e__Struct struct {
+	Usage           uint16
+	Reserved1       uint16
+	StringIndex     uint16
+	Reserved2       uint16
+	DesignatorIndex uint16
+	Reserved3       uint16
+	DataIndex       uint16
+	Reserved4       uint16
+}
+
+type HIDP_VALUE_CAPS_Anonymous_e__Union_Range_e__Struct struct {
+	UsageMin      uint16
+	UsageMax      uint16
+	StringMin     uint16
+	StringMax     uint16
+	DesignatorMin uint16
+	DesignatorMax uint16
+	DataIndexMin  uint16
+	DataIndexMax  uint16
+}
+
 // HIDP_VALUE_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HIDP_VALUE_CAPS_Anonymous_e__Union struct {
 	Data [8]uint16
+}
+
+// Range reinterprets the union as its Range member.
+func (u *HIDP_VALUE_CAPS_Anonymous_e__Union) Range() *HIDP_VALUE_CAPS_Anonymous_e__Union_Range_e__Struct {
+	return (*HIDP_VALUE_CAPS_Anonymous_e__Union_Range_e__Struct)(unsafe.Pointer(u))
+}
+
+// NotRange reinterprets the union as its NotRange member.
+func (u *HIDP_VALUE_CAPS_Anonymous_e__Union) NotRange() *HIDP_VALUE_CAPS_Anonymous_e__Union_NotRange_e__Struct {
+	return (*HIDP_VALUE_CAPS_Anonymous_e__Union_NotRange_e__Struct)(unsafe.Pointer(u))
 }
 
 type HIDP_VALUE_CAPS struct {
@@ -948,10 +1062,26 @@ type MOUSE_ATTRIBUTES struct {
 	InputDataQueueLength uint32
 }
 
+type MOUSE_INPUT_DATA_Anonymous_e__Union_Anonymous_e__Struct struct {
+	ButtonFlags uint16
+	ButtonData  uint16
+}
+
 // MOUSE_INPUT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MOUSE_INPUT_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Buttons reinterprets the union as its Buttons member.
+func (u *MOUSE_INPUT_DATA_Anonymous_e__Union) Buttons() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MOUSE_INPUT_DATA_Anonymous_e__Union) Anonymous() *MOUSE_INPUT_DATA_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*MOUSE_INPUT_DATA_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // MOUSE_INPUT_DATA: https://learn.microsoft.com/windows/win32/api/ntddmou/ns-ntddmou-mouse_input_data

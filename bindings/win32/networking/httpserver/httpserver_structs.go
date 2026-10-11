@@ -94,10 +94,70 @@ type HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO struct {
 	PropertyInfo       unsafe.Pointer
 }
 
+type HTTP_DATA_CHUNK_Anonymous_e__Union_FromFileHandle_e__Struct struct {
+	ByteRange  HTTP_BYTE_RANGE
+	FileHandle foundation.HANDLE
+}
+
+type HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCacheEx_e__Struct struct {
+	ByteRange     HTTP_BYTE_RANGE
+	PFragmentName foundation.PWSTR
+}
+
+type HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCache_e__Struct struct {
+	FragmentNameLength uint16
+	PFragmentName      foundation.PWSTR
+}
+
+type HTTP_DATA_CHUNK_Anonymous_e__Union_FromMemory_e__Struct struct {
+	PBuffer      unsafe.Pointer
+	BufferLength uint32
+}
+
+type HTTP_DATA_CHUNK_Anonymous_e__Union_FromWinHttpFastForwarding_e__Struct struct {
+	WhFastForwardingData HTTP_WINHTTP_FAST_FORWARDING_DATA
+}
+
+type HTTP_DATA_CHUNK_Anonymous_e__Union_Trailers_e__Struct struct {
+	TrailerCount uint16
+	PTrailers    *HTTP_UNKNOWN_HEADER
+}
+
 // HTTP_DATA_CHUNK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HTTP_DATA_CHUNK_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// FromMemory reinterprets the union as its FromMemory member.
+func (u *HTTP_DATA_CHUNK_Anonymous_e__Union) FromMemory() *HTTP_DATA_CHUNK_Anonymous_e__Union_FromMemory_e__Struct {
+	return (*HTTP_DATA_CHUNK_Anonymous_e__Union_FromMemory_e__Struct)(unsafe.Pointer(u))
+}
+
+// FromFileHandle reinterprets the union as its FromFileHandle member.
+func (u *HTTP_DATA_CHUNK_Anonymous_e__Union) FromFileHandle() *HTTP_DATA_CHUNK_Anonymous_e__Union_FromFileHandle_e__Struct {
+	return (*HTTP_DATA_CHUNK_Anonymous_e__Union_FromFileHandle_e__Struct)(unsafe.Pointer(u))
+}
+
+// FromFragmentCache reinterprets the union as its FromFragmentCache member.
+func (u *HTTP_DATA_CHUNK_Anonymous_e__Union) FromFragmentCache() *HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCache_e__Struct {
+	return (*HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCache_e__Struct)(unsafe.Pointer(u))
+}
+
+// FromFragmentCacheEx reinterprets the union as its FromFragmentCacheEx member.
+func (u *HTTP_DATA_CHUNK_Anonymous_e__Union) FromFragmentCacheEx() *HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCacheEx_e__Struct {
+	return (*HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCacheEx_e__Struct)(unsafe.Pointer(u))
+}
+
+// Trailers reinterprets the union as its Trailers member.
+func (u *HTTP_DATA_CHUNK_Anonymous_e__Union) Trailers() *HTTP_DATA_CHUNK_Anonymous_e__Union_Trailers_e__Struct {
+	return (*HTTP_DATA_CHUNK_Anonymous_e__Union_Trailers_e__Struct)(unsafe.Pointer(u))
+}
+
+// FromWinHttpFastForwarding reinterprets the union as its FromWinHttpFastForwarding member.
+func (u *HTTP_DATA_CHUNK_Anonymous_e__Union) FromWinHttpFastForwarding() *HTTP_DATA_CHUNK_Anonymous_e__Union_FromWinHttpFastForwarding_e__Struct {
+	return (*HTTP_DATA_CHUNK_Anonymous_e__Union_FromWinHttpFastForwarding_e__Struct)(unsafe.Pointer(u))
 }
 
 // HTTP_DATA_CHUNK: https://learn.microsoft.com/windows/win32/api/http/ns-http-http_data_chunk
@@ -566,9 +626,45 @@ type HTTP_SERVICE_CONFIG_SSL_PARAM struct {
 }
 
 // HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Http2WindowSizeParam reinterprets the union as its Http2WindowSizeParam member.
+func (u *HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union) Http2WindowSizeParam() *HTTP2_WINDOW_SIZE_PARAM {
+	return (*HTTP2_WINDOW_SIZE_PARAM)(unsafe.Pointer(u))
+}
+
+// Http2SettingsLimitsParam reinterprets the union as its Http2SettingsLimitsParam member.
+func (u *HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union) Http2SettingsLimitsParam() *HTTP2_SETTINGS_LIMITS_PARAM {
+	return (*HTTP2_SETTINGS_LIMITS_PARAM)(unsafe.Pointer(u))
+}
+
+// HttpPerformanceParam reinterprets the union as its HttpPerformanceParam member.
+func (u *HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union) HttpPerformanceParam() *HTTP_PERFORMANCE_PARAM {
+	return (*HTTP_PERFORMANCE_PARAM)(unsafe.Pointer(u))
+}
+
+// HttpTlsRestrictionsParam reinterprets the union as its HttpTlsRestrictionsParam member.
+func (u *HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union) HttpTlsRestrictionsParam() *HTTP_TLS_RESTRICTIONS_PARAM {
+	return (*HTTP_TLS_RESTRICTIONS_PARAM)(unsafe.Pointer(u))
+}
+
+// HttpErrorHeadersParam reinterprets the union as its HttpErrorHeadersParam member.
+func (u *HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union) HttpErrorHeadersParam() *HTTP_ERROR_HEADERS_PARAM {
+	return (*HTTP_ERROR_HEADERS_PARAM)(unsafe.Pointer(u))
+}
+
+// HttpTlsSessionTicketKeysParam reinterprets the union as its HttpTlsSessionTicketKeysParam member.
+func (u *HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union) HttpTlsSessionTicketKeysParam() *HTTP_TLS_SESSION_TICKET_KEYS_PARAM {
+	return (*HTTP_TLS_SESSION_TICKET_KEYS_PARAM)(unsafe.Pointer(u))
+}
+
+// HttpCertConfigParam reinterprets the union as its HttpCertConfigParam member.
+func (u *HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union) HttpCertConfigParam() *HTTP_CERT_CONFIG_PARAM {
+	return (*HTTP_CERT_CONFIG_PARAM)(unsafe.Pointer(u))
 }
 
 type HTTP_SERVICE_CONFIG_SSL_PARAM_EX struct {

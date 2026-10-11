@@ -29,10 +29,237 @@ type WINBIO_ANTI_SPOOF_POLICY struct {
 	Source WINBIO_POLICY_SOURCE
 }
 
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_CaptureSample_e__Struct struct {
+	Sample       *WINBIO_BIR
+	SampleSize   uintptr
+	RejectDetail uint32
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_ControlUnit_e__Struct struct {
+	Component         WINBIO_COMPONENT
+	ControlCode       uint32
+	OperationStatus   uint32
+	SendBuffer        *byte
+	SendBufferSize    uintptr
+	ReceiveBuffer     *byte
+	ReceiveBufferSize uintptr
+	ReceiveDataSize   uintptr
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_DeleteTemplate_e__Struct struct {
+	Identity  WINBIO_IDENTITY
+	SubFactor byte
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollBegin_e__Struct struct {
+	SubFactor byte
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCapture_e__Struct struct {
+	RejectDetail uint32
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCommit_e__Struct struct {
+	Identity      WINBIO_IDENTITY
+	IsNewTemplate foundation.BOOLEAN
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollSelect_e__Struct struct {
+	SelectorValue uint64
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumBiometricUnits_e__Struct struct {
+	UnitCount       uintptr
+	UnitSchemaArray *WINBIO_UNIT_SCHEMA
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumDatabases_e__Struct struct {
+	StorageCount       uintptr
+	StorageSchemaArray *WINBIO_STORAGE_SCHEMA
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumEnrollments_e__Struct struct {
+	Identity       WINBIO_IDENTITY
+	SubFactorCount uintptr
+	SubFactorArray *byte
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumServiceProviders_e__Struct struct {
+	BspCount       uintptr
+	BspSchemaArray *WINBIO_BSP_SCHEMA
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_GetEvent_e__Struct struct {
+	Event WINBIO_EVENT
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProperty_e__Struct struct {
+	PropertyType       uint32
+	PropertyId         uint32
+	Identity           WINBIO_IDENTITY
+	SubFactor          byte
+	PropertyBufferSize uintptr
+	PropertyBuffer     unsafe.Pointer
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProtectionPolicy_e__Struct struct {
+	Identity WINBIO_IDENTITY
+	Policy   WINBIO_PROTECTION_POLICY
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_IdentifyAndReleaseTicket_e__Struct struct {
+	Identity     WINBIO_IDENTITY
+	SubFactor    byte
+	RejectDetail uint32
+	Ticket       uint64
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_Identify_e__Struct struct {
+	Identity     WINBIO_IDENTITY
+	SubFactor    byte
+	RejectDetail uint32
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_MonitorPresence_e__Struct struct {
+	ChangeType    uint32
+	PresenceCount uintptr
+	PresenceArray *WINBIO_PRESENCE
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_NotifyUnitStatusChange_e__Struct struct {
+	ExtendedStatus WINBIO_EXTENDED_UNIT_STATUS
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_SetProperty_e__Struct struct {
+	PropertyType       uint32
+	PropertyId         uint32
+	Identity           WINBIO_IDENTITY
+	SubFactor          byte
+	PropertyBufferSize uintptr
+	PropertyBuffer     unsafe.Pointer
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_VerifyAndReleaseTicket_e__Struct struct {
+	Match        foundation.BOOLEAN
+	RejectDetail uint32
+	Ticket       uint64
+}
+
+type WINBIO_ASYNC_RESULT_Parameters_e__Union_Verify_e__Struct struct {
+	Match        foundation.BOOLEAN
+	RejectDetail uint32
+}
+
 // WINBIO_ASYNC_RESULT_Parameters_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_ASYNC_RESULT_Parameters_e__Union struct {
 	Data [40]uint64
+}
+
+// Verify reinterprets the union as its Verify member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) Verify() *WINBIO_ASYNC_RESULT_Parameters_e__Union_Verify_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_Verify_e__Struct)(unsafe.Pointer(u))
+}
+
+// Identify reinterprets the union as its Identify member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) Identify() *WINBIO_ASYNC_RESULT_Parameters_e__Union_Identify_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_Identify_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnrollBegin reinterprets the union as its EnrollBegin member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnrollBegin() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollBegin_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollBegin_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnrollCapture reinterprets the union as its EnrollCapture member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnrollCapture() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCapture_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCapture_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnrollCommit reinterprets the union as its EnrollCommit member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnrollCommit() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCommit_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCommit_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnumEnrollments reinterprets the union as its EnumEnrollments member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnumEnrollments() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumEnrollments_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumEnrollments_e__Struct)(unsafe.Pointer(u))
+}
+
+// CaptureSample reinterprets the union as its CaptureSample member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) CaptureSample() *WINBIO_ASYNC_RESULT_Parameters_e__Union_CaptureSample_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_CaptureSample_e__Struct)(unsafe.Pointer(u))
+}
+
+// DeleteTemplate reinterprets the union as its DeleteTemplate member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) DeleteTemplate() *WINBIO_ASYNC_RESULT_Parameters_e__Union_DeleteTemplate_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_DeleteTemplate_e__Struct)(unsafe.Pointer(u))
+}
+
+// GetProperty reinterprets the union as its GetProperty member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) GetProperty() *WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProperty_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProperty_e__Struct)(unsafe.Pointer(u))
+}
+
+// SetProperty reinterprets the union as its SetProperty member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) SetProperty() *WINBIO_ASYNC_RESULT_Parameters_e__Union_SetProperty_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_SetProperty_e__Struct)(unsafe.Pointer(u))
+}
+
+// GetEvent reinterprets the union as its GetEvent member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) GetEvent() *WINBIO_ASYNC_RESULT_Parameters_e__Union_GetEvent_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_GetEvent_e__Struct)(unsafe.Pointer(u))
+}
+
+// ControlUnit reinterprets the union as its ControlUnit member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) ControlUnit() *WINBIO_ASYNC_RESULT_Parameters_e__Union_ControlUnit_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_ControlUnit_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnumServiceProviders reinterprets the union as its EnumServiceProviders member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnumServiceProviders() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumServiceProviders_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumServiceProviders_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnumBiometricUnits reinterprets the union as its EnumBiometricUnits member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnumBiometricUnits() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumBiometricUnits_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumBiometricUnits_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnumDatabases reinterprets the union as its EnumDatabases member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnumDatabases() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumDatabases_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumDatabases_e__Struct)(unsafe.Pointer(u))
+}
+
+// VerifyAndReleaseTicket reinterprets the union as its VerifyAndReleaseTicket member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) VerifyAndReleaseTicket() *WINBIO_ASYNC_RESULT_Parameters_e__Union_VerifyAndReleaseTicket_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_VerifyAndReleaseTicket_e__Struct)(unsafe.Pointer(u))
+}
+
+// IdentifyAndReleaseTicket reinterprets the union as its IdentifyAndReleaseTicket member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) IdentifyAndReleaseTicket() *WINBIO_ASYNC_RESULT_Parameters_e__Union_IdentifyAndReleaseTicket_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_IdentifyAndReleaseTicket_e__Struct)(unsafe.Pointer(u))
+}
+
+// EnrollSelect reinterprets the union as its EnrollSelect member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) EnrollSelect() *WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollSelect_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollSelect_e__Struct)(unsafe.Pointer(u))
+}
+
+// MonitorPresence reinterprets the union as its MonitorPresence member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) MonitorPresence() *WINBIO_ASYNC_RESULT_Parameters_e__Union_MonitorPresence_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_MonitorPresence_e__Struct)(unsafe.Pointer(u))
+}
+
+// GetProtectionPolicy reinterprets the union as its GetProtectionPolicy member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) GetProtectionPolicy() *WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProtectionPolicy_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProtectionPolicy_e__Struct)(unsafe.Pointer(u))
+}
+
+// NotifyUnitStatusChange reinterprets the union as its NotifyUnitStatusChange member.
+func (u *WINBIO_ASYNC_RESULT_Parameters_e__Union) NotifyUnitStatusChange() *WINBIO_ASYNC_RESULT_Parameters_e__Union_NotifyUnitStatusChange_e__Struct {
+	return (*WINBIO_ASYNC_RESULT_Parameters_e__Union_NotifyUnitStatusChange_e__Struct)(unsafe.Pointer(u))
 }
 
 // WINBIO_ASYNC_RESULT: https://learn.microsoft.com/windows/win32/api/winbio/ns-winbio-winbio_async_result
@@ -225,10 +452,42 @@ type WINBIO_ENGINE_INTERFACE struct {
 	IdentifyFeatureSetAuthenticated PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN
 }
 
+type WINBIO_EVENT_Parameters_e__Union_Error_e__Struct struct {
+	ErrorCode foundation.HRESULT
+}
+
+type WINBIO_EVENT_Parameters_e__Union_UnclaimedIdentify_e__Struct struct {
+	UnitId       uint32
+	Identity     WINBIO_IDENTITY
+	SubFactor    byte
+	RejectDetail uint32
+}
+
+type WINBIO_EVENT_Parameters_e__Union_Unclaimed_e__Struct struct {
+	UnitId       uint32
+	RejectDetail uint32
+}
+
 // WINBIO_EVENT_Parameters_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_EVENT_Parameters_e__Union struct {
 	Data [22]uint32
+}
+
+// Unclaimed reinterprets the union as its Unclaimed member.
+func (u *WINBIO_EVENT_Parameters_e__Union) Unclaimed() *WINBIO_EVENT_Parameters_e__Union_Unclaimed_e__Struct {
+	return (*WINBIO_EVENT_Parameters_e__Union_Unclaimed_e__Struct)(unsafe.Pointer(u))
+}
+
+// UnclaimedIdentify reinterprets the union as its UnclaimedIdentify member.
+func (u *WINBIO_EVENT_Parameters_e__Union) UnclaimedIdentify() *WINBIO_EVENT_Parameters_e__Union_UnclaimedIdentify_e__Struct {
+	return (*WINBIO_EVENT_Parameters_e__Union_UnclaimedIdentify_e__Struct)(unsafe.Pointer(u))
+}
+
+// Error reinterprets the union as its Error member.
+func (u *WINBIO_EVENT_Parameters_e__Union) Error() *WINBIO_EVENT_Parameters_e__Union_Error_e__Struct {
+	return (*WINBIO_EVENT_Parameters_e__Union_Error_e__Struct)(unsafe.Pointer(u))
 }
 
 // WINBIO_EVENT: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-event-constants
@@ -237,10 +496,77 @@ type WINBIO_EVENT struct {
 	Parameters WINBIO_EVENT_Parameters_e__Union
 }
 
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_FacialFeatures_e__Struct_EnrollmentRequirements_e__Struct struct {
+	Null uint32
+}
+
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_FacialFeatures_e__Struct struct {
+	Capabilities           uint32
+	EnrollmentRequirements WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_FacialFeatures_e__Struct_EnrollmentRequirements_e__Struct
+}
+
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Fingerprint_e__Struct_EnrollmentRequirements_e__Struct struct {
+	GeneralSamples uint32
+	Center         uint32
+	TopEdge        uint32
+	BottomEdge     uint32
+	LeftEdge       uint32
+	RightEdge      uint32
+}
+
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Fingerprint_e__Struct struct {
+	Capabilities           uint32
+	EnrollmentRequirements WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Fingerprint_e__Struct_EnrollmentRequirements_e__Struct
+}
+
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Iris_e__Struct_EnrollmentRequirements_e__Struct struct {
+	Null uint32
+}
+
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Iris_e__Struct struct {
+	Capabilities           uint32
+	EnrollmentRequirements WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Iris_e__Struct_EnrollmentRequirements_e__Struct
+}
+
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Voice_e__Struct_EnrollmentRequirements_e__Struct struct {
+	Null uint32
+}
+
+type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Voice_e__Struct struct {
+	Capabilities           uint32
+	EnrollmentRequirements WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Voice_e__Struct_EnrollmentRequirements_e__Struct
+}
+
 // WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union struct {
 	Data [7]uint32
+}
+
+// Null reinterprets the union as its Null member.
+func (u *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union) Null() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FacialFeatures reinterprets the union as its FacialFeatures member.
+func (u *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union) FacialFeatures() *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_FacialFeatures_e__Struct {
+	return (*WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_FacialFeatures_e__Struct)(unsafe.Pointer(u))
+}
+
+// Fingerprint reinterprets the union as its Fingerprint member.
+func (u *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union) Fingerprint() *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Fingerprint_e__Struct {
+	return (*WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Fingerprint_e__Struct)(unsafe.Pointer(u))
+}
+
+// Iris reinterprets the union as its Iris member.
+func (u *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union) Iris() *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Iris_e__Struct {
+	return (*WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Iris_e__Struct)(unsafe.Pointer(u))
+}
+
+// Voice reinterprets the union as its Voice member.
+func (u *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union) Voice() *WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Voice_e__Struct {
+	return (*WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Voice_e__Struct)(unsafe.Pointer(u))
 }
 
 // WINBIO_EXTENDED_ENGINE_INFO: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-engine-info
@@ -256,10 +582,78 @@ type WINBIO_EXTENDED_ENROLLMENT_PARAMETERS struct {
 	SubFactor byte
 }
 
+type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_FacialFeatures_e__Struct_OpaqueEngineData_e__Struct struct {
+	AdapterId win32.GUID
+	Data      [78]uint32
+}
+
+type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_FacialFeatures_e__Struct struct {
+	BoundingBox      foundation.RECT
+	Distance         int32
+	OpaqueEngineData WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_FacialFeatures_e__Struct_OpaqueEngineData_e__Struct
+}
+
+type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Fingerprint_e__Struct struct {
+	GeneralSamples uint32
+	Center         uint32
+	TopEdge        uint32
+	BottomEdge     uint32
+	LeftEdge       uint32
+	RightEdge      uint32
+}
+
+type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Iris_e__Struct_Point3D_e__Struct struct {
+	X float64
+	Y float64
+	Z float64
+}
+
+type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Iris_e__Struct struct {
+	EyeBoundingBox_1                   foundation.RECT
+	EyeBoundingBox_2                   foundation.RECT
+	PupilCenter_1                      foundation.POINT
+	PupilCenter_2                      foundation.POINT
+	Distance                           int32
+	GridPointCompletionPercent         uint32
+	GridPointIndex                     uint16
+	Point3D                            WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Iris_e__Struct_Point3D_e__Struct
+	StopCaptureAndShowCriticalFeedback foundation.BOOL
+}
+
+type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Voice_e__Struct struct {
+	Reserved uint32
+}
+
 // WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union struct {
 	Data [44]uint64
+}
+
+// Null reinterprets the union as its Null member.
+func (u *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union) Null() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FacialFeatures reinterprets the union as its FacialFeatures member.
+func (u *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union) FacialFeatures() *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_FacialFeatures_e__Struct {
+	return (*WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_FacialFeatures_e__Struct)(unsafe.Pointer(u))
+}
+
+// Fingerprint reinterprets the union as its Fingerprint member.
+func (u *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union) Fingerprint() *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Fingerprint_e__Struct {
+	return (*WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Fingerprint_e__Struct)(unsafe.Pointer(u))
+}
+
+// Iris reinterprets the union as its Iris member.
+func (u *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union) Iris() *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Iris_e__Struct {
+	return (*WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Iris_e__Struct)(unsafe.Pointer(u))
+}
+
+// Voice reinterprets the union as its Voice member.
+func (u *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union) Voice() *WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Voice_e__Struct {
+	return (*WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Voice_e__Struct)(unsafe.Pointer(u))
 }
 
 // WINBIO_EXTENDED_ENROLLMENT_STATUS: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-enrollment-status
@@ -272,10 +666,63 @@ type WINBIO_EXTENDED_ENROLLMENT_STATUS struct {
 	Specific        WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union
 }
 
+type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_FacialFeatures_e__Struct_HardwareInfo_e__Struct struct {
+	ColorSensorId               [260]uint16
+	InfraredSensorId            [260]uint16
+	InfraredSensorRotationAngle uint32
+}
+
+type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_FacialFeatures_e__Struct struct {
+	FrameSize            foundation.RECT
+	FrameOffset          foundation.POINT
+	MandatoryOrientation uint32
+	HardwareInfo         WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_FacialFeatures_e__Struct_HardwareInfo_e__Struct
+}
+
+type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Fingerprint_e__Struct struct {
+	Reserved uint32
+}
+
+type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Iris_e__Struct struct {
+	FrameSize            foundation.RECT
+	FrameOffset          foundation.POINT
+	MandatoryOrientation uint32
+}
+
+type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Voice_e__Struct struct {
+	Reserved uint32
+}
+
 // WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union struct {
 	Data [268]uint32
+}
+
+// Null reinterprets the union as its Null member.
+func (u *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union) Null() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FacialFeatures reinterprets the union as its FacialFeatures member.
+func (u *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union) FacialFeatures() *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_FacialFeatures_e__Struct {
+	return (*WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_FacialFeatures_e__Struct)(unsafe.Pointer(u))
+}
+
+// Fingerprint reinterprets the union as its Fingerprint member.
+func (u *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union) Fingerprint() *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Fingerprint_e__Struct {
+	return (*WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Fingerprint_e__Struct)(unsafe.Pointer(u))
+}
+
+// Iris reinterprets the union as its Iris member.
+func (u *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union) Iris() *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Iris_e__Struct {
+	return (*WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Iris_e__Struct)(unsafe.Pointer(u))
+}
+
+// Voice reinterprets the union as its Voice member.
+func (u *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union) Voice() *WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Voice_e__Struct {
+	return (*WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Voice_e__Struct)(unsafe.Pointer(u))
 }
 
 // WINBIO_EXTENDED_SENSOR_INFO: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-sensor-info
@@ -285,10 +732,52 @@ type WINBIO_EXTENDED_SENSOR_INFO struct {
 	Specific                  WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union
 }
 
+type WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_FacialFeatures_e__Struct struct {
+	Capabilities uint32
+}
+
+type WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Fingerprint_e__Struct struct {
+	Capabilities uint32
+}
+
+type WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Iris_e__Struct struct {
+	Capabilities uint32
+}
+
+type WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Voice_e__Struct struct {
+	Capabilities uint32
+}
+
 // WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union struct {
 	Data [1]uint32
+}
+
+// Null reinterprets the union as its Null member.
+func (u *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union) Null() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FacialFeatures reinterprets the union as its FacialFeatures member.
+func (u *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union) FacialFeatures() *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_FacialFeatures_e__Struct {
+	return (*WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_FacialFeatures_e__Struct)(unsafe.Pointer(u))
+}
+
+// Fingerprint reinterprets the union as its Fingerprint member.
+func (u *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union) Fingerprint() *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Fingerprint_e__Struct {
+	return (*WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Fingerprint_e__Struct)(unsafe.Pointer(u))
+}
+
+// Iris reinterprets the union as its Iris member.
+func (u *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union) Iris() *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Iris_e__Struct {
+	return (*WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Iris_e__Struct)(unsafe.Pointer(u))
+}
+
+// Voice reinterprets the union as its Voice member.
+func (u *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union) Voice() *WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Voice_e__Struct {
+	return (*WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Voice_e__Struct)(unsafe.Pointer(u))
 }
 
 // WINBIO_EXTENDED_STORAGE_INFO: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-extended-storage-info
@@ -372,10 +861,41 @@ type WINBIO_GET_INDICATOR struct {
 	IndicatorStatus uint32
 }
 
+type WINBIO_IDENTITY_Value_e__Union_AccountSid_e__Struct struct {
+	Size uint32
+	Data [68]byte
+}
+
 // WINBIO_IDENTITY_Value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_IDENTITY_Value_e__Union struct {
 	Data [18]uint32
+}
+
+// Null reinterprets the union as its Null member.
+func (u *WINBIO_IDENTITY_Value_e__Union) Null() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Wildcard reinterprets the union as its Wildcard member.
+func (u *WINBIO_IDENTITY_Value_e__Union) Wildcard() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// TemplateGuid reinterprets the union as its TemplateGuid member.
+func (u *WINBIO_IDENTITY_Value_e__Union) TemplateGuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// AccountSid reinterprets the union as its AccountSid member.
+func (u *WINBIO_IDENTITY_Value_e__Union) AccountSid() *WINBIO_IDENTITY_Value_e__Union_AccountSid_e__Struct {
+	return (*WINBIO_IDENTITY_Value_e__Union_AccountSid_e__Struct)(unsafe.Pointer(u))
+}
+
+// SecureId reinterprets the union as its SecureId member.
+func (u *WINBIO_IDENTITY_Value_e__Union) SecureId() *[32]byte {
+	return (*[32]byte)(unsafe.Pointer(u))
 }
 
 // WINBIO_IDENTITY: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-identity
@@ -422,11 +942,41 @@ type WINBIO_PRESENCE struct {
 	Authorization WINBIO_PRESENCE_Authorization_e__Struct
 }
 
+type WINBIO_PRESENCE_PROPERTIES_FacialFeatures_e__Struct_OpaqueEngineData_e__Struct struct {
+	AdapterId win32.GUID
+	Data      [78]uint32
+}
+
+type WINBIO_PRESENCE_PROPERTIES_FacialFeatures_e__Struct struct {
+	BoundingBox      foundation.RECT
+	Distance         int32
+	OpaqueEngineData WINBIO_PRESENCE_PROPERTIES_FacialFeatures_e__Struct_OpaqueEngineData_e__Struct
+}
+
+type WINBIO_PRESENCE_PROPERTIES_Iris_e__Struct struct {
+	EyeBoundingBox_1 foundation.RECT
+	EyeBoundingBox_2 foundation.RECT
+	PupilCenter_1    foundation.POINT
+	PupilCenter_2    foundation.POINT
+	Distance         int32
+}
+
 // WINBIO_PRESENCE_PROPERTIES: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-presence-properties
 // WINBIO_PRESENCE_PROPERTIES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINBIO_PRESENCE_PROPERTIES struct {
 	Data [87]uint32
+}
+
+// FacialFeatures reinterprets the union as its FacialFeatures member.
+func (u *WINBIO_PRESENCE_PROPERTIES) FacialFeatures() *WINBIO_PRESENCE_PROPERTIES_FacialFeatures_e__Struct {
+	return (*WINBIO_PRESENCE_PROPERTIES_FacialFeatures_e__Struct)(unsafe.Pointer(u))
+}
+
+// Iris reinterprets the union as its Iris member.
+func (u *WINBIO_PRESENCE_PROPERTIES) Iris() *WINBIO_PRESENCE_PROPERTIES_Iris_e__Struct {
+	return (*WINBIO_PRESENCE_PROPERTIES_Iris_e__Struct)(unsafe.Pointer(u))
 }
 
 type WINBIO_PRIVATE_SENSOR_TYPE_INFO struct {

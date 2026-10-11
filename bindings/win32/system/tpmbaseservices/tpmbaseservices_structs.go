@@ -4,15 +4,34 @@
 
 package tpmbaseservices
 
+import (
+	"unsafe"
+)
+
 // TBS_CONTEXT_PARAMS: https://learn.microsoft.com/windows/win32/api/tbs/ns-tbs-tbs_context_params
 type TBS_CONTEXT_PARAMS struct {
 	Version uint32
 }
 
+type TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // TBS_CONTEXT_PARAMS2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TBS_CONTEXT_PARAMS2_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *TBS_CONTEXT_PARAMS2_Anonymous_e__Union) Anonymous() *TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUINT32 reinterprets the union as its asUINT32 member.
+func (u *TBS_CONTEXT_PARAMS2_Anonymous_e__Union) AsUINT32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // TBS_CONTEXT_PARAMS2: https://learn.microsoft.com/windows/win32/api/tbs/ns-tbs-tbs_context_params2

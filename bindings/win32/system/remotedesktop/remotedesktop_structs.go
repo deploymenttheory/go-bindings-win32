@@ -5,6 +5,8 @@
 package remotedesktop
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
@@ -179,9 +181,15 @@ type VM_PATCH_INFO struct {
 
 // WRDS_CONNECTION_SETTING: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_connection_setting
 // WRDS_CONNECTION_SETTING is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WRDS_CONNECTION_SETTING struct {
 	Data [470]uint64
+}
+
+// WRdsConnectionSettings1 reinterprets the union as its WRdsConnectionSettings1 member.
+func (u *WRDS_CONNECTION_SETTING) WRdsConnectionSettings1() *WRDS_CONNECTION_SETTINGS_1 {
+	return (*WRDS_CONNECTION_SETTINGS_1)(unsafe.Pointer(u))
 }
 
 // WRDS_CONNECTION_SETTINGS: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_connection_settings
@@ -274,9 +282,15 @@ type WRDS_DYNAMIC_TIME_ZONE_INFORMATION struct {
 
 // WRDS_LISTENER_SETTING: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_listener_setting
 // WRDS_LISTENER_SETTING is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WRDS_LISTENER_SETTING struct {
 	Data [2]uint64
+}
+
+// WRdsListenerSettings1 reinterprets the union as its WRdsListenerSettings1 member.
+func (u *WRDS_LISTENER_SETTING) WRdsListenerSettings1() *WRDS_LISTENER_SETTINGS_1 {
+	return (*WRDS_LISTENER_SETTINGS_1)(unsafe.Pointer(u))
 }
 
 // WRDS_LISTENER_SETTINGS: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_listener_settings
@@ -294,9 +308,15 @@ type WRDS_LISTENER_SETTINGS_1 struct {
 
 // WRDS_SETTING: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_setting
 // WRDS_SETTING is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WRDS_SETTING struct {
 	Data [31]uint32
+}
+
+// WRdsSettings1 reinterprets the union as its WRdsSettings1 member.
+func (u *WRDS_SETTING) WRdsSettings1() *WRDS_SETTINGS_1 {
+	return (*WRDS_SETTINGS_1)(unsafe.Pointer(u))
 }
 
 // WRDS_SETTINGS: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_settings
@@ -493,16 +513,28 @@ type WTSINFOEX_LEVEL1_W struct {
 
 // WTSINFOEX_LEVEL_A: https://learn.microsoft.com/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfoex_level_a
 // WTSINFOEX_LEVEL_A is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTSINFOEX_LEVEL_A struct {
 	Data [19]uint64
 }
 
+// WTSInfoExLevel1 reinterprets the union as its WTSInfoExLevel1 member.
+func (u *WTSINFOEX_LEVEL_A) WTSInfoExLevel1() *WTSINFOEX_LEVEL1_A {
+	return (*WTSINFOEX_LEVEL1_A)(unsafe.Pointer(u))
+}
+
 // WTSINFOEX_LEVEL_W: https://learn.microsoft.com/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfoex_level_w
 // WTSINFOEX_LEVEL_W is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTSINFOEX_LEVEL_W struct {
 	Data [28]uint64
+}
+
+// WTSInfoExLevel1 reinterprets the union as its WTSInfoExLevel1 member.
+func (u *WTSINFOEX_LEVEL_W) WTSInfoExLevel1() *WTSINFOEX_LEVEL1_W {
+	return (*WTSINFOEX_LEVEL1_W)(unsafe.Pointer(u))
 }
 
 // WTSINFOW: https://learn.microsoft.com/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfow
@@ -694,9 +726,25 @@ type WTS_CACHE_STATS struct {
 
 // WTS_CACHE_STATS_UN: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_cache_stats_un
 // WTS_CACHE_STATS_UN is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTS_CACHE_STATS_UN struct {
 	Data [20]uint32
+}
+
+// ProtocolCache reinterprets the union as its ProtocolCache member.
+func (u *WTS_CACHE_STATS_UN) ProtocolCache() *[4]WTS_PROTOCOL_CACHE {
+	return (*[4]WTS_PROTOCOL_CACHE)(unsafe.Pointer(u))
+}
+
+// TShareCacheStats reinterprets the union as its TShareCacheStats member.
+func (u *WTS_CACHE_STATS_UN) TShareCacheStats() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *WTS_CACHE_STATS_UN) Reserved() *[20]uint32 {
+	return (*[20]uint32)(unsafe.Pointer(u))
 }
 
 // WTS_CLIENT_ADDRESS: https://learn.microsoft.com/windows/win32/api/wtsapi32/ns-wtsapi32-wts_client_address
@@ -849,10 +897,41 @@ type WTS_PROCESS_INFO_EXW struct {
 	KernelTime         int64
 }
 
+type WTS_PROPERTY_VALUE_u_e__Union_bVal_e__Struct struct {
+	Size  uint32
+	PbVal foundation.PSTR
+}
+
+type WTS_PROPERTY_VALUE_u_e__Union_strVal_e__Struct struct {
+	Size    uint32
+	PstrVal foundation.PWSTR
+}
+
 // WTS_PROPERTY_VALUE_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTS_PROPERTY_VALUE_u_e__Union struct {
 	Data [2]uint64
+}
+
+// UlVal reinterprets the union as its ulVal member.
+func (u *WTS_PROPERTY_VALUE_u_e__Union) UlVal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// StrVal reinterprets the union as its strVal member.
+func (u *WTS_PROPERTY_VALUE_u_e__Union) StrVal() *WTS_PROPERTY_VALUE_u_e__Union_strVal_e__Struct {
+	return (*WTS_PROPERTY_VALUE_u_e__Union_strVal_e__Struct)(unsafe.Pointer(u))
+}
+
+// BVal reinterprets the union as its bVal member.
+func (u *WTS_PROPERTY_VALUE_u_e__Union) BVal() *WTS_PROPERTY_VALUE_u_e__Union_bVal_e__Struct {
+	return (*WTS_PROPERTY_VALUE_u_e__Union_bVal_e__Struct)(unsafe.Pointer(u))
+}
+
+// GuidVal reinterprets the union as its guidVal member.
+func (u *WTS_PROPERTY_VALUE_u_e__Union) GuidVal() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 // WTS_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_property_value
@@ -978,10 +1057,34 @@ type WTS_SMALL_RECT struct {
 	Bottom int16
 }
 
+type WTS_SOCKADDR_u_e__Union_ipv4_e__Struct struct {
+	Sin_port uint16
+	IN_ADDR  uint32
+	Sin_zero [8]byte
+}
+
+type WTS_SOCKADDR_u_e__Union_ipv6_e__Struct struct {
+	Sin6_port     uint16
+	Sin6_flowinfo uint32
+	Sin6_addr     [8]uint16
+	Sin6_scope_id uint32
+}
+
 // WTS_SOCKADDR_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WTS_SOCKADDR_u_e__Union struct {
 	Data [7]uint32
+}
+
+// Ipv4 reinterprets the union as its ipv4 member.
+func (u *WTS_SOCKADDR_u_e__Union) Ipv4() *WTS_SOCKADDR_u_e__Union_ipv4_e__Struct {
+	return (*WTS_SOCKADDR_u_e__Union_ipv4_e__Struct)(unsafe.Pointer(u))
+}
+
+// Ipv6 reinterprets the union as its ipv6 member.
+func (u *WTS_SOCKADDR_u_e__Union) Ipv6() *WTS_SOCKADDR_u_e__Union_ipv6_e__Struct {
+	return (*WTS_SOCKADDR_u_e__Union_ipv6_e__Struct)(unsafe.Pointer(u))
 }
 
 // WTS_SOCKADDR: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_sockaddr

@@ -20,6 +20,8 @@ var abiSystem_TpmBaseServices = []abiCase{
 	{"systemtpmbaseservices.TBS_CONTEXT_PARAMS2.Version", unsafe.Offsetof(systemtpmbaseservices.TBS_CONTEXT_PARAMS2{}.Version), 0},
 	{"systemtpmbaseservices.TBS_CONTEXT_PARAMS2.Anonymous", unsafe.Offsetof(systemtpmbaseservices.TBS_CONTEXT_PARAMS2{}.Anonymous), 4},
 	{"systemtpmbaseservices.TBS_CONTEXT_PARAMS2_Anonymous_e__Union size", unsafe.Sizeof(systemtpmbaseservices.TBS_CONTEXT_PARAMS2_Anonymous_e__Union{}), 4},
+	{"systemtpmbaseservices.TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct size", unsafe.Sizeof(systemtpmbaseservices.TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct{}), 4},
+	{"systemtpmbaseservices.TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct.Bitfield", unsafe.Offsetof(systemtpmbaseservices.TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct{}.Bitfield), 0},
 	{"systemtpmbaseservices.TPM_DEVICE_INFO size", unsafe.Sizeof(systemtpmbaseservices.TPM_DEVICE_INFO{}), 16},
 	{"systemtpmbaseservices.TPM_DEVICE_INFO.StructVersion", unsafe.Offsetof(systemtpmbaseservices.TPM_DEVICE_INFO{}.StructVersion), 0},
 	{"systemtpmbaseservices.TPM_DEVICE_INFO.TpmVersion", unsafe.Offsetof(systemtpmbaseservices.TPM_DEVICE_INFO{}.TpmVersion), 4},

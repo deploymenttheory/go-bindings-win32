@@ -126,6 +126,11 @@ var abiSystem_Threading = []abiCase{
 	{"systemthreading.REASON_CONTEXT.Flags", unsafe.Offsetof(systemthreading.REASON_CONTEXT{}.Flags), 4},
 	{"systemthreading.REASON_CONTEXT.Reason", unsafe.Offsetof(systemthreading.REASON_CONTEXT{}.Reason), 8},
 	{"systemthreading.REASON_CONTEXT_Reason_e__Union size", unsafe.Sizeof(systemthreading.REASON_CONTEXT_Reason_e__Union{}), 24},
+	{"systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct size", unsafe.Sizeof(systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct{}), 24},
+	{"systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct.LocalizedReasonModule", unsafe.Offsetof(systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct{}.LocalizedReasonModule), 0},
+	{"systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct.LocalizedReasonId", unsafe.Offsetof(systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct{}.LocalizedReasonId), 8},
+	{"systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct.ReasonStringCount", unsafe.Offsetof(systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct{}.ReasonStringCount), 12},
+	{"systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct.ReasonStrings", unsafe.Offsetof(systemthreading.REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct{}.ReasonStrings), 16},
 	{"systemthreading.RTL_USER_PROCESS_PARAMETERS size", unsafe.Sizeof(systemthreading.RTL_USER_PROCESS_PARAMETERS{}), 128},
 	{"systemthreading.RTL_USER_PROCESS_PARAMETERS.Reserved1", unsafe.Offsetof(systemthreading.RTL_USER_PROCESS_PARAMETERS{}.Reserved1), 0},
 	{"systemthreading.RTL_USER_PROCESS_PARAMETERS.Reserved2", unsafe.Offsetof(systemthreading.RTL_USER_PROCESS_PARAMETERS{}.Reserved2), 16},
@@ -210,6 +215,8 @@ var abiSystem_Threading = []abiCase{
 	{"systemthreading.TP_CALLBACK_ENVIRON_V3.CallbackPriority", unsafe.Offsetof(systemthreading.TP_CALLBACK_ENVIRON_V3{}.CallbackPriority), 60},
 	{"systemthreading.TP_CALLBACK_ENVIRON_V3.Size", unsafe.Offsetof(systemthreading.TP_CALLBACK_ENVIRON_V3{}.Size), 64},
 	{"systemthreading.TP_CALLBACK_ENVIRON_V3_u_e__Union size", unsafe.Sizeof(systemthreading.TP_CALLBACK_ENVIRON_V3_u_e__Union{}), 4},
+	{"systemthreading.TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct size", unsafe.Sizeof(systemthreading.TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct{}), 4},
+	{"systemthreading.TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct.Bitfield", unsafe.Offsetof(systemthreading.TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct{}.Bitfield), 0},
 	{"systemthreading.TP_POOL_STACK_INFORMATION size", unsafe.Sizeof(systemthreading.TP_POOL_STACK_INFORMATION{}), 16},
 	{"systemthreading.TP_POOL_STACK_INFORMATION.StackReserve", unsafe.Offsetof(systemthreading.TP_POOL_STACK_INFORMATION{}.StackReserve), 0},
 	{"systemthreading.TP_POOL_STACK_INFORMATION.StackCommit", unsafe.Offsetof(systemthreading.TP_POOL_STACK_INFORMATION{}.StackCommit), 8},
@@ -222,6 +229,8 @@ var abiSystem_Threading = []abiCase{
 	{"systemthreading.UMS_SYSTEM_THREAD_INFORMATION.UmsVersion", unsafe.Offsetof(systemthreading.UMS_SYSTEM_THREAD_INFORMATION{}.UmsVersion), 0},
 	{"systemthreading.UMS_SYSTEM_THREAD_INFORMATION.Anonymous", unsafe.Offsetof(systemthreading.UMS_SYSTEM_THREAD_INFORMATION{}.Anonymous), 4},
 	{"systemthreading.UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union size", unsafe.Sizeof(systemthreading.UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union{}), 4},
+	{"systemthreading.UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct size", unsafe.Sizeof(systemthreading.UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct{}), 4},
+	{"systemthreading.UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct.Bitfield", unsafe.Offsetof(systemthreading.UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct{}.Bitfield), 0},
 }
 
 func TestABI_System_Threading(t *testing.T) { checkABI(t, abiSystem_Threading) }

@@ -38,10 +38,29 @@ type PRJ_CALLBACK_DATA struct {
 	InstanceContext                unsafe.Pointer
 }
 
+type PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Enumeration_e__Struct struct {
+	DirEntryBufferHandle PRJ_DIR_ENTRY_BUFFER_HANDLE
+}
+
+type PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Notification_e__Struct struct {
+	NotificationMask PRJ_NOTIFY_TYPES
+}
+
 // PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Notification reinterprets the union as its Notification member.
+func (u *PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union) Notification() *PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Notification_e__Struct {
+	return (*PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Notification_e__Struct)(unsafe.Pointer(u))
+}
+
+// Enumeration reinterprets the union as its Enumeration member.
+func (u *PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union) Enumeration() *PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Enumeration_e__Struct {
+	return (*PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Enumeration_e__Struct)(unsafe.Pointer(u))
 }
 
 // PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS: https://learn.microsoft.com/windows/win32/api/projectedfslib/ns-projectedfslib-prj_complete_command_extended_parameters
@@ -50,10 +69,20 @@ type PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS struct {
 	Anonymous   PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union
 }
 
+type PRJ_EXTENDED_INFO_Anonymous_e__Union_Symlink_e__Struct struct {
+	TargetName foundation.PWSTR
+}
+
 // PRJ_EXTENDED_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PRJ_EXTENDED_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Symlink reinterprets the union as its Symlink member.
+func (u *PRJ_EXTENDED_INFO_Anonymous_e__Union) Symlink() *PRJ_EXTENDED_INFO_Anonymous_e__Union_Symlink_e__Struct {
+	return (*PRJ_EXTENDED_INFO_Anonymous_e__Union_Symlink_e__Struct)(unsafe.Pointer(u))
 }
 
 // PRJ_EXTENDED_INFO: https://learn.microsoft.com/windows/win32/api/projectedfslib/ns-projectedfslib-prj_extended_info
@@ -80,11 +109,39 @@ type PRJ_NOTIFICATION_MAPPING struct {
 	NotificationRoot    foundation.PWSTR
 }
 
+type PRJ_NOTIFICATION_PARAMETERS_FileDeletedOnHandleClose_e__Struct struct {
+	IsFileModified foundation.BOOLEAN
+}
+
+type PRJ_NOTIFICATION_PARAMETERS_FileRenamed_e__Struct struct {
+	NotificationMask PRJ_NOTIFY_TYPES
+}
+
+type PRJ_NOTIFICATION_PARAMETERS_PostCreate_e__Struct struct {
+	NotificationMask PRJ_NOTIFY_TYPES
+}
+
 // PRJ_NOTIFICATION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/projectedfslib/ns-projectedfslib-prj_notification_parameters
 // PRJ_NOTIFICATION_PARAMETERS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PRJ_NOTIFICATION_PARAMETERS struct {
 	Data [1]uint32
+}
+
+// PostCreate reinterprets the union as its PostCreate member.
+func (u *PRJ_NOTIFICATION_PARAMETERS) PostCreate() *PRJ_NOTIFICATION_PARAMETERS_PostCreate_e__Struct {
+	return (*PRJ_NOTIFICATION_PARAMETERS_PostCreate_e__Struct)(unsafe.Pointer(u))
+}
+
+// FileRenamed reinterprets the union as its FileRenamed member.
+func (u *PRJ_NOTIFICATION_PARAMETERS) FileRenamed() *PRJ_NOTIFICATION_PARAMETERS_FileRenamed_e__Struct {
+	return (*PRJ_NOTIFICATION_PARAMETERS_FileRenamed_e__Struct)(unsafe.Pointer(u))
+}
+
+// FileDeletedOnHandleClose reinterprets the union as its FileDeletedOnHandleClose member.
+func (u *PRJ_NOTIFICATION_PARAMETERS) FileDeletedOnHandleClose() *PRJ_NOTIFICATION_PARAMETERS_FileDeletedOnHandleClose_e__Struct {
+	return (*PRJ_NOTIFICATION_PARAMETERS_FileDeletedOnHandleClose_e__Struct)(unsafe.Pointer(u))
 }
 
 type PRJ_PLACEHOLDER_INFO_EaInformation_e__Struct struct {

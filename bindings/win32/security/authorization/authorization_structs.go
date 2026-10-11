@@ -77,9 +77,20 @@ type ACTRL_CONTROL_INFOW struct {
 }
 
 // ACTRL_OVERLAPPED_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ACTRL_OVERLAPPED_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Provider reinterprets the union as its Provider member.
+func (u *ACTRL_OVERLAPPED_Anonymous_e__Union) Provider() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Reserved1 reinterprets the union as its Reserved1 member.
+func (u *ACTRL_OVERLAPPED_Anonymous_e__Union) Reserved1() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type ACTRL_OVERLAPPED struct {
@@ -120,15 +131,67 @@ type AUDIT_OBJECT_TYPES struct {
 }
 
 // AUDIT_PARAM_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AUDIT_PARAM_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// Data0 reinterprets the union as its Data0 member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) Data0() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// String reinterprets the union as its String member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) String() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// U reinterprets the union as its u member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) U() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// Psid reinterprets the union as its psid member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) Psid() **security.SID {
+	return (**security.SID)(unsafe.Pointer(u))
+}
+
+// Pguid reinterprets the union as its pguid member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) Pguid() **win32.GUID {
+	return (**win32.GUID)(unsafe.Pointer(u))
+}
+
+// LogonId_LowPart reinterprets the union as its LogonId_LowPart member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) LogonId_LowPart() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PObjectTypes reinterprets the union as its pObjectTypes member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) PObjectTypes() **AUDIT_OBJECT_TYPES {
+	return (**AUDIT_OBJECT_TYPES)(unsafe.Pointer(u))
+}
+
+// PIpAddress reinterprets the union as its pIpAddress member.
+func (u *AUDIT_PARAM_Anonymous1_e__Union) PIpAddress() **AUDIT_IP_ADDRESS {
+	return (**AUDIT_IP_ADDRESS)(unsafe.Pointer(u))
+}
+
 // AUDIT_PARAM_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AUDIT_PARAM_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// Data1 reinterprets the union as its Data1 member.
+func (u *AUDIT_PARAM_Anonymous2_e__Union) Data1() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// LogonId_HighPart reinterprets the union as its LogonId_HighPart member.
+func (u *AUDIT_PARAM_Anonymous2_e__Union) LogonId_HighPart() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type AUDIT_PARAM struct {
@@ -179,9 +242,15 @@ type AUTHZ_AUDIT_EVENT_TYPE_OLD struct {
 }
 
 // AUTHZ_AUDIT_EVENT_TYPE_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AUTHZ_AUDIT_EVENT_TYPE_UNION struct {
 	Data [3]uint16
+}
+
+// Legacy reinterprets the union as its Legacy member.
+func (u *AUTHZ_AUDIT_EVENT_TYPE_UNION) Legacy() *AUTHZ_AUDIT_EVENT_TYPE_LEGACY {
+	return (*AUTHZ_AUDIT_EVENT_TYPE_LEGACY)(unsafe.Pointer(u))
 }
 
 // AUTHZ_INIT_INFO: https://learn.microsoft.com/windows/win32/api/authz/ns-authz-authz_init_info
@@ -213,9 +282,15 @@ type AUTHZ_RPC_INIT_INFO_CLIENT struct {
 }
 
 // AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union struct {
 	Data [1]uint64
+}
+
+// PAttributeV1 reinterprets the union as its pAttributeV1 member.
+func (u *AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union) PAttributeV1() **AUTHZ_SECURITY_ATTRIBUTE_V1 {
+	return (**AUTHZ_SECURITY_ATTRIBUTE_V1)(unsafe.Pointer(u))
 }
 
 // AUTHZ_SECURITY_ATTRIBUTES_INFORMATION: https://learn.microsoft.com/windows/win32/api/authz/ns-authz-authz_security_attributes_information
@@ -239,9 +314,35 @@ type AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE struct {
 }
 
 // AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union struct {
 	Data [1]uint64
+}
+
+// PInt64 reinterprets the union as its pInt64 member.
+func (u *AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union) PInt64() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// PUint64 reinterprets the union as its pUint64 member.
+func (u *AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union) PUint64() **uint64 {
+	return (**uint64)(unsafe.Pointer(u))
+}
+
+// PpString reinterprets the union as its ppString member.
+func (u *AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union) PpString() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PFqbn reinterprets the union as its pFqbn member.
+func (u *AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union) PFqbn() **AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE {
+	return (**AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE)(unsafe.Pointer(u))
+}
+
+// POctetString reinterprets the union as its pOctetString member.
+func (u *AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union) POctetString() **AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
+	return (**AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE)(unsafe.Pointer(u))
 }
 
 // AUTHZ_SECURITY_ATTRIBUTE_V1: https://learn.microsoft.com/windows/win32/api/authz/ns-authz-authz_security_attribute_v1
@@ -255,9 +356,20 @@ type AUTHZ_SECURITY_ATTRIBUTE_V1 struct {
 }
 
 // AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PReserved reinterprets the union as its pReserved member.
+func (u *AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union) PReserved() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PProviderGuid reinterprets the union as its pProviderGuid member.
+func (u *AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union) PProviderGuid() **win32.GUID {
+	return (**win32.GUID)(unsafe.Pointer(u))
 }
 
 // AUTHZ_SOURCE_SCHEMA_REGISTRATION: https://learn.microsoft.com/windows/win32/api/authz/ns-authz-authz_source_schema_registration

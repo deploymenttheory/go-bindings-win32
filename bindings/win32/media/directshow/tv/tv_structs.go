@@ -5,6 +5,8 @@
 package tv
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	mediakernelstreaming "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/kernelstreaming"
@@ -120,10 +122,40 @@ type ChannelIDTuneRequest struct {
 type ChannelIDTuningSpace struct {
 }
 
+type ChannelInfo_Anonymous_e__Union_ATSC_e__Struct struct {
+	LProgNumber int32
+}
+
+type ChannelInfo_Anonymous_e__Union_DC_e__Struct struct {
+	LProgNumber int32
+}
+
+type ChannelInfo_Anonymous_e__Union_DVB_e__Struct struct {
+	LONID int32
+	LTSID int32
+	LSID  int32
+}
+
 // ChannelInfo_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ChannelInfo_Anonymous_e__Union struct {
 	Data [3]uint32
+}
+
+// DVB reinterprets the union as its DVB member.
+func (u *ChannelInfo_Anonymous_e__Union) DVB() *ChannelInfo_Anonymous_e__Union_DVB_e__Struct {
+	return (*ChannelInfo_Anonymous_e__Union_DVB_e__Struct)(unsafe.Pointer(u))
+}
+
+// DC reinterprets the union as its DC member.
+func (u *ChannelInfo_Anonymous_e__Union) DC() *ChannelInfo_Anonymous_e__Union_DC_e__Struct {
+	return (*ChannelInfo_Anonymous_e__Union_DC_e__Struct)(unsafe.Pointer(u))
+}
+
+// ATSC reinterprets the union as its ATSC member.
+func (u *ChannelInfo_Anonymous_e__Union) ATSC() *ChannelInfo_Anonymous_e__Union_ATSC_e__Struct {
+	return (*ChannelInfo_Anonymous_e__Union_ATSC_e__Struct)(unsafe.Pointer(u))
 }
 
 type ChannelInfo struct {
@@ -748,9 +780,20 @@ type KSM_BDA_ISDBCAS_REQUEST struct {
 }
 
 // KSM_BDA_PIN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSM_BDA_PIN_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// PinId reinterprets the union as its PinId member.
+func (u *KSM_BDA_PIN_Anonymous_e__Union) PinId() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PinType reinterprets the union as its PinType member.
+func (u *KSM_BDA_PIN_Anonymous_e__Union) PinType() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type KSM_BDA_PIN struct {
@@ -760,15 +803,37 @@ type KSM_BDA_PIN struct {
 }
 
 // KSM_BDA_PIN_PAIR_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSM_BDA_PIN_PAIR_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// InputPinId reinterprets the union as its InputPinId member.
+func (u *KSM_BDA_PIN_PAIR_Anonymous1_e__Union) InputPinId() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// InputPinType reinterprets the union as its InputPinType member.
+func (u *KSM_BDA_PIN_PAIR_Anonymous1_e__Union) InputPinType() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // KSM_BDA_PIN_PAIR_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSM_BDA_PIN_PAIR_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// OutputPinId reinterprets the union as its OutputPinId member.
+func (u *KSM_BDA_PIN_PAIR_Anonymous2_e__Union) OutputPinId() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// OutputPinType reinterprets the union as its OutputPinType member.
+func (u *KSM_BDA_PIN_PAIR_Anonymous2_e__Union) OutputPinType() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type KSM_BDA_PIN_PAIR struct {
@@ -1506,9 +1571,20 @@ type SBE_PIN_DATA struct {
 }
 
 // SECTION_Header_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SECTION_Header_e__Union struct {
 	Data [2]byte
+}
+
+// S reinterprets the union as its S member.
+func (u *SECTION_Header_e__Union) S() *MPEG_HEADER_BITS_MIDL {
+	return (*MPEG_HEADER_BITS_MIDL)(unsafe.Pointer(u))
+}
+
+// W reinterprets the union as its W member.
+func (u *SECTION_Header_e__Union) W() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 // SECTION: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-section
@@ -1565,10 +1641,25 @@ type TID_EXTENSION struct {
 type TIFLoad struct {
 }
 
+type TRANSPORT_PROPERTIES_Fields_e__Union_Others struct {
+	Bitfield int64
+}
+
 // TRANSPORT_PROPERTIES_Fields_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRANSPORT_PROPERTIES_Fields_e__Union struct {
 	Data [1]uint64
+}
+
+// Others reinterprets the union as its Others member.
+func (u *TRANSPORT_PROPERTIES_Fields_e__Union) Others() *TRANSPORT_PROPERTIES_Fields_e__Union_Others {
+	return (*TRANSPORT_PROPERTIES_Fields_e__Union_Others)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *TRANSPORT_PROPERTIES_Fields_e__Union) Value() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type TRANSPORT_PROPERTIES struct {

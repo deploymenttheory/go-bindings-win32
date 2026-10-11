@@ -61,10 +61,31 @@ type JOBOBJECT_BASIC_UI_RESTRICTIONS struct {
 	UIRestrictionsClass JOB_OBJECT_UILIMIT
 }
 
+type JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	MinRate uint16
+	MaxRate uint16
+}
+
 // JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// CpuRate reinterprets the union as its CpuRate member.
+func (u *JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union) CpuRate() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Weight reinterprets the union as its Weight member.
+func (u *JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union) Weight() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union) Anonymous() *JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // JOBOBJECT_CPU_RATE_CONTROL_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_cpu_rate_control_information
@@ -180,21 +201,54 @@ type JOBOBJECT_LIMIT_VIOLATION_INFORMATION struct {
 }
 
 // JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// JobHighMemoryLimit reinterprets the union as its JobHighMemoryLimit member.
+func (u *JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union) JobHighMemoryLimit() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// JobMemoryLimit reinterprets the union as its JobMemoryLimit member.
+func (u *JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union) JobMemoryLimit() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
 // JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// RateControlTolerance reinterprets the union as its RateControlTolerance member.
+func (u *JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union) RateControlTolerance() *JOBOBJECT_RATE_CONTROL_TOLERANCE {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE)(unsafe.Pointer(u))
+}
+
+// CpuRateControlTolerance reinterprets the union as its CpuRateControlTolerance member.
+func (u *JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union) CpuRateControlTolerance() *JOBOBJECT_RATE_CONTROL_TOLERANCE {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE)(unsafe.Pointer(u))
+}
+
 // JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union struct {
 	Data [1]uint32
+}
+
+// RateControlToleranceLimit reinterprets the union as its RateControlToleranceLimit member.
+func (u *JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union) RateControlToleranceLimit() *JOBOBJECT_RATE_CONTROL_TOLERANCE {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE)(unsafe.Pointer(u))
+}
+
+// CpuRateControlToleranceLimit reinterprets the union as its CpuRateControlToleranceLimit member.
+func (u *JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union) CpuRateControlToleranceLimit() *JOBOBJECT_RATE_CONTROL_TOLERANCE {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE)(unsafe.Pointer(u))
 }
 
 // JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_limit_violation_information_2
@@ -237,21 +291,54 @@ type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION struct {
 }
 
 // JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// JobHighMemoryLimit reinterprets the union as its JobHighMemoryLimit member.
+func (u *JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union) JobHighMemoryLimit() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// JobMemoryLimit reinterprets the union as its JobMemoryLimit member.
+func (u *JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union) JobMemoryLimit() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
 // JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// RateControlTolerance reinterprets the union as its RateControlTolerance member.
+func (u *JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union) RateControlTolerance() *JOBOBJECT_RATE_CONTROL_TOLERANCE {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE)(unsafe.Pointer(u))
+}
+
+// CpuRateControlTolerance reinterprets the union as its CpuRateControlTolerance member.
+func (u *JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union) CpuRateControlTolerance() *JOBOBJECT_RATE_CONTROL_TOLERANCE {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE)(unsafe.Pointer(u))
+}
+
 // JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union struct {
 	Data [1]uint32
+}
+
+// RateControlToleranceInterval reinterprets the union as its RateControlToleranceInterval member.
+func (u *JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union) RateControlToleranceInterval() *JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL)(unsafe.Pointer(u))
+}
+
+// CpuRateControlToleranceInterval reinterprets the union as its CpuRateControlToleranceInterval member.
+func (u *JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union) CpuRateControlToleranceInterval() *JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL {
+	return (*JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL)(unsafe.Pointer(u))
 }
 
 // JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_notification_limit_information_2

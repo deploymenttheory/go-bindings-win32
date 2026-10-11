@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 )
 
 // CLRES_CALLBACK_FUNCTION_TABLE: https://learn.microsoft.com/windows/win32/api/resapi/ns-resapi-clres_callback_function_table
@@ -33,9 +34,30 @@ type CLRES_CALLBACK_FUNCTION_TABLE struct {
 }
 
 // CLRES_FUNCTION_TABLE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLRES_FUNCTION_TABLE_Anonymous_e__Union struct {
 	Data [14]uint64
+}
+
+// V1Functions reinterprets the union as its V1Functions member.
+func (u *CLRES_FUNCTION_TABLE_Anonymous_e__Union) V1Functions() *CLRES_V1_FUNCTIONS {
+	return (*CLRES_V1_FUNCTIONS)(unsafe.Pointer(u))
+}
+
+// V2Functions reinterprets the union as its V2Functions member.
+func (u *CLRES_FUNCTION_TABLE_Anonymous_e__Union) V2Functions() *CLRES_V2_FUNCTIONS {
+	return (*CLRES_V2_FUNCTIONS)(unsafe.Pointer(u))
+}
+
+// V3Functions reinterprets the union as its V3Functions member.
+func (u *CLRES_FUNCTION_TABLE_Anonymous_e__Union) V3Functions() *CLRES_V3_FUNCTIONS {
+	return (*CLRES_V3_FUNCTIONS)(unsafe.Pointer(u))
+}
+
+// V4Functions reinterprets the union as its V4Functions member.
+func (u *CLRES_FUNCTION_TABLE_Anonymous_e__Union) V4Functions() *CLRES_V4_FUNCTIONS {
+	return (*CLRES_V4_FUNCTIONS)(unsafe.Pointer(u))
 }
 
 // CLRES_FUNCTION_TABLE: https://learn.microsoft.com/windows/win32/api/resapi/ns-resapi-clres_function_table
@@ -142,9 +164,150 @@ type CLUSPROP_BINARY struct {
 
 // CLUSPROP_BUFFER_HELPER: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_buffer_helper
 // CLUSPROP_BUFFER_HELPER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLUSPROP_BUFFER_HELPER struct {
 	Data [1]uint64
+}
+
+// Pb reinterprets the union as its pb member.
+func (u *CLUSPROP_BUFFER_HELPER) Pb() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
+// Pw reinterprets the union as its pw member.
+func (u *CLUSPROP_BUFFER_HELPER) Pw() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// Pdw reinterprets the union as its pdw member.
+func (u *CLUSPROP_BUFFER_HELPER) Pdw() **uint32 {
+	return (**uint32)(unsafe.Pointer(u))
+}
+
+// Pl reinterprets the union as its pl member.
+func (u *CLUSPROP_BUFFER_HELPER) Pl() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// Psz reinterprets the union as its psz member.
+func (u *CLUSPROP_BUFFER_HELPER) Psz() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PList reinterprets the union as its pList member.
+func (u *CLUSPROP_BUFFER_HELPER) PList() **CLUSPROP_LIST {
+	return (**CLUSPROP_LIST)(unsafe.Pointer(u))
+}
+
+// PSyntax reinterprets the union as its pSyntax member.
+func (u *CLUSPROP_BUFFER_HELPER) PSyntax() **CLUSPROP_SYNTAX {
+	return (**CLUSPROP_SYNTAX)(unsafe.Pointer(u))
+}
+
+// PName reinterprets the union as its pName member.
+func (u *CLUSPROP_BUFFER_HELPER) PName() **CLUSPROP_SZ {
+	return (**CLUSPROP_SZ)(unsafe.Pointer(u))
+}
+
+// PValue reinterprets the union as its pValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PValue() **CLUSPROP_VALUE {
+	return (**CLUSPROP_VALUE)(unsafe.Pointer(u))
+}
+
+// PBinaryValue reinterprets the union as its pBinaryValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PBinaryValue() **CLUSPROP_BINARY {
+	return (**CLUSPROP_BINARY)(unsafe.Pointer(u))
+}
+
+// PWordValue reinterprets the union as its pWordValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PWordValue() **CLUSPROP_WORD {
+	return (**CLUSPROP_WORD)(unsafe.Pointer(u))
+}
+
+// PDwordValue reinterprets the union as its pDwordValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PDwordValue() **CLUSPROP_DWORD {
+	return (**CLUSPROP_DWORD)(unsafe.Pointer(u))
+}
+
+// PLongValue reinterprets the union as its pLongValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PLongValue() **CLUSPROP_LONG {
+	return (**CLUSPROP_LONG)(unsafe.Pointer(u))
+}
+
+// PULargeIntegerValue reinterprets the union as its pULargeIntegerValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PULargeIntegerValue() **CLUSPROP_ULARGE_INTEGER {
+	return (**CLUSPROP_ULARGE_INTEGER)(unsafe.Pointer(u))
+}
+
+// PLargeIntegerValue reinterprets the union as its pLargeIntegerValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PLargeIntegerValue() **CLUSPROP_LARGE_INTEGER {
+	return (**CLUSPROP_LARGE_INTEGER)(unsafe.Pointer(u))
+}
+
+// PStringValue reinterprets the union as its pStringValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PStringValue() **CLUSPROP_SZ {
+	return (**CLUSPROP_SZ)(unsafe.Pointer(u))
+}
+
+// PMultiSzValue reinterprets the union as its pMultiSzValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PMultiSzValue() **CLUSPROP_SZ {
+	return (**CLUSPROP_SZ)(unsafe.Pointer(u))
+}
+
+// PSecurityDescriptor reinterprets the union as its pSecurityDescriptor member.
+func (u *CLUSPROP_BUFFER_HELPER) PSecurityDescriptor() **CLUSPROP_SECURITY_DESCRIPTOR {
+	return (**CLUSPROP_SECURITY_DESCRIPTOR)(unsafe.Pointer(u))
+}
+
+// PResourceClassValue reinterprets the union as its pResourceClassValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PResourceClassValue() **CLUSPROP_RESOURCE_CLASS {
+	return (**CLUSPROP_RESOURCE_CLASS)(unsafe.Pointer(u))
+}
+
+// PResourceClassInfoValue reinterprets the union as its pResourceClassInfoValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PResourceClassInfoValue() **CLUSPROP_RESOURCE_CLASS_INFO {
+	return (**CLUSPROP_RESOURCE_CLASS_INFO)(unsafe.Pointer(u))
+}
+
+// PDiskSignatureValue reinterprets the union as its pDiskSignatureValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PDiskSignatureValue() **CLUSPROP_DWORD {
+	return (**CLUSPROP_DWORD)(unsafe.Pointer(u))
+}
+
+// PScsiAddressValue reinterprets the union as its pScsiAddressValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PScsiAddressValue() **CLUSPROP_SCSI_ADDRESS {
+	return (**CLUSPROP_SCSI_ADDRESS)(unsafe.Pointer(u))
+}
+
+// PDiskNumberValue reinterprets the union as its pDiskNumberValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PDiskNumberValue() **CLUSPROP_DWORD {
+	return (**CLUSPROP_DWORD)(unsafe.Pointer(u))
+}
+
+// PPartitionInfoValue reinterprets the union as its pPartitionInfoValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PPartitionInfoValue() **CLUSPROP_PARTITION_INFO {
+	return (**CLUSPROP_PARTITION_INFO)(unsafe.Pointer(u))
+}
+
+// PRequiredDependencyValue reinterprets the union as its pRequiredDependencyValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PRequiredDependencyValue() **CLUSPROP_REQUIRED_DEPENDENCY {
+	return (**CLUSPROP_REQUIRED_DEPENDENCY)(unsafe.Pointer(u))
+}
+
+// PPartitionInfoValueEx reinterprets the union as its pPartitionInfoValueEx member.
+func (u *CLUSPROP_BUFFER_HELPER) PPartitionInfoValueEx() **CLUSPROP_PARTITION_INFO_EX {
+	return (**CLUSPROP_PARTITION_INFO_EX)(unsafe.Pointer(u))
+}
+
+// PPartitionInfoValueEx2 reinterprets the union as its pPartitionInfoValueEx2 member.
+func (u *CLUSPROP_BUFFER_HELPER) PPartitionInfoValueEx2() **CLUSPROP_PARTITION_INFO_EX2 {
+	return (**CLUSPROP_PARTITION_INFO_EX2)(unsafe.Pointer(u))
+}
+
+// PFileTimeValue reinterprets the union as its pFileTimeValue member.
+func (u *CLUSPROP_BUFFER_HELPER) PFileTimeValue() **CLUSPROP_FILETIME {
+	return (**CLUSPROP_FILETIME)(unsafe.Pointer(u))
 }
 
 // CLUSPROP_DWORD: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_dword
@@ -203,9 +366,25 @@ type CLUSPROP_PARTITION_INFO_EX2 struct {
 
 // CLUSPROP_REQUIRED_DEPENDENCY: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_required_dependency
 // CLUSPROP_REQUIRED_DEPENDENCY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLUSPROP_REQUIRED_DEPENDENCY struct {
 	Data [3]uint32
+}
+
+// Value reinterprets the union as its Value member.
+func (u *CLUSPROP_REQUIRED_DEPENDENCY) Value() *CLUSPROP_VALUE {
+	return (*CLUSPROP_VALUE)(unsafe.Pointer(u))
+}
+
+// ResClass reinterprets the union as its ResClass member.
+func (u *CLUSPROP_REQUIRED_DEPENDENCY) ResClass() *CLUSPROP_RESOURCE_CLASS {
+	return (*CLUSPROP_RESOURCE_CLASS)(unsafe.Pointer(u))
+}
+
+// ResTypeName reinterprets the union as its ResTypeName member.
+func (u *CLUSPROP_REQUIRED_DEPENDENCY) ResTypeName() *CLUSPROP_SZ {
+	return (*CLUSPROP_SZ)(unsafe.Pointer(u))
 }
 
 // CLUSPROP_RESOURCE_CLASS: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_resource_class
@@ -227,9 +406,20 @@ type CLUSPROP_SCSI_ADDRESS struct {
 }
 
 // CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [5]uint32
+}
+
+// Sd reinterprets the union as its sd member.
+func (u *CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union) Sd() *security.SECURITY_DESCRIPTOR_RELATIVE {
+	return (*security.SECURITY_DESCRIPTOR_RELATIVE)(unsafe.Pointer(u))
+}
+
+// RgbSecurityDescriptor reinterprets the union as its rgbSecurityDescriptor member.
+func (u *CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union) RgbSecurityDescriptor() *[1]byte {
+	return (*[1]byte)(unsafe.Pointer(u))
 }
 
 // CLUSPROP_SECURITY_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_security_descriptor
@@ -238,11 +428,27 @@ type CLUSPROP_SECURITY_DESCRIPTOR struct {
 	Anonymous CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union
 }
 
+type CLUSPROP_SYNTAX_Anonymous_e__Struct struct {
+	WFormat uint16
+	WType   uint16
+}
+
 // CLUSPROP_SYNTAX: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_syntax
 // CLUSPROP_SYNTAX is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLUSPROP_SYNTAX struct {
 	Data [1]uint32
+}
+
+// Dw reinterprets the union as its dw member.
+func (u *CLUSPROP_SYNTAX) Dw() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *CLUSPROP_SYNTAX) Anonymous() *CLUSPROP_SYNTAX_Anonymous_e__Struct {
+	return (*CLUSPROP_SYNTAX_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // CLUSPROP_SZ: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_sz
@@ -425,9 +631,30 @@ type CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME struct {
 }
 
 // CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union struct {
 	Data [65]uint64
+}
+
+// VolumeOffset reinterprets the union as its VolumeOffset member.
+func (u *CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union) VolumeOffset() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// VolumeId reinterprets the union as its VolumeId member.
+func (u *CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union) VolumeId() *[260]uint16 {
+	return (*[260]uint16)(unsafe.Pointer(u))
+}
+
+// VolumeName reinterprets the union as its VolumeName member.
+func (u *CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union) VolumeName() *[260]uint16 {
+	return (*[260]uint16)(unsafe.Pointer(u))
+}
+
+// VolumeGuid reinterprets the union as its VolumeGuid member.
+func (u *CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union) VolumeGuid() *[50]uint16 {
+	return (*[50]uint16)(unsafe.Pointer(u))
 }
 
 type CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME struct {
@@ -632,10 +859,43 @@ type CLUS_PROVIDER_STATE_CHANGE_INFO struct {
 	SzProviderId  [1]uint16
 }
 
+// CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint32
+}
+
+// Dw reinterprets the union as its dw member.
+func (u *CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Dw() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Rc reinterprets the union as its rc member.
+func (u *CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Rc() *CLUSTER_RESOURCE_CLASS {
+	return (*CLUSTER_RESOURCE_CLASS)(unsafe.Pointer(u))
+}
+
+type CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Anonymous CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+	SubClass  uint32
+}
+
 // CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union) Anonymous() *CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Li reinterprets the union as its li member.
+func (u *CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union) Li() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // CLUS_RESOURCE_CLASS_INFO: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clus_resource_class_info
@@ -643,10 +903,28 @@ type CLUS_RESOURCE_CLASS_INFO struct {
 	Anonymous CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union
 }
 
+type CLUS_SCSI_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	PortNumber byte
+	PathId     byte
+	TargetId   byte
+	Lun        byte
+}
+
 // CLUS_SCSI_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLUS_SCSI_ADDRESS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *CLUS_SCSI_ADDRESS_Anonymous_e__Union) Anonymous() *CLUS_SCSI_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*CLUS_SCSI_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Dw reinterprets the union as its dw member.
+func (u *CLUS_SCSI_ADDRESS_Anonymous_e__Union) Dw() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // CLUS_SCSI_ADDRESS: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clus_scsi_address
@@ -987,9 +1265,40 @@ type RESUTIL_LARGEINT_DATA struct {
 }
 
 // RESUTIL_PROPERTY_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RESUTIL_PROPERTY_ITEM_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DefaultPtr reinterprets the union as its DefaultPtr member.
+func (u *RESUTIL_PROPERTY_ITEM_Anonymous_e__Union) DefaultPtr() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// Default reinterprets the union as its Default member.
+func (u *RESUTIL_PROPERTY_ITEM_Anonymous_e__Union) Default() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDefault reinterprets the union as its lpDefault member.
+func (u *RESUTIL_PROPERTY_ITEM_Anonymous_e__Union) LpDefault() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// LargeIntData reinterprets the union as its LargeIntData member.
+func (u *RESUTIL_PROPERTY_ITEM_Anonymous_e__Union) LargeIntData() **RESUTIL_LARGEINT_DATA {
+	return (**RESUTIL_LARGEINT_DATA)(unsafe.Pointer(u))
+}
+
+// ULargeIntData reinterprets the union as its ULargeIntData member.
+func (u *RESUTIL_PROPERTY_ITEM_Anonymous_e__Union) ULargeIntData() **RESUTIL_ULARGEINT_DATA {
+	return (**RESUTIL_ULARGEINT_DATA)(unsafe.Pointer(u))
+}
+
+// FileTimeData reinterprets the union as its FileTimeData member.
+func (u *RESUTIL_PROPERTY_ITEM_Anonymous_e__Union) FileTimeData() **RESUTIL_FILETIME_DATA {
+	return (**RESUTIL_FILETIME_DATA)(unsafe.Pointer(u))
 }
 
 // RESUTIL_PROPERTY_ITEM: https://learn.microsoft.com/windows/win32/api/resapi/ns-resapi-resutil_property_item

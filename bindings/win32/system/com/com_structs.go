@@ -9,7 +9,9 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemsystemservices "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/systemservices"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
@@ -37,9 +39,25 @@ type BINDINFO struct {
 
 // BINDPTR: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-bindptr
 // BINDPTR is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BINDPTR struct {
 	Data [1]uint64
+}
+
+// Lpfuncdesc reinterprets the union as its lpfuncdesc member.
+func (u *BINDPTR) Lpfuncdesc() **FUNCDESC {
+	return (**FUNCDESC)(unsafe.Pointer(u))
+}
+
+// Lpvardesc reinterprets the union as its lpvardesc member.
+func (u *BINDPTR) Lpvardesc() **VARDESC {
+	return (**VARDESC)(unsafe.Pointer(u))
+}
+
+// Lptcomp reinterprets the union as its lptcomp member.
+func (u *BINDPTR) Lptcomp() **ITypeComp {
+	return (**ITypeComp)(unsafe.Pointer(u))
 }
 
 // BIND_OPTS: https://learn.microsoft.com/windows/win32/api/objidl/ns-objidl-bind_opts
@@ -144,11 +162,27 @@ type CUSTDATAITEM struct {
 	VarValue systemvariant.VARIANT
 }
 
+type CY_Anonymous_e__Struct struct {
+	Lo uint32
+	Hi int32
+}
+
 // CY: https://learn.microsoft.com/windows/win32/api/wtypes/ns-wtypes-cy~r1
 // CY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CY struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *CY) Anonymous() *CY_Anonymous_e__Struct {
+	return (*CY_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Int64 reinterprets the union as its int64 member.
+func (u *CY) Int64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type ComCallData struct {
@@ -192,9 +226,20 @@ type DWORD_SIZEDARR struct {
 }
 
 // ELEMDESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ELEMDESC_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Idldesc reinterprets the union as its idldesc member.
+func (u *ELEMDESC_Anonymous_e__Union) Idldesc() *IDLDESC {
+	return (*IDLDESC)(unsafe.Pointer(u))
+}
+
+// Paramdesc reinterprets the union as its paramdesc member.
+func (u *ELEMDESC_Anonymous_e__Union) Paramdesc() *[2]uint64 {
+	return (*[2]uint64)(unsafe.Pointer(u))
 }
 
 // ELEMDESC: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-elemdesc~r1
@@ -260,9 +305,25 @@ type FUNCDESC struct {
 }
 
 // GDI_OBJECT_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GDI_OBJECT_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HBitmap reinterprets the union as its hBitmap member.
+func (u *GDI_OBJECT_u_e__Struct) HBitmap() **systemsystemservices.UserHBITMAP {
+	return (**systemsystemservices.UserHBITMAP)(unsafe.Pointer(u))
+}
+
+// HPalette reinterprets the union as its hPalette member.
+func (u *GDI_OBJECT_u_e__Struct) HPalette() **systemsystemservices.UserHPALETTE {
+	return (**systemsystemservices.UserHPALETTE)(unsafe.Pointer(u))
+}
+
+// HGeneric reinterprets the union as its hGeneric member.
+func (u *GDI_OBJECT_u_e__Struct) HGeneric() **systemsystemservices.UserHGLOBAL {
+	return (**systemsystemservices.UserHGLOBAL)(unsafe.Pointer(u))
 }
 
 type GDI_OBJECT struct {
@@ -393,9 +454,45 @@ type STATSTG struct {
 }
 
 // STGMEDIUM_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STGMEDIUM_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HBitmap reinterprets the union as its hBitmap member.
+func (u *STGMEDIUM_u_e__Union) HBitmap() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// HMetaFilePict reinterprets the union as its hMetaFilePict member.
+func (u *STGMEDIUM_u_e__Union) HMetaFilePict() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// HEnhMetaFile reinterprets the union as its hEnhMetaFile member.
+func (u *STGMEDIUM_u_e__Union) HEnhMetaFile() *graphicsgdi.HENHMETAFILE {
+	return (*graphicsgdi.HENHMETAFILE)(unsafe.Pointer(u))
+}
+
+// HGlobal reinterprets the union as its hGlobal member.
+func (u *STGMEDIUM_u_e__Union) HGlobal() *foundation.HGLOBAL {
+	return (*foundation.HGLOBAL)(unsafe.Pointer(u))
+}
+
+// LpszFileName reinterprets the union as its lpszFileName member.
+func (u *STGMEDIUM_u_e__Union) LpszFileName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Pstm reinterprets the union as its pstm member.
+func (u *STGMEDIUM_u_e__Union) Pstm() **IStream {
+	return (**IStream)(unsafe.Pointer(u))
+}
+
+// Pstg reinterprets the union as its pstg member.
+func (u *STGMEDIUM_u_e__Union) Pstg() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type STGMEDIUM struct {
@@ -445,9 +542,25 @@ type TYPEATTR struct {
 }
 
 // TYPEDESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TYPEDESC_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Lptdesc reinterprets the union as its lptdesc member.
+func (u *TYPEDESC_Anonymous_e__Union) Lptdesc() **TYPEDESC {
+	return (**TYPEDESC)(unsafe.Pointer(u))
+}
+
+// Lpadesc reinterprets the union as its lpadesc member.
+func (u *TYPEDESC_Anonymous_e__Union) Lpadesc() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Hreftype reinterprets the union as its hreftype member.
+func (u *TYPEDESC_Anonymous_e__Union) Hreftype() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // TYPEDESC: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-typedesc
@@ -457,9 +570,20 @@ type TYPEDESC struct {
 }
 
 // VARDESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VARDESC_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// OInst reinterprets the union as its oInst member.
+func (u *VARDESC_Anonymous_e__Union) OInst() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpvarValue reinterprets the union as its lpvarValue member.
+func (u *VARDESC_Anonymous_e__Union) LpvarValue() **systemvariant.VARIANT {
+	return (**systemvariant.VARIANT)(unsafe.Pointer(u))
 }
 
 // VARDESC: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-vardesc
@@ -482,10 +606,56 @@ type WORD_SIZEDARR struct {
 	PData  *uint16
 }
 
+type UCLSSPEC_tagged_union_e__Struct_ByName_e__Struct struct {
+	PPackageName foundation.PWSTR
+	PolicyId     win32.GUID
+}
+
+type UCLSSPEC_tagged_union_e__Struct_ByObjectId_e__Struct struct {
+	ObjectId win32.GUID
+	PolicyId win32.GUID
+}
+
 // UCLSSPEC_tagged_union_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UCLSSPEC_tagged_union_e__Struct struct {
 	Data [4]uint64
+}
+
+// Clsid reinterprets the union as its clsid member.
+func (u *UCLSSPEC_tagged_union_e__Struct) Clsid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// PFileExt reinterprets the union as its pFileExt member.
+func (u *UCLSSPEC_tagged_union_e__Struct) PFileExt() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PMimeType reinterprets the union as its pMimeType member.
+func (u *UCLSSPEC_tagged_union_e__Struct) PMimeType() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PProgId reinterprets the union as its pProgId member.
+func (u *UCLSSPEC_tagged_union_e__Struct) PProgId() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PFileName reinterprets the union as its pFileName member.
+func (u *UCLSSPEC_tagged_union_e__Struct) PFileName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// ByName reinterprets the union as its ByName member.
+func (u *UCLSSPEC_tagged_union_e__Struct) ByName() *UCLSSPEC_tagged_union_e__Struct_ByName_e__Struct {
+	return (*UCLSSPEC_tagged_union_e__Struct_ByName_e__Struct)(unsafe.Pointer(u))
+}
+
+// ByObjectId reinterprets the union as its ByObjectId member.
+func (u *UCLSSPEC_tagged_union_e__Struct) ByObjectId() *UCLSSPEC_tagged_union_e__Struct_ByObjectId_e__Struct {
+	return (*UCLSSPEC_tagged_union_e__Struct_ByObjectId_e__Struct)(unsafe.Pointer(u))
 }
 
 type UCLSSPEC struct {
@@ -500,9 +670,45 @@ type UserFLAG_STGMEDIUM struct {
 }
 
 // UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HMetaFilePict reinterprets the union as its hMetaFilePict member.
+func (u *UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct) HMetaFilePict() **systemsystemservices.UserHMETAFILEPICT {
+	return (**systemsystemservices.UserHMETAFILEPICT)(unsafe.Pointer(u))
+}
+
+// HHEnhMetaFile reinterprets the union as its hHEnhMetaFile member.
+func (u *UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct) HHEnhMetaFile() **systemsystemservices.UserHENHMETAFILE {
+	return (**systemsystemservices.UserHENHMETAFILE)(unsafe.Pointer(u))
+}
+
+// HGdiHandle reinterprets the union as its hGdiHandle member.
+func (u *UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct) HGdiHandle() **GDI_OBJECT {
+	return (**GDI_OBJECT)(unsafe.Pointer(u))
+}
+
+// HGlobal reinterprets the union as its hGlobal member.
+func (u *UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct) HGlobal() **systemsystemservices.UserHGLOBAL {
+	return (**systemsystemservices.UserHGLOBAL)(unsafe.Pointer(u))
+}
+
+// LpszFileName reinterprets the union as its lpszFileName member.
+func (u *UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct) LpszFileName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Pstm reinterprets the union as its pstm member.
+func (u *UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct) Pstm() **BYTE_BLOB {
+	return (**BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// Pstg reinterprets the union as its pstg member.
+func (u *UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct) Pstg() **BYTE_BLOB {
+	return (**BYTE_BLOB)(unsafe.Pointer(u))
 }
 
 type UserSTGMEDIUM_STGMEDIUM_UNION struct {

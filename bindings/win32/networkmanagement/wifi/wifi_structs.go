@@ -303,10 +303,27 @@ type DOT11_BSS_ENTRY struct {
 	UcBuffer                [1]byte
 }
 
+type DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO_FHSS_e__Struct struct {
+	UHopPattern uint32
+	UHopSet     uint32
+	UDwellTime  uint32
+}
+
 // DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO struct {
 	Data [3]uint32
+}
+
+// UChCenterFrequency reinterprets the union as its uChCenterFrequency member.
+func (u *DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO) UChCenterFrequency() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FHSS reinterprets the union as its FHSS member.
+func (u *DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO) FHSS() *DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO_FHSS_e__Struct {
+	return (*DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO_FHSS_e__Struct)(unsafe.Pointer(u))
 }
 
 type DOT11_BSS_LIST struct {
@@ -1039,9 +1056,25 @@ type DOT11_PER_MSDU_COUNTERS struct {
 }
 
 // DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union struct {
 	Data [3]uint32
+}
+
+// HRDSSSAttributes reinterprets the union as its HRDSSSAttributes member.
+func (u *DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union) HRDSSSAttributes() *DOT11_HRDSSS_PHY_ATTRIBUTES {
+	return (*DOT11_HRDSSS_PHY_ATTRIBUTES)(unsafe.Pointer(u))
+}
+
+// OFDMAttributes reinterprets the union as its OFDMAttributes member.
+func (u *DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union) OFDMAttributes() *DOT11_OFDM_PHY_ATTRIBUTES {
+	return (*DOT11_OFDM_PHY_ATTRIBUTES)(unsafe.Pointer(u))
+}
+
+// ERPAttributes reinterprets the union as its ERPAttributes member.
+func (u *DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union) ERPAttributes() *DOT11_ERP_PHY_ATTRIBUTES {
+	return (*DOT11_ERP_PHY_ATTRIBUTES)(unsafe.Pointer(u))
 }
 
 type DOT11_PHY_ATTRIBUTES struct {
@@ -1083,9 +1116,20 @@ type DOT11_PHY_FRAME_STATISTICS struct {
 }
 
 // DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UlChannel reinterprets the union as its ulChannel member.
+func (u *DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union) UlChannel() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// UlFrequency reinterprets the union as its ulFrequency member.
+func (u *DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union) UlFrequency() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS struct {
@@ -1353,9 +1397,20 @@ type DOT11_RECV_SENSITIVITY struct {
 }
 
 // DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Dot11PhyType reinterprets the union as its dot11PhyType member.
+func (u *DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union) Dot11PhyType() *DOT11_PHY_TYPE {
+	return (*DOT11_PHY_TYPE)(unsafe.Pointer(u))
+}
+
+// UPhyId reinterprets the union as its uPhyId member.
+func (u *DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union) UPhyId() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DOT11_RECV_SENSITIVITY_LIST struct {

@@ -11,10 +11,55 @@ import (
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 )
 
+type CONTEXT_Anonymous_e__Union_Anonymous_e__Struct struct {
+	X0  uint64
+	X1  uint64
+	X2  uint64
+	X3  uint64
+	X4  uint64
+	X5  uint64
+	X6  uint64
+	X7  uint64
+	X8  uint64
+	X9  uint64
+	X10 uint64
+	X11 uint64
+	X12 uint64
+	X13 uint64
+	X14 uint64
+	X15 uint64
+	X16 uint64
+	X17 uint64
+	X18 uint64
+	X19 uint64
+	X20 uint64
+	X21 uint64
+	X22 uint64
+	X23 uint64
+	X24 uint64
+	X25 uint64
+	X26 uint64
+	X27 uint64
+	X28 uint64
+	Fp  uint64
+	Lr  uint64
+}
+
 // CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CONTEXT_Anonymous_e__Union struct {
 	Data [31]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *CONTEXT_Anonymous_e__Union) Anonymous() *CONTEXT_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*CONTEXT_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// X reinterprets the union as its X member.
+func (u *CONTEXT_Anonymous_e__Union) X() *[31]uint64 {
+	return (*[31]uint64)(unsafe.Pointer(u))
 }
 
 // CONTEXT: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-context

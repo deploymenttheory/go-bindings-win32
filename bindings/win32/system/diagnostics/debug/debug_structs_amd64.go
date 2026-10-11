@@ -10,10 +10,42 @@ import (
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 )
 
+type CONTEXT_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Header [2]M128A
+	Legacy [8]M128A
+	Xmm0   M128A
+	Xmm1   M128A
+	Xmm2   M128A
+	Xmm3   M128A
+	Xmm4   M128A
+	Xmm5   M128A
+	Xmm6   M128A
+	Xmm7   M128A
+	Xmm8   M128A
+	Xmm9   M128A
+	Xmm10  M128A
+	Xmm11  M128A
+	Xmm12  M128A
+	Xmm13  M128A
+	Xmm14  M128A
+	Xmm15  M128A
+}
+
 // CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CONTEXT_Anonymous_e__Union struct {
 	Data [64]uint64
+}
+
+// FltSave reinterprets the union as its FltSave member.
+func (u *CONTEXT_Anonymous_e__Union) FltSave() *XSAVE_FORMAT {
+	return (*XSAVE_FORMAT)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *CONTEXT_Anonymous_e__Union) Anonymous() *CONTEXT_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*CONTEXT_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // CONTEXT: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-context
@@ -80,16 +112,76 @@ type DISPATCHER_CONTEXT struct {
 	Fill0            uint32
 }
 
+type KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Xmm0  *M128A
+	Xmm1  *M128A
+	Xmm2  *M128A
+	Xmm3  *M128A
+	Xmm4  *M128A
+	Xmm5  *M128A
+	Xmm6  *M128A
+	Xmm7  *M128A
+	Xmm8  *M128A
+	Xmm9  *M128A
+	Xmm10 *M128A
+	Xmm11 *M128A
+	Xmm12 *M128A
+	Xmm13 *M128A
+	Xmm14 *M128A
+	Xmm15 *M128A
+}
+
 // KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union struct {
 	Data [16]uint64
 }
 
+// FloatingContext reinterprets the union as its FloatingContext member.
+func (u *KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union) FloatingContext() *[16]*M128A {
+	return (*[16]*M128A)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union) Anonymous() *KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Rax *uint64
+	Rcx *uint64
+	Rdx *uint64
+	Rbx *uint64
+	Rsp *uint64
+	Rbp *uint64
+	Rsi *uint64
+	Rdi *uint64
+	R8  *uint64
+	R9  *uint64
+	R10 *uint64
+	R11 *uint64
+	R12 *uint64
+	R13 *uint64
+	R14 *uint64
+	R15 *uint64
+}
+
 // KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union struct {
 	Data [16]uint64
+}
+
+// IntegerContext reinterprets the union as its IntegerContext member.
+func (u *KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union) IntegerContext() *[16]*uint64 {
+	return (*[16]*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union) Anonymous() *KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type KNONVOLATILE_CONTEXT_POINTERS struct {

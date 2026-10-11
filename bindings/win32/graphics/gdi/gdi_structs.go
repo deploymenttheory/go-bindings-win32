@@ -208,16 +208,55 @@ type DESIGNVECTOR struct {
 	DvValues   [16]int32
 }
 
+type DEVMODEA_Anonymous1_e__Union_Anonymous1_e__Struct struct {
+	DmOrientation   int16
+	DmPaperSize     int16
+	DmPaperLength   int16
+	DmPaperWidth    int16
+	DmScale         int16
+	DmCopies        int16
+	DmDefaultSource int16
+	DmPrintQuality  int16
+}
+
+type DEVMODEA_Anonymous1_e__Union_Anonymous2_e__Struct struct {
+	DmPosition           foundation.POINTL
+	DmDisplayOrientation DEVMODE_DISPLAY_ORIENTATION
+	DmDisplayFixedOutput DEVMODE_DISPLAY_FIXED_OUTPUT
+}
+
 // DEVMODEA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEVMODEA_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *DEVMODEA_Anonymous1_e__Union) Anonymous1() *DEVMODEA_Anonymous1_e__Union_Anonymous1_e__Struct {
+	return (*DEVMODEA_Anonymous1_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *DEVMODEA_Anonymous1_e__Union) Anonymous2() *DEVMODEA_Anonymous1_e__Union_Anonymous2_e__Struct {
+	return (*DEVMODEA_Anonymous1_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
 // DEVMODEA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEVMODEA_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// DmDisplayFlags reinterprets the union as its dmDisplayFlags member.
+func (u *DEVMODEA_Anonymous2_e__Union) DmDisplayFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DmNup reinterprets the union as its dmNup member.
+func (u *DEVMODEA_Anonymous2_e__Union) DmNup() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DEVMODEA: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-devmodea
@@ -251,16 +290,55 @@ type DEVMODEA struct {
 	DmPanningHeight    uint32
 }
 
+type DEVMODEW_Anonymous1_e__Union_Anonymous1_e__Struct struct {
+	DmOrientation   int16
+	DmPaperSize     int16
+	DmPaperLength   int16
+	DmPaperWidth    int16
+	DmScale         int16
+	DmCopies        int16
+	DmDefaultSource int16
+	DmPrintQuality  int16
+}
+
+type DEVMODEW_Anonymous1_e__Union_Anonymous2_e__Struct struct {
+	DmPosition           foundation.POINTL
+	DmDisplayOrientation DEVMODE_DISPLAY_ORIENTATION
+	DmDisplayFixedOutput DEVMODE_DISPLAY_FIXED_OUTPUT
+}
+
 // DEVMODEW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEVMODEW_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *DEVMODEW_Anonymous1_e__Union) Anonymous1() *DEVMODEW_Anonymous1_e__Union_Anonymous1_e__Struct {
+	return (*DEVMODEW_Anonymous1_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *DEVMODEW_Anonymous1_e__Union) Anonymous2() *DEVMODEW_Anonymous1_e__Union_Anonymous2_e__Struct {
+	return (*DEVMODEW_Anonymous1_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
 // DEVMODEW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEVMODEW_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// DmDisplayFlags reinterprets the union as its dmDisplayFlags member.
+func (u *DEVMODEW_Anonymous2_e__Union) DmDisplayFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DmNup reinterprets the union as its dmNup member.
+func (u *DEVMODEW_Anonymous2_e__Union) DmNup() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DEVMODEW: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-devmodew

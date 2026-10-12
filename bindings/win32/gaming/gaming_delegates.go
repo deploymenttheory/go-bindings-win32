@@ -8,6 +8,10 @@ package gaming
 // using the shape func(foundation.HRESULT, unsafe.Pointer) uintptr.
 type GameUICompletionRoutine uintptr
 
+// PGAMING_FULL_SCREEN_EXPERIENCE_CHANGE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
+type PGAMING_FULL_SCREEN_EXPERIENCE_CHANGE_ROUTINE uintptr
+
 // PlayerPickerUICompletionRoutine is a callback pointer: create one with syscall.NewCallback
 // using the shape func(foundation.HRESULT, unsafe.Pointer, *systemwinrt.HSTRING, uintptr) uintptr.
 type PlayerPickerUICompletionRoutine uintptr

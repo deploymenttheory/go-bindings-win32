@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.5.0...v0.6.0) (2026-09-19)
+
+
+### Features
+
+* add example on how to use windows and messaging and win32 graphics to implement a simple On Screen Display ([32e255e](https://github.com/deploymenttheory/go-bindings-win32/commit/32e255ea81d4f36619b75030660db6c9142af4d0))
+* add example on how to use windows and messaging and win32 graphics to implement a simple On Screen Display ([60e1122](https://github.com/deploymenttheory/go-bindings-win32/commit/60e1122774e4d1dbea5a8e8ebd60fcd759e8a3c8))
+
 ## [0.5.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.4.0...v0.5.0) (2026-08-28)
 
 

@@ -5,6 +5,8 @@
 package cdrom
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -152,9 +154,20 @@ type CDROM_TOC_CD_TEXT_DATA struct {
 }
 
 // CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union struct {
 	Data [6]uint16
+}
+
+// Text reinterprets the union as its Text member.
+func (u *CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union) Text() *[12]byte {
+	return (*[12]byte)(unsafe.Pointer(u))
+}
+
+// WText reinterprets the union as its WText member.
+func (u *CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union) WText() *[6]uint16 {
+	return (*[6]uint16)(unsafe.Pointer(u))
 }
 
 type CDROM_TOC_CD_TEXT_DATA_BLOCK struct {
@@ -216,9 +229,25 @@ type RAW_READ_INFO struct {
 }
 
 // SUB_Q_CHANNEL_DATA is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SUB_Q_CHANNEL_DATA struct {
 	Data [24]byte
+}
+
+// CurrentPosition reinterprets the union as its CurrentPosition member.
+func (u *SUB_Q_CHANNEL_DATA) CurrentPosition() *SUB_Q_CURRENT_POSITION {
+	return (*SUB_Q_CURRENT_POSITION)(unsafe.Pointer(u))
+}
+
+// MediaCatalog reinterprets the union as its MediaCatalog member.
+func (u *SUB_Q_CHANNEL_DATA) MediaCatalog() *SUB_Q_MEDIA_CATALOG_NUMBER {
+	return (*SUB_Q_MEDIA_CATALOG_NUMBER)(unsafe.Pointer(u))
+}
+
+// TrackIsrc reinterprets the union as its TrackIsrc member.
+func (u *SUB_Q_CHANNEL_DATA) TrackIsrc() *SUB_Q_TRACK_ISRC {
+	return (*SUB_Q_TRACK_ISRC)(unsafe.Pointer(u))
 }
 
 type SUB_Q_CURRENT_POSITION struct {

@@ -90,9 +90,95 @@ type GOPHER_ASK_ATTRIBUTE_TYPE struct {
 }
 
 // GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union struct {
 	Data [3]uint64
+}
+
+// Admin reinterprets the union as its Admin member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Admin() *GOPHER_ADMIN_ATTRIBUTE_TYPE {
+	return (*GOPHER_ADMIN_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// ModDate reinterprets the union as its ModDate member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) ModDate() *GOPHER_MOD_DATE_ATTRIBUTE_TYPE {
+	return (*GOPHER_MOD_DATE_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Ttl reinterprets the union as its Ttl member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Ttl() *GOPHER_TTL_ATTRIBUTE_TYPE {
+	return (*GOPHER_TTL_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Score reinterprets the union as its Score member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Score() *GOPHER_SCORE_ATTRIBUTE_TYPE {
+	return (*GOPHER_SCORE_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// ScoreRange reinterprets the union as its ScoreRange member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) ScoreRange() *GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE {
+	return (*GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Site reinterprets the union as its Site member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Site() *GOPHER_SITE_ATTRIBUTE_TYPE {
+	return (*GOPHER_SITE_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Organization reinterprets the union as its Organization member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Organization() *GOPHER_ORGANIZATION_ATTRIBUTE_TYPE {
+	return (*GOPHER_ORGANIZATION_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Location reinterprets the union as its Location member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Location() *GOPHER_LOCATION_ATTRIBUTE_TYPE {
+	return (*GOPHER_LOCATION_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// GeographicalLocation reinterprets the union as its GeographicalLocation member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) GeographicalLocation() *GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE {
+	return (*GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// TimeZone reinterprets the union as its TimeZone member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) TimeZone() *GOPHER_TIMEZONE_ATTRIBUTE_TYPE {
+	return (*GOPHER_TIMEZONE_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Provider reinterprets the union as its Provider member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Provider() *GOPHER_PROVIDER_ATTRIBUTE_TYPE {
+	return (*GOPHER_PROVIDER_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Version reinterprets the union as its Version member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Version() *GOPHER_VERSION_ATTRIBUTE_TYPE {
+	return (*GOPHER_VERSION_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Abstract reinterprets the union as its Abstract member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Abstract() *GOPHER_ABSTRACT_ATTRIBUTE_TYPE {
+	return (*GOPHER_ABSTRACT_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// View reinterprets the union as its View member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) View() *GOPHER_VIEW_ATTRIBUTE_TYPE {
+	return (*GOPHER_VIEW_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Veronica reinterprets the union as its Veronica member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Veronica() *GOPHER_VERONICA_ATTRIBUTE_TYPE {
+	return (*GOPHER_VERONICA_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Ask reinterprets the union as its Ask member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Ask() *GOPHER_ASK_ATTRIBUTE_TYPE {
+	return (*GOPHER_ASK_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
+}
+
+// Unknown reinterprets the union as its Unknown member.
+func (u *GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union) Unknown() *GOPHER_UNKNOWN_ATTRIBUTE_TYPE {
+	return (*GOPHER_UNKNOWN_ATTRIBUTE_TYPE)(unsafe.Pointer(u))
 }
 
 // GOPHER_ATTRIBUTE_TYPE: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-gopher_attribute_type
@@ -250,10 +336,26 @@ type INTERNET_BUFFERSW struct {
 	DwOffsetHigh    uint32
 }
 
+type INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union_Anonymous_e__Struct struct {
+	CachePath   [260]foundation.CHAR
+	DwCacheSize uint32
+}
+
 // INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union struct {
 	Data [66]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union) Anonymous() *INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// CachePaths reinterprets the union as its CachePaths member.
+func (u *INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union) CachePaths() *[1]INTERNET_CACHE_CONFIG_PATH_ENTRYA {
+	return (*[1]INTERNET_CACHE_CONFIG_PATH_ENTRYA)(unsafe.Pointer(u))
 }
 
 // INTERNET_CACHE_CONFIG_INFOA: https://learn.microsoft.com/windows/win32/api/winineti/ns-winineti-internet_cache_config_infoa
@@ -270,10 +372,26 @@ type INTERNET_CACHE_CONFIG_INFOA struct {
 	DwExemptUsage   uint32
 }
 
+type INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union_Anonymous_e__Struct struct {
+	CachePath   [260]uint16
+	DwCacheSize uint32
+}
+
 // INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union struct {
 	Data [131]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union) Anonymous() *INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// CachePaths reinterprets the union as its CachePaths member.
+func (u *INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union) CachePaths() *[1]INTERNET_CACHE_CONFIG_PATH_ENTRYW {
+	return (*[1]INTERNET_CACHE_CONFIG_PATH_ENTRYW)(unsafe.Pointer(u))
 }
 
 // INTERNET_CACHE_CONFIG_INFOW: https://learn.microsoft.com/windows/win32/api/winineti/ns-winineti-internet_cache_config_infow
@@ -317,9 +435,20 @@ type INTERNET_CACHE_CONTAINER_INFOW struct {
 }
 
 // INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwReserved reinterprets the union as its dwReserved member.
+func (u *INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union) DwReserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwExemptDelta reinterprets the union as its dwExemptDelta member.
+func (u *INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union) DwExemptDelta() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // INTERNET_CACHE_ENTRY_INFOA: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infoa
@@ -343,9 +472,20 @@ type INTERNET_CACHE_ENTRY_INFOA struct {
 }
 
 // INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwReserved reinterprets the union as its dwReserved member.
+func (u *INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union) DwReserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwExemptDelta reinterprets the union as its dwExemptDelta member.
+func (u *INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union) DwExemptDelta() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // INTERNET_CACHE_ENTRY_INFOW: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infow
@@ -446,10 +586,26 @@ type INTERNET_COOKIE2 struct {
 	FExpiresSet foundation.BOOL
 }
 
+type INTERNET_CREDENTIALS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	LpcwszUserName foundation.PWSTR
+	LpcwszPassword foundation.PWSTR
+}
+
 // INTERNET_CREDENTIALS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERNET_CREDENTIALS_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *INTERNET_CREDENTIALS_Anonymous_e__Union) Anonymous() *INTERNET_CREDENTIALS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*INTERNET_CREDENTIALS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// PAuthIdentityOpaque reinterprets the union as its pAuthIdentityOpaque member.
+func (u *INTERNET_CREDENTIALS_Anonymous_e__Union) PAuthIdentityOpaque() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type INTERNET_CREDENTIALS struct {
@@ -481,9 +637,25 @@ type INTERNET_END_BROWSER_SESSION_DATA struct {
 }
 
 // INTERNET_PER_CONN_OPTIONA_Value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERNET_PER_CONN_OPTIONA_Value_e__Union struct {
 	Data [1]uint64
+}
+
+// DwValue reinterprets the union as its dwValue member.
+func (u *INTERNET_PER_CONN_OPTIONA_Value_e__Union) DwValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PszValue reinterprets the union as its pszValue member.
+func (u *INTERNET_PER_CONN_OPTIONA_Value_e__Union) PszValue() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// FtValue reinterprets the union as its ftValue member.
+func (u *INTERNET_PER_CONN_OPTIONA_Value_e__Union) FtValue() *foundation.FILETIME {
+	return (*foundation.FILETIME)(unsafe.Pointer(u))
 }
 
 // INTERNET_PER_CONN_OPTIONA: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_per_conn_optiona
@@ -493,9 +665,25 @@ type INTERNET_PER_CONN_OPTIONA struct {
 }
 
 // INTERNET_PER_CONN_OPTIONW_Value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERNET_PER_CONN_OPTIONW_Value_e__Union struct {
 	Data [1]uint64
+}
+
+// DwValue reinterprets the union as its dwValue member.
+func (u *INTERNET_PER_CONN_OPTIONW_Value_e__Union) DwValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PszValue reinterprets the union as its pszValue member.
+func (u *INTERNET_PER_CONN_OPTIONW_Value_e__Union) PszValue() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// FtValue reinterprets the union as its ftValue member.
+func (u *INTERNET_PER_CONN_OPTIONW_Value_e__Union) FtValue() *foundation.FILETIME {
+	return (*foundation.FILETIME)(unsafe.Pointer(u))
 }
 
 // INTERNET_PER_CONN_OPTIONW: https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_per_conn_optionw

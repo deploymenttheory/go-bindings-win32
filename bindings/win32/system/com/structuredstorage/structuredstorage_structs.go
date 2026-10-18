@@ -5,6 +5,8 @@
 package structuredstorage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
@@ -151,9 +153,20 @@ type PROPBAG2 struct {
 }
 
 // PROPSPEC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSPEC_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Propid reinterprets the union as its propid member.
+func (u *PROPSPEC_Anonymous_e__Union) Propid() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Lpwstr reinterprets the union as its lpwstr member.
+func (u *PROPSPEC_Anonymous_e__Union) Lpwstr() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // PROPSPEC: https://learn.microsoft.com/windows/win32/api/propidlbase/ns-propidlbase-propspec
@@ -162,10 +175,401 @@ type PROPSPEC struct {
 	Anonymous PROPSPEC_Anonymous_e__Union
 }
 
+// PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [2]uint64
+}
+
+// CVal reinterprets the union as its cVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) CVal() *foundation.CHAR {
+	return (*foundation.CHAR)(unsafe.Pointer(u))
+}
+
+// BVal reinterprets the union as its bVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) BVal() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// IVal reinterprets the union as its iVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) IVal() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// UiVal reinterprets the union as its uiVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UiVal() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// LVal reinterprets the union as its lVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) LVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// UlVal reinterprets the union as its ulVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UlVal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// IntVal reinterprets the union as its intVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) IntVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// UintVal reinterprets the union as its uintVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UintVal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// HVal reinterprets the union as its hVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) HVal() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// UhVal reinterprets the union as its uhVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UhVal() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// FltVal reinterprets the union as its fltVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) FltVal() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DblVal reinterprets the union as its dblVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) DblVal() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// BoolVal reinterprets the union as its boolVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) BoolVal() *foundation.VARIANT_BOOL {
+	return (*foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// OBSOLETE__VARIANT_BOOL reinterprets the union as its __OBSOLETE__VARIANT_BOOL member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) OBSOLETE__VARIANT_BOOL() *foundation.VARIANT_BOOL {
+	return (*foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// Scode reinterprets the union as its scode member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Scode() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// CyVal reinterprets the union as its cyVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) CyVal() *systemcom.CY {
+	return (*systemcom.CY)(unsafe.Pointer(u))
+}
+
+// Date reinterprets the union as its date member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Date() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// Filetime reinterprets the union as its filetime member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Filetime() *foundation.FILETIME {
+	return (*foundation.FILETIME)(unsafe.Pointer(u))
+}
+
+// Puuid reinterprets the union as its puuid member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Puuid() **win32.GUID {
+	return (**win32.GUID)(unsafe.Pointer(u))
+}
+
+// Pclipdata reinterprets the union as its pclipdata member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Pclipdata() **CLIPDATA {
+	return (**CLIPDATA)(unsafe.Pointer(u))
+}
+
+// BstrVal reinterprets the union as its bstrVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) BstrVal() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// BstrblobVal reinterprets the union as its bstrblobVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) BstrblobVal() *BSTRBLOB {
+	return (*BSTRBLOB)(unsafe.Pointer(u))
+}
+
+// Blob reinterprets the union as its blob member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Blob() *systemcom.BLOB {
+	return (*systemcom.BLOB)(unsafe.Pointer(u))
+}
+
+// PszVal reinterprets the union as its pszVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PszVal() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PwszVal reinterprets the union as its pwszVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PwszVal() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PunkVal reinterprets the union as its punkVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PunkVal() **systemcom.IUnknown {
+	return (**systemcom.IUnknown)(unsafe.Pointer(u))
+}
+
+// PdispVal reinterprets the union as its pdispVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PdispVal() **systemcom.IDispatch {
+	return (**systemcom.IDispatch)(unsafe.Pointer(u))
+}
+
+// PStream reinterprets the union as its pStream member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PStream() **systemcom.IStream {
+	return (**systemcom.IStream)(unsafe.Pointer(u))
+}
+
+// PStorage reinterprets the union as its pStorage member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PStorage() **IStorage {
+	return (**IStorage)(unsafe.Pointer(u))
+}
+
+// PVersionedStream reinterprets the union as its pVersionedStream member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PVersionedStream() **VERSIONEDSTREAM {
+	return (**VERSIONEDSTREAM)(unsafe.Pointer(u))
+}
+
+// Parray reinterprets the union as its parray member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Parray() **systemcom.SAFEARRAY {
+	return (**systemcom.SAFEARRAY)(unsafe.Pointer(u))
+}
+
+// Cac reinterprets the union as its cac member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cac() *CAC {
+	return (*CAC)(unsafe.Pointer(u))
+}
+
+// Caub reinterprets the union as its caub member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Caub() *CAUB {
+	return (*CAUB)(unsafe.Pointer(u))
+}
+
+// Cai reinterprets the union as its cai member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cai() *CAI {
+	return (*CAI)(unsafe.Pointer(u))
+}
+
+// Caui reinterprets the union as its caui member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Caui() *CAUI {
+	return (*CAUI)(unsafe.Pointer(u))
+}
+
+// Cal reinterprets the union as its cal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cal() *CAL {
+	return (*CAL)(unsafe.Pointer(u))
+}
+
+// Caul reinterprets the union as its caul member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Caul() *CAUL {
+	return (*CAUL)(unsafe.Pointer(u))
+}
+
+// Cah reinterprets the union as its cah member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cah() *CAH {
+	return (*CAH)(unsafe.Pointer(u))
+}
+
+// Cauh reinterprets the union as its cauh member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cauh() *CAUH {
+	return (*CAUH)(unsafe.Pointer(u))
+}
+
+// Caflt reinterprets the union as its caflt member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Caflt() *CAFLT {
+	return (*CAFLT)(unsafe.Pointer(u))
+}
+
+// Cadbl reinterprets the union as its cadbl member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cadbl() *CADBL {
+	return (*CADBL)(unsafe.Pointer(u))
+}
+
+// Cabool reinterprets the union as its cabool member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cabool() *CABOOL {
+	return (*CABOOL)(unsafe.Pointer(u))
+}
+
+// Cascode reinterprets the union as its cascode member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cascode() *CASCODE {
+	return (*CASCODE)(unsafe.Pointer(u))
+}
+
+// Cacy reinterprets the union as its cacy member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cacy() *CACY {
+	return (*CACY)(unsafe.Pointer(u))
+}
+
+// Cadate reinterprets the union as its cadate member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cadate() *CADATE {
+	return (*CADATE)(unsafe.Pointer(u))
+}
+
+// Cafiletime reinterprets the union as its cafiletime member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cafiletime() *CAFILETIME {
+	return (*CAFILETIME)(unsafe.Pointer(u))
+}
+
+// Cauuid reinterprets the union as its cauuid member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cauuid() *CACLSID {
+	return (*CACLSID)(unsafe.Pointer(u))
+}
+
+// Caclipdata reinterprets the union as its caclipdata member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Caclipdata() *CACLIPDATA {
+	return (*CACLIPDATA)(unsafe.Pointer(u))
+}
+
+// Cabstr reinterprets the union as its cabstr member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cabstr() *CABSTR {
+	return (*CABSTR)(unsafe.Pointer(u))
+}
+
+// Cabstrblob reinterprets the union as its cabstrblob member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Cabstrblob() *CABSTRBLOB {
+	return (*CABSTRBLOB)(unsafe.Pointer(u))
+}
+
+// Calpstr reinterprets the union as its calpstr member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Calpstr() *CALPSTR {
+	return (*CALPSTR)(unsafe.Pointer(u))
+}
+
+// Calpwstr reinterprets the union as its calpwstr member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Calpwstr() *CALPWSTR {
+	return (*CALPWSTR)(unsafe.Pointer(u))
+}
+
+// Capropvar reinterprets the union as its capropvar member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Capropvar() *CAPROPVARIANT {
+	return (*CAPROPVARIANT)(unsafe.Pointer(u))
+}
+
+// PcVal reinterprets the union as its pcVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PcVal() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PbVal reinterprets the union as its pbVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PbVal() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
+// PiVal reinterprets the union as its piVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PiVal() **int16 {
+	return (**int16)(unsafe.Pointer(u))
+}
+
+// PuiVal reinterprets the union as its puiVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PuiVal() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// PlVal reinterprets the union as its plVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PlVal() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// PulVal reinterprets the union as its pulVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PulVal() **uint32 {
+	return (**uint32)(unsafe.Pointer(u))
+}
+
+// PintVal reinterprets the union as its pintVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PintVal() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// PuintVal reinterprets the union as its puintVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PuintVal() **uint32 {
+	return (**uint32)(unsafe.Pointer(u))
+}
+
+// PfltVal reinterprets the union as its pfltVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PfltVal() **float32 {
+	return (**float32)(unsafe.Pointer(u))
+}
+
+// PdblVal reinterprets the union as its pdblVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PdblVal() **float64 {
+	return (**float64)(unsafe.Pointer(u))
+}
+
+// PboolVal reinterprets the union as its pboolVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PboolVal() **foundation.VARIANT_BOOL {
+	return (**foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// PdecVal reinterprets the union as its pdecVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PdecVal() **foundation.DECIMAL {
+	return (**foundation.DECIMAL)(unsafe.Pointer(u))
+}
+
+// Pscode reinterprets the union as its pscode member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Pscode() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// PcyVal reinterprets the union as its pcyVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PcyVal() **systemcom.CY {
+	return (**systemcom.CY)(unsafe.Pointer(u))
+}
+
+// Pdate reinterprets the union as its pdate member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Pdate() **float64 {
+	return (**float64)(unsafe.Pointer(u))
+}
+
+// PbstrVal reinterprets the union as its pbstrVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PbstrVal() **foundation.BSTR {
+	return (**foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// PpunkVal reinterprets the union as its ppunkVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PpunkVal() ***systemcom.IUnknown {
+	return (***systemcom.IUnknown)(unsafe.Pointer(u))
+}
+
+// PpdispVal reinterprets the union as its ppdispVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PpdispVal() ***systemcom.IDispatch {
+	return (***systemcom.IDispatch)(unsafe.Pointer(u))
+}
+
+// Pparray reinterprets the union as its pparray member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Pparray() ***systemcom.SAFEARRAY {
+	return (***systemcom.SAFEARRAY)(unsafe.Pointer(u))
+}
+
+// PvarVal reinterprets the union as its pvarVal member.
+func (u *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PvarVal() **PROPVARIANT {
+	return (**PROPVARIANT)(unsafe.Pointer(u))
+}
+
+type PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Vt         systemvariant.VARENUM
+	WReserved1 uint16
+	WReserved2 uint16
+	WReserved3 uint16
+	Anonymous  PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+}
+
 // PROPVARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPVARIANT_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROPVARIANT_Anonymous_e__Union) Anonymous() *PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// DecVal reinterprets the union as its decVal member.
+func (u *PROPVARIANT_Anonymous_e__Union) DecVal() *foundation.DECIMAL {
+	return (*foundation.DECIMAL)(unsafe.Pointer(u))
 }
 
 // PROPVARIANT: https://learn.microsoft.com/windows/win32/api/propidlbase/ns-propidlbase-propvariant

@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 )
 
 type BitmapData struct {
@@ -277,9 +278,20 @@ type LevelsParams struct {
 }
 
 // MetafileHeader_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MetafileHeader_Anonymous_e__Union struct {
 	Data [22]uint32
+}
+
+// WmfHeader reinterprets the union as its WmfHeader member.
+func (u *MetafileHeader_Anonymous_e__Union) WmfHeader() *graphicsgdi.METAHEADER {
+	return (*graphicsgdi.METAHEADER)(unsafe.Pointer(u))
+}
+
+// EmfHeader reinterprets the union as its EmfHeader member.
+func (u *MetafileHeader_Anonymous_e__Union) EmfHeader() *ENHMETAHEADER3 {
+	return (*ENHMETAHEADER3)(unsafe.Pointer(u))
 }
 
 type MetafileHeader struct {

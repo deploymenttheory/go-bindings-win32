@@ -5,6 +5,8 @@
 package activescript
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
@@ -56,9 +58,20 @@ type MachineDebugManager_RETAIL struct {
 }
 
 // PROFILER_HEAP_OBJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROFILER_HEAP_OBJECT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// ObjectId reinterprets the union as its objectId member.
+func (u *PROFILER_HEAP_OBJECT_Anonymous_e__Union) ObjectId() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// ExternalObjectAddress reinterprets the union as its externalObjectAddress member.
+func (u *PROFILER_HEAP_OBJECT_Anonymous_e__Union) ExternalObjectAddress() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type PROFILER_HEAP_OBJECT struct {
@@ -71,9 +84,75 @@ type PROFILER_HEAP_OBJECT struct {
 }
 
 // PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Prototype reinterprets the union as its prototype member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) Prototype() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// FunctionName reinterprets the union as its functionName member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) FunctionName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// ElementAttributesSize reinterprets the union as its elementAttributesSize member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) ElementAttributesSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementTextChildrenSize reinterprets the union as its elementTextChildrenSize member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) ElementTextChildrenSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ScopeList reinterprets the union as its scopeList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) ScopeList() **PROFILER_HEAP_OBJECT_SCOPE_LIST {
+	return (**PROFILER_HEAP_OBJECT_SCOPE_LIST)(unsafe.Pointer(u))
+}
+
+// InternalProperty reinterprets the union as its internalProperty member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) InternalProperty() **PROFILER_HEAP_OBJECT_RELATIONSHIP {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP)(unsafe.Pointer(u))
+}
+
+// NamePropertyList reinterprets the union as its namePropertyList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) NamePropertyList() **PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST)(unsafe.Pointer(u))
+}
+
+// IndexPropertyList reinterprets the union as its indexPropertyList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) IndexPropertyList() **PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST)(unsafe.Pointer(u))
+}
+
+// RelationshipList reinterprets the union as its relationshipList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) RelationshipList() **PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST)(unsafe.Pointer(u))
+}
+
+// EventList reinterprets the union as its eventList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) EventList() **PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST)(unsafe.Pointer(u))
+}
+
+// WeakMapCollectionList reinterprets the union as its weakMapCollectionList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) WeakMapCollectionList() **PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST)(unsafe.Pointer(u))
+}
+
+// MapCollectionList reinterprets the union as its mapCollectionList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) MapCollectionList() **PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST)(unsafe.Pointer(u))
+}
+
+// SetCollectionList reinterprets the union as its setCollectionList member.
+func (u *PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union) SetCollectionList() **PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST {
+	return (**PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST)(unsafe.Pointer(u))
 }
 
 type PROFILER_HEAP_OBJECT_OPTIONAL_INFO struct {
@@ -82,9 +161,40 @@ type PROFILER_HEAP_OBJECT_OPTIONAL_INFO struct {
 }
 
 // PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// NumberValue reinterprets the union as its numberValue member.
+func (u *PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union) NumberValue() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// StringValue reinterprets the union as its stringValue member.
+func (u *PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union) StringValue() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// BstrValue reinterprets the union as its bstrValue member.
+func (u *PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union) BstrValue() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// ObjectId reinterprets the union as its objectId member.
+func (u *PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union) ObjectId() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// ExternalObjectAddress reinterprets the union as its externalObjectAddress member.
+func (u *PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union) ExternalObjectAddress() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// SubString reinterprets the union as its subString member.
+func (u *PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union) SubString() **PROFILER_PROPERTY_TYPE_SUBSTRING_INFO {
+	return (**PROFILER_PROPERTY_TYPE_SUBSTRING_INFO)(unsafe.Pointer(u))
 }
 
 type PROFILER_HEAP_OBJECT_RELATIONSHIP struct {

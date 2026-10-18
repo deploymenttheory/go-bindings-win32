@@ -112,7 +112,11 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   - gather (`types.go`, `functions.go`, `interfaces.go`, `handles.go`,
     `sizes.go`, `generator.go`): all decisions; the function/COM gathers apply
     the idiomatic shaping (see below), unions become size/alignment-correct
-    opaque blobs, C layout is computed in `sizes.go` (amd64 model).
+    opaque blobs carrying one typed accessor per member (`unionAccessors`;
+    every C union member sits at offset 0, so each accessor is a single
+    pointer reinterpretation, and types nested inside a union are emitted as
+    siblings like any other anonymous nested type), C layout is computed in
+    `sizes.go` (amd64 model).
   - `view/` — pure-data IR; imports nothing from meta/typemap.
   - `render/` — `//go:embed templates/*.tmpl`; imports only `view` (the
     render firewall). Templates branch on `ReturnKind`, never decide.

@@ -5,6 +5,8 @@
 package interactioncontext
 
 import (
+	"unsafe"
+
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
 
@@ -39,9 +41,25 @@ type INTERACTION_CONTEXT_CONFIGURATION struct {
 }
 
 // INTERACTION_CONTEXT_OUTPUT_arguments_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERACTION_CONTEXT_OUTPUT_arguments_e__Union struct {
 	Data [15]uint32
+}
+
+// Manipulation reinterprets the union as its manipulation member.
+func (u *INTERACTION_CONTEXT_OUTPUT_arguments_e__Union) Manipulation() *INTERACTION_ARGUMENTS_MANIPULATION {
+	return (*INTERACTION_ARGUMENTS_MANIPULATION)(unsafe.Pointer(u))
+}
+
+// Tap reinterprets the union as its tap member.
+func (u *INTERACTION_CONTEXT_OUTPUT_arguments_e__Union) Tap() *INTERACTION_ARGUMENTS_TAP {
+	return (*INTERACTION_ARGUMENTS_TAP)(unsafe.Pointer(u))
+}
+
+// CrossSlide reinterprets the union as its crossSlide member.
+func (u *INTERACTION_CONTEXT_OUTPUT_arguments_e__Union) CrossSlide() *INTERACTION_ARGUMENTS_CROSS_SLIDE {
+	return (*INTERACTION_ARGUMENTS_CROSS_SLIDE)(unsafe.Pointer(u))
 }
 
 // INTERACTION_CONTEXT_OUTPUT: https://learn.microsoft.com/windows/win32/api/interactioncontext/ns-interactioncontext-interaction_context_output
@@ -55,9 +73,25 @@ type INTERACTION_CONTEXT_OUTPUT struct {
 }
 
 // INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union struct {
 	Data [15]uint32
+}
+
+// Manipulation reinterprets the union as its manipulation member.
+func (u *INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union) Manipulation() *INTERACTION_ARGUMENTS_MANIPULATION {
+	return (*INTERACTION_ARGUMENTS_MANIPULATION)(unsafe.Pointer(u))
+}
+
+// Tap reinterprets the union as its tap member.
+func (u *INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union) Tap() *INTERACTION_ARGUMENTS_TAP {
+	return (*INTERACTION_ARGUMENTS_TAP)(unsafe.Pointer(u))
+}
+
+// CrossSlide reinterprets the union as its crossSlide member.
+func (u *INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union) CrossSlide() *INTERACTION_ARGUMENTS_CROSS_SLIDE {
+	return (*INTERACTION_ARGUMENTS_CROSS_SLIDE)(unsafe.Pointer(u))
 }
 
 type INTERACTION_CONTEXT_OUTPUT2 struct {

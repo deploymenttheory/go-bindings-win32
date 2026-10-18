@@ -5,13 +5,45 @@
 package direct3d
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+type D3DMATRIX_Anonymous_e__Union_Anonymous_e__Struct struct {
+	F11 float32
+	F12 float32
+	F13 float32
+	F14 float32
+	F21 float32
+	F22 float32
+	F23 float32
+	F24 float32
+	F31 float32
+	F32 float32
+	F33 float32
+	F34 float32
+	F41 float32
+	F42 float32
+	F43 float32
+	F44 float32
+}
+
 // D3DMATRIX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATRIX_Anonymous_e__Union struct {
 	Data [16]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *D3DMATRIX_Anonymous_e__Union) Anonymous() *D3DMATRIX_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*D3DMATRIX_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// M reinterprets the union as its m member.
+func (u *D3DMATRIX_Anonymous_e__Union) M() *[16]float32 {
+	return (*[16]float32)(unsafe.Pointer(u))
 }
 
 // D3DMATRIX: https://learn.microsoft.com/windows/win32/direct3d10/d3d10-d3dmatrix
@@ -54,7 +86,18 @@ type D3D_SHADER_MACRO struct {
 }
 
 // D3D_VERSION_NUMBER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D_VERSION_NUMBER struct {
 	Data [1]uint64
+}
+
+// Version reinterprets the union as its Version member.
+func (u *D3D_VERSION_NUMBER) Version() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// VersionParts reinterprets the union as its VersionParts member.
+func (u *D3D_VERSION_NUMBER) VersionParts() *[4]uint16 {
+	return (*[4]uint16)(unsafe.Pointer(u))
 }

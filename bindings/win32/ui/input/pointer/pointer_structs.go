@@ -5,6 +5,8 @@
 package pointer
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
@@ -18,10 +20,40 @@ type INPUT_INJECTION_VALUE struct {
 	Index uint16
 }
 
+type INPUT_TRANSFORM_Anonymous_e__Union_Anonymous_e__Struct struct {
+	F11 float32
+	F12 float32
+	F13 float32
+	F14 float32
+	F21 float32
+	F22 float32
+	F23 float32
+	F24 float32
+	F31 float32
+	F32 float32
+	F33 float32
+	F34 float32
+	F41 float32
+	F42 float32
+	F43 float32
+	F44 float32
+}
+
 // INPUT_TRANSFORM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INPUT_TRANSFORM_Anonymous_e__Union struct {
 	Data [16]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *INPUT_TRANSFORM_Anonymous_e__Union) Anonymous() *INPUT_TRANSFORM_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*INPUT_TRANSFORM_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// M reinterprets the union as its m member.
+func (u *INPUT_TRANSFORM_Anonymous_e__Union) M() *[16]float32 {
+	return (*[16]float32)(unsafe.Pointer(u))
 }
 
 // INPUT_TRANSFORM: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-input_transform
@@ -101,9 +133,25 @@ type POINTER_TOUCH_INFO struct {
 }
 
 // POINTER_TYPE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type POINTER_TYPE_INFO_Anonymous_e__Union struct {
 	Data [18]uint64
+}
+
+// PointerInfo reinterprets the union as its pointerInfo member.
+func (u *POINTER_TYPE_INFO_Anonymous_e__Union) PointerInfo() *POINTER_INFO {
+	return (*POINTER_INFO)(unsafe.Pointer(u))
+}
+
+// TouchInfo reinterprets the union as its touchInfo member.
+func (u *POINTER_TYPE_INFO_Anonymous_e__Union) TouchInfo() *POINTER_TOUCH_INFO {
+	return (*POINTER_TOUCH_INFO)(unsafe.Pointer(u))
+}
+
+// PenInfo reinterprets the union as its penInfo member.
+func (u *POINTER_TYPE_INFO_Anonymous_e__Union) PenInfo() *POINTER_PEN_INFO {
+	return (*POINTER_PEN_INFO)(unsafe.Pointer(u))
 }
 
 // POINTER_TYPE_INFO: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-pointer_type_info

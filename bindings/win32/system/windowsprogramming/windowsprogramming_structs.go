@@ -148,9 +148,20 @@ type DELAYLOAD_INFO struct {
 }
 
 // DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union struct {
 	Data [1]uint64
+}
+
+// Name reinterprets the union as its Name member.
+func (u *DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union) Name() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// Ordinal reinterprets the union as its Ordinal member.
+func (u *DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union) Ordinal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DELAYLOAD_PROC_DESCRIPTOR struct {
@@ -199,10 +210,25 @@ type HW_PROFILE_INFOW struct {
 	SzHwProfileName [80]uint16
 }
 
+type IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union struct {
 	Data [1]uint32
+}
+
+// AllAttributes reinterprets the union as its AllAttributes member.
+func (u *IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union) AllAttributes() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union) Anonymous() *IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union_Anonymous_e__Struct {
+	return (*IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IMAGE_DELAYLOAD_DESCRIPTOR struct {
@@ -217,9 +243,30 @@ type IMAGE_DELAYLOAD_DESCRIPTOR struct {
 }
 
 // IMAGE_THUNK_DATA32_u1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_THUNK_DATA32_u1_e__Union struct {
 	Data [1]uint32
+}
+
+// ForwarderString reinterprets the union as its ForwarderString member.
+func (u *IMAGE_THUNK_DATA32_u1_e__Union) ForwarderString() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Function reinterprets the union as its Function member.
+func (u *IMAGE_THUNK_DATA32_u1_e__Union) Function() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ordinal reinterprets the union as its Ordinal member.
+func (u *IMAGE_THUNK_DATA32_u1_e__Union) Ordinal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// AddressOfData reinterprets the union as its AddressOfData member.
+func (u *IMAGE_THUNK_DATA32_u1_e__Union) AddressOfData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type IMAGE_THUNK_DATA32 struct {
@@ -227,9 +274,30 @@ type IMAGE_THUNK_DATA32 struct {
 }
 
 // IMAGE_THUNK_DATA64_u1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_THUNK_DATA64_u1_e__Union struct {
 	Data [1]uint64
+}
+
+// ForwarderString reinterprets the union as its ForwarderString member.
+func (u *IMAGE_THUNK_DATA64_u1_e__Union) ForwarderString() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Function reinterprets the union as its Function member.
+func (u *IMAGE_THUNK_DATA64_u1_e__Union) Function() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Ordinal reinterprets the union as its Ordinal member.
+func (u *IMAGE_THUNK_DATA64_u1_e__Union) Ordinal() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// AddressOfData reinterprets the union as its AddressOfData member.
+func (u *IMAGE_THUNK_DATA64_u1_e__Union) AddressOfData() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type IMAGE_THUNK_DATA64 struct {
@@ -293,9 +361,20 @@ type JIT_DEBUG_INFO struct {
 }
 
 // LDR_DATA_TABLE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type LDR_DATA_TABLE_ENTRY_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// CheckSum reinterprets the union as its CheckSum member.
+func (u *LDR_DATA_TABLE_ENTRY_Anonymous_e__Union) CheckSum() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Reserved6 reinterprets the union as its Reserved6 member.
+func (u *LDR_DATA_TABLE_ENTRY_Anonymous_e__Union) Reserved6() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type LDR_DATA_TABLE_ENTRY struct {
@@ -333,10 +412,25 @@ type PERUSERSECTIONW struct {
 	BRollback     foundation.BOOL
 }
 
+type PROCESS_CREATION_SVE_VECTOR_LENGTH_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_CREATION_SVE_VECTOR_LENGTH is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_CREATION_SVE_VECTOR_LENGTH struct {
 	Data [1]uint32
+}
+
+// Data_ reinterprets the union as its Data member.
+func (u *PROCESS_CREATION_SVE_VECTOR_LENGTH) Data_() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_CREATION_SVE_VECTOR_LENGTH) Anonymous() *PROCESS_CREATION_SVE_VECTOR_LENGTH_Anonymous_e__Struct {
+	return (*PROCESS_CREATION_SVE_VECTOR_LENGTH_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PUBLIC_OBJECT_BASIC_INFORMATION struct {
@@ -524,9 +618,20 @@ type TDIObjectID struct {
 }
 
 // TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// IoControlCode reinterprets the union as its IoControlCode member.
+func (u *TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union) IoControlCode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// OptionName reinterprets the union as its OptionName member.
+func (u *TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union) OptionName() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type TDI_TL_IO_CONTROL_ENDPOINT struct {

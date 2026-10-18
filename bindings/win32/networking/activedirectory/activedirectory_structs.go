@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uishell "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/shell"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
@@ -36,9 +37,145 @@ type ADSPROPINITPARAMS struct {
 }
 
 // ADSVALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ADSVALUE_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// DNString reinterprets the union as its DNString member.
+func (u *ADSVALUE_Anonymous_e__Union) DNString() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// CaseExactString reinterprets the union as its CaseExactString member.
+func (u *ADSVALUE_Anonymous_e__Union) CaseExactString() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// CaseIgnoreString reinterprets the union as its CaseIgnoreString member.
+func (u *ADSVALUE_Anonymous_e__Union) CaseIgnoreString() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// PrintableString reinterprets the union as its PrintableString member.
+func (u *ADSVALUE_Anonymous_e__Union) PrintableString() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// NumericString reinterprets the union as its NumericString member.
+func (u *ADSVALUE_Anonymous_e__Union) NumericString() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// Boolean reinterprets the union as its Boolean member.
+func (u *ADSVALUE_Anonymous_e__Union) Boolean() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Integer reinterprets the union as its Integer member.
+func (u *ADSVALUE_Anonymous_e__Union) Integer() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// OctetString reinterprets the union as its OctetString member.
+func (u *ADSVALUE_Anonymous_e__Union) OctetString() *ADS_OCTET_STRING {
+	return (*ADS_OCTET_STRING)(unsafe.Pointer(u))
+}
+
+// UTCTime reinterprets the union as its UTCTime member.
+func (u *ADSVALUE_Anonymous_e__Union) UTCTime() *foundation.SYSTEMTIME {
+	return (*foundation.SYSTEMTIME)(unsafe.Pointer(u))
+}
+
+// LargeInteger reinterprets the union as its LargeInteger member.
+func (u *ADSVALUE_Anonymous_e__Union) LargeInteger() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// ClassName reinterprets the union as its ClassName member.
+func (u *ADSVALUE_Anonymous_e__Union) ClassName() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// ProviderSpecific reinterprets the union as its ProviderSpecific member.
+func (u *ADSVALUE_Anonymous_e__Union) ProviderSpecific() *ADS_PROV_SPECIFIC {
+	return (*ADS_PROV_SPECIFIC)(unsafe.Pointer(u))
+}
+
+// PCaseIgnoreList reinterprets the union as its pCaseIgnoreList member.
+func (u *ADSVALUE_Anonymous_e__Union) PCaseIgnoreList() **ADS_CASEIGNORE_LIST {
+	return (**ADS_CASEIGNORE_LIST)(unsafe.Pointer(u))
+}
+
+// POctetList reinterprets the union as its pOctetList member.
+func (u *ADSVALUE_Anonymous_e__Union) POctetList() **ADS_OCTET_LIST {
+	return (**ADS_OCTET_LIST)(unsafe.Pointer(u))
+}
+
+// PPath reinterprets the union as its pPath member.
+func (u *ADSVALUE_Anonymous_e__Union) PPath() **ADS_PATH {
+	return (**ADS_PATH)(unsafe.Pointer(u))
+}
+
+// PPostalAddress reinterprets the union as its pPostalAddress member.
+func (u *ADSVALUE_Anonymous_e__Union) PPostalAddress() **ADS_POSTALADDRESS {
+	return (**ADS_POSTALADDRESS)(unsafe.Pointer(u))
+}
+
+// Timestamp reinterprets the union as its Timestamp member.
+func (u *ADSVALUE_Anonymous_e__Union) Timestamp() *ADS_TIMESTAMP {
+	return (*ADS_TIMESTAMP)(unsafe.Pointer(u))
+}
+
+// BackLink reinterprets the union as its BackLink member.
+func (u *ADSVALUE_Anonymous_e__Union) BackLink() *ADS_BACKLINK {
+	return (*ADS_BACKLINK)(unsafe.Pointer(u))
+}
+
+// PTypedName reinterprets the union as its pTypedName member.
+func (u *ADSVALUE_Anonymous_e__Union) PTypedName() **ADS_TYPEDNAME {
+	return (**ADS_TYPEDNAME)(unsafe.Pointer(u))
+}
+
+// Hold reinterprets the union as its Hold member.
+func (u *ADSVALUE_Anonymous_e__Union) Hold() *ADS_HOLD {
+	return (*ADS_HOLD)(unsafe.Pointer(u))
+}
+
+// PNetAddress reinterprets the union as its pNetAddress member.
+func (u *ADSVALUE_Anonymous_e__Union) PNetAddress() **ADS_NETADDRESS {
+	return (**ADS_NETADDRESS)(unsafe.Pointer(u))
+}
+
+// PReplicaPointer reinterprets the union as its pReplicaPointer member.
+func (u *ADSVALUE_Anonymous_e__Union) PReplicaPointer() **ADS_REPLICAPOINTER {
+	return (**ADS_REPLICAPOINTER)(unsafe.Pointer(u))
+}
+
+// PFaxNumber reinterprets the union as its pFaxNumber member.
+func (u *ADSVALUE_Anonymous_e__Union) PFaxNumber() **ADS_FAXNUMBER {
+	return (**ADS_FAXNUMBER)(unsafe.Pointer(u))
+}
+
+// Email reinterprets the union as its Email member.
+func (u *ADSVALUE_Anonymous_e__Union) Email() *ADS_EMAIL {
+	return (*ADS_EMAIL)(unsafe.Pointer(u))
+}
+
+// SecurityDescriptor reinterprets the union as its SecurityDescriptor member.
+func (u *ADSVALUE_Anonymous_e__Union) SecurityDescriptor() *ADS_NT_SECURITY_DESCRIPTOR {
+	return (*ADS_NT_SECURITY_DESCRIPTOR)(unsafe.Pointer(u))
+}
+
+// PDNWithBinary reinterprets the union as its pDNWithBinary member.
+func (u *ADSVALUE_Anonymous_e__Union) PDNWithBinary() **ADS_DN_WITH_BINARY {
+	return (**ADS_DN_WITH_BINARY)(unsafe.Pointer(u))
+}
+
+// PDNWithString reinterprets the union as its pDNWithString member.
+func (u *ADSVALUE_Anonymous_e__Union) PDNWithString() **ADS_DN_WITH_STRING {
+	return (**ADS_DN_WITH_STRING)(unsafe.Pointer(u))
 }
 
 // ADSVALUE: https://learn.microsoft.com/windows/win32/api/iads/ns-iads-adsvalue
@@ -1109,9 +1246,20 @@ type NetAddress struct {
 }
 
 // OPENQUERYWINDOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OPENQUERYWINDOW_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PFormParameters reinterprets the union as its pFormParameters member.
+func (u *OPENQUERYWINDOW_Anonymous_e__Union) PFormParameters() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PpbFormParameters reinterprets the union as its ppbFormParameters member.
+func (u *OPENQUERYWINDOW_Anonymous_e__Union) PpbFormParameters() **systemcomstructuredstorage.IPropertyBag {
+	return (**systemcomstructuredstorage.IPropertyBag)(unsafe.Pointer(u))
 }
 
 // OPENQUERYWINDOW: https://learn.microsoft.com/windows/win32/api/cmnquery/ns-cmnquery-openquerywindow

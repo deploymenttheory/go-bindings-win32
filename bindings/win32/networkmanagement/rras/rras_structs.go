@@ -635,9 +635,20 @@ type PPTP_CONFIG_PARAMS struct {
 }
 
 // PROJECTION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROJECTION_INFO_Anonymous_e__Union struct {
 	Data [24]uint64
+}
+
+// PppProjectionInfo reinterprets the union as its PppProjectionInfo member.
+func (u *PROJECTION_INFO_Anonymous_e__Union) PppProjectionInfo() *PPP_PROJECTION_INFO {
+	return (*PPP_PROJECTION_INFO)(unsafe.Pointer(u))
+}
+
+// Ikev2ProjectionInfo reinterprets the union as its Ikev2ProjectionInfo member.
+func (u *PROJECTION_INFO_Anonymous_e__Union) Ikev2ProjectionInfo() *IKEV2_PROJECTION_INFO {
+	return (*IKEV2_PROJECTION_INFO)(unsafe.Pointer(u))
 }
 
 // PROJECTION_INFO: https://learn.microsoft.com/windows/win32/api/mprapi/ns-mprapi-projection_info
@@ -647,9 +658,20 @@ type PROJECTION_INFO struct {
 }
 
 // PROJECTION_INFO2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROJECTION_INFO2_Anonymous_e__Union struct {
 	Data [25]uint64
+}
+
+// PppProjectionInfo reinterprets the union as its PppProjectionInfo member.
+func (u *PROJECTION_INFO2_Anonymous_e__Union) PppProjectionInfo() *PPP_PROJECTION_INFO2 {
+	return (*PPP_PROJECTION_INFO2)(unsafe.Pointer(u))
+}
+
+// Ikev2ProjectionInfo reinterprets the union as its Ikev2ProjectionInfo member.
+func (u *PROJECTION_INFO2_Anonymous_e__Union) Ikev2ProjectionInfo() *IKEV2_PROJECTION_INFO2 {
+	return (*IKEV2_PROJECTION_INFO2)(unsafe.Pointer(u))
 }
 
 // PROJECTION_INFO2: https://learn.microsoft.com/windows/win32/api/mprapi/ns-mprapi-projection_info2
@@ -1188,9 +1210,20 @@ type RASSUBENTRYW struct {
 }
 
 // RASTUNNELENDPOINT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RASTUNNELENDPOINT_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Ipv4 reinterprets the union as its ipv4 member.
+func (u *RASTUNNELENDPOINT_Anonymous_e__Union) Ipv4() *networkingwinsock.IN_ADDR {
+	return (*networkingwinsock.IN_ADDR)(unsafe.Pointer(u))
+}
+
+// Ipv6 reinterprets the union as its ipv6 member.
+func (u *RASTUNNELENDPOINT_Anonymous_e__Union) Ipv6() *networkingwinsock.IN6_ADDR {
+	return (*networkingwinsock.IN6_ADDR)(unsafe.Pointer(u))
 }
 
 type RASTUNNELENDPOINT struct {
@@ -1392,9 +1425,20 @@ type RAS_PORT_2 struct {
 }
 
 // RAS_PROJECTION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RAS_PROJECTION_INFO_Anonymous_e__Union struct {
 	Data [25]uint32
+}
+
+// Ppp reinterprets the union as its ppp member.
+func (u *RAS_PROJECTION_INFO_Anonymous_e__Union) Ppp() *RASPPP_PROJECTION_INFO {
+	return (*RASPPP_PROJECTION_INFO)(unsafe.Pointer(u))
+}
+
+// Ikev2 reinterprets the union as its ikev2 member.
+func (u *RAS_PROJECTION_INFO_Anonymous_e__Union) Ikev2() *RASIKEV2_PROJECTION_INFO {
+	return (*RASIKEV2_PROJECTION_INFO)(unsafe.Pointer(u))
 }
 
 // RAS_PROJECTION_INFO: https://learn.microsoft.com/windows/win32/api/ras/ns-ras-ras_projection_info
@@ -1526,10 +1570,26 @@ type RTM_ENTITY_EXPORT_METHODS struct {
 	Methods    [1]RTM_ENTITY_EXPORT_METHOD
 }
 
+type RTM_ENTITY_ID_Anonymous_e__Union_Anonymous_e__Struct struct {
+	EntityProtocolId uint32
+	EntityInstanceId uint32
+}
+
 // RTM_ENTITY_ID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RTM_ENTITY_ID_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *RTM_ENTITY_ID_Anonymous_e__Union) Anonymous() *RTM_ENTITY_ID_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*RTM_ENTITY_ID_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// EntityId reinterprets the union as its EntityId member.
+func (u *RTM_ENTITY_ID_Anonymous_e__Union) EntityId() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // RTM_ENTITY_ID: https://learn.microsoft.com/windows/win32/api/rtmv2/ns-rtmv2-rtm_entity_id
@@ -1644,9 +1704,20 @@ type SSTP_CONFIG_PARAMS struct {
 }
 
 // VPN_TS_IP_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VPN_TS_IP_ADDRESS_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// V4 reinterprets the union as its v4 member.
+func (u *VPN_TS_IP_ADDRESS_Anonymous_e__Union) V4() *networkingwinsock.IN_ADDR {
+	return (*networkingwinsock.IN_ADDR)(unsafe.Pointer(u))
+}
+
+// V6 reinterprets the union as its v6 member.
+func (u *VPN_TS_IP_ADDRESS_Anonymous_e__Union) V6() *networkingwinsock.IN6_ADDR {
+	return (*networkingwinsock.IN6_ADDR)(unsafe.Pointer(u))
 }
 
 type VPN_TS_IP_ADDRESS struct {

@@ -87,18 +87,69 @@ type PROCESS_MEMORY_COUNTERS_EX2 struct {
 	SharedCommitUsage          uint64
 }
 
+type PSAPI_WORKING_SET_BLOCK_Anonymous_e__Struct struct {
+	Bitfield uintptr
+}
+
 // PSAPI_WORKING_SET_BLOCK: https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-psapi_working_set_block
 // PSAPI_WORKING_SET_BLOCK is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PSAPI_WORKING_SET_BLOCK struct {
 	Data [1]uint64
 }
 
+// Flags reinterprets the union as its Flags member.
+func (u *PSAPI_WORKING_SET_BLOCK) Flags() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PSAPI_WORKING_SET_BLOCK) Anonymous() *PSAPI_WORKING_SET_BLOCK_Anonymous_e__Struct {
+	return (*PSAPI_WORKING_SET_BLOCK_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uintptr
+}
+
+type PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Invalid_e__Struct struct {
+	Bitfield uintptr
+}
+
+// PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union struct {
+	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union) Anonymous() *PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Invalid reinterprets the union as its Invalid member.
+func (u *PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union) Invalid() *PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Invalid_e__Struct {
+	return (*PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Invalid_e__Struct)(unsafe.Pointer(u))
+}
+
 // PSAPI_WORKING_SET_EX_BLOCK: https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-psapi_working_set_ex_block
 // PSAPI_WORKING_SET_EX_BLOCK is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PSAPI_WORKING_SET_EX_BLOCK struct {
 	Data [1]uint64
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PSAPI_WORKING_SET_EX_BLOCK) Flags() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PSAPI_WORKING_SET_EX_BLOCK) Anonymous() *PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union {
+	return (*PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union)(unsafe.Pointer(u))
 }
 
 // PSAPI_WORKING_SET_EX_INFORMATION: https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-psapi_working_set_ex_information

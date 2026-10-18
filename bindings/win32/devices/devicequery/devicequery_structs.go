@@ -31,9 +31,20 @@ type DEV_QUERY_PARAMETER struct {
 }
 
 // DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD struct {
 	Data [4]uint64
+}
+
+// State reinterprets the union as its State member.
+func (u *DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD) State() *DEV_QUERY_STATE {
+	return (*DEV_QUERY_STATE)(unsafe.Pointer(u))
+}
+
+// DeviceObject reinterprets the union as its DeviceObject member.
+func (u *DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD) DeviceObject() *DEV_OBJECT {
+	return (*DEV_OBJECT)(unsafe.Pointer(u))
 }
 
 type DEV_QUERY_RESULT_ACTION_DATA struct {

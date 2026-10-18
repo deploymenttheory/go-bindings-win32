@@ -112,9 +112,15 @@ type ACL_SIZE_INFORMATION struct {
 }
 
 // CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union struct {
 	Data [1]uint64
+}
+
+// PAttributeV1 reinterprets the union as its pAttributeV1 member.
+func (u *CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union) PAttributeV1() **CLAIM_SECURITY_ATTRIBUTE_V1 {
+	return (**CLAIM_SECURITY_ATTRIBUTE_V1)(unsafe.Pointer(u))
 }
 
 // CLAIM_SECURITY_ATTRIBUTES_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-claim_security_attributes_information
@@ -138,9 +144,35 @@ type CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE struct {
 }
 
 // CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union struct {
 	Data [1]uint32
+}
+
+// PInt64 reinterprets the union as its pInt64 member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union) PInt64() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
+}
+
+// PUint64 reinterprets the union as its pUint64 member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union) PUint64() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
+}
+
+// PpString reinterprets the union as its ppString member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union) PpString() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
+}
+
+// PFqbn reinterprets the union as its pFqbn member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union) PFqbn() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
+}
+
+// POctetString reinterprets the union as its pOctetString member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union) POctetString() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
 }
 
 // CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-claim_security_attribute_relative_v1
@@ -154,9 +186,35 @@ type CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 struct {
 }
 
 // CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union struct {
 	Data [1]uint64
+}
+
+// PInt64 reinterprets the union as its pInt64 member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union) PInt64() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// PUint64 reinterprets the union as its pUint64 member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union) PUint64() **uint64 {
+	return (**uint64)(unsafe.Pointer(u))
+}
+
+// PpString reinterprets the union as its ppString member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union) PpString() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PFqbn reinterprets the union as its pFqbn member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union) PFqbn() **CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE {
+	return (**CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE)(unsafe.Pointer(u))
+}
+
+// POctetString reinterprets the union as its pOctetString member.
+func (u *CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union) POctetString() **CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
+	return (**CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE)(unsafe.Pointer(u))
 }
 
 // CLAIM_SECURITY_ATTRIBUTE_V1: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-claim_security_attribute_v1
@@ -178,9 +236,20 @@ type GENERIC_MAPPING struct {
 }
 
 // LLFILETIME_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type LLFILETIME_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Ll reinterprets the union as its ll member.
+func (u *LLFILETIME_Anonymous_e__Union) Ll() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// Ft reinterprets the union as its ft member.
+func (u *LLFILETIME_Anonymous_e__Union) Ft() *foundation.FILETIME {
+	return (*foundation.FILETIME)(unsafe.Pointer(u))
 }
 
 type LLFILETIME struct {
@@ -295,9 +364,20 @@ type SE_SECURITY_DESCRIPTOR struct {
 }
 
 // SE_SID is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SE_SID struct {
 	Data [17]uint32
+}
+
+// Sid reinterprets the union as its Sid member.
+func (u *SE_SID) Sid() *SID {
+	return (*SID)(unsafe.Pointer(u))
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *SE_SID) Buffer() *[68]byte {
+	return (*[68]byte)(unsafe.Pointer(u))
 }
 
 // SID: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-sid

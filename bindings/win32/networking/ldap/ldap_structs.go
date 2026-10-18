@@ -109,9 +109,20 @@ type LDAPMessage struct {
 }
 
 // LDAPModA_mod_vals_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type LDAPModA_mod_vals_e__Union struct {
 	Data [1]uint64
+}
+
+// Modv_strvals reinterprets the union as its modv_strvals member.
+func (u *LDAPModA_mod_vals_e__Union) Modv_strvals() **foundation.PSTR {
+	return (**foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// Modv_bvals reinterprets the union as its modv_bvals member.
+func (u *LDAPModA_mod_vals_e__Union) Modv_bvals() ***LDAP_BERVAL {
+	return (***LDAP_BERVAL)(unsafe.Pointer(u))
 }
 
 // LDAPModA: https://learn.microsoft.com/windows/win32/api/winldap/ns-winldap-ldapmoda
@@ -122,9 +133,20 @@ type LDAPModA struct {
 }
 
 // LDAPModW_mod_vals_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type LDAPModW_mod_vals_e__Union struct {
 	Data [1]uint64
+}
+
+// Modv_strvals reinterprets the union as its modv_strvals member.
+func (u *LDAPModW_mod_vals_e__Union) Modv_strvals() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Modv_bvals reinterprets the union as its modv_bvals member.
+func (u *LDAPModW_mod_vals_e__Union) Modv_bvals() ***LDAP_BERVAL {
+	return (***LDAP_BERVAL)(unsafe.Pointer(u))
 }
 
 // LDAPModW: https://learn.microsoft.com/windows/win32/api/winldap/ns-winldap-ldapmodw

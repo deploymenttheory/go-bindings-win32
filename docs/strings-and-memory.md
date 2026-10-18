@@ -60,13 +60,36 @@ sysinfo.GlobalMemoryStatusEx(&mem)
 ```
 
 **Unions** are exposed as a correctly sized, correctly aligned backing blob
-(a struct with a `Data [N]uintN` field). Read the overlay you need:
+(a struct with a `Data [N]uintN` field) plus one typed accessor per member.
+Every C union member starts at offset 0, so each accessor is a single pointer
+reinterpretation of that storage; it returns a `*T` you can read *and* write:
 
 ```go
 var si sysinfo.SYSTEM_INFO
 sysinfo.GetNativeSystemInfo(&si)
-arch := uint16(si.Anonymous.Data[0] & 0xFFFF) // wProcessorArchitecture
+arch := si.Anonymous.Anonymous().WProcessorArchitecture // PROCESSOR_ARCHITECTURE
 ```
+
+Anonymous structs and unions nested inside a union are emitted too, named after
+the path that reaches them, so a deeply overlaid type stays fully typed. That is
+what makes `VARIANT` and `PROPVARIANT` usable — the discriminant is a real
+field, and each payload has its own accessor:
+
+```go
+var pv structuredstorage.PROPVARIANT
+defer structuredstorage.PropVariantClear(&pv)
+store.GetValue(&key, &pv)
+
+v := pv.Anonymous.Anonymous()                  // the vt-carrying struct
+if v.Vt == variant.VT_LPWSTR {                 // typed VARENUM
+	name := win32.UTF16ToString((*uint16)(*v.Anonymous.PwszVal()))
+}
+```
+
+A member whose type the package cannot name — a cross-namespace type on a
+severed import edge — degrades to a correctly sized blob or `unsafe.Pointer`,
+exactly as a struct field of that type would. The `Data` backing field stays,
+so byte-level access remains available.
 
 **Bitfields** become `_bitfieldN` backing fields; mask/shift to read members
 (typed accessors are a future addition).

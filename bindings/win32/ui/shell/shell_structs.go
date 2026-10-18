@@ -811,9 +811,20 @@ type NEWCPLINFOW struct {
 }
 
 // NOTIFYICONDATAA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NOTIFYICONDATAA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UTimeout reinterprets the union as its uTimeout member.
+func (u *NOTIFYICONDATAA_Anonymous_e__Union) UTimeout() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// UVersion reinterprets the union as its uVersion member.
+func (u *NOTIFYICONDATAA_Anonymous_e__Union) UVersion() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NOTIFYICONDATAA: https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataa
@@ -836,9 +847,20 @@ type NOTIFYICONDATAA struct {
 }
 
 // NOTIFYICONDATAW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NOTIFYICONDATAW_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UTimeout reinterprets the union as its uTimeout member.
+func (u *NOTIFYICONDATAW_Anonymous_e__Union) UTimeout() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// UVersion reinterprets the union as its uVersion member.
+func (u *NOTIFYICONDATAW_Anonymous_e__Union) UVersion() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // NOTIFYICONDATAW: https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw
@@ -1215,9 +1237,20 @@ type SHDRAGIMAGE struct {
 }
 
 // SHELLEXECUTEINFOA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SHELLEXECUTEINFOA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *SHELLEXECUTEINFOA_Anonymous_e__Union) HIcon() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// HMonitor reinterprets the union as its hMonitor member.
+func (u *SHELLEXECUTEINFOA_Anonymous_e__Union) HMonitor() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
 }
 
 // SHELLEXECUTEINFOA: https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-shellexecuteinfoa
@@ -1240,9 +1273,20 @@ type SHELLEXECUTEINFOA struct {
 }
 
 // SHELLEXECUTEINFOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SHELLEXECUTEINFOW_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *SHELLEXECUTEINFOW_Anonymous_e__Union) HIcon() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// HMonitor reinterprets the union as its hMonitor member.
+func (u *SHELLEXECUTEINFOW_Anonymous_e__Union) HMonitor() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
 }
 
 // SHELLEXECUTEINFOW: https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-shellexecuteinfow

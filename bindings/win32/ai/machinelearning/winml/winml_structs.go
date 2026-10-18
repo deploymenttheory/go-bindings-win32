@@ -18,9 +18,30 @@ type MLOperatorAttribute struct {
 }
 
 // MLOperatorAttributeNameValue_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MLOperatorAttributeNameValue_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Reserved reinterprets the union as its reserved member.
+func (u *MLOperatorAttributeNameValue_Anonymous_e__Union) Reserved() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Ints reinterprets the union as its ints member.
+func (u *MLOperatorAttributeNameValue_Anonymous_e__Union) Ints() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// Strings reinterprets the union as its strings member.
+func (u *MLOperatorAttributeNameValue_Anonymous_e__Union) Strings() ***int8 {
+	return (***int8)(unsafe.Pointer(u))
+}
+
+// Floats reinterprets the union as its floats member.
+func (u *MLOperatorAttributeNameValue_Anonymous_e__Union) Floats() **float32 {
+	return (**float32)(unsafe.Pointer(u))
 }
 
 type MLOperatorAttributeNameValue struct {
@@ -31,9 +52,20 @@ type MLOperatorAttributeNameValue struct {
 }
 
 // MLOperatorEdgeDescription_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MLOperatorEdgeDescription_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Reserved reinterprets the union as its reserved member.
+func (u *MLOperatorEdgeDescription_Anonymous_e__Union) Reserved() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// TensorDataType reinterprets the union as its tensorDataType member.
+func (u *MLOperatorEdgeDescription_Anonymous_e__Union) TensorDataType() *MLOperatorTensorDataType {
+	return (*MLOperatorTensorDataType)(unsafe.Pointer(u))
 }
 
 type MLOperatorEdgeDescription struct {
@@ -76,9 +108,25 @@ type MLOperatorSchemaDescription struct {
 }
 
 // MLOperatorSchemaEdgeDescription_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MLOperatorSchemaEdgeDescription_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Reserved reinterprets the union as its reserved member.
+func (u *MLOperatorSchemaEdgeDescription_Anonymous_e__Union) Reserved() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// TypeLabel reinterprets the union as its typeLabel member.
+func (u *MLOperatorSchemaEdgeDescription_Anonymous_e__Union) TypeLabel() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// EdgeDescription reinterprets the union as its edgeDescription member.
+func (u *MLOperatorSchemaEdgeDescription_Anonymous_e__Union) EdgeDescription() *MLOperatorEdgeDescription {
+	return (*MLOperatorEdgeDescription)(unsafe.Pointer(u))
 }
 
 type MLOperatorSchemaEdgeDescription struct {
@@ -93,9 +141,35 @@ type MLOperatorSetId struct {
 }
 
 // WINML_BINDING_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINML_BINDING_DESC_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// Tensor reinterprets the union as its Tensor member.
+func (u *WINML_BINDING_DESC_Anonymous_e__Union) Tensor() *WINML_TENSOR_BINDING_DESC {
+	return (*WINML_TENSOR_BINDING_DESC)(unsafe.Pointer(u))
+}
+
+// Sequence reinterprets the union as its Sequence member.
+func (u *WINML_BINDING_DESC_Anonymous_e__Union) Sequence() *WINML_SEQUENCE_BINDING_DESC {
+	return (*WINML_SEQUENCE_BINDING_DESC)(unsafe.Pointer(u))
+}
+
+// Map reinterprets the union as its Map member.
+func (u *WINML_BINDING_DESC_Anonymous_e__Union) Map() *WINML_MAP_BINDING_DESC {
+	return (*WINML_MAP_BINDING_DESC)(unsafe.Pointer(u))
+}
+
+// Image reinterprets the union as its Image member.
+func (u *WINML_BINDING_DESC_Anonymous_e__Union) Image() *WINML_IMAGE_BINDING_DESC {
+	return (*WINML_IMAGE_BINDING_DESC)(unsafe.Pointer(u))
+}
+
+// Resource reinterprets the union as its Resource member.
+func (u *WINML_BINDING_DESC_Anonymous_e__Union) Resource() *WINML_RESOURCE_BINDING_DESC {
+	return (*WINML_RESOURCE_BINDING_DESC)(unsafe.Pointer(u))
 }
 
 // WINML_BINDING_DESC: https://learn.microsoft.com/windows/win32/api/winml/ns-winml-winml_binding_desc
@@ -122,15 +196,47 @@ type WINML_IMAGE_VARIABLE_DESC struct {
 }
 
 // WINML_MAP_BINDING_DESC_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINML_MAP_BINDING_DESC_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PStringKeys reinterprets the union as its pStringKeys member.
+func (u *WINML_MAP_BINDING_DESC_Anonymous1_e__Union) PStringKeys() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PIntKeys reinterprets the union as its pIntKeys member.
+func (u *WINML_MAP_BINDING_DESC_Anonymous1_e__Union) PIntKeys() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
 // WINML_MAP_BINDING_DESC_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINML_MAP_BINDING_DESC_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// PStringFields reinterprets the union as its pStringFields member.
+func (u *WINML_MAP_BINDING_DESC_Anonymous2_e__Union) PStringFields() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PIntFields reinterprets the union as its pIntFields member.
+func (u *WINML_MAP_BINDING_DESC_Anonymous2_e__Union) PIntFields() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// PFloatFields reinterprets the union as its pFloatFields member.
+func (u *WINML_MAP_BINDING_DESC_Anonymous2_e__Union) PFloatFields() **float32 {
+	return (**float32)(unsafe.Pointer(u))
+}
+
+// PDoubleFields reinterprets the union as its pDoubleFields member.
+func (u *WINML_MAP_BINDING_DESC_Anonymous2_e__Union) PDoubleFields() **float64 {
+	return (**float64)(unsafe.Pointer(u))
 }
 
 // WINML_MAP_BINDING_DESC: https://learn.microsoft.com/windows/win32/api/winml/ns-winml-winml_map_binding_desc
@@ -166,9 +272,30 @@ type WINML_RESOURCE_BINDING_DESC struct {
 }
 
 // WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PStrings reinterprets the union as its pStrings member.
+func (u *WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union) PStrings() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PInts reinterprets the union as its pInts member.
+func (u *WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union) PInts() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// PFloats reinterprets the union as its pFloats member.
+func (u *WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union) PFloats() **float32 {
+	return (**float32)(unsafe.Pointer(u))
+}
+
+// PDoubles reinterprets the union as its pDoubles member.
+func (u *WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union) PDoubles() **float64 {
+	return (**float64)(unsafe.Pointer(u))
 }
 
 // WINML_SEQUENCE_BINDING_DESC: https://learn.microsoft.com/windows/win32/api/winml/ns-winml-winml_sequence_binding_desc
@@ -200,9 +327,30 @@ type WINML_TENSOR_VARIABLE_DESC struct {
 }
 
 // WINML_VARIABLE_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINML_VARIABLE_DESC_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Tensor reinterprets the union as its Tensor member.
+func (u *WINML_VARIABLE_DESC_Anonymous_e__Union) Tensor() *WINML_TENSOR_VARIABLE_DESC {
+	return (*WINML_TENSOR_VARIABLE_DESC)(unsafe.Pointer(u))
+}
+
+// Sequence reinterprets the union as its Sequence member.
+func (u *WINML_VARIABLE_DESC_Anonymous_e__Union) Sequence() *WINML_SEQUENCE_VARIABLE_DESC {
+	return (*WINML_SEQUENCE_VARIABLE_DESC)(unsafe.Pointer(u))
+}
+
+// Map reinterprets the union as its Map member.
+func (u *WINML_VARIABLE_DESC_Anonymous_e__Union) Map() *WINML_MAP_VARIABLE_DESC {
+	return (*WINML_MAP_VARIABLE_DESC)(unsafe.Pointer(u))
+}
+
+// Image reinterprets the union as its Image member.
+func (u *WINML_VARIABLE_DESC_Anonymous_e__Union) Image() *WINML_IMAGE_VARIABLE_DESC {
+	return (*WINML_IMAGE_VARIABLE_DESC)(unsafe.Pointer(u))
 }
 
 // WINML_VARIABLE_DESC: https://learn.microsoft.com/windows/win32/api/winml/ns-winml-winml_variable_desc

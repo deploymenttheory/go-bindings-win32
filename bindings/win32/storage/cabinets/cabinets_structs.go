@@ -45,10 +45,48 @@ type FDICABINETINFO struct {
 	Hasnext   foundation.BOOL
 }
 
+type FDIDECRYPT_Anonymous_e__Union_cabinet_e__Struct struct {
+	PHeaderReserve  unsafe.Pointer
+	CbHeaderReserve uint16
+	SetID           uint16
+	ICabinet        int32
+}
+
+type FDIDECRYPT_Anonymous_e__Union_decrypt_e__Struct struct {
+	PDataReserve  unsafe.Pointer
+	CbDataReserve uint16
+	PbData        unsafe.Pointer
+	CbData        uint16
+	FSplit        foundation.BOOL
+	CbPartial     uint16
+}
+
+type FDIDECRYPT_Anonymous_e__Union_folder_e__Struct struct {
+	PFolderReserve  unsafe.Pointer
+	CbFolderReserve uint16
+	IFolder         uint16
+}
+
 // FDIDECRYPT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FDIDECRYPT_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// Cabinet reinterprets the union as its cabinet member.
+func (u *FDIDECRYPT_Anonymous_e__Union) Cabinet() *FDIDECRYPT_Anonymous_e__Union_cabinet_e__Struct {
+	return (*FDIDECRYPT_Anonymous_e__Union_cabinet_e__Struct)(unsafe.Pointer(u))
+}
+
+// Folder reinterprets the union as its folder member.
+func (u *FDIDECRYPT_Anonymous_e__Union) Folder() *FDIDECRYPT_Anonymous_e__Union_folder_e__Struct {
+	return (*FDIDECRYPT_Anonymous_e__Union_folder_e__Struct)(unsafe.Pointer(u))
+}
+
+// Decrypt reinterprets the union as its decrypt member.
+func (u *FDIDECRYPT_Anonymous_e__Union) Decrypt() *FDIDECRYPT_Anonymous_e__Union_decrypt_e__Struct {
+	return (*FDIDECRYPT_Anonymous_e__Union_decrypt_e__Struct)(unsafe.Pointer(u))
 }
 
 type FDIDECRYPT struct {

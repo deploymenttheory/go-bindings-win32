@@ -252,9 +252,20 @@ type DHCP_ALL_OPTION_VALUES_PB struct {
 }
 
 // DHCP_ATTRIB_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_ATTRIB_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DhcpAttribBool reinterprets the union as its DhcpAttribBool member.
+func (u *DHCP_ATTRIB_Anonymous_e__Union) DhcpAttribBool() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// DhcpAttribUlong reinterprets the union as its DhcpAttribUlong member.
+func (u *DHCP_ATTRIB_Anonymous_e__Union) DhcpAttribUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DHCP_ATTRIB: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_attrib
@@ -749,9 +760,55 @@ type DHCP_OPTION_DATA struct {
 }
 
 // DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION struct {
 	Data [2]uint64
+}
+
+// ByteOption reinterprets the union as its ByteOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) ByteOption() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// WordOption reinterprets the union as its WordOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) WordOption() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// DWordOption reinterprets the union as its DWordOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) DWordOption() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DWordDWordOption reinterprets the union as its DWordDWordOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) DWordDWordOption() *DWORD_DWORD {
+	return (*DWORD_DWORD)(unsafe.Pointer(u))
+}
+
+// IpAddressOption reinterprets the union as its IpAddressOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) IpAddressOption() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// StringDataOption reinterprets the union as its StringDataOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) StringDataOption() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// BinaryDataOption reinterprets the union as its BinaryDataOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) BinaryDataOption() *DHCP_BINARY_DATA {
+	return (*DHCP_BINARY_DATA)(unsafe.Pointer(u))
+}
+
+// EncapsulatedDataOption reinterprets the union as its EncapsulatedDataOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) EncapsulatedDataOption() *DHCP_BINARY_DATA {
+	return (*DHCP_BINARY_DATA)(unsafe.Pointer(u))
+}
+
+// Ipv6AddressDataOption reinterprets the union as its Ipv6AddressDataOption member.
+func (u *DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION) Ipv6AddressDataOption() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // DHCP_OPTION_DATA_ELEMENT: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_data_element
@@ -767,9 +824,35 @@ type DHCP_OPTION_LIST struct {
 }
 
 // DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION struct {
 	Data [1]uint64
+}
+
+// DefaultScopeInfo reinterprets the union as its DefaultScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION) DefaultScopeInfo() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// GlobalScopeInfo reinterprets the union as its GlobalScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION) GlobalScopeInfo() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// SubnetScopeInfo reinterprets the union as its SubnetScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION) SubnetScopeInfo() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ReservedScopeInfo reinterprets the union as its ReservedScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION) ReservedScopeInfo() *DHCP_RESERVED_SCOPE {
+	return (*DHCP_RESERVED_SCOPE)(unsafe.Pointer(u))
+}
+
+// MScopeInfo reinterprets the union as its MScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION) MScopeInfo() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // DHCP_OPTION_SCOPE_INFO: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_scope_info
@@ -779,9 +862,25 @@ type DHCP_OPTION_SCOPE_INFO struct {
 }
 
 // DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 struct {
 	Data [4]uint64
+}
+
+// DefaultScopeInfo reinterprets the union as its DefaultScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6) DefaultScopeInfo() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// SubnetScopeInfo reinterprets the union as its SubnetScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6) SubnetScopeInfo() *DHCP_IPV6_ADDRESS {
+	return (*DHCP_IPV6_ADDRESS)(unsafe.Pointer(u))
+}
+
+// ReservedScopeInfo reinterprets the union as its ReservedScopeInfo member.
+func (u *DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6) ReservedScopeInfo() *DHCP_RESERVED_SCOPE6 {
+	return (*DHCP_RESERVED_SCOPE6)(unsafe.Pointer(u))
 }
 
 // DHCP_OPTION_SCOPE_INFO6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_option_scope_info6
@@ -892,9 +991,35 @@ type DHCP_POL_EXPR_ARRAY struct {
 }
 
 // DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION struct {
 	Data [2]uint64
+}
+
+// ByteValue reinterprets the union as its ByteValue member.
+func (u *DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION) ByteValue() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// WordValue reinterprets the union as its WordValue member.
+func (u *DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION) WordValue() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// DWordValue reinterprets the union as its DWordValue member.
+func (u *DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION) DWordValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// StringValue reinterprets the union as its StringValue member.
+func (u *DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION) StringValue() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// BinaryValue reinterprets the union as its BinaryValue member.
+func (u *DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION) BinaryValue() *DHCP_BINARY_DATA {
+	return (*DHCP_BINARY_DATA)(unsafe.Pointer(u))
 }
 
 type DHCP_PROPERTY struct {
@@ -938,9 +1063,25 @@ type DHCP_SCAN_LIST struct {
 }
 
 // DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION struct {
 	Data [2]uint64
+}
+
+// ClientIpAddress reinterprets the union as its ClientIpAddress member.
+func (u *DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION) ClientIpAddress() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ClientHardwareAddress reinterprets the union as its ClientHardwareAddress member.
+func (u *DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION) ClientHardwareAddress() *DHCP_BINARY_DATA {
+	return (*DHCP_BINARY_DATA)(unsafe.Pointer(u))
+}
+
+// ClientName reinterprets the union as its ClientName member.
+func (u *DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION) ClientName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // DHCP_SEARCH_INFO: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_search_info
@@ -950,9 +1091,25 @@ type DHCP_SEARCH_INFO struct {
 }
 
 // DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6 struct {
 	Data [2]uint64
+}
+
+// ClientIpAddress reinterprets the union as its ClientIpAddress member.
+func (u *DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6) ClientIpAddress() *DHCP_IPV6_ADDRESS {
+	return (*DHCP_IPV6_ADDRESS)(unsafe.Pointer(u))
+}
+
+// ClientDUID reinterprets the union as its ClientDUID member.
+func (u *DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6) ClientDUID() *DHCP_BINARY_DATA {
+	return (*DHCP_BINARY_DATA)(unsafe.Pointer(u))
+}
+
+// ClientName reinterprets the union as its ClientName member.
+func (u *DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6) ClientName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // DHCP_SEARCH_INFO_V6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_search_info_v6
@@ -1060,9 +1217,35 @@ type DHCP_SERVER_SPECIFIC_STRINGS struct {
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION struct {
 	Data [1]uint64
+}
+
+// IpRange reinterprets the union as its IpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION) IpRange() **DHCP_IP_RANGE {
+	return (**DHCP_IP_RANGE)(unsafe.Pointer(u))
+}
+
+// SecondaryHost reinterprets the union as its SecondaryHost member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION) SecondaryHost() **DHCP_HOST_INFO {
+	return (**DHCP_HOST_INFO)(unsafe.Pointer(u))
+}
+
+// ReservedIp reinterprets the union as its ReservedIp member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION) ReservedIp() **DHCP_IP_RESERVATION {
+	return (**DHCP_IP_RESERVATION)(unsafe.Pointer(u))
+}
+
+// ExcludeIpRange reinterprets the union as its ExcludeIpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION) ExcludeIpRange() **DHCP_IP_RANGE {
+	return (**DHCP_IP_RANGE)(unsafe.Pointer(u))
+}
+
+// IpUsedCluster reinterprets the union as its IpUsedCluster member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION) IpUsedCluster() **DHCP_IP_CLUSTER {
+	return (**DHCP_IP_CLUSTER)(unsafe.Pointer(u))
 }
 
 // DHCP_SUBNET_ELEMENT_DATA: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data
@@ -1072,9 +1255,35 @@ type DHCP_SUBNET_ELEMENT_DATA struct {
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 struct {
 	Data [1]uint64
+}
+
+// IpRange reinterprets the union as its IpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4) IpRange() **DHCP_IP_RANGE {
+	return (**DHCP_IP_RANGE)(unsafe.Pointer(u))
+}
+
+// SecondaryHost reinterprets the union as its SecondaryHost member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4) SecondaryHost() **DHCP_HOST_INFO {
+	return (**DHCP_HOST_INFO)(unsafe.Pointer(u))
+}
+
+// ReservedIp reinterprets the union as its ReservedIp member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4) ReservedIp() **DHCP_IP_RESERVATION_V4 {
+	return (**DHCP_IP_RESERVATION_V4)(unsafe.Pointer(u))
+}
+
+// ExcludeIpRange reinterprets the union as its ExcludeIpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4) ExcludeIpRange() **DHCP_IP_RANGE {
+	return (**DHCP_IP_RANGE)(unsafe.Pointer(u))
+}
+
+// IpUsedCluster reinterprets the union as its IpUsedCluster member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4) IpUsedCluster() **DHCP_IP_CLUSTER {
+	return (**DHCP_IP_CLUSTER)(unsafe.Pointer(u))
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V4: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data_v4
@@ -1084,9 +1293,35 @@ type DHCP_SUBNET_ELEMENT_DATA_V4 struct {
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5 struct {
 	Data [1]uint64
+}
+
+// IpRange reinterprets the union as its IpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5) IpRange() **DHCP_BOOTP_IP_RANGE {
+	return (**DHCP_BOOTP_IP_RANGE)(unsafe.Pointer(u))
+}
+
+// SecondaryHost reinterprets the union as its SecondaryHost member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5) SecondaryHost() **DHCP_HOST_INFO {
+	return (**DHCP_HOST_INFO)(unsafe.Pointer(u))
+}
+
+// ReservedIp reinterprets the union as its ReservedIp member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5) ReservedIp() **DHCP_IP_RESERVATION_V4 {
+	return (**DHCP_IP_RESERVATION_V4)(unsafe.Pointer(u))
+}
+
+// ExcludeIpRange reinterprets the union as its ExcludeIpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5) ExcludeIpRange() **DHCP_IP_RANGE {
+	return (**DHCP_IP_RANGE)(unsafe.Pointer(u))
+}
+
+// IpUsedCluster reinterprets the union as its IpUsedCluster member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5) IpUsedCluster() **DHCP_IP_CLUSTER {
+	return (**DHCP_IP_CLUSTER)(unsafe.Pointer(u))
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V5: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data_v5
@@ -1096,9 +1331,25 @@ type DHCP_SUBNET_ELEMENT_DATA_V5 struct {
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 struct {
 	Data [1]uint64
+}
+
+// IpRange reinterprets the union as its IpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6) IpRange() **DHCP_IP_RANGE_V6 {
+	return (**DHCP_IP_RANGE_V6)(unsafe.Pointer(u))
+}
+
+// ReservedIp reinterprets the union as its ReservedIp member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6) ReservedIp() **DHCP_IP_RESERVATION_V6 {
+	return (**DHCP_IP_RESERVATION_V6)(unsafe.Pointer(u))
+}
+
+// ExcludeIpRange reinterprets the union as its ExcludeIpRange member.
+func (u *DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6) ExcludeIpRange() **DHCP_IP_RANGE_V6 {
+	return (**DHCP_IP_RANGE_V6)(unsafe.Pointer(u))
 }
 
 // DHCP_SUBNET_ELEMENT_DATA_V6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_subnet_element_data_v6

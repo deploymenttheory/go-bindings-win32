@@ -307,9 +307,20 @@ type MD_CHANGE_OBJECT_W struct {
 }
 
 // METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DwMDDataOffset reinterprets the union as its dwMDDataOffset member.
+func (u *METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union) DwMDDataOffset() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// PbMDData reinterprets the union as its pbMDData member.
+func (u *METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union) PbMDData() **byte {
+	return (**byte)(unsafe.Pointer(u))
 }
 
 type METADATA_GETALL_INTERNAL_RECORD struct {

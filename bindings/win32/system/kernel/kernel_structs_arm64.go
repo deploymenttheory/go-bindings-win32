@@ -4,8 +4,33 @@
 
 package kernel
 
+import (
+	"unsafe"
+)
+
+type SLIST_HEADER_Anonymous_e__Struct struct {
+	Alignment uint64
+	Region    uint64
+}
+
+type SLIST_HEADER_HeaderArm64_e__Struct struct {
+	Bitfield1 uint64
+	Bitfield2 uint64
+}
+
 // SLIST_HEADER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SLIST_HEADER struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *SLIST_HEADER) Anonymous() *SLIST_HEADER_Anonymous_e__Struct {
+	return (*SLIST_HEADER_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// HeaderArm64 reinterprets the union as its HeaderArm64 member.
+func (u *SLIST_HEADER) HeaderArm64() *SLIST_HEADER_HeaderArm64_e__Struct {
+	return (*SLIST_HEADER_HeaderArm64_e__Struct)(unsafe.Pointer(u))
 }

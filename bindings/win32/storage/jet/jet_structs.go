@@ -18,16 +18,46 @@ type JET_BKINFO struct {
 	Data [24]byte
 }
 
+type JET_BKLOGTIME_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // JET_BKLOGTIME_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_BKLOGTIME_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
+// BFiller1 reinterprets the union as its bFiller1 member.
+func (u *JET_BKLOGTIME_Anonymous1_e__Union) BFiller1() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JET_BKLOGTIME_Anonymous1_e__Union) Anonymous() *JET_BKLOGTIME_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*JET_BKLOGTIME_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type JET_BKLOGTIME_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // JET_BKLOGTIME_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_BKLOGTIME_Anonymous2_e__Union struct {
 	Data [1]byte
+}
+
+// BFiller2 reinterprets the union as its bFiller2 member.
+func (u *JET_BKLOGTIME_Anonymous2_e__Union) BFiller2() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JET_BKLOGTIME_Anonymous2_e__Union) Anonymous() *JET_BKLOGTIME_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*JET_BKLOGTIME_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // JET_BKLOGTIME: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-bklogtime-structure
@@ -149,10 +179,25 @@ type JET_CONDITIONALCOLUMN_W struct {
 	Grbit        uint32
 }
 
+type JET_CONVERT_A_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // JET_CONVERT_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_CONVERT_A_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// FFlags reinterprets the union as its fFlags member.
+func (u *JET_CONVERT_A_Anonymous_e__Union) FFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JET_CONVERT_A_Anonymous_e__Union) Anonymous() *JET_CONVERT_A_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*JET_CONVERT_A_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type JET_CONVERT_A struct {
@@ -160,10 +205,25 @@ type JET_CONVERT_A struct {
 	Anonymous JET_CONVERT_A_Anonymous_e__Union
 }
 
+type JET_CONVERT_W_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // JET_CONVERT_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_CONVERT_W_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// FFlags reinterprets the union as its fFlags member.
+func (u *JET_CONVERT_W_Anonymous_e__Union) FFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JET_CONVERT_W_Anonymous_e__Union) Anonymous() *JET_CONVERT_W_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*JET_CONVERT_W_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type JET_CONVERT_W struct {
@@ -320,10 +380,25 @@ type JET_DBINFOMISC4 struct {
 	BkinfoDiffPrev       JET_BKINFO
 }
 
+type JET_DBINFOUPGRADE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // JET_DBINFOUPGRADE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_DBINFOUPGRADE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UlFlags reinterprets the union as its ulFlags member.
+func (u *JET_DBINFOUPGRADE_Anonymous_e__Union) UlFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JET_DBINFOUPGRADE_Anonymous_e__Union) Anonymous() *JET_DBINFOUPGRADE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*JET_DBINFOUPGRADE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // JET_DBINFOUPGRADE: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-dbinfoupgrade-structure
@@ -337,10 +412,31 @@ type JET_DBINFOUPGRADE struct {
 	Anonymous               JET_DBINFOUPGRADE_Anonymous_e__Union
 }
 
+type JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	CEnumColumnValue  uint32
+	RgEnumColumnValue *JET_ENUMCOLUMNVALUE
+}
+
+type JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	CbData uint32
+	PvData unsafe.Pointer
+}
+
 // JET_ENUMCOLUMN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_ENUMCOLUMN_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *JET_ENUMCOLUMN_Anonymous_e__Union) Anonymous1() *JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *JET_ENUMCOLUMN_Anonymous_e__Union) Anonymous2() *JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 // JET_ENUMCOLUMN: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-enumcolumn-class
@@ -375,15 +471,37 @@ type JET_ERRINFOBASIC_W struct {
 }
 
 // JET_INDEXCREATE2_A_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE2_A_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// Lcid reinterprets the union as its lcid member.
+func (u *JET_INDEXCREATE2_A_Anonymous1_e__Union) Lcid() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Pidxunicode reinterprets the union as its pidxunicode member.
+func (u *JET_INDEXCREATE2_A_Anonymous1_e__Union) Pidxunicode() **JET_UNICODEINDEX {
+	return (**JET_UNICODEINDEX)(unsafe.Pointer(u))
+}
+
 // JET_INDEXCREATE2_A_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE2_A_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// CbVarSegMac reinterprets the union as its cbVarSegMac member.
+func (u *JET_INDEXCREATE2_A_Anonymous2_e__Union) CbVarSegMac() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ptuplelimits reinterprets the union as its ptuplelimits member.
+func (u *JET_INDEXCREATE2_A_Anonymous2_e__Union) Ptuplelimits() **JET_TUPLELIMITS {
+	return (**JET_TUPLELIMITS)(unsafe.Pointer(u))
 }
 
 type JET_INDEXCREATE2_A struct {
@@ -403,15 +521,37 @@ type JET_INDEXCREATE2_A struct {
 }
 
 // JET_INDEXCREATE2_W_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE2_W_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// Lcid reinterprets the union as its lcid member.
+func (u *JET_INDEXCREATE2_W_Anonymous1_e__Union) Lcid() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Pidxunicode reinterprets the union as its pidxunicode member.
+func (u *JET_INDEXCREATE2_W_Anonymous1_e__Union) Pidxunicode() **JET_UNICODEINDEX {
+	return (**JET_UNICODEINDEX)(unsafe.Pointer(u))
+}
+
 // JET_INDEXCREATE2_W_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE2_W_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// CbVarSegMac reinterprets the union as its cbVarSegMac member.
+func (u *JET_INDEXCREATE2_W_Anonymous2_e__Union) CbVarSegMac() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ptuplelimits reinterprets the union as its ptuplelimits member.
+func (u *JET_INDEXCREATE2_W_Anonymous2_e__Union) Ptuplelimits() **JET_TUPLELIMITS {
+	return (**JET_TUPLELIMITS)(unsafe.Pointer(u))
 }
 
 type JET_INDEXCREATE2_W struct {
@@ -431,9 +571,20 @@ type JET_INDEXCREATE2_W struct {
 }
 
 // JET_INDEXCREATE3_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE3_A_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// CbVarSegMac reinterprets the union as its cbVarSegMac member.
+func (u *JET_INDEXCREATE3_A_Anonymous_e__Union) CbVarSegMac() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ptuplelimits reinterprets the union as its ptuplelimits member.
+func (u *JET_INDEXCREATE3_A_Anonymous_e__Union) Ptuplelimits() **JET_TUPLELIMITS {
+	return (**JET_TUPLELIMITS)(unsafe.Pointer(u))
 }
 
 type JET_INDEXCREATE3_A struct {
@@ -453,9 +604,20 @@ type JET_INDEXCREATE3_A struct {
 }
 
 // JET_INDEXCREATE3_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE3_W_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// CbVarSegMac reinterprets the union as its cbVarSegMac member.
+func (u *JET_INDEXCREATE3_W_Anonymous_e__Union) CbVarSegMac() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ptuplelimits reinterprets the union as its ptuplelimits member.
+func (u *JET_INDEXCREATE3_W_Anonymous_e__Union) Ptuplelimits() **JET_TUPLELIMITS {
+	return (**JET_TUPLELIMITS)(unsafe.Pointer(u))
 }
 
 type JET_INDEXCREATE3_W struct {
@@ -475,15 +637,37 @@ type JET_INDEXCREATE3_W struct {
 }
 
 // JET_INDEXCREATE_A_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE_A_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// Lcid reinterprets the union as its lcid member.
+func (u *JET_INDEXCREATE_A_Anonymous1_e__Union) Lcid() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Pidxunicode reinterprets the union as its pidxunicode member.
+func (u *JET_INDEXCREATE_A_Anonymous1_e__Union) Pidxunicode() **JET_UNICODEINDEX {
+	return (**JET_UNICODEINDEX)(unsafe.Pointer(u))
+}
+
 // JET_INDEXCREATE_A_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE_A_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// CbVarSegMac reinterprets the union as its cbVarSegMac member.
+func (u *JET_INDEXCREATE_A_Anonymous2_e__Union) CbVarSegMac() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ptuplelimits reinterprets the union as its ptuplelimits member.
+func (u *JET_INDEXCREATE_A_Anonymous2_e__Union) Ptuplelimits() **JET_TUPLELIMITS {
+	return (**JET_TUPLELIMITS)(unsafe.Pointer(u))
 }
 
 type JET_INDEXCREATE_A struct {
@@ -502,15 +686,37 @@ type JET_INDEXCREATE_A struct {
 }
 
 // JET_INDEXCREATE_W_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE_W_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// Lcid reinterprets the union as its lcid member.
+func (u *JET_INDEXCREATE_W_Anonymous1_e__Union) Lcid() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Pidxunicode reinterprets the union as its pidxunicode member.
+func (u *JET_INDEXCREATE_W_Anonymous1_e__Union) Pidxunicode() **JET_UNICODEINDEX {
+	return (**JET_UNICODEINDEX)(unsafe.Pointer(u))
+}
+
 // JET_INDEXCREATE_W_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_INDEXCREATE_W_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// CbVarSegMac reinterprets the union as its cbVarSegMac member.
+func (u *JET_INDEXCREATE_W_Anonymous2_e__Union) CbVarSegMac() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ptuplelimits reinterprets the union as its ptuplelimits member.
+func (u *JET_INDEXCREATE_W_Anonymous2_e__Union) Ptuplelimits() **JET_TUPLELIMITS {
+	return (**JET_TUPLELIMITS)(unsafe.Pointer(u))
 }
 
 type JET_INDEXCREATE_W struct {
@@ -621,16 +827,46 @@ type JET_LOGINFO_W struct {
 	SzBaseName [4]uint16
 }
 
+type JET_LOGTIME_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // JET_LOGTIME_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_LOGTIME_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
+// BFiller1 reinterprets the union as its bFiller1 member.
+func (u *JET_LOGTIME_Anonymous1_e__Union) BFiller1() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JET_LOGTIME_Anonymous1_e__Union) Anonymous() *JET_LOGTIME_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*JET_LOGTIME_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type JET_LOGTIME_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // JET_LOGTIME_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type JET_LOGTIME_Anonymous2_e__Union struct {
 	Data [1]byte
+}
+
+// BFiller2 reinterprets the union as its bFiller2 member.
+func (u *JET_LOGTIME_Anonymous2_e__Union) BFiller2() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *JET_LOGTIME_Anonymous2_e__Union) Anonymous() *JET_LOGTIME_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*JET_LOGTIME_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // JET_LOGTIME: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-logtime-structure

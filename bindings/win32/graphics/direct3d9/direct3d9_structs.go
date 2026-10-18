@@ -84,10 +84,25 @@ type D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT struct {
 	ReturnCode     foundation.HRESULT
 }
 
+type D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union) Anonymous() *D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS: https://learn.microsoft.com/windows/win32/medfound/d3dauthenticatedchannel-protection-flags
@@ -589,21 +604,54 @@ type D3DGAMMARAMP struct {
 }
 
 // D3DHVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DHVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// Hx reinterprets the union as its hx member.
+func (u *D3DHVERTEX_Anonymous1_e__Union) Hx() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvHX reinterprets the union as its dvHX member.
+func (u *D3DHVERTEX_Anonymous1_e__Union) DvHX() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DHVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DHVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Hy reinterprets the union as its hy member.
+func (u *D3DHVERTEX_Anonymous2_e__Union) Hy() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvHY reinterprets the union as its dvHY member.
+func (u *D3DHVERTEX_Anonymous2_e__Union) DvHY() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DHVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DHVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
+}
+
+// Hz reinterprets the union as its hz member.
+func (u *D3DHVERTEX_Anonymous3_e__Union) Hz() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvHZ reinterprets the union as its dvHZ member.
+func (u *D3DHVERTEX_Anonymous3_e__Union) DvHZ() *float32 {
+	return (*float32)(unsafe.Pointer(u))
 }
 
 type D3DHVERTEX struct {
@@ -713,15 +761,37 @@ type D3DLIGHTINGELEMENT struct {
 }
 
 // D3DLINE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLINE_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
+// V1 reinterprets the union as its v1 member.
+func (u *D3DLINE_Anonymous1_e__Union) V1() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// WV1 reinterprets the union as its wV1 member.
+func (u *D3DLINE_Anonymous1_e__Union) WV1() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
 // D3DLINE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLINE_Anonymous2_e__Union struct {
 	Data [1]uint16
+}
+
+// V2 reinterprets the union as its v2 member.
+func (u *D3DLINE_Anonymous2_e__Union) V2() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// WV2 reinterprets the union as its wV2 member.
+func (u *D3DLINE_Anonymous2_e__Union) WV2() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type D3DLINE struct {
@@ -743,45 +813,122 @@ type D3DLOCKED_RECT struct {
 }
 
 // D3DLVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// X reinterprets the union as its x member.
+func (u *D3DLVERTEX_Anonymous1_e__Union) X() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvX reinterprets the union as its dvX member.
+func (u *D3DLVERTEX_Anonymous1_e__Union) DvX() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DLVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Y reinterprets the union as its y member.
+func (u *D3DLVERTEX_Anonymous2_e__Union) Y() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvY reinterprets the union as its dvY member.
+func (u *D3DLVERTEX_Anonymous2_e__Union) DvY() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DLVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
+// Z reinterprets the union as its z member.
+func (u *D3DLVERTEX_Anonymous3_e__Union) Z() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvZ reinterprets the union as its dvZ member.
+func (u *D3DLVERTEX_Anonymous3_e__Union) DvZ() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DLVERTEX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLVERTEX_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
+// Color reinterprets the union as its color member.
+func (u *D3DLVERTEX_Anonymous4_e__Union) Color() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DcColor reinterprets the union as its dcColor member.
+func (u *D3DLVERTEX_Anonymous4_e__Union) DcColor() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3DLVERTEX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLVERTEX_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
 
+// Specular reinterprets the union as its specular member.
+func (u *D3DLVERTEX_Anonymous5_e__Union) Specular() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DcSpecular reinterprets the union as its dcSpecular member.
+func (u *D3DLVERTEX_Anonymous5_e__Union) DcSpecular() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3DLVERTEX_Anonymous6_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLVERTEX_Anonymous6_e__Union struct {
 	Data [1]uint32
 }
 
+// Tu reinterprets the union as its tu member.
+func (u *D3DLVERTEX_Anonymous6_e__Union) Tu() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvTU reinterprets the union as its dvTU member.
+func (u *D3DLVERTEX_Anonymous6_e__Union) DvTU() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DLVERTEX_Anonymous7_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DLVERTEX_Anonymous7_e__Union struct {
 	Data [1]uint32
+}
+
+// Tv reinterprets the union as its tv member.
+func (u *D3DLVERTEX_Anonymous7_e__Union) Tv() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvTV reinterprets the union as its dvTV member.
+func (u *D3DLVERTEX_Anonymous7_e__Union) DvTV() *float32 {
+	return (*float32)(unsafe.Pointer(u))
 }
 
 type D3DLVERTEX struct {
@@ -796,33 +943,88 @@ type D3DLVERTEX struct {
 }
 
 // D3DMATERIAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// Diffuse reinterprets the union as its diffuse member.
+func (u *D3DMATERIAL_Anonymous1_e__Union) Diffuse() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvDiffuse reinterprets the union as its dcvDiffuse member.
+func (u *D3DMATERIAL_Anonymous1_e__Union) DcvDiffuse() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
+// Ambient reinterprets the union as its ambient member.
+func (u *D3DMATERIAL_Anonymous2_e__Union) Ambient() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvAmbient reinterprets the union as its dcvAmbient member.
+func (u *D3DMATERIAL_Anonymous2_e__Union) DcvAmbient() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL_Anonymous3_e__Union struct {
 	Data [4]uint32
 }
 
+// Specular reinterprets the union as its specular member.
+func (u *D3DMATERIAL_Anonymous3_e__Union) Specular() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvSpecular reinterprets the union as its dcvSpecular member.
+func (u *D3DMATERIAL_Anonymous3_e__Union) DcvSpecular() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL_Anonymous4_e__Union struct {
 	Data [4]uint32
 }
 
+// Emissive reinterprets the union as its emissive member.
+func (u *D3DMATERIAL_Anonymous4_e__Union) Emissive() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvEmissive reinterprets the union as its dcvEmissive member.
+func (u *D3DMATERIAL_Anonymous4_e__Union) DcvEmissive() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL_Anonymous5_e__Union struct {
 	Data [1]uint32
+}
+
+// Power reinterprets the union as its power member.
+func (u *D3DMATERIAL_Anonymous5_e__Union) Power() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvPower reinterprets the union as its dvPower member.
+func (u *D3DMATERIAL_Anonymous5_e__Union) DvPower() *float32 {
+	return (*float32)(unsafe.Pointer(u))
 }
 
 type D3DMATERIAL struct {
@@ -837,33 +1039,88 @@ type D3DMATERIAL struct {
 }
 
 // D3DMATERIAL7_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL7_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// Diffuse reinterprets the union as its diffuse member.
+func (u *D3DMATERIAL7_Anonymous1_e__Union) Diffuse() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvDiffuse reinterprets the union as its dcvDiffuse member.
+func (u *D3DMATERIAL7_Anonymous1_e__Union) DcvDiffuse() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL7_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL7_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
+// Ambient reinterprets the union as its ambient member.
+func (u *D3DMATERIAL7_Anonymous2_e__Union) Ambient() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvAmbient reinterprets the union as its dcvAmbient member.
+func (u *D3DMATERIAL7_Anonymous2_e__Union) DcvAmbient() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL7_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL7_Anonymous3_e__Union struct {
 	Data [4]uint32
 }
 
+// Specular reinterprets the union as its specular member.
+func (u *D3DMATERIAL7_Anonymous3_e__Union) Specular() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvSpecular reinterprets the union as its dcvSpecular member.
+func (u *D3DMATERIAL7_Anonymous3_e__Union) DcvSpecular() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL7_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL7_Anonymous4_e__Union struct {
 	Data [4]uint32
 }
 
+// Emissive reinterprets the union as its emissive member.
+func (u *D3DMATERIAL7_Anonymous4_e__Union) Emissive() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
+// DcvEmissive reinterprets the union as its dcvEmissive member.
+func (u *D3DMATERIAL7_Anonymous4_e__Union) DcvEmissive() *D3DCOLORVALUE {
+	return (*D3DCOLORVALUE)(unsafe.Pointer(u))
+}
+
 // D3DMATERIAL7_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DMATERIAL7_Anonymous5_e__Union struct {
 	Data [1]uint32
+}
+
+// Power reinterprets the union as its power member.
+func (u *D3DMATERIAL7_Anonymous5_e__Union) Power() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvPower reinterprets the union as its dvPower member.
+func (u *D3DMATERIAL7_Anonymous5_e__Union) DvPower() *float32 {
+	return (*float32)(unsafe.Pointer(u))
 }
 
 type D3DMATERIAL7 struct {
@@ -1026,15 +1283,37 @@ type D3DSPAN struct {
 }
 
 // D3DSTATE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DSTATE_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// DlstLightStateType reinterprets the union as its dlstLightStateType member.
+func (u *D3DSTATE_Anonymous1_e__Union) DlstLightStateType() *D3DLIGHTSTATETYPE {
+	return (*D3DLIGHTSTATETYPE)(unsafe.Pointer(u))
+}
+
+// DrstRenderStateType reinterprets the union as its drstRenderStateType member.
+func (u *D3DSTATE_Anonymous1_e__Union) DrstRenderStateType() *D3DRENDERSTATETYPE {
+	return (*D3DRENDERSTATETYPE)(unsafe.Pointer(u))
+}
+
 // D3DSTATE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DSTATE_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// DwArg reinterprets the union as its dwArg member.
+func (u *D3DSTATE_Anonymous2_e__Union) DwArg() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
+}
+
+// DvArg reinterprets the union as its dvArg member.
+func (u *D3DSTATE_Anonymous2_e__Union) DvArg() *[1]float32 {
+	return (*[1]float32)(unsafe.Pointer(u))
 }
 
 type D3DSTATE struct {
@@ -1075,51 +1354,139 @@ type D3DTEXTURELOAD struct {
 }
 
 // D3DTLVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// Sx reinterprets the union as its sx member.
+func (u *D3DTLVERTEX_Anonymous1_e__Union) Sx() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvSX reinterprets the union as its dvSX member.
+func (u *D3DTLVERTEX_Anonymous1_e__Union) DvSX() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DTLVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Sy reinterprets the union as its sy member.
+func (u *D3DTLVERTEX_Anonymous2_e__Union) Sy() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvSY reinterprets the union as its dvSY member.
+func (u *D3DTLVERTEX_Anonymous2_e__Union) DvSY() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DTLVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
+// Sz reinterprets the union as its sz member.
+func (u *D3DTLVERTEX_Anonymous3_e__Union) Sz() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvSZ reinterprets the union as its dvSZ member.
+func (u *D3DTLVERTEX_Anonymous3_e__Union) DvSZ() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DTLVERTEX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
+// Rhw reinterprets the union as its rhw member.
+func (u *D3DTLVERTEX_Anonymous4_e__Union) Rhw() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvRHW reinterprets the union as its dvRHW member.
+func (u *D3DTLVERTEX_Anonymous4_e__Union) DvRHW() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DTLVERTEX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
 
+// Color reinterprets the union as its color member.
+func (u *D3DTLVERTEX_Anonymous5_e__Union) Color() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DcColor reinterprets the union as its dcColor member.
+func (u *D3DTLVERTEX_Anonymous5_e__Union) DcColor() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3DTLVERTEX_Anonymous6_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous6_e__Union struct {
 	Data [1]uint32
 }
 
+// Specular reinterprets the union as its specular member.
+func (u *D3DTLVERTEX_Anonymous6_e__Union) Specular() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DcSpecular reinterprets the union as its dcSpecular member.
+func (u *D3DTLVERTEX_Anonymous6_e__Union) DcSpecular() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3DTLVERTEX_Anonymous7_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous7_e__Union struct {
 	Data [1]uint32
 }
 
+// Tu reinterprets the union as its tu member.
+func (u *D3DTLVERTEX_Anonymous7_e__Union) Tu() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvTU reinterprets the union as its dvTU member.
+func (u *D3DTLVERTEX_Anonymous7_e__Union) DvTU() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DTLVERTEX_Anonymous8_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTLVERTEX_Anonymous8_e__Union struct {
 	Data [1]uint32
+}
+
+// Tv reinterprets the union as its tv member.
+func (u *D3DTLVERTEX_Anonymous8_e__Union) Tv() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvTV reinterprets the union as its dvTV member.
+func (u *D3DTLVERTEX_Anonymous8_e__Union) DvTV() *float32 {
+	return (*float32)(unsafe.Pointer(u))
 }
 
 type D3DTLVERTEX struct {
@@ -1152,21 +1519,54 @@ type D3DTRANSFORMDATA struct {
 }
 
 // D3DTRIANGLE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTRIANGLE_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
+// V1 reinterprets the union as its v1 member.
+func (u *D3DTRIANGLE_Anonymous1_e__Union) V1() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// WV1 reinterprets the union as its wV1 member.
+func (u *D3DTRIANGLE_Anonymous1_e__Union) WV1() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
 // D3DTRIANGLE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTRIANGLE_Anonymous2_e__Union struct {
 	Data [1]uint16
 }
 
+// V2 reinterprets the union as its v2 member.
+func (u *D3DTRIANGLE_Anonymous2_e__Union) V2() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// WV2 reinterprets the union as its wV2 member.
+func (u *D3DTRIANGLE_Anonymous2_e__Union) WV2() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
 // D3DTRIANGLE_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DTRIANGLE_Anonymous3_e__Union struct {
 	Data [1]uint16
+}
+
+// V3 reinterprets the union as its v3 member.
+func (u *D3DTRIANGLE_Anonymous3_e__Union) V3() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// WV3 reinterprets the union as its wV3 member.
+func (u *D3DTRIANGLE_Anonymous3_e__Union) WV3() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type D3DTRIANGLE struct {
@@ -1185,51 +1585,139 @@ type D3DTRIPATCH_INFO struct {
 }
 
 // D3DVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// X reinterprets the union as its x member.
+func (u *D3DVERTEX_Anonymous1_e__Union) X() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvX reinterprets the union as its dvX member.
+func (u *D3DVERTEX_Anonymous1_e__Union) DvX() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Y reinterprets the union as its y member.
+func (u *D3DVERTEX_Anonymous2_e__Union) Y() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvY reinterprets the union as its dvY member.
+func (u *D3DVERTEX_Anonymous2_e__Union) DvY() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
+// Z reinterprets the union as its z member.
+func (u *D3DVERTEX_Anonymous3_e__Union) Z() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvZ reinterprets the union as its dvZ member.
+func (u *D3DVERTEX_Anonymous3_e__Union) DvZ() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DVERTEX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
+// Nx reinterprets the union as its nx member.
+func (u *D3DVERTEX_Anonymous4_e__Union) Nx() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvNX reinterprets the union as its dvNX member.
+func (u *D3DVERTEX_Anonymous4_e__Union) DvNX() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DVERTEX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
 
+// Ny reinterprets the union as its ny member.
+func (u *D3DVERTEX_Anonymous5_e__Union) Ny() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvNY reinterprets the union as its dvNY member.
+func (u *D3DVERTEX_Anonymous5_e__Union) DvNY() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DVERTEX_Anonymous6_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous6_e__Union struct {
 	Data [1]uint32
 }
 
+// Nz reinterprets the union as its nz member.
+func (u *D3DVERTEX_Anonymous6_e__Union) Nz() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvNZ reinterprets the union as its dvNZ member.
+func (u *D3DVERTEX_Anonymous6_e__Union) DvNZ() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DVERTEX_Anonymous7_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous7_e__Union struct {
 	Data [1]uint32
 }
 
+// Tu reinterprets the union as its tu member.
+func (u *D3DVERTEX_Anonymous7_e__Union) Tu() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvTU reinterprets the union as its dvTU member.
+func (u *D3DVERTEX_Anonymous7_e__Union) DvTU() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // D3DVERTEX_Anonymous8_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3DVERTEX_Anonymous8_e__Union struct {
 	Data [1]uint32
+}
+
+// Tv reinterprets the union as its tv member.
+func (u *D3DVERTEX_Anonymous8_e__Union) Tv() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvTV reinterprets the union as its dvTV member.
+func (u *D3DVERTEX_Anonymous8_e__Union) DvTV() *float32 {
+	return (*float32)(unsafe.Pointer(u))
 }
 
 type D3DVERTEX struct {

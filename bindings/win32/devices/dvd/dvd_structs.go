@@ -4,6 +4,12 @@
 
 package dvd
 
+import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+)
+
 type AACS_BINDING_NONCE struct {
 	BindingNonce [16]byte
 	MAC          [16]byte
@@ -25,9 +31,20 @@ type AACS_MEDIA_ID struct {
 }
 
 // AACS_READ_BINDING_NONCE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AACS_READ_BINDING_NONCE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Handle reinterprets the union as its Handle member.
+func (u *AACS_READ_BINDING_NONCE_Anonymous_e__Union) Handle() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// ForceStructureLengthToMatch64bit reinterprets the union as its ForceStructureLengthToMatch64bit member.
+func (u *AACS_READ_BINDING_NONCE_Anonymous_e__Union) ForceStructureLengthToMatch64bit() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type AACS_READ_BINDING_NONCE struct {
@@ -100,10 +117,52 @@ type DVD_COPYRIGHT_DESCRIPTOR struct {
 	Data [4]byte
 }
 
+type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_DvdRecordable_Version1_e__Struct struct {
+	Bitfield byte
+}
+
+type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_DvdRecordable_e__Struct struct {
+	Bitfield byte
+}
+
+type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_Dvdram_e__Struct struct {
+	Reserved0003 byte
+}
+
+type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_Dvdrom_e__Struct struct {
+	Bitfield byte
+}
+
 // DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// Dvdrom reinterprets the union as its Dvdrom member.
+func (u *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union) Dvdrom() *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_Dvdrom_e__Struct {
+	return (*DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_Dvdrom_e__Struct)(unsafe.Pointer(u))
+}
+
+// DvdRecordable_Version1 reinterprets the union as its DvdRecordable_Version1 member.
+func (u *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union) DvdRecordable_Version1() *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_DvdRecordable_Version1_e__Struct {
+	return (*DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_DvdRecordable_Version1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Dvdram reinterprets the union as its Dvdram member.
+func (u *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union) Dvdram() *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_Dvdram_e__Struct {
+	return (*DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_Dvdram_e__Struct)(unsafe.Pointer(u))
+}
+
+// DvdRecordable reinterprets the union as its DvdRecordable member.
+func (u *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union) DvdRecordable() *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_DvdRecordable_e__Struct {
+	return (*DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union_DvdRecordable_e__Struct)(unsafe.Pointer(u))
+}
+
+// CPR_MAI reinterprets the union as its CPR_MAI member.
+func (u *DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union) CPR_MAI() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR struct {
@@ -125,10 +184,26 @@ type DVD_DESCRIPTOR_HEADER struct {
 	Data [5]byte
 }
 
+type DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union_Anonymous_e__Struct struct {
+	ReservedDoNotUse_UseAsByteInstead_0 [3]byte
+	Bitfield                            byte
+}
+
 // DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union struct {
 	Data [4]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union) Anonymous() *DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union_Anonymous_e__Struct {
+	return (*DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsByte reinterprets the union as its AsByte member.
+func (u *DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union) AsByte() *[4]byte {
+	return (*[4]byte)(unsafe.Pointer(u))
 }
 
 type DVD_DISC_CONTROL_BLOCK_HEADER struct {
@@ -164,10 +239,26 @@ type DVD_DISC_CONTROL_BLOCK_SESSION_ITEM struct {
 	AsByte [16]byte
 }
 
+type DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union_Anonymous_e__Struct struct {
+	ReservedDoNotUse_UseAsByteInstead_0 [3]byte
+	Bitfield                            byte
+}
+
 // DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union struct {
 	Data [4]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union) Anonymous() *DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union_Anonymous_e__Struct {
+	return (*DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsByte reinterprets the union as its AsByte member.
+func (u *DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union) AsByte() *[4]byte {
+	return (*[4]byte)(unsafe.Pointer(u))
 }
 
 type DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT struct {

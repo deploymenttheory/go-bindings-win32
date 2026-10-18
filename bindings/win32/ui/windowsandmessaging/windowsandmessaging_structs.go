@@ -569,10 +569,31 @@ type MENUITEMTEMPLATEHEADER struct {
 	Offset        uint16
 }
 
+type MENUTEMPLATEEX_Anonymous_e__Union_MenuEx_e__Struct struct {
+	MexHeader MENUEX_TEMPLATE_HEADER
+	MexItem   [1]MENUEX_TEMPLATE_ITEM
+}
+
+type MENUTEMPLATEEX_Anonymous_e__Union_Menu_e__Struct struct {
+	MitHeader  MENUITEMTEMPLATEHEADER
+	MiTemplate [1]MENUITEMTEMPLATE
+}
+
 // MENUTEMPLATEEX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MENUTEMPLATEEX_Anonymous_e__Union struct {
 	Data [6]uint32
+}
+
+// Menu reinterprets the union as its Menu member.
+func (u *MENUTEMPLATEEX_Anonymous_e__Union) Menu() *MENUTEMPLATEEX_Anonymous_e__Union_Menu_e__Struct {
+	return (*MENUTEMPLATEEX_Anonymous_e__Union_Menu_e__Struct)(unsafe.Pointer(u))
+}
+
+// MenuEx reinterprets the union as its MenuEx member.
+func (u *MENUTEMPLATEEX_Anonymous_e__Union) MenuEx() *MENUTEMPLATEEX_Anonymous_e__Union_MenuEx_e__Struct {
+	return (*MENUTEMPLATEEX_Anonymous_e__Union_MenuEx_e__Struct)(unsafe.Pointer(u))
 }
 
 type MENUTEMPLATEEX struct {

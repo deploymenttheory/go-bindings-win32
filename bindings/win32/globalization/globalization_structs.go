@@ -431,9 +431,30 @@ type UCPTrie struct {
 }
 
 // UCPTrieData is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UCPTrieData struct {
 	Data [1]uint64
+}
+
+// Ptr0 reinterprets the union as its ptr0 member.
+func (u *UCPTrieData) Ptr0() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Ptr16 reinterprets the union as its ptr16 member.
+func (u *UCPTrieData) Ptr16() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// Ptr32 reinterprets the union as its ptr32 member.
+func (u *UCPTrieData) Ptr32() **uint32 {
+	return (**uint32)(unsafe.Pointer(u))
+}
+
+// Ptr8 reinterprets the union as its ptr8 member.
+func (u *UCPTrieData) Ptr8() **byte {
+	return (**byte)(unsafe.Pointer(u))
 }
 
 type UCharIterator struct {

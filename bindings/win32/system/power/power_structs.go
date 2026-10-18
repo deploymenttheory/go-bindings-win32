@@ -286,10 +286,25 @@ type POWER_ADAPTER_CHARGE_REQUIREMENT struct {
 	MaximumPower  uint32
 }
 
+type POWER_ADAPTER_POWER_STATES_States_e__Struct struct {
+	Bitfield uint32
+}
+
 // POWER_ADAPTER_POWER_STATES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type POWER_ADAPTER_POWER_STATES struct {
 	Data [1]uint32
+}
+
+// States reinterprets the union as its States member.
+func (u *POWER_ADAPTER_POWER_STATES) States() *POWER_ADAPTER_POWER_STATES_States_e__Struct {
+	return (*POWER_ADAPTER_POWER_STATES_States_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *POWER_ADAPTER_POWER_STATES) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type POWER_ADAPTER_SET_STATUS_BUFFER struct {

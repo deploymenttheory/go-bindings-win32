@@ -49,15 +49,32 @@ type CVStruct struct {
 }
 
 // CeeSectionRelocExtra is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CeeSectionRelocExtra struct {
 	Data [1]uint16
 }
 
+// HighAdj reinterprets the union as its highAdj member.
+func (u *CeeSectionRelocExtra) HighAdj() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
 // IMAGE_COR_ILMETHOD is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_COR_ILMETHOD struct {
 	Data [3]uint32
+}
+
+// Tiny reinterprets the union as its Tiny member.
+func (u *IMAGE_COR_ILMETHOD) Tiny() *IMAGE_COR_ILMETHOD_TINY {
+	return (*IMAGE_COR_ILMETHOD_TINY)(unsafe.Pointer(u))
+}
+
+// Fat reinterprets the union as its Fat member.
+func (u *IMAGE_COR_ILMETHOD) Fat() *IMAGE_COR_ILMETHOD_FAT {
+	return (*IMAGE_COR_ILMETHOD_FAT)(unsafe.Pointer(u))
 }
 
 type IMAGE_COR_ILMETHOD_FAT struct {
@@ -67,15 +84,37 @@ type IMAGE_COR_ILMETHOD_FAT struct {
 }
 
 // IMAGE_COR_ILMETHOD_SECT_EH is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_COR_ILMETHOD_SECT_EH struct {
 	Data [7]uint32
 }
 
+// Small reinterprets the union as its Small member.
+func (u *IMAGE_COR_ILMETHOD_SECT_EH) Small() *IMAGE_COR_ILMETHOD_SECT_EH_SMALL {
+	return (*IMAGE_COR_ILMETHOD_SECT_EH_SMALL)(unsafe.Pointer(u))
+}
+
+// Fat reinterprets the union as its Fat member.
+func (u *IMAGE_COR_ILMETHOD_SECT_EH) Fat() *IMAGE_COR_ILMETHOD_SECT_EH_FAT {
+	return (*IMAGE_COR_ILMETHOD_SECT_EH_FAT)(unsafe.Pointer(u))
+}
+
 // IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ClassToken reinterprets the union as its ClassToken member.
+func (u *IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union) ClassToken() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FilterOffset reinterprets the union as its FilterOffset member.
+func (u *IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union) FilterOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT struct {
@@ -88,9 +127,20 @@ type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT struct {
 }
 
 // IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ClassToken reinterprets the union as its ClassToken member.
+func (u *IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union) ClassToken() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FilterOffset reinterprets the union as its FilterOffset member.
+func (u *IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union) FilterOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL struct {

@@ -5,6 +5,8 @@
 package xps
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -56,10 +58,45 @@ type PSINJECTDATA struct {
 	PageNumber     uint16
 }
 
+type XPS_COLOR_XPS_COLOR_VALUE_context_e__Struct struct {
+	ChannelCount byte
+	Channels     [9]float32
+}
+
+type XPS_COLOR_XPS_COLOR_VALUE_sRGB_e__Struct struct {
+	Alpha byte
+	Red   byte
+	Green byte
+	Blue  byte
+}
+
+type XPS_COLOR_XPS_COLOR_VALUE_scRGB_e__Struct struct {
+	Alpha float32
+	Red   float32
+	Green float32
+	Blue  float32
+}
+
 // XPS_COLOR_XPS_COLOR_VALUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type XPS_COLOR_XPS_COLOR_VALUE struct {
 	Data [10]uint32
+}
+
+// SRGB reinterprets the union as its sRGB member.
+func (u *XPS_COLOR_XPS_COLOR_VALUE) SRGB() *XPS_COLOR_XPS_COLOR_VALUE_sRGB_e__Struct {
+	return (*XPS_COLOR_XPS_COLOR_VALUE_sRGB_e__Struct)(unsafe.Pointer(u))
+}
+
+// ScRGB reinterprets the union as its scRGB member.
+func (u *XPS_COLOR_XPS_COLOR_VALUE) ScRGB() *XPS_COLOR_XPS_COLOR_VALUE_scRGB_e__Struct {
+	return (*XPS_COLOR_XPS_COLOR_VALUE_scRGB_e__Struct)(unsafe.Pointer(u))
+}
+
+// Context reinterprets the union as its context member.
+func (u *XPS_COLOR_XPS_COLOR_VALUE) Context() *XPS_COLOR_XPS_COLOR_VALUE_context_e__Struct {
+	return (*XPS_COLOR_XPS_COLOR_VALUE_context_e__Struct)(unsafe.Pointer(u))
 }
 
 // XPS_COLOR: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ns-xpsobjectmodel-xps_color

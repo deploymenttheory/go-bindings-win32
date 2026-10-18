@@ -52,15 +52,37 @@ type D3D10_BUFFER_DESC struct {
 }
 
 // D3D10_BUFFER_RTV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_BUFFER_RTV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// FirstElement reinterprets the union as its FirstElement member.
+func (u *D3D10_BUFFER_RTV_Anonymous1_e__Union) FirstElement() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementOffset reinterprets the union as its ElementOffset member.
+func (u *D3D10_BUFFER_RTV_Anonymous1_e__Union) ElementOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3D10_BUFFER_RTV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_BUFFER_RTV_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// NumElements reinterprets the union as its NumElements member.
+func (u *D3D10_BUFFER_RTV_Anonymous2_e__Union) NumElements() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementWidth reinterprets the union as its ElementWidth member.
+func (u *D3D10_BUFFER_RTV_Anonymous2_e__Union) ElementWidth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // D3D10_BUFFER_RTV: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_buffer_rtv
@@ -70,15 +92,37 @@ type D3D10_BUFFER_RTV struct {
 }
 
 // D3D10_BUFFER_SRV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_BUFFER_SRV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// FirstElement reinterprets the union as its FirstElement member.
+func (u *D3D10_BUFFER_SRV_Anonymous1_e__Union) FirstElement() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementOffset reinterprets the union as its ElementOffset member.
+func (u *D3D10_BUFFER_SRV_Anonymous1_e__Union) ElementOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3D10_BUFFER_SRV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_BUFFER_SRV_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// NumElements reinterprets the union as its NumElements member.
+func (u *D3D10_BUFFER_SRV_Anonymous2_e__Union) NumElements() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementWidth reinterprets the union as its ElementWidth member.
+func (u *D3D10_BUFFER_SRV_Anonymous2_e__Union) ElementWidth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // D3D10_BUFFER_SRV: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_buffer_srv
@@ -121,9 +165,40 @@ type D3D10_DEPTH_STENCIL_DESC struct {
 }
 
 // D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture1D() *D3D10_TEX1D_DSV {
+	return (*D3D10_TEX1D_DSV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture1DArray() *D3D10_TEX1D_ARRAY_DSV {
+	return (*D3D10_TEX1D_ARRAY_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D10_TEX2D_DSV {
+	return (*D3D10_TEX2D_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D10_TEX2D_ARRAY_DSV {
+	return (*D3D10_TEX2D_ARRAY_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2DMS() *D3D10_TEX2DMS_DSV {
+	return (*D3D10_TEX2DMS_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2DMSArray() *D3D10_TEX2DMS_ARRAY_DSV {
+	return (*D3D10_TEX2DMS_ARRAY_DSV)(unsafe.Pointer(u))
 }
 
 // D3D10_DEPTH_STENCIL_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_depth_stencil_view_desc
@@ -301,9 +376,50 @@ type D3D10_RENDER_TARGET_BLEND_DESC1 struct {
 }
 
 // D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Buffer() *D3D10_BUFFER_RTV {
+	return (*D3D10_BUFFER_RTV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture1D() *D3D10_TEX1D_RTV {
+	return (*D3D10_TEX1D_RTV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture1DArray() *D3D10_TEX1D_ARRAY_RTV {
+	return (*D3D10_TEX1D_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D10_TEX2D_RTV {
+	return (*D3D10_TEX2D_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D10_TEX2D_ARRAY_RTV {
+	return (*D3D10_TEX2D_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2DMS() *D3D10_TEX2DMS_RTV {
+	return (*D3D10_TEX2DMS_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2DMSArray() *D3D10_TEX2DMS_ARRAY_RTV {
+	return (*D3D10_TEX2DMS_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture3D() *D3D10_TEX3D_RTV {
+	return (*D3D10_TEX3D_RTV)(unsafe.Pointer(u))
 }
 
 // D3D10_RENDER_TARGET_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_render_target_view_desc
@@ -505,9 +621,55 @@ type D3D10_SHADER_INPUT_BIND_DESC struct {
 }
 
 // D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Buffer() *D3D10_BUFFER_SRV {
+	return (*D3D10_BUFFER_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture1D() *D3D10_TEX1D_SRV {
+	return (*D3D10_TEX1D_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture1DArray() *D3D10_TEX1D_ARRAY_SRV {
+	return (*D3D10_TEX1D_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D10_TEX2D_SRV {
+	return (*D3D10_TEX2D_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D10_TEX2D_ARRAY_SRV {
+	return (*D3D10_TEX2D_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2DMS() *D3D10_TEX2DMS_SRV {
+	return (*D3D10_TEX2DMS_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2DMSArray() *D3D10_TEX2DMS_ARRAY_SRV {
+	return (*D3D10_TEX2DMS_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture3D() *D3D10_TEX3D_SRV {
+	return (*D3D10_TEX3D_SRV)(unsafe.Pointer(u))
+}
+
+// TextureCube reinterprets the union as its TextureCube member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) TextureCube() *D3D10_TEXCUBE_SRV {
+	return (*D3D10_TEXCUBE_SRV)(unsafe.Pointer(u))
 }
 
 // D3D10_SHADER_RESOURCE_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d10/ns-d3d10-d3d10_shader_resource_view_desc
@@ -518,9 +680,60 @@ type D3D10_SHADER_RESOURCE_VIEW_DESC struct {
 }
 
 // D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Buffer() *D3D10_BUFFER_SRV {
+	return (*D3D10_BUFFER_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture1D() *D3D10_TEX1D_SRV {
+	return (*D3D10_TEX1D_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture1DArray() *D3D10_TEX1D_ARRAY_SRV {
+	return (*D3D10_TEX1D_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2D() *D3D10_TEX2D_SRV {
+	return (*D3D10_TEX2D_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2DArray() *D3D10_TEX2D_ARRAY_SRV {
+	return (*D3D10_TEX2D_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2DMS() *D3D10_TEX2DMS_SRV {
+	return (*D3D10_TEX2DMS_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2DMSArray() *D3D10_TEX2DMS_ARRAY_SRV {
+	return (*D3D10_TEX2DMS_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture3D() *D3D10_TEX3D_SRV {
+	return (*D3D10_TEX3D_SRV)(unsafe.Pointer(u))
+}
+
+// TextureCube reinterprets the union as its TextureCube member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) TextureCube() *D3D10_TEXCUBE_SRV {
+	return (*D3D10_TEXCUBE_SRV)(unsafe.Pointer(u))
+}
+
+// TextureCubeArray reinterprets the union as its TextureCubeArray member.
+func (u *D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) TextureCubeArray() *D3D10_TEXCUBE_ARRAY_SRV1 {
+	return (*D3D10_TEXCUBE_ARRAY_SRV1)(unsafe.Pointer(u))
 }
 
 // D3D10_SHADER_RESOURCE_VIEW_DESC1: https://learn.microsoft.com/windows/win32/api/d3d10_1/ns-d3d10_1-d3d10_shader_resource_view_desc1

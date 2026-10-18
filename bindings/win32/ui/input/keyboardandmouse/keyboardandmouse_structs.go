@@ -5,6 +5,8 @@
 package keyboardandmouse
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -22,9 +24,25 @@ type HARDWAREINPUT struct {
 }
 
 // INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INPUT_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// Mi reinterprets the union as its mi member.
+func (u *INPUT_Anonymous_e__Union) Mi() *MOUSEINPUT {
+	return (*MOUSEINPUT)(unsafe.Pointer(u))
+}
+
+// Ki reinterprets the union as its ki member.
+func (u *INPUT_Anonymous_e__Union) Ki() *KEYBDINPUT {
+	return (*KEYBDINPUT)(unsafe.Pointer(u))
+}
+
+// Hi reinterprets the union as its hi member.
+func (u *INPUT_Anonymous_e__Union) Hi() *HARDWAREINPUT {
+	return (*HARDWAREINPUT)(unsafe.Pointer(u))
 }
 
 // INPUT: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-input

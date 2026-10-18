@@ -5,6 +5,8 @@
 package input
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -22,9 +24,25 @@ type RAWHID struct {
 }
 
 // RAWINPUT_data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RAWINPUT_data_e__Union struct {
 	Data [6]uint32
+}
+
+// Mouse reinterprets the union as its mouse member.
+func (u *RAWINPUT_data_e__Union) Mouse() *RAWMOUSE {
+	return (*RAWMOUSE)(unsafe.Pointer(u))
+}
+
+// Keyboard reinterprets the union as its keyboard member.
+func (u *RAWINPUT_data_e__Union) Keyboard() *RAWKEYBOARD {
+	return (*RAWKEYBOARD)(unsafe.Pointer(u))
+}
+
+// Hid reinterprets the union as its hid member.
+func (u *RAWINPUT_data_e__Union) Hid() *RAWHID {
+	return (*RAWHID)(unsafe.Pointer(u))
 }
 
 // RAWINPUT: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-rawinput
@@ -65,10 +83,26 @@ type RAWKEYBOARD struct {
 	ExtraInformation uint32
 }
 
+type RAWMOUSE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	UsButtonFlags uint16
+	UsButtonData  uint16
+}
+
 // RAWMOUSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RAWMOUSE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UlButtons reinterprets the union as its ulButtons member.
+func (u *RAWMOUSE_Anonymous_e__Union) UlButtons() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *RAWMOUSE_Anonymous_e__Union) Anonymous() *RAWMOUSE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*RAWMOUSE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // RAWMOUSE: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-rawmouse
@@ -82,9 +116,25 @@ type RAWMOUSE struct {
 }
 
 // RID_DEVICE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RID_DEVICE_INFO_Anonymous_e__Union struct {
 	Data [6]uint32
+}
+
+// Mouse reinterprets the union as its mouse member.
+func (u *RID_DEVICE_INFO_Anonymous_e__Union) Mouse() *RID_DEVICE_INFO_MOUSE {
+	return (*RID_DEVICE_INFO_MOUSE)(unsafe.Pointer(u))
+}
+
+// Keyboard reinterprets the union as its keyboard member.
+func (u *RID_DEVICE_INFO_Anonymous_e__Union) Keyboard() *RID_DEVICE_INFO_KEYBOARD {
+	return (*RID_DEVICE_INFO_KEYBOARD)(unsafe.Pointer(u))
+}
+
+// Hid reinterprets the union as its hid member.
+func (u *RID_DEVICE_INFO_Anonymous_e__Union) Hid() *RID_DEVICE_INFO_HID {
+	return (*RID_DEVICE_INFO_HID)(unsafe.Pointer(u))
 }
 
 // RID_DEVICE_INFO: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-rid_device_info

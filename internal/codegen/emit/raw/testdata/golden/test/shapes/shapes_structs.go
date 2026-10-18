@@ -4,6 +4,10 @@
 
 package shapes
 
+import (
+	"unsafe"
+)
+
 type BIG struct {
 	A int64
 	B int64
@@ -38,15 +42,82 @@ type Taken struct {
 }
 
 // UNI is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UNI struct {
 	Data [1]uint64
 }
 
+// I reinterprets the union as its i member.
+func (u *UNI) I() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Q reinterprets the union as its q member.
+func (u *UNI) Q() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// VARIANTLIKE_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type VARIANTLIKE_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [1]uint64
+}
+
+// LVal reinterprets the union as its lVal member.
+func (u *VARIANTLIKE_Anonymous_e__Struct_Anonymous_e__Union) LVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// PwszVal reinterprets the union as its pwszVal member.
+func (u *VARIANTLIKE_Anonymous_e__Struct_Anonymous_e__Union) PwszVal() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// Small reinterprets the union as its small member.
+func (u *VARIANTLIKE_Anonymous_e__Struct_Anonymous_e__Union) Small() *SMALL {
+	return (*SMALL)(unsafe.Pointer(u))
+}
+
+type VARIANTLIKE_Anonymous_e__Struct struct {
+	Vt        uint16
+	Reserved  uint16
+	Anonymous VARIANTLIKE_Anonymous_e__Struct_Anonymous_e__Union
+}
+
+// VARIANTLIKE is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type VARIANTLIKE struct {
+	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *VARIANTLIKE) Anonymous() *VARIANTLIKE_Anonymous_e__Struct {
+	return (*VARIANTLIKE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Data_ reinterprets the union as its data member.
+func (u *VARIANTLIKE) Data_() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
 // WITHNESTED_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WITHNESTED_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// I reinterprets the union as its i member.
+func (u *WITHNESTED_Anonymous_e__Union) I() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// D reinterprets the union as its d member.
+func (u *WITHNESTED_Anonymous_e__Union) D() *float64 {
+	return (*float64)(unsafe.Pointer(u))
 }
 
 type WITHNESTED struct {

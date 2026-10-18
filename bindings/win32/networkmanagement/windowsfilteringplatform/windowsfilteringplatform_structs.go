@@ -5,15 +5,28 @@
 package windowsfilteringplatform
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 )
 
 // FWPM_ACTION0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_ACTION0_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// FilterType reinterprets the union as its filterType member.
+func (u *FWPM_ACTION0_Anonymous_e__Union) FilterType() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// CalloutKey reinterprets the union as its calloutKey member.
+func (u *FWPM_ACTION0_Anonymous_e__Union) CalloutKey() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 // FWPM_ACTION0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_action0
@@ -66,15 +79,37 @@ type FWPM_CLASSIFY_OPTIONS0 struct {
 }
 
 // FWPM_CONNECTION0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_CONNECTION0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalV4Address reinterprets the union as its localV4Address member.
+func (u *FWPM_CONNECTION0_Anonymous1_e__Union) LocalV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalV6Address reinterprets the union as its localV6Address member.
+func (u *FWPM_CONNECTION0_Anonymous1_e__Union) LocalV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // FWPM_CONNECTION0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_CONNECTION0_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteV4Address reinterprets the union as its remoteV4Address member.
+func (u *FWPM_CONNECTION0_Anonymous2_e__Union) RemoteV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteV6Address reinterprets the union as its remoteV6Address member.
+func (u *FWPM_CONNECTION0_Anonymous2_e__Union) RemoteV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // FWPM_CONNECTION0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_connection0
@@ -122,9 +157,20 @@ type FWPM_FIELD0 struct {
 }
 
 // FWPM_FILTER0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_FILTER0_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// RawContext reinterprets the union as its rawContext member.
+func (u *FWPM_FILTER0_Anonymous_e__Union) RawContext() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// ProviderContextKey reinterprets the union as its providerContextKey member.
+func (u *FWPM_FILTER0_Anonymous_e__Union) ProviderContextKey() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 // FWPM_FILTER0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_filter0
@@ -226,9 +272,40 @@ type FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0 struct {
 }
 
 // FWPM_NET_EVENT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// IkeMmFailure reinterprets the union as its ikeMmFailure member.
+func (u *FWPM_NET_EVENT0_Anonymous_e__Union) IkeMmFailure() **FWPM_NET_EVENT_IKEEXT_MM_FAILURE0 {
+	return (**FWPM_NET_EVENT_IKEEXT_MM_FAILURE0)(unsafe.Pointer(u))
+}
+
+// IkeQmFailure reinterprets the union as its ikeQmFailure member.
+func (u *FWPM_NET_EVENT0_Anonymous_e__Union) IkeQmFailure() **FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 {
+	return (**FWPM_NET_EVENT_IKEEXT_QM_FAILURE0)(unsafe.Pointer(u))
+}
+
+// IkeEmFailure reinterprets the union as its ikeEmFailure member.
+func (u *FWPM_NET_EVENT0_Anonymous_e__Union) IkeEmFailure() **FWPM_NET_EVENT_IKEEXT_EM_FAILURE0 {
+	return (**FWPM_NET_EVENT_IKEEXT_EM_FAILURE0)(unsafe.Pointer(u))
+}
+
+// ClassifyDrop reinterprets the union as its classifyDrop member.
+func (u *FWPM_NET_EVENT0_Anonymous_e__Union) ClassifyDrop() **FWPM_NET_EVENT_CLASSIFY_DROP0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP0)(unsafe.Pointer(u))
+}
+
+// IpsecDrop reinterprets the union as its ipsecDrop member.
+func (u *FWPM_NET_EVENT0_Anonymous_e__Union) IpsecDrop() **FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_KERNEL_DROP0)(unsafe.Pointer(u))
+}
+
+// IdpDrop reinterprets the union as its idpDrop member.
+func (u *FWPM_NET_EVENT0_Anonymous_e__Union) IdpDrop() **FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_DOSP_DROP0)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event0
@@ -239,9 +316,40 @@ type FWPM_NET_EVENT0 struct {
 }
 
 // FWPM_NET_EVENT1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// IkeMmFailure reinterprets the union as its ikeMmFailure member.
+func (u *FWPM_NET_EVENT1_Anonymous_e__Union) IkeMmFailure() **FWPM_NET_EVENT_IKEEXT_MM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_MM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// IkeQmFailure reinterprets the union as its ikeQmFailure member.
+func (u *FWPM_NET_EVENT1_Anonymous_e__Union) IkeQmFailure() **FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 {
+	return (**FWPM_NET_EVENT_IKEEXT_QM_FAILURE0)(unsafe.Pointer(u))
+}
+
+// IkeEmFailure reinterprets the union as its ikeEmFailure member.
+func (u *FWPM_NET_EVENT1_Anonymous_e__Union) IkeEmFailure() **FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_EM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// ClassifyDrop reinterprets the union as its classifyDrop member.
+func (u *FWPM_NET_EVENT1_Anonymous_e__Union) ClassifyDrop() **FWPM_NET_EVENT_CLASSIFY_DROP1 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP1)(unsafe.Pointer(u))
+}
+
+// IpsecDrop reinterprets the union as its ipsecDrop member.
+func (u *FWPM_NET_EVENT1_Anonymous_e__Union) IpsecDrop() **FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_KERNEL_DROP0)(unsafe.Pointer(u))
+}
+
+// IdpDrop reinterprets the union as its idpDrop member.
+func (u *FWPM_NET_EVENT1_Anonymous_e__Union) IdpDrop() **FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_DOSP_DROP0)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT1: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event1
@@ -252,9 +360,60 @@ type FWPM_NET_EVENT1 struct {
 }
 
 // FWPM_NET_EVENT2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT2_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// IkeMmFailure reinterprets the union as its ikeMmFailure member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) IkeMmFailure() **FWPM_NET_EVENT_IKEEXT_MM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_MM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// IkeQmFailure reinterprets the union as its ikeQmFailure member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) IkeQmFailure() **FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 {
+	return (**FWPM_NET_EVENT_IKEEXT_QM_FAILURE0)(unsafe.Pointer(u))
+}
+
+// IkeEmFailure reinterprets the union as its ikeEmFailure member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) IkeEmFailure() **FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_EM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// ClassifyDrop reinterprets the union as its classifyDrop member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) ClassifyDrop() **FWPM_NET_EVENT_CLASSIFY_DROP2 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP2)(unsafe.Pointer(u))
+}
+
+// IpsecDrop reinterprets the union as its ipsecDrop member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) IpsecDrop() **FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_KERNEL_DROP0)(unsafe.Pointer(u))
+}
+
+// IdpDrop reinterprets the union as its idpDrop member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) IdpDrop() **FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_DOSP_DROP0)(unsafe.Pointer(u))
+}
+
+// ClassifyAllow reinterprets the union as its classifyAllow member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) ClassifyAllow() **FWPM_NET_EVENT_CLASSIFY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// CapabilityDrop reinterprets the union as its capabilityDrop member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) CapabilityDrop() **FWPM_NET_EVENT_CAPABILITY_DROP0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_DROP0)(unsafe.Pointer(u))
+}
+
+// CapabilityAllow reinterprets the union as its capabilityAllow member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) CapabilityAllow() **FWPM_NET_EVENT_CAPABILITY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// ClassifyDropMac reinterprets the union as its classifyDropMac member.
+func (u *FWPM_NET_EVENT2_Anonymous_e__Union) ClassifyDropMac() **FWPM_NET_EVENT_CLASSIFY_DROP_MAC0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP_MAC0)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT2: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event2
@@ -265,9 +424,60 @@ type FWPM_NET_EVENT2 struct {
 }
 
 // FWPM_NET_EVENT3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT3_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// IkeMmFailure reinterprets the union as its ikeMmFailure member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) IkeMmFailure() **FWPM_NET_EVENT_IKEEXT_MM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_MM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// IkeQmFailure reinterprets the union as its ikeQmFailure member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) IkeQmFailure() **FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 {
+	return (**FWPM_NET_EVENT_IKEEXT_QM_FAILURE0)(unsafe.Pointer(u))
+}
+
+// IkeEmFailure reinterprets the union as its ikeEmFailure member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) IkeEmFailure() **FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_EM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// ClassifyDrop reinterprets the union as its classifyDrop member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) ClassifyDrop() **FWPM_NET_EVENT_CLASSIFY_DROP2 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP2)(unsafe.Pointer(u))
+}
+
+// IpsecDrop reinterprets the union as its ipsecDrop member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) IpsecDrop() **FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_KERNEL_DROP0)(unsafe.Pointer(u))
+}
+
+// IdpDrop reinterprets the union as its idpDrop member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) IdpDrop() **FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_DOSP_DROP0)(unsafe.Pointer(u))
+}
+
+// ClassifyAllow reinterprets the union as its classifyAllow member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) ClassifyAllow() **FWPM_NET_EVENT_CLASSIFY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// CapabilityDrop reinterprets the union as its capabilityDrop member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) CapabilityDrop() **FWPM_NET_EVENT_CAPABILITY_DROP0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_DROP0)(unsafe.Pointer(u))
+}
+
+// CapabilityAllow reinterprets the union as its capabilityAllow member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) CapabilityAllow() **FWPM_NET_EVENT_CAPABILITY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// ClassifyDropMac reinterprets the union as its classifyDropMac member.
+func (u *FWPM_NET_EVENT3_Anonymous_e__Union) ClassifyDropMac() **FWPM_NET_EVENT_CLASSIFY_DROP_MAC0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP_MAC0)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT3: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event3
@@ -278,9 +488,60 @@ type FWPM_NET_EVENT3 struct {
 }
 
 // FWPM_NET_EVENT4_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT4_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// IkeMmFailure reinterprets the union as its ikeMmFailure member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) IkeMmFailure() **FWPM_NET_EVENT_IKEEXT_MM_FAILURE2 {
+	return (**FWPM_NET_EVENT_IKEEXT_MM_FAILURE2)(unsafe.Pointer(u))
+}
+
+// IkeQmFailure reinterprets the union as its ikeQmFailure member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) IkeQmFailure() **FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_QM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// IkeEmFailure reinterprets the union as its ikeEmFailure member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) IkeEmFailure() **FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_EM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// ClassifyDrop reinterprets the union as its classifyDrop member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) ClassifyDrop() **FWPM_NET_EVENT_CLASSIFY_DROP2 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP2)(unsafe.Pointer(u))
+}
+
+// IpsecDrop reinterprets the union as its ipsecDrop member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) IpsecDrop() **FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_KERNEL_DROP0)(unsafe.Pointer(u))
+}
+
+// IdpDrop reinterprets the union as its idpDrop member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) IdpDrop() **FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_DOSP_DROP0)(unsafe.Pointer(u))
+}
+
+// ClassifyAllow reinterprets the union as its classifyAllow member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) ClassifyAllow() **FWPM_NET_EVENT_CLASSIFY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// CapabilityDrop reinterprets the union as its capabilityDrop member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) CapabilityDrop() **FWPM_NET_EVENT_CAPABILITY_DROP0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_DROP0)(unsafe.Pointer(u))
+}
+
+// CapabilityAllow reinterprets the union as its capabilityAllow member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) CapabilityAllow() **FWPM_NET_EVENT_CAPABILITY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// ClassifyDropMac reinterprets the union as its classifyDropMac member.
+func (u *FWPM_NET_EVENT4_Anonymous_e__Union) ClassifyDropMac() **FWPM_NET_EVENT_CLASSIFY_DROP_MAC0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP_MAC0)(unsafe.Pointer(u))
 }
 
 type FWPM_NET_EVENT4 struct {
@@ -290,9 +551,65 @@ type FWPM_NET_EVENT4 struct {
 }
 
 // FWPM_NET_EVENT5_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT5_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// IkeMmFailure reinterprets the union as its ikeMmFailure member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) IkeMmFailure() **FWPM_NET_EVENT_IKEEXT_MM_FAILURE2 {
+	return (**FWPM_NET_EVENT_IKEEXT_MM_FAILURE2)(unsafe.Pointer(u))
+}
+
+// IkeQmFailure reinterprets the union as its ikeQmFailure member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) IkeQmFailure() **FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_QM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// IkeEmFailure reinterprets the union as its ikeEmFailure member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) IkeEmFailure() **FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 {
+	return (**FWPM_NET_EVENT_IKEEXT_EM_FAILURE1)(unsafe.Pointer(u))
+}
+
+// ClassifyDrop reinterprets the union as its classifyDrop member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) ClassifyDrop() **FWPM_NET_EVENT_CLASSIFY_DROP2 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP2)(unsafe.Pointer(u))
+}
+
+// IpsecDrop reinterprets the union as its ipsecDrop member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) IpsecDrop() **FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_KERNEL_DROP0)(unsafe.Pointer(u))
+}
+
+// IdpDrop reinterprets the union as its idpDrop member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) IdpDrop() **FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
+	return (**FWPM_NET_EVENT_IPSEC_DOSP_DROP0)(unsafe.Pointer(u))
+}
+
+// ClassifyAllow reinterprets the union as its classifyAllow member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) ClassifyAllow() **FWPM_NET_EVENT_CLASSIFY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// CapabilityDrop reinterprets the union as its capabilityDrop member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) CapabilityDrop() **FWPM_NET_EVENT_CAPABILITY_DROP0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_DROP0)(unsafe.Pointer(u))
+}
+
+// CapabilityAllow reinterprets the union as its capabilityAllow member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) CapabilityAllow() **FWPM_NET_EVENT_CAPABILITY_ALLOW0 {
+	return (**FWPM_NET_EVENT_CAPABILITY_ALLOW0)(unsafe.Pointer(u))
+}
+
+// ClassifyDropMac reinterprets the union as its classifyDropMac member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) ClassifyDropMac() **FWPM_NET_EVENT_CLASSIFY_DROP_MAC0 {
+	return (**FWPM_NET_EVENT_CLASSIFY_DROP_MAC0)(unsafe.Pointer(u))
+}
+
+// LpmPacketArrival reinterprets the union as its lpmPacketArrival member.
+func (u *FWPM_NET_EVENT5_Anonymous_e__Union) LpmPacketArrival() **FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0 {
+	return (**FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0)(unsafe.Pointer(u))
 }
 
 type FWPM_NET_EVENT5 struct {
@@ -389,15 +706,37 @@ type FWPM_NET_EVENT_ENUM_TEMPLATE0 struct {
 }
 
 // FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalAddrV4 reinterprets the union as its localAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union) LocalAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalAddrV6 reinterprets the union as its localAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union) LocalAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
+}
+
 // FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteAddrV4 reinterprets the union as its remoteAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union) RemoteAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteAddrV6 reinterprets the union as its remoteAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union) RemoteAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT_HEADER0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_header0
@@ -416,21 +755,78 @@ type FWPM_NET_EVENT_HEADER0 struct {
 }
 
 // FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalAddrV4 reinterprets the union as its localAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union) LocalAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalAddrV6 reinterprets the union as its localAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union) LocalAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
+}
+
 // FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
+// RemoteAddrV4 reinterprets the union as its remoteAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union) RemoteAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteAddrV6 reinterprets the union as its remoteAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union) RemoteAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
+}
+
+type FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Reserved2  FWP_BYTE_ARRAY6
+	Reserved3  FWP_BYTE_ARRAY6
+	Reserved4  uint32
+	Reserved5  uint32
+	Reserved6  uint16
+	Reserved7  uint32
+	Reserved8  uint32
+	Reserved9  uint16
+	Reserved10 uint64
+}
+
+// FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [6]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Anonymous() *FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct struct {
+	Reserved1 FWP_AF
+	Anonymous FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+}
+
 // FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union struct {
 	Data [7]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union) Anonymous() *FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct {
+	return (*FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT_HEADER1: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_header1
@@ -450,15 +846,37 @@ type FWPM_NET_EVENT_HEADER1 struct {
 }
 
 // FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalAddrV4 reinterprets the union as its localAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union) LocalAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalAddrV6 reinterprets the union as its localAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union) LocalAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
+}
+
 // FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteAddrV4 reinterprets the union as its remoteAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union) RemoteAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteAddrV6 reinterprets the union as its remoteAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union) RemoteAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT_HEADER2: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_header2
@@ -479,15 +897,37 @@ type FWPM_NET_EVENT_HEADER2 struct {
 }
 
 // FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalAddrV4 reinterprets the union as its localAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union) LocalAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalAddrV6 reinterprets the union as its localAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union) LocalAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
+}
+
 // FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteAddrV4 reinterprets the union as its remoteAddrV4 member.
+func (u *FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union) RemoteAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteAddrV6 reinterprets the union as its remoteAddrV6 member.
+func (u *FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union) RemoteAddrV6() *FWP_BYTE_ARRAY16 {
+	return (*FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT_HEADER3: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_header3
@@ -598,15 +1038,27 @@ type FWPM_NET_EVENT_IKEEXT_MM_FAILURE2 struct {
 }
 
 // FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
+// LocalSubNet reinterprets the union as its localSubNet member.
+func (u *FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union) LocalSubNet() *FWP_CONDITION_VALUE0 {
+	return (*FWP_CONDITION_VALUE0)(unsafe.Pointer(u))
+}
+
 // FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union struct {
 	Data [2]uint64
+}
+
+// RemoteSubNet reinterprets the union as its remoteSubNet member.
+func (u *FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union) RemoteSubNet() *FWP_CONDITION_VALUE0 {
+	return (*FWP_CONDITION_VALUE0)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT_IKEEXT_QM_FAILURE0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_ikeext_qm_failure0
@@ -623,15 +1075,27 @@ type FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 struct {
 }
 
 // FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
+// LocalSubNet reinterprets the union as its localSubNet member.
+func (u *FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous1_e__Union) LocalSubNet() *FWP_CONDITION_VALUE0 {
+	return (*FWP_CONDITION_VALUE0)(unsafe.Pointer(u))
+}
+
 // FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous2_e__Union struct {
 	Data [2]uint64
+}
+
+// RemoteSubNet reinterprets the union as its remoteSubNet member.
+func (u *FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous2_e__Union) RemoteSubNet() *FWP_CONDITION_VALUE0 {
+	return (*FWP_CONDITION_VALUE0)(unsafe.Pointer(u))
 }
 
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 struct {
@@ -649,15 +1113,37 @@ type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 struct {
 }
 
 // FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// PublicHostV4Addr reinterprets the union as its publicHostV4Addr member.
+func (u *FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union) PublicHostV4Addr() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PublicHostV6Addr reinterprets the union as its publicHostV6Addr member.
+func (u *FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union) PublicHostV6Addr() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// InternalHostV4Addr reinterprets the union as its internalHostV4Addr member.
+func (u *FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union) InternalHostV4Addr() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// InternalHostV6Addr reinterprets the union as its internalHostV6Addr member.
+func (u *FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union) InternalHostV6Addr() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // FWPM_NET_EVENT_IPSEC_DOSP_DROP0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_net_event_ipsec_dosp_drop0
@@ -705,9 +1191,55 @@ type FWPM_PROVIDER_CHANGE0 struct {
 }
 
 // FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// KeyingPolicy reinterprets the union as its keyingPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) KeyingPolicy() **IPSEC_KEYING_POLICY0 {
+	return (**IPSEC_KEYING_POLICY0)(unsafe.Pointer(u))
+}
+
+// IkeQmTransportPolicy reinterprets the union as its ikeQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) IkeQmTransportPolicy() **IPSEC_TRANSPORT_POLICY0 {
+	return (**IPSEC_TRANSPORT_POLICY0)(unsafe.Pointer(u))
+}
+
+// IkeQmTunnelPolicy reinterprets the union as its ikeQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) IkeQmTunnelPolicy() **IPSEC_TUNNEL_POLICY0 {
+	return (**IPSEC_TUNNEL_POLICY0)(unsafe.Pointer(u))
+}
+
+// AuthipQmTransportPolicy reinterprets the union as its authipQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) AuthipQmTransportPolicy() **IPSEC_TRANSPORT_POLICY0 {
+	return (**IPSEC_TRANSPORT_POLICY0)(unsafe.Pointer(u))
+}
+
+// AuthipQmTunnelPolicy reinterprets the union as its authipQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) AuthipQmTunnelPolicy() **IPSEC_TUNNEL_POLICY0 {
+	return (**IPSEC_TUNNEL_POLICY0)(unsafe.Pointer(u))
+}
+
+// IkeMmPolicy reinterprets the union as its ikeMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) IkeMmPolicy() **IKEEXT_POLICY0 {
+	return (**IKEEXT_POLICY0)(unsafe.Pointer(u))
+}
+
+// AuthIpMmPolicy reinterprets the union as its authIpMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) AuthIpMmPolicy() **IKEEXT_POLICY0 {
+	return (**IKEEXT_POLICY0)(unsafe.Pointer(u))
+}
+
+// DataBuffer reinterprets the union as its dataBuffer member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) DataBuffer() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// ClassifyOptions reinterprets the union as its classifyOptions member.
+func (u *FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union) ClassifyOptions() **FWPM_CLASSIFY_OPTIONS0 {
+	return (**FWPM_CLASSIFY_OPTIONS0)(unsafe.Pointer(u))
 }
 
 // FWPM_PROVIDER_CONTEXT0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_provider_context0
@@ -723,9 +1255,70 @@ type FWPM_PROVIDER_CONTEXT0 struct {
 }
 
 // FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// KeyingPolicy reinterprets the union as its keyingPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) KeyingPolicy() **IPSEC_KEYING_POLICY0 {
+	return (**IPSEC_KEYING_POLICY0)(unsafe.Pointer(u))
+}
+
+// IkeQmTransportPolicy reinterprets the union as its ikeQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) IkeQmTransportPolicy() **IPSEC_TRANSPORT_POLICY1 {
+	return (**IPSEC_TRANSPORT_POLICY1)(unsafe.Pointer(u))
+}
+
+// IkeQmTunnelPolicy reinterprets the union as its ikeQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) IkeQmTunnelPolicy() **IPSEC_TUNNEL_POLICY1 {
+	return (**IPSEC_TUNNEL_POLICY1)(unsafe.Pointer(u))
+}
+
+// AuthipQmTransportPolicy reinterprets the union as its authipQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) AuthipQmTransportPolicy() **IPSEC_TRANSPORT_POLICY1 {
+	return (**IPSEC_TRANSPORT_POLICY1)(unsafe.Pointer(u))
+}
+
+// AuthipQmTunnelPolicy reinterprets the union as its authipQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) AuthipQmTunnelPolicy() **IPSEC_TUNNEL_POLICY1 {
+	return (**IPSEC_TUNNEL_POLICY1)(unsafe.Pointer(u))
+}
+
+// IkeMmPolicy reinterprets the union as its ikeMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) IkeMmPolicy() **IKEEXT_POLICY1 {
+	return (**IKEEXT_POLICY1)(unsafe.Pointer(u))
+}
+
+// AuthIpMmPolicy reinterprets the union as its authIpMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) AuthIpMmPolicy() **IKEEXT_POLICY1 {
+	return (**IKEEXT_POLICY1)(unsafe.Pointer(u))
+}
+
+// DataBuffer reinterprets the union as its dataBuffer member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) DataBuffer() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// ClassifyOptions reinterprets the union as its classifyOptions member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) ClassifyOptions() **FWPM_CLASSIFY_OPTIONS0 {
+	return (**FWPM_CLASSIFY_OPTIONS0)(unsafe.Pointer(u))
+}
+
+// IkeV2QmTunnelPolicy reinterprets the union as its ikeV2QmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) IkeV2QmTunnelPolicy() **IPSEC_TUNNEL_POLICY1 {
+	return (**IPSEC_TUNNEL_POLICY1)(unsafe.Pointer(u))
+}
+
+// IkeV2MmPolicy reinterprets the union as its ikeV2MmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) IkeV2MmPolicy() **IKEEXT_POLICY1 {
+	return (**IKEEXT_POLICY1)(unsafe.Pointer(u))
+}
+
+// IdpOptions reinterprets the union as its idpOptions member.
+func (u *FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union) IdpOptions() **IPSEC_DOSP_OPTIONS0 {
+	return (**IPSEC_DOSP_OPTIONS0)(unsafe.Pointer(u))
 }
 
 // FWPM_PROVIDER_CONTEXT1: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_provider_context1
@@ -741,9 +1334,75 @@ type FWPM_PROVIDER_CONTEXT1 struct {
 }
 
 // FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// KeyingPolicy reinterprets the union as its keyingPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) KeyingPolicy() **IPSEC_KEYING_POLICY1 {
+	return (**IPSEC_KEYING_POLICY1)(unsafe.Pointer(u))
+}
+
+// IkeQmTransportPolicy reinterprets the union as its ikeQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) IkeQmTransportPolicy() **IPSEC_TRANSPORT_POLICY2 {
+	return (**IPSEC_TRANSPORT_POLICY2)(unsafe.Pointer(u))
+}
+
+// IkeQmTunnelPolicy reinterprets the union as its ikeQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) IkeQmTunnelPolicy() **IPSEC_TUNNEL_POLICY2 {
+	return (**IPSEC_TUNNEL_POLICY2)(unsafe.Pointer(u))
+}
+
+// AuthipQmTransportPolicy reinterprets the union as its authipQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) AuthipQmTransportPolicy() **IPSEC_TRANSPORT_POLICY2 {
+	return (**IPSEC_TRANSPORT_POLICY2)(unsafe.Pointer(u))
+}
+
+// AuthipQmTunnelPolicy reinterprets the union as its authipQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) AuthipQmTunnelPolicy() **IPSEC_TUNNEL_POLICY2 {
+	return (**IPSEC_TUNNEL_POLICY2)(unsafe.Pointer(u))
+}
+
+// IkeMmPolicy reinterprets the union as its ikeMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) IkeMmPolicy() **IKEEXT_POLICY2 {
+	return (**IKEEXT_POLICY2)(unsafe.Pointer(u))
+}
+
+// AuthIpMmPolicy reinterprets the union as its authIpMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) AuthIpMmPolicy() **IKEEXT_POLICY2 {
+	return (**IKEEXT_POLICY2)(unsafe.Pointer(u))
+}
+
+// DataBuffer reinterprets the union as its dataBuffer member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) DataBuffer() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// ClassifyOptions reinterprets the union as its classifyOptions member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) ClassifyOptions() **FWPM_CLASSIFY_OPTIONS0 {
+	return (**FWPM_CLASSIFY_OPTIONS0)(unsafe.Pointer(u))
+}
+
+// IkeV2QmTunnelPolicy reinterprets the union as its ikeV2QmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) IkeV2QmTunnelPolicy() **IPSEC_TUNNEL_POLICY2 {
+	return (**IPSEC_TUNNEL_POLICY2)(unsafe.Pointer(u))
+}
+
+// IkeV2QmTransportPolicy reinterprets the union as its ikeV2QmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) IkeV2QmTransportPolicy() **IPSEC_TRANSPORT_POLICY2 {
+	return (**IPSEC_TRANSPORT_POLICY2)(unsafe.Pointer(u))
+}
+
+// IkeV2MmPolicy reinterprets the union as its ikeV2MmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) IkeV2MmPolicy() **IKEEXT_POLICY2 {
+	return (**IKEEXT_POLICY2)(unsafe.Pointer(u))
+}
+
+// IdpOptions reinterprets the union as its idpOptions member.
+func (u *FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union) IdpOptions() **IPSEC_DOSP_OPTIONS0 {
+	return (**IPSEC_DOSP_OPTIONS0)(unsafe.Pointer(u))
 }
 
 // FWPM_PROVIDER_CONTEXT2: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_provider_context2
@@ -759,9 +1418,80 @@ type FWPM_PROVIDER_CONTEXT2 struct {
 }
 
 // FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// KeyingPolicy reinterprets the union as its keyingPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) KeyingPolicy() **IPSEC_KEYING_POLICY1 {
+	return (**IPSEC_KEYING_POLICY1)(unsafe.Pointer(u))
+}
+
+// IkeQmTransportPolicy reinterprets the union as its ikeQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) IkeQmTransportPolicy() **IPSEC_TRANSPORT_POLICY2 {
+	return (**IPSEC_TRANSPORT_POLICY2)(unsafe.Pointer(u))
+}
+
+// IkeQmTunnelPolicy reinterprets the union as its ikeQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) IkeQmTunnelPolicy() **IPSEC_TUNNEL_POLICY3 {
+	return (**IPSEC_TUNNEL_POLICY3)(unsafe.Pointer(u))
+}
+
+// AuthipQmTransportPolicy reinterprets the union as its authipQmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) AuthipQmTransportPolicy() **IPSEC_TRANSPORT_POLICY2 {
+	return (**IPSEC_TRANSPORT_POLICY2)(unsafe.Pointer(u))
+}
+
+// AuthipQmTunnelPolicy reinterprets the union as its authipQmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) AuthipQmTunnelPolicy() **IPSEC_TUNNEL_POLICY3 {
+	return (**IPSEC_TUNNEL_POLICY3)(unsafe.Pointer(u))
+}
+
+// IkeMmPolicy reinterprets the union as its ikeMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) IkeMmPolicy() **IKEEXT_POLICY2 {
+	return (**IKEEXT_POLICY2)(unsafe.Pointer(u))
+}
+
+// AuthIpMmPolicy reinterprets the union as its authIpMmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) AuthIpMmPolicy() **IKEEXT_POLICY2 {
+	return (**IKEEXT_POLICY2)(unsafe.Pointer(u))
+}
+
+// DataBuffer reinterprets the union as its dataBuffer member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) DataBuffer() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// ClassifyOptions reinterprets the union as its classifyOptions member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) ClassifyOptions() **FWPM_CLASSIFY_OPTIONS0 {
+	return (**FWPM_CLASSIFY_OPTIONS0)(unsafe.Pointer(u))
+}
+
+// IkeV2QmTunnelPolicy reinterprets the union as its ikeV2QmTunnelPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) IkeV2QmTunnelPolicy() **IPSEC_TUNNEL_POLICY3 {
+	return (**IPSEC_TUNNEL_POLICY3)(unsafe.Pointer(u))
+}
+
+// IkeV2QmTransportPolicy reinterprets the union as its ikeV2QmTransportPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) IkeV2QmTransportPolicy() **IPSEC_TRANSPORT_POLICY2 {
+	return (**IPSEC_TRANSPORT_POLICY2)(unsafe.Pointer(u))
+}
+
+// IkeV2MmPolicy reinterprets the union as its ikeV2MmPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) IkeV2MmPolicy() **IKEEXT_POLICY2 {
+	return (**IKEEXT_POLICY2)(unsafe.Pointer(u))
+}
+
+// IdpOptions reinterprets the union as its idpOptions member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) IdpOptions() **IPSEC_DOSP_OPTIONS0 {
+	return (**IPSEC_DOSP_OPTIONS0)(unsafe.Pointer(u))
+}
+
+// NetworkConnectionPolicy reinterprets the union as its networkConnectionPolicy member.
+func (u *FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union) NetworkConnectionPolicy() **FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0 {
+	return (**FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0)(unsafe.Pointer(u))
 }
 
 type FWPM_PROVIDER_CONTEXT3 struct {
@@ -944,10 +1674,32 @@ type FWPM_SYSTEM_PORTS_BY_TYPE0 struct {
 	Ports    *uint16
 }
 
+type FWPM_VSWITCH_EVENT0_Anonymous_e__Union_positionInfo_e__Struct struct {
+	NumvSwitchFilterExtensions uint32
+	VSwitchFilterExtensions    *foundation.PWSTR
+}
+
+type FWPM_VSWITCH_EVENT0_Anonymous_e__Union_reorderInfo_e__Struct struct {
+	InRequiredPosition         foundation.BOOL
+	NumvSwitchFilterExtensions uint32
+	VSwitchFilterExtensions    *foundation.PWSTR
+}
+
 // FWPM_VSWITCH_EVENT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWPM_VSWITCH_EVENT0_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// PositionInfo reinterprets the union as its positionInfo member.
+func (u *FWPM_VSWITCH_EVENT0_Anonymous_e__Union) PositionInfo() *FWPM_VSWITCH_EVENT0_Anonymous_e__Union_positionInfo_e__Struct {
+	return (*FWPM_VSWITCH_EVENT0_Anonymous_e__Union_positionInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// ReorderInfo reinterprets the union as its reorderInfo member.
+func (u *FWPM_VSWITCH_EVENT0_Anonymous_e__Union) ReorderInfo() *FWPM_VSWITCH_EVENT0_Anonymous_e__Union_reorderInfo_e__Struct {
+	return (*FWPM_VSWITCH_EVENT0_Anonymous_e__Union_reorderInfo_e__Struct)(unsafe.Pointer(u))
 }
 
 // FWPM_VSWITCH_EVENT0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_vswitch_event0
@@ -980,9 +1732,115 @@ type FWP_BYTE_BLOB struct {
 }
 
 // FWP_CONDITION_VALUE0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWP_CONDITION_VALUE0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Uint8 reinterprets the union as its uint8 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Uint8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Uint16 reinterprets the union as its uint16 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Uint16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Uint32 reinterprets the union as its uint32 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Uint32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Uint64 reinterprets the union as its uint64 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Uint64() **uint64 {
+	return (**uint64)(unsafe.Pointer(u))
+}
+
+// Int8 reinterprets the union as its int8 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Int8() *int8 {
+	return (*int8)(unsafe.Pointer(u))
+}
+
+// Int16 reinterprets the union as its int16 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Int16() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// Int32 reinterprets the union as its int32 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Int32() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Int64 reinterprets the union as its int64 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Int64() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// Float32 reinterprets the union as its float32 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Float32() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// Double64 reinterprets the union as its double64 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Double64() **float64 {
+	return (**float64)(unsafe.Pointer(u))
+}
+
+// ByteArray16 reinterprets the union as its byteArray16 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) ByteArray16() **FWP_BYTE_ARRAY16 {
+	return (**FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
+}
+
+// ByteBlob reinterprets the union as its byteBlob member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) ByteBlob() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// Sid reinterprets the union as its sid member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Sid() **security.SID {
+	return (**security.SID)(unsafe.Pointer(u))
+}
+
+// Sd reinterprets the union as its sd member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) Sd() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// TokenInformation reinterprets the union as its tokenInformation member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) TokenInformation() **FWP_TOKEN_INFORMATION {
+	return (**FWP_TOKEN_INFORMATION)(unsafe.Pointer(u))
+}
+
+// TokenAccessInformation reinterprets the union as its tokenAccessInformation member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) TokenAccessInformation() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// UnicodeString reinterprets the union as its unicodeString member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) UnicodeString() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// ByteArray6 reinterprets the union as its byteArray6 member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) ByteArray6() **FWP_BYTE_ARRAY6 {
+	return (**FWP_BYTE_ARRAY6)(unsafe.Pointer(u))
+}
+
+// V4AddrMask reinterprets the union as its v4AddrMask member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) V4AddrMask() **FWP_V4_ADDR_AND_MASK {
+	return (**FWP_V4_ADDR_AND_MASK)(unsafe.Pointer(u))
+}
+
+// V6AddrMask reinterprets the union as its v6AddrMask member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) V6AddrMask() **FWP_V6_ADDR_AND_MASK {
+	return (**FWP_V6_ADDR_AND_MASK)(unsafe.Pointer(u))
+}
+
+// RangeValue reinterprets the union as its rangeValue member.
+func (u *FWP_CONDITION_VALUE0_Anonymous_e__Union) RangeValue() **FWP_RANGE0 {
+	return (**FWP_RANGE0)(unsafe.Pointer(u))
 }
 
 // FWP_CONDITION_VALUE0: https://learn.microsoft.com/windows/win32/api/fwptypes/ns-fwptypes-fwp_condition_value0
@@ -1018,9 +1876,100 @@ type FWP_V6_ADDR_AND_MASK struct {
 }
 
 // FWP_VALUE0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FWP_VALUE0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Uint8 reinterprets the union as its uint8 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Uint8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Uint16 reinterprets the union as its uint16 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Uint16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Uint32 reinterprets the union as its uint32 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Uint32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Uint64 reinterprets the union as its uint64 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Uint64() **uint64 {
+	return (**uint64)(unsafe.Pointer(u))
+}
+
+// Int8 reinterprets the union as its int8 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Int8() *int8 {
+	return (*int8)(unsafe.Pointer(u))
+}
+
+// Int16 reinterprets the union as its int16 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Int16() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// Int32 reinterprets the union as its int32 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Int32() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Int64 reinterprets the union as its int64 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Int64() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// Float32 reinterprets the union as its float32 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Float32() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// Double64 reinterprets the union as its double64 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Double64() **float64 {
+	return (**float64)(unsafe.Pointer(u))
+}
+
+// ByteArray16 reinterprets the union as its byteArray16 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) ByteArray16() **FWP_BYTE_ARRAY16 {
+	return (**FWP_BYTE_ARRAY16)(unsafe.Pointer(u))
+}
+
+// ByteBlob reinterprets the union as its byteBlob member.
+func (u *FWP_VALUE0_Anonymous_e__Union) ByteBlob() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// Sid reinterprets the union as its sid member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Sid() **security.SID {
+	return (**security.SID)(unsafe.Pointer(u))
+}
+
+// Sd reinterprets the union as its sd member.
+func (u *FWP_VALUE0_Anonymous_e__Union) Sd() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// TokenInformation reinterprets the union as its tokenInformation member.
+func (u *FWP_VALUE0_Anonymous_e__Union) TokenInformation() **FWP_TOKEN_INFORMATION {
+	return (**FWP_TOKEN_INFORMATION)(unsafe.Pointer(u))
+}
+
+// TokenAccessInformation reinterprets the union as its tokenAccessInformation member.
+func (u *FWP_VALUE0_Anonymous_e__Union) TokenAccessInformation() **FWP_BYTE_BLOB {
+	return (**FWP_BYTE_BLOB)(unsafe.Pointer(u))
+}
+
+// UnicodeString reinterprets the union as its unicodeString member.
+func (u *FWP_VALUE0_Anonymous_e__Union) UnicodeString() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// ByteArray6 reinterprets the union as its byteArray6 member.
+func (u *FWP_VALUE0_Anonymous_e__Union) ByteArray6() **FWP_BYTE_ARRAY6 {
+	return (**FWP_BYTE_ARRAY6)(unsafe.Pointer(u))
 }
 
 // FWP_VALUE0: https://learn.microsoft.com/windows/win32/api/fwptypes/ns-fwptypes-fwp_value0
@@ -1030,9 +1979,40 @@ type FWP_VALUE0 struct {
 }
 
 // IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union struct {
 	Data [7]uint64
+}
+
+// PresharedKeyAuthentication reinterprets the union as its presharedKeyAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union) PresharedKeyAuthentication() *IKEEXT_PRESHARED_KEY_AUTHENTICATION0 {
+	return (*IKEEXT_PRESHARED_KEY_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// CertificateAuthentication reinterprets the union as its certificateAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union) CertificateAuthentication() *IKEEXT_CERTIFICATE_AUTHENTICATION0 {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// KerberosAuthentication reinterprets the union as its kerberosAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union) KerberosAuthentication() *IKEEXT_KERBEROS_AUTHENTICATION0 {
+	return (*IKEEXT_KERBEROS_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// NtlmV2Authentication reinterprets the union as its ntlmV2Authentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union) NtlmV2Authentication() *IKEEXT_NTLM_V2_AUTHENTICATION0 {
+	return (*IKEEXT_NTLM_V2_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// SslAuthentication reinterprets the union as its sslAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union) SslAuthentication() *IKEEXT_CERTIFICATE_AUTHENTICATION0 {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// CgaAuthentication reinterprets the union as its cgaAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union) CgaAuthentication() *IKEEXT_IPV6_CGA_AUTHENTICATION0 {
+	return (*IKEEXT_IPV6_CGA_AUTHENTICATION0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_AUTHENTICATION_METHOD0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_authentication_method0
@@ -1042,9 +2022,45 @@ type IKEEXT_AUTHENTICATION_METHOD0 struct {
 }
 
 // IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union struct {
 	Data [9]uint64
+}
+
+// PresharedKeyAuthentication reinterprets the union as its presharedKeyAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union) PresharedKeyAuthentication() *IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
+	return (*IKEEXT_PRESHARED_KEY_AUTHENTICATION1)(unsafe.Pointer(u))
+}
+
+// CertificateAuthentication reinterprets the union as its certificateAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union) CertificateAuthentication() *IKEEXT_CERTIFICATE_AUTHENTICATION1 {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION1)(unsafe.Pointer(u))
+}
+
+// KerberosAuthentication reinterprets the union as its kerberosAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union) KerberosAuthentication() *IKEEXT_KERBEROS_AUTHENTICATION0 {
+	return (*IKEEXT_KERBEROS_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// NtlmV2Authentication reinterprets the union as its ntlmV2Authentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union) NtlmV2Authentication() *IKEEXT_NTLM_V2_AUTHENTICATION0 {
+	return (*IKEEXT_NTLM_V2_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// SslAuthentication reinterprets the union as its sslAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union) SslAuthentication() *IKEEXT_CERTIFICATE_AUTHENTICATION1 {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION1)(unsafe.Pointer(u))
+}
+
+// CgaAuthentication reinterprets the union as its cgaAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union) CgaAuthentication() *IKEEXT_IPV6_CGA_AUTHENTICATION0 {
+	return (*IKEEXT_IPV6_CGA_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// EapAuthentication reinterprets the union as its eapAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union) EapAuthentication() *IKEEXT_EAP_AUTHENTICATION0 {
+	return (*IKEEXT_EAP_AUTHENTICATION0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_AUTHENTICATION_METHOD1: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_authentication_method1
@@ -1054,9 +2070,50 @@ type IKEEXT_AUTHENTICATION_METHOD1 struct {
 }
 
 // IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union struct {
 	Data [9]uint64
+}
+
+// PresharedKeyAuthentication reinterprets the union as its presharedKeyAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) PresharedKeyAuthentication() *IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
+	return (*IKEEXT_PRESHARED_KEY_AUTHENTICATION1)(unsafe.Pointer(u))
+}
+
+// CertificateAuthentication reinterprets the union as its certificateAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) CertificateAuthentication() *IKEEXT_CERTIFICATE_AUTHENTICATION2 {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2)(unsafe.Pointer(u))
+}
+
+// KerberosAuthentication reinterprets the union as its kerberosAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) KerberosAuthentication() *IKEEXT_KERBEROS_AUTHENTICATION1 {
+	return (*IKEEXT_KERBEROS_AUTHENTICATION1)(unsafe.Pointer(u))
+}
+
+// ReservedAuthentication reinterprets the union as its reservedAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) ReservedAuthentication() *IKEEXT_RESERVED_AUTHENTICATION0 {
+	return (*IKEEXT_RESERVED_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// NtlmV2Authentication reinterprets the union as its ntlmV2Authentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) NtlmV2Authentication() *IKEEXT_NTLM_V2_AUTHENTICATION0 {
+	return (*IKEEXT_NTLM_V2_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// SslAuthentication reinterprets the union as its sslAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) SslAuthentication() *IKEEXT_CERTIFICATE_AUTHENTICATION2 {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2)(unsafe.Pointer(u))
+}
+
+// CgaAuthentication reinterprets the union as its cgaAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) CgaAuthentication() *IKEEXT_IPV6_CGA_AUTHENTICATION0 {
+	return (*IKEEXT_IPV6_CGA_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// EapAuthentication reinterprets the union as its eapAuthentication member.
+func (u *IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union) EapAuthentication() *IKEEXT_EAP_AUTHENTICATION0 {
+	return (*IKEEXT_EAP_AUTHENTICATION0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_AUTHENTICATION_METHOD2: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_authentication_method2
@@ -1065,16 +2122,58 @@ type IKEEXT_AUTHENTICATION_METHOD2 struct {
 	Anonymous                IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union
 }
 
+type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	InboundRootArraySize uint32
+	InboundRootArray     *IKEEXT_CERT_ROOT_CONFIG0
+}
+
 // IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union) Anonymous() *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// InboundEnterpriseStoreConfig reinterprets the union as its inboundEnterpriseStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union) InboundEnterpriseStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
+}
+
+// InboundTrustedRootStoreConfig reinterprets the union as its inboundTrustedRootStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union) InboundTrustedRootStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
+}
+
+type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	OutboundRootArraySize uint32
+	OutboundRootArray     *IKEEXT_CERT_ROOT_CONFIG0
+}
+
 // IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union) Anonymous() *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// OutboundEnterpriseStoreConfig reinterprets the union as its outboundEnterpriseStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union) OutboundEnterpriseStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
+}
+
+// OutboundTrustedRootStoreConfig reinterprets the union as its outboundTrustedRootStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union) OutboundTrustedRootStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_certificate_authentication0
@@ -1086,16 +2185,58 @@ type IKEEXT_CERTIFICATE_AUTHENTICATION0 struct {
 	Flags              IKEEXT_CERT_AUTH
 }
 
+type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	InboundRootArraySize uint32
+	InboundRootArray     *IKEEXT_CERT_ROOT_CONFIG0
+}
+
 // IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union) Anonymous() *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// InboundEnterpriseStoreConfig reinterprets the union as its inboundEnterpriseStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union) InboundEnterpriseStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
+}
+
+// InboundTrustedRootStoreConfig reinterprets the union as its inboundTrustedRootStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union) InboundTrustedRootStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
+}
+
+type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	OutboundRootArraySize uint32
+	OutboundRootArray     *IKEEXT_CERT_ROOT_CONFIG0
+}
+
 // IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union) Anonymous() *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// OutboundEnterpriseStoreConfig reinterprets the union as its outboundEnterpriseStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union) OutboundEnterpriseStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
+}
+
+// OutboundTrustedRootStoreConfig reinterprets the union as its outboundTrustedRootStoreConfig member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union) OutboundTrustedRootStoreConfig() **IKEEXT_CERT_ROOT_CONFIG0 {
+	return (**IKEEXT_CERT_ROOT_CONFIG0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION1: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_certificate_authentication1
@@ -1108,16 +2249,78 @@ type IKEEXT_CERTIFICATE_AUTHENTICATION1 struct {
 	LocalCertLocationUrl FWP_BYTE_BLOB
 }
 
+type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous1_e__Struct struct {
+	InboundRootArraySize uint32
+	InboundRootCriteria  *IKEEXT_CERTIFICATE_CRITERIA0
+}
+
+type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous2_e__Struct struct {
+	InboundEnterpriseStoreArraySize uint32
+	InboundEnterpriseStoreCriteria  *IKEEXT_CERTIFICATE_CRITERIA0
+}
+
+type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous3_e__Struct struct {
+	InboundRootStoreArraySize       uint32
+	InboundTrustedRootStoreCriteria *IKEEXT_CERTIFICATE_CRITERIA0
+}
+
 // IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union) Anonymous1() *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous1_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union) Anonymous2() *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous2_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous3 reinterprets the union as its Anonymous3 member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union) Anonymous3() *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous3_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous3_e__Struct)(unsafe.Pointer(u))
+}
+
+type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous1_e__Struct struct {
+	OutboundRootArraySize uint32
+	OutboundRootCriteria  *IKEEXT_CERTIFICATE_CRITERIA0
+}
+
+type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous2_e__Struct struct {
+	OutboundEnterpriseStoreArraySize uint32
+	OutboundEnterpriseStoreCriteria  *IKEEXT_CERTIFICATE_CRITERIA0
+}
+
+type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous3_e__Struct struct {
+	OutboundRootStoreArraySize       uint32
+	OutboundTrustedRootStoreCriteria *IKEEXT_CERTIFICATE_CRITERIA0
+}
+
 // IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union) Anonymous1() *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous1_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union) Anonymous2() *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous2_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous3 reinterprets the union as its Anonymous3 member.
+func (u *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union) Anonymous3() *IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous3_e__Struct {
+	return (*IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous3_e__Struct)(unsafe.Pointer(u))
 }
 
 // IKEEXT_CERTIFICATE_AUTHENTICATION2: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_certificate_authentication2
@@ -1204,9 +2407,25 @@ type IKEEXT_COOKIE_PAIR0 struct {
 }
 
 // IKEEXT_CREDENTIAL0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CREDENTIAL0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PresharedKey reinterprets the union as its presharedKey member.
+func (u *IKEEXT_CREDENTIAL0_Anonymous_e__Union) PresharedKey() **IKEEXT_PRESHARED_KEY_AUTHENTICATION0 {
+	return (**IKEEXT_PRESHARED_KEY_AUTHENTICATION0)(unsafe.Pointer(u))
+}
+
+// Certificate reinterprets the union as its certificate member.
+func (u *IKEEXT_CREDENTIAL0_Anonymous_e__Union) Certificate() **IKEEXT_CERTIFICATE_CREDENTIAL0 {
+	return (**IKEEXT_CERTIFICATE_CREDENTIAL0)(unsafe.Pointer(u))
+}
+
+// Name reinterprets the union as its name member.
+func (u *IKEEXT_CREDENTIAL0_Anonymous_e__Union) Name() **IKEEXT_NAME_CREDENTIAL0 {
+	return (**IKEEXT_NAME_CREDENTIAL0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_CREDENTIAL0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_credential0
@@ -1217,9 +2436,25 @@ type IKEEXT_CREDENTIAL0 struct {
 }
 
 // IKEEXT_CREDENTIAL1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CREDENTIAL1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PresharedKey reinterprets the union as its presharedKey member.
+func (u *IKEEXT_CREDENTIAL1_Anonymous_e__Union) PresharedKey() **IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
+	return (**IKEEXT_PRESHARED_KEY_AUTHENTICATION1)(unsafe.Pointer(u))
+}
+
+// Certificate reinterprets the union as its certificate member.
+func (u *IKEEXT_CREDENTIAL1_Anonymous_e__Union) Certificate() **IKEEXT_CERTIFICATE_CREDENTIAL1 {
+	return (**IKEEXT_CERTIFICATE_CREDENTIAL1)(unsafe.Pointer(u))
+}
+
+// Name reinterprets the union as its name member.
+func (u *IKEEXT_CREDENTIAL1_Anonymous_e__Union) Name() **IKEEXT_NAME_CREDENTIAL0 {
+	return (**IKEEXT_NAME_CREDENTIAL0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_CREDENTIAL1: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_credential1
@@ -1230,9 +2465,25 @@ type IKEEXT_CREDENTIAL1 struct {
 }
 
 // IKEEXT_CREDENTIAL2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_CREDENTIAL2_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PresharedKey reinterprets the union as its presharedKey member.
+func (u *IKEEXT_CREDENTIAL2_Anonymous_e__Union) PresharedKey() **IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
+	return (**IKEEXT_PRESHARED_KEY_AUTHENTICATION1)(unsafe.Pointer(u))
+}
+
+// Certificate reinterprets the union as its certificate member.
+func (u *IKEEXT_CREDENTIAL2_Anonymous_e__Union) Certificate() **IKEEXT_CERTIFICATE_CREDENTIAL1 {
+	return (**IKEEXT_CERTIFICATE_CREDENTIAL1)(unsafe.Pointer(u))
+}
+
+// Name reinterprets the union as its name member.
+func (u *IKEEXT_CREDENTIAL2_Anonymous_e__Union) Name() **IKEEXT_NAME_CREDENTIAL0 {
+	return (**IKEEXT_NAME_CREDENTIAL0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_CREDENTIAL2: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_credential2
@@ -1479,9 +2730,15 @@ type IKEEXT_RESERVED_AUTHENTICATION0 struct {
 }
 
 // IKEEXT_SA_DETAILS0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_SA_DETAILS0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// V4UdpEncapsulation reinterprets the union as its v4UdpEncapsulation member.
+func (u *IKEEXT_SA_DETAILS0_Anonymous_e__Union) V4UdpEncapsulation() **IPSEC_V4_UDP_ENCAPSULATION0 {
+	return (**IPSEC_V4_UDP_ENCAPSULATION0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_SA_DETAILS0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_sa_details0
@@ -1499,9 +2756,15 @@ type IKEEXT_SA_DETAILS0 struct {
 }
 
 // IKEEXT_SA_DETAILS1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_SA_DETAILS1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// V4UdpEncapsulation reinterprets the union as its v4UdpEncapsulation member.
+func (u *IKEEXT_SA_DETAILS1_Anonymous_e__Union) V4UdpEncapsulation() **IPSEC_V4_UDP_ENCAPSULATION0 {
+	return (**IPSEC_V4_UDP_ENCAPSULATION0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_SA_DETAILS1: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_sa_details1
@@ -1520,9 +2783,15 @@ type IKEEXT_SA_DETAILS1 struct {
 }
 
 // IKEEXT_SA_DETAILS2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_SA_DETAILS2_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// V4UdpEncapsulation reinterprets the union as its v4UdpEncapsulation member.
+func (u *IKEEXT_SA_DETAILS2_Anonymous_e__Union) V4UdpEncapsulation() **IPSEC_V4_UDP_ENCAPSULATION0 {
+	return (**IPSEC_V4_UDP_ENCAPSULATION0)(unsafe.Pointer(u))
 }
 
 // IKEEXT_SA_DETAILS2: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_sa_details2
@@ -1563,15 +2832,37 @@ type IKEEXT_STATISTICS1 struct {
 }
 
 // IKEEXT_TRAFFIC0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_TRAFFIC0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalV4Address reinterprets the union as its localV4Address member.
+func (u *IKEEXT_TRAFFIC0_Anonymous1_e__Union) LocalV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalV6Address reinterprets the union as its localV6Address member.
+func (u *IKEEXT_TRAFFIC0_Anonymous1_e__Union) LocalV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IKEEXT_TRAFFIC0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKEEXT_TRAFFIC0_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteV4Address reinterprets the union as its remoteV4Address member.
+func (u *IKEEXT_TRAFFIC0_Anonymous2_e__Union) RemoteV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteV6Address reinterprets the union as its remoteV6Address member.
+func (u *IKEEXT_TRAFFIC0_Anonymous2_e__Union) RemoteV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // IKEEXT_TRAFFIC0: https://learn.microsoft.com/windows/win32/api/iketypes/ns-iketypes-ikeext_traffic0
@@ -1739,9 +3030,15 @@ type IPSEC_ESP_DROP_PACKET_STATISTICS0 struct {
 }
 
 // IPSEC_GETSPI0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_GETSPI0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// InboundUdpEncapsulation reinterprets the union as its inboundUdpEncapsulation member.
+func (u *IPSEC_GETSPI0_Anonymous_e__Union) InboundUdpEncapsulation() **IPSEC_V4_UDP_ENCAPSULATION0 {
+	return (**IPSEC_V4_UDP_ENCAPSULATION0)(unsafe.Pointer(u))
 }
 
 // IPSEC_GETSPI0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_getspi0
@@ -1753,9 +3050,15 @@ type IPSEC_GETSPI0 struct {
 }
 
 // IPSEC_GETSPI1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_GETSPI1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// InboundUdpEncapsulation reinterprets the union as its inboundUdpEncapsulation member.
+func (u *IPSEC_GETSPI1_Anonymous_e__Union) InboundUdpEncapsulation() **IPSEC_V4_UDP_ENCAPSULATION0 {
+	return (**IPSEC_V4_UDP_ENCAPSULATION0)(unsafe.Pointer(u))
 }
 
 // IPSEC_GETSPI1: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_getspi1
@@ -1821,9 +3124,35 @@ type IPSEC_PROPOSAL0 struct {
 }
 
 // IPSEC_SA0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_SA0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// AhInformation reinterprets the union as its ahInformation member.
+func (u *IPSEC_SA0_Anonymous_e__Union) AhInformation() **IPSEC_SA_AUTH_INFORMATION0 {
+	return (**IPSEC_SA_AUTH_INFORMATION0)(unsafe.Pointer(u))
+}
+
+// EspAuthInformation reinterprets the union as its espAuthInformation member.
+func (u *IPSEC_SA0_Anonymous_e__Union) EspAuthInformation() **IPSEC_SA_AUTH_INFORMATION0 {
+	return (**IPSEC_SA_AUTH_INFORMATION0)(unsafe.Pointer(u))
+}
+
+// EspCipherInformation reinterprets the union as its espCipherInformation member.
+func (u *IPSEC_SA0_Anonymous_e__Union) EspCipherInformation() **IPSEC_SA_CIPHER_INFORMATION0 {
+	return (**IPSEC_SA_CIPHER_INFORMATION0)(unsafe.Pointer(u))
+}
+
+// EspAuthAndCipherInformation reinterprets the union as its espAuthAndCipherInformation member.
+func (u *IPSEC_SA0_Anonymous_e__Union) EspAuthAndCipherInformation() **IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0 {
+	return (**IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0)(unsafe.Pointer(u))
+}
+
+// EspAuthFwInformation reinterprets the union as its espAuthFwInformation member.
+func (u *IPSEC_SA0_Anonymous_e__Union) EspAuthFwInformation() **IPSEC_SA_AUTH_INFORMATION0 {
+	return (**IPSEC_SA_AUTH_INFORMATION0)(unsafe.Pointer(u))
 }
 
 // IPSEC_SA0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa0
@@ -1846,9 +3175,15 @@ type IPSEC_SA_AUTH_INFORMATION0 struct {
 }
 
 // IPSEC_SA_BUNDLE0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_SA_BUNDLE0_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// PeerV4PrivateAddress reinterprets the union as its peerV4PrivateAddress member.
+func (u *IPSEC_SA_BUNDLE0_Anonymous_e__Union) PeerV4PrivateAddress() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // IPSEC_SA_BUNDLE0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa_bundle0
@@ -1870,9 +3205,15 @@ type IPSEC_SA_BUNDLE0 struct {
 }
 
 // IPSEC_SA_BUNDLE1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_SA_BUNDLE1_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// PeerV4PrivateAddress reinterprets the union as its peerV4PrivateAddress member.
+func (u *IPSEC_SA_BUNDLE1_Anonymous_e__Union) PeerV4PrivateAddress() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // IPSEC_SA_BUNDLE1: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa_bundle1
@@ -1935,9 +3276,15 @@ type IPSEC_SA_CONTEXT_SUBSCRIPTION0 struct {
 }
 
 // IPSEC_SA_DETAILS0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_SA_DETAILS0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// UdpEncapsulation reinterprets the union as its udpEncapsulation member.
+func (u *IPSEC_SA_DETAILS0_Anonymous_e__Union) UdpEncapsulation() **IPSEC_V4_UDP_ENCAPSULATION0 {
+	return (**IPSEC_V4_UDP_ENCAPSULATION0)(unsafe.Pointer(u))
 }
 
 // IPSEC_SA_DETAILS0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa_details0
@@ -1951,9 +3298,15 @@ type IPSEC_SA_DETAILS0 struct {
 }
 
 // IPSEC_SA_DETAILS1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_SA_DETAILS1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// UdpEncapsulation reinterprets the union as its udpEncapsulation member.
+func (u *IPSEC_SA_DETAILS1_Anonymous_e__Union) UdpEncapsulation() **IPSEC_V4_UDP_ENCAPSULATION0 {
+	return (**IPSEC_V4_UDP_ENCAPSULATION0)(unsafe.Pointer(u))
 }
 
 // IPSEC_SA_DETAILS1: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa_details1
@@ -1986,9 +3339,35 @@ type IPSEC_SA_LIFETIME0 struct {
 }
 
 // IPSEC_SA_TRANSFORM0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_SA_TRANSFORM0_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// AhTransform reinterprets the union as its ahTransform member.
+func (u *IPSEC_SA_TRANSFORM0_Anonymous_e__Union) AhTransform() **IPSEC_AUTH_TRANSFORM0 {
+	return (**IPSEC_AUTH_TRANSFORM0)(unsafe.Pointer(u))
+}
+
+// EspAuthTransform reinterprets the union as its espAuthTransform member.
+func (u *IPSEC_SA_TRANSFORM0_Anonymous_e__Union) EspAuthTransform() **IPSEC_AUTH_TRANSFORM0 {
+	return (**IPSEC_AUTH_TRANSFORM0)(unsafe.Pointer(u))
+}
+
+// EspCipherTransform reinterprets the union as its espCipherTransform member.
+func (u *IPSEC_SA_TRANSFORM0_Anonymous_e__Union) EspCipherTransform() **IPSEC_CIPHER_TRANSFORM0 {
+	return (**IPSEC_CIPHER_TRANSFORM0)(unsafe.Pointer(u))
+}
+
+// EspAuthAndCipherTransform reinterprets the union as its espAuthAndCipherTransform member.
+func (u *IPSEC_SA_TRANSFORM0_Anonymous_e__Union) EspAuthAndCipherTransform() **IPSEC_AUTH_AND_CIPHER_TRANSFORM0 {
+	return (**IPSEC_AUTH_AND_CIPHER_TRANSFORM0)(unsafe.Pointer(u))
+}
+
+// EspAuthFwTransform reinterprets the union as its espAuthFwTransform member.
+func (u *IPSEC_SA_TRANSFORM0_Anonymous_e__Union) EspAuthFwTransform() **IPSEC_AUTH_TRANSFORM0 {
+	return (**IPSEC_AUTH_TRANSFORM0)(unsafe.Pointer(u))
 }
 
 // IPSEC_SA_TRANSFORM0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_sa_transform0
@@ -2026,21 +3405,54 @@ type IPSEC_TOKEN0 struct {
 }
 
 // IPSEC_TRAFFIC0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalV4Address reinterprets the union as its localV4Address member.
+func (u *IPSEC_TRAFFIC0_Anonymous1_e__Union) LocalV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalV6Address reinterprets the union as its localV6Address member.
+func (u *IPSEC_TRAFFIC0_Anonymous1_e__Union) LocalV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TRAFFIC0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
+// RemoteV4Address reinterprets the union as its remoteV4Address member.
+func (u *IPSEC_TRAFFIC0_Anonymous2_e__Union) RemoteV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteV6Address reinterprets the union as its remoteV6Address member.
+func (u *IPSEC_TRAFFIC0_Anonymous2_e__Union) RemoteV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TRAFFIC0_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC0_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// IpsecFilterId reinterprets the union as its ipsecFilterId member.
+func (u *IPSEC_TRAFFIC0_Anonymous3_e__Union) IpsecFilterId() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// TunnelPolicyId reinterprets the union as its tunnelPolicyId member.
+func (u *IPSEC_TRAFFIC0_Anonymous3_e__Union) TunnelPolicyId() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // IPSEC_TRAFFIC0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_traffic0
@@ -2054,21 +3466,54 @@ type IPSEC_TRAFFIC0 struct {
 }
 
 // IPSEC_TRAFFIC1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC1_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalV4Address reinterprets the union as its localV4Address member.
+func (u *IPSEC_TRAFFIC1_Anonymous1_e__Union) LocalV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalV6Address reinterprets the union as its localV6Address member.
+func (u *IPSEC_TRAFFIC1_Anonymous1_e__Union) LocalV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TRAFFIC1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC1_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
+// RemoteV4Address reinterprets the union as its remoteV4Address member.
+func (u *IPSEC_TRAFFIC1_Anonymous2_e__Union) RemoteV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteV6Address reinterprets the union as its remoteV6Address member.
+func (u *IPSEC_TRAFFIC1_Anonymous2_e__Union) RemoteV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TRAFFIC1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC1_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// IpsecFilterId reinterprets the union as its ipsecFilterId member.
+func (u *IPSEC_TRAFFIC1_Anonymous3_e__Union) IpsecFilterId() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// TunnelPolicyId reinterprets the union as its tunnelPolicyId member.
+func (u *IPSEC_TRAFFIC1_Anonymous3_e__Union) TunnelPolicyId() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // IPSEC_TRAFFIC1: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_traffic1
@@ -2086,15 +3531,37 @@ type IPSEC_TRAFFIC1 struct {
 }
 
 // IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// StartV4Address reinterprets the union as its startV4Address member.
+func (u *IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union) StartV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// StartV6Address reinterprets the union as its startV6Address member.
+func (u *IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union) StartV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// EndV4Address reinterprets the union as its endV4Address member.
+func (u *IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union) EndV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// EndV6Address reinterprets the union as its endV6Address member.
+func (u *IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union) EndV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 type IPSEC_TRAFFIC_SELECTOR0 struct {
@@ -2166,9 +3633,20 @@ type IPSEC_TRANSPORT_POLICY2 struct {
 }
 
 // IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// V4Address reinterprets the union as its v4Address member.
+func (u *IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union) V4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// V6Address reinterprets the union as its v6Address member.
+func (u *IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union) V6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // IPSEC_TUNNEL_ENDPOINT0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoint0
@@ -2178,15 +3656,37 @@ type IPSEC_TUNNEL_ENDPOINT0 struct {
 }
 
 // IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalV4Address reinterprets the union as its localV4Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union) LocalV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalV6Address reinterprets the union as its localV6Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union) LocalV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteV4Address reinterprets the union as its remoteV4Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union) RemoteV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteV6Address reinterprets the union as its remoteV6Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union) RemoteV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // IPSEC_TUNNEL_ENDPOINTS0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoints0
@@ -2197,15 +3697,37 @@ type IPSEC_TUNNEL_ENDPOINTS0 struct {
 }
 
 // IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalV4Address reinterprets the union as its localV4Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union) LocalV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalV6Address reinterprets the union as its localV6Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union) LocalV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteV4Address reinterprets the union as its remoteV4Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union) RemoteV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteV6Address reinterprets the union as its remoteV6Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union) RemoteV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // IPSEC_TUNNEL_ENDPOINTS1: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoints1
@@ -2217,15 +3739,37 @@ type IPSEC_TUNNEL_ENDPOINTS1 struct {
 }
 
 // IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// LocalV4Address reinterprets the union as its localV4Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union) LocalV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LocalV6Address reinterprets the union as its localV6Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union) LocalV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
 // IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union struct {
 	Data [4]uint32
+}
+
+// RemoteV4Address reinterprets the union as its remoteV4Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union) RemoteV4Address() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RemoteV6Address reinterprets the union as its remoteV6Address member.
+func (u *IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union) RemoteV6Address() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // IPSEC_TUNNEL_ENDPOINTS2: https://learn.microsoft.com/windows/win32/api/ipsectypes/ns-ipsectypes-ipsec_tunnel_endpoints2

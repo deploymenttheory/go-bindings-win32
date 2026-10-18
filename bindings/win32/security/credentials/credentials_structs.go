@@ -270,10 +270,36 @@ type OPENCARD_SEARCH_CRITERIAW struct {
 	DwPreferredProtocols uint32
 }
 
+type READER_SEL_REQUEST_Anonymous_e__Union_ReaderAndContainerParameter_e__Struct struct {
+	CbReaderNameOffset         uint32
+	CchReaderNameLength        uint32
+	CbContainerNameOffset      uint32
+	CchContainerNameLength     uint32
+	DwDesiredCardModuleVersion uint32
+	DwCspFlags                 uint32
+}
+
+type READER_SEL_REQUEST_Anonymous_e__Union_SerialNumberParameter_e__Struct struct {
+	CbSerialNumberOffset       uint32
+	CbSerialNumberLength       uint32
+	DwDesiredCardModuleVersion uint32
+}
+
 // READER_SEL_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type READER_SEL_REQUEST_Anonymous_e__Union struct {
 	Data [6]uint32
+}
+
+// ReaderAndContainerParameter reinterprets the union as its ReaderAndContainerParameter member.
+func (u *READER_SEL_REQUEST_Anonymous_e__Union) ReaderAndContainerParameter() *READER_SEL_REQUEST_Anonymous_e__Union_ReaderAndContainerParameter_e__Struct {
+	return (*READER_SEL_REQUEST_Anonymous_e__Union_ReaderAndContainerParameter_e__Struct)(unsafe.Pointer(u))
+}
+
+// SerialNumberParameter reinterprets the union as its SerialNumberParameter member.
+func (u *READER_SEL_REQUEST_Anonymous_e__Union) SerialNumberParameter() *READER_SEL_REQUEST_Anonymous_e__Union_SerialNumberParameter_e__Struct {
+	return (*READER_SEL_REQUEST_Anonymous_e__Union_SerialNumberParameter_e__Struct)(unsafe.Pointer(u))
 }
 
 type READER_SEL_REQUEST struct {
@@ -332,9 +358,20 @@ type SCARD_T0_COMMAND struct {
 }
 
 // SCARD_T0_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SCARD_T0_REQUEST_Anonymous_e__Union struct {
 	Data [5]byte
+}
+
+// CmdBytes reinterprets the union as its CmdBytes member.
+func (u *SCARD_T0_REQUEST_Anonymous_e__Union) CmdBytes() *SCARD_T0_COMMAND {
+	return (*SCARD_T0_COMMAND)(unsafe.Pointer(u))
+}
+
+// RgbHeader reinterprets the union as its rgbHeader member.
+func (u *SCARD_T0_REQUEST_Anonymous_e__Union) RgbHeader() *[5]byte {
+	return (*[5]byte)(unsafe.Pointer(u))
 }
 
 type SCARD_T0_REQUEST struct {

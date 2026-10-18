@@ -105,7 +105,18 @@ type COR_PRF_NONGC_HEAP_RANGE struct {
 }
 
 // FunctionIDOrClientID is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FunctionIDOrClientID struct {
 	Data [1]uint64
+}
+
+// FunctionID reinterprets the union as its functionID member.
+func (u *FunctionIDOrClientID) FunctionID() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// ClientID reinterprets the union as its clientID member.
+func (u *FunctionIDOrClientID) ClientID() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }

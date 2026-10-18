@@ -5,6 +5,8 @@
 package htmlhelp
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
@@ -16,9 +18,25 @@ type COLUMNSTATUS struct {
 }
 
 // CProperty_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CProperty_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// LpszwData reinterprets the union as its lpszwData member.
+func (u *CProperty_Anonymous_e__Union) LpszwData() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// LpvData reinterprets the union as its lpvData member.
+func (u *CProperty_Anonymous_e__Union) LpvData() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// DwValue reinterprets the union as its dwValue member.
+func (u *CProperty_Anonymous_e__Union) DwValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type CProperty struct {

@@ -5,6 +5,8 @@
 package mmc
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
@@ -139,9 +141,25 @@ type MMC_SORT_SET_DATA struct {
 }
 
 // MMC_TASK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MMC_TASK_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// NCommandID reinterprets the union as its nCommandID member.
+func (u *MMC_TASK_Anonymous_e__Union) NCommandID() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// SzActionURL reinterprets the union as its szActionURL member.
+func (u *MMC_TASK_Anonymous_e__Union) SzActionURL() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// SzScript reinterprets the union as its szScript member.
+func (u *MMC_TASK_Anonymous_e__Union) SzScript() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // MMC_TASK: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-mmc_task
@@ -160,9 +178,20 @@ type MMC_TASK_DISPLAY_BITMAP struct {
 }
 
 // MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// UBitmap reinterprets the union as its uBitmap member.
+func (u *MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union) UBitmap() *MMC_TASK_DISPLAY_BITMAP {
+	return (*MMC_TASK_DISPLAY_BITMAP)(unsafe.Pointer(u))
+}
+
+// USymbol reinterprets the union as its uSymbol member.
+func (u *MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union) USymbol() *MMC_TASK_DISPLAY_SYMBOL {
+	return (*MMC_TASK_DISPLAY_SYMBOL)(unsafe.Pointer(u))
 }
 
 // MMC_TASK_DISPLAY_OBJECT: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-mmc_task_display_object
@@ -222,10 +251,36 @@ type RESULTFINDINFO struct {
 	DwOptions uint32
 }
 
+type RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	DwHTMLOptions uint32
+	PstrURL       foundation.PWSTR
+}
+
+type RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	DwOCXOptions uint32
+	PUnkControl  *systemcom.IUnknown
+}
+
 // RESULT_VIEW_TYPE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RESULT_VIEW_TYPE_INFO_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// DwListOptions reinterprets the union as its dwListOptions member.
+func (u *RESULT_VIEW_TYPE_INFO_Anonymous_e__Union) DwListOptions() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *RESULT_VIEW_TYPE_INFO_Anonymous_e__Union) Anonymous1() *RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *RESULT_VIEW_TYPE_INFO_Anonymous_e__Union) Anonymous2() *RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 // RESULT_VIEW_TYPE_INFO: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-result_view_type_info

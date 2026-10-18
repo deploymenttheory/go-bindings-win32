@@ -5,6 +5,9 @@
 package backgroundintelligenttransferservice
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -17,9 +20,15 @@ type BG_AUTH_CREDENTIALS struct {
 
 // BG_AUTH_CREDENTIALS_UNION: https://learn.microsoft.com/windows/win32/api/bits1_5/ns-bits1_5-bg_auth_credentials_union
 // BG_AUTH_CREDENTIALS_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BG_AUTH_CREDENTIALS_UNION struct {
 	Data [2]uint64
+}
+
+// Basic reinterprets the union as its Basic member.
+func (u *BG_AUTH_CREDENTIALS_UNION) Basic() *BG_BASIC_CREDENTIALS {
+	return (*BG_BASIC_CREDENTIALS)(unsafe.Pointer(u))
 }
 
 // BG_BASIC_CREDENTIALS: https://learn.microsoft.com/windows/win32/api/bits1_5/ns-bits1_5-bg_basic_credentials
@@ -73,16 +82,48 @@ type BITSExtensionSetupFactory struct {
 
 // BITS_FILE_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/bits5_0/ns-bits5_0-bits_file_property_value
 // BITS_FILE_PROPERTY_VALUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BITS_FILE_PROPERTY_VALUE struct {
 	Data [1]uint64
 }
 
+// String reinterprets the union as its String member.
+func (u *BITS_FILE_PROPERTY_VALUE) String() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // BITS_JOB_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/bits5_0/ns-bits5_0-bits_job_property_value
 // BITS_JOB_PROPERTY_VALUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BITS_JOB_PROPERTY_VALUE struct {
 	Data [2]uint64
+}
+
+// Dword reinterprets the union as its Dword member.
+func (u *BITS_JOB_PROPERTY_VALUE) Dword() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ClsID reinterprets the union as its ClsID member.
+func (u *BITS_JOB_PROPERTY_VALUE) ClsID() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// Enable reinterprets the union as its Enable member.
+func (u *BITS_JOB_PROPERTY_VALUE) Enable() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// Uint64 reinterprets the union as its Uint64 member.
+func (u *BITS_JOB_PROPERTY_VALUE) Uint64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Target reinterprets the union as its Target member.
+func (u *BITS_JOB_PROPERTY_VALUE) Target() *BG_AUTH_TARGET {
+	return (*BG_AUTH_TARGET)(unsafe.Pointer(u))
 }
 
 type BackgroundCopyManager struct {

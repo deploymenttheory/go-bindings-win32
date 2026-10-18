@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
+	securitywintrust "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/wintrust"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 )
 
@@ -166,9 +167,20 @@ type CRYPTUI_INITDIALOG_STRUCT struct {
 }
 
 // CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PCryptProviderData reinterprets the union as its pCryptProviderData member.
+func (u *CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union) PCryptProviderData() **securitywintrust.CRYPT_PROVIDER_DATA {
+	return (**securitywintrust.CRYPT_PROVIDER_DATA)(unsafe.Pointer(u))
+}
+
+// HWVTStateData reinterprets the union as its hWVTStateData member.
+func (u *CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union) HWVTStateData() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
 }
 
 // CRYPTUI_VIEWCERTIFICATE_STRUCTA: https://learn.microsoft.com/windows/win32/api/cryptuiapi/ns-cryptuiapi-cryptui_viewcertificate_structa
@@ -194,9 +206,20 @@ type CRYPTUI_VIEWCERTIFICATE_STRUCTA struct {
 }
 
 // CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PCryptProviderData reinterprets the union as its pCryptProviderData member.
+func (u *CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union) PCryptProviderData() **securitywintrust.CRYPT_PROVIDER_DATA {
+	return (**securitywintrust.CRYPT_PROVIDER_DATA)(unsafe.Pointer(u))
+}
+
+// HWVTStateData reinterprets the union as its hWVTStateData member.
+func (u *CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union) HWVTStateData() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
 }
 
 // CRYPTUI_VIEWCERTIFICATE_STRUCTW: https://learn.microsoft.com/windows/win32/api/cryptuiapi/ns-cryptuiapi-cryptui_viewcertificate_structw
@@ -231,9 +254,20 @@ type CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO struct {
 }
 
 // CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PPvkFileInfo reinterprets the union as its pPvkFileInfo member.
+func (u *CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union) PPvkFileInfo() **CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO {
+	return (**CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO)(unsafe.Pointer(u))
+}
+
+// PPvkProvInfo reinterprets the union as its pPvkProvInfo member.
+func (u *CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union) PPvkProvInfo() **securitycryptography.CRYPT_KEY_PROV_INFO {
+	return (**securitycryptography.CRYPT_KEY_PROV_INFO)(unsafe.Pointer(u))
 }
 
 // CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO: https://learn.microsoft.com/windows/win32/api/cryptuiapi/ns-cryptuiapi-cryptui_wiz_digital_sign_cert_pvk_info
@@ -265,15 +299,42 @@ type CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO struct {
 }
 
 // CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PwszFileName reinterprets the union as its pwszFileName member.
+func (u *CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union) PwszFileName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PSignBlobInfo reinterprets the union as its pSignBlobInfo member.
+func (u *CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union) PSignBlobInfo() **CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO {
+	return (**CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO)(unsafe.Pointer(u))
+}
+
 // CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// PSigningCertContext reinterprets the union as its pSigningCertContext member.
+func (u *CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union) PSigningCertContext() **securitycryptography.CERT_CONTEXT {
+	return (**securitycryptography.CERT_CONTEXT)(unsafe.Pointer(u))
+}
+
+// PSigningCertStore reinterprets the union as its pSigningCertStore member.
+func (u *CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union) PSigningCertStore() **CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO {
+	return (**CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO)(unsafe.Pointer(u))
+}
+
+// PSigningCertPvkInfo reinterprets the union as its pSigningCertPvkInfo member.
+func (u *CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union) PSigningCertPvkInfo() **CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO {
+	return (**CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO)(unsafe.Pointer(u))
 }
 
 // CRYPTUI_WIZ_DIGITAL_SIGN_INFO: https://learn.microsoft.com/windows/win32/api/cryptuiapi/ns-cryptuiapi-cryptui_wiz_digital_sign_info
@@ -316,9 +377,30 @@ type CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO struct {
 }
 
 // CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PCertContext reinterprets the union as its pCertContext member.
+func (u *CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union) PCertContext() **securitycryptography.CERT_CONTEXT {
+	return (**securitycryptography.CERT_CONTEXT)(unsafe.Pointer(u))
+}
+
+// PCTLContext reinterprets the union as its pCTLContext member.
+func (u *CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union) PCTLContext() **securitycryptography.CTL_CONTEXT {
+	return (**securitycryptography.CTL_CONTEXT)(unsafe.Pointer(u))
+}
+
+// PCRLContext reinterprets the union as its pCRLContext member.
+func (u *CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union) PCRLContext() **securitycryptography.CRL_CONTEXT {
+	return (**securitycryptography.CRL_CONTEXT)(unsafe.Pointer(u))
+}
+
+// HCertStore reinterprets the union as its hCertStore member.
+func (u *CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union) HCertStore() *securitycryptography.HCERTSTORE {
+	return (*securitycryptography.HCERTSTORE)(unsafe.Pointer(u))
 }
 
 // CRYPTUI_WIZ_EXPORT_INFO: https://learn.microsoft.com/windows/win32/api/cryptuiapi/ns-cryptuiapi-cryptui_wiz_export_info
@@ -332,9 +414,35 @@ type CRYPTUI_WIZ_EXPORT_INFO struct {
 }
 
 // CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PwszFileName reinterprets the union as its pwszFileName member.
+func (u *CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union) PwszFileName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PCertContext reinterprets the union as its pCertContext member.
+func (u *CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union) PCertContext() **securitycryptography.CERT_CONTEXT {
+	return (**securitycryptography.CERT_CONTEXT)(unsafe.Pointer(u))
+}
+
+// PCTLContext reinterprets the union as its pCTLContext member.
+func (u *CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union) PCTLContext() **securitycryptography.CTL_CONTEXT {
+	return (**securitycryptography.CTL_CONTEXT)(unsafe.Pointer(u))
+}
+
+// PCRLContext reinterprets the union as its pCRLContext member.
+func (u *CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union) PCRLContext() **securitycryptography.CRL_CONTEXT {
+	return (**securitycryptography.CRL_CONTEXT)(unsafe.Pointer(u))
+}
+
+// HCertStore reinterprets the union as its hCertStore member.
+func (u *CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union) HCertStore() *securitycryptography.HCERTSTORE {
+	return (*securitycryptography.HCERTSTORE)(unsafe.Pointer(u))
 }
 
 // CRYPTUI_WIZ_IMPORT_SRC_INFO: https://learn.microsoft.com/windows/win32/api/cryptuiapi/ns-cryptuiapi-cryptui_wiz_import_src_info

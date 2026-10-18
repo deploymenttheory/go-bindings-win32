@@ -54,10 +54,42 @@ type CABINET_INFO_W struct {
 	CabinetNumber uint16
 }
 
+type CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceHandle_e__Struct struct {
+	EventGuid  win32.GUID
+	NameOffset int32
+	DataSize   uint32
+	Data       [1]byte
+}
+
+type CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInstance_e__Struct struct {
+	InstanceId [1]uint16
+}
+
+type CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInterface_e__Struct struct {
+	ClassGuid    win32.GUID
+	SymbolicLink [1]uint16
+}
+
 // CM_NOTIFY_EVENT_DATA_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CM_NOTIFY_EVENT_DATA_u_e__Union struct {
 	Data [7]uint32
+}
+
+// DeviceInterface reinterprets the union as its DeviceInterface member.
+func (u *CM_NOTIFY_EVENT_DATA_u_e__Union) DeviceInterface() *CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInterface_e__Struct {
+	return (*CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInterface_e__Struct)(unsafe.Pointer(u))
+}
+
+// DeviceHandle reinterprets the union as its DeviceHandle member.
+func (u *CM_NOTIFY_EVENT_DATA_u_e__Union) DeviceHandle() *CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceHandle_e__Struct {
+	return (*CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceHandle_e__Struct)(unsafe.Pointer(u))
+}
+
+// DeviceInstance reinterprets the union as its DeviceInstance member.
+func (u *CM_NOTIFY_EVENT_DATA_u_e__Union) DeviceInstance() *CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInstance_e__Struct {
+	return (*CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInstance_e__Struct)(unsafe.Pointer(u))
 }
 
 // CM_NOTIFY_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-cm_notify_event_data
@@ -67,10 +99,38 @@ type CM_NOTIFY_EVENT_DATA struct {
 	U          CM_NOTIFY_EVENT_DATA_u_e__Union
 }
 
+type CM_NOTIFY_FILTER_u_e__Union_DeviceHandle_e__Struct struct {
+	HTarget foundation.HANDLE
+}
+
+type CM_NOTIFY_FILTER_u_e__Union_DeviceInstance_e__Struct struct {
+	InstanceId [200]uint16
+}
+
+type CM_NOTIFY_FILTER_u_e__Union_DeviceInterface_e__Struct struct {
+	ClassGuid win32.GUID
+}
+
 // CM_NOTIFY_FILTER_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CM_NOTIFY_FILTER_u_e__Union struct {
 	Data [50]uint64
+}
+
+// DeviceInterface reinterprets the union as its DeviceInterface member.
+func (u *CM_NOTIFY_FILTER_u_e__Union) DeviceInterface() *CM_NOTIFY_FILTER_u_e__Union_DeviceInterface_e__Struct {
+	return (*CM_NOTIFY_FILTER_u_e__Union_DeviceInterface_e__Struct)(unsafe.Pointer(u))
+}
+
+// DeviceHandle reinterprets the union as its DeviceHandle member.
+func (u *CM_NOTIFY_FILTER_u_e__Union) DeviceHandle() *CM_NOTIFY_FILTER_u_e__Union_DeviceHandle_e__Struct {
+	return (*CM_NOTIFY_FILTER_u_e__Union_DeviceHandle_e__Struct)(unsafe.Pointer(u))
+}
+
+// DeviceInstance reinterprets the union as its DeviceInstance member.
+func (u *CM_NOTIFY_FILTER_u_e__Union) DeviceInstance() *CM_NOTIFY_FILTER_u_e__Union_DeviceInstance_e__Struct {
+	return (*CM_NOTIFY_FILTER_u_e__Union_DeviceInstance_e__Struct)(unsafe.Pointer(u))
 }
 
 // CM_NOTIFY_FILTER: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-cm_notify_filter
@@ -411,9 +471,20 @@ type SP_ALTPLATFORM_INFO_V1 struct {
 }
 
 // SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union) Reserved() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union) Flags() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 // SP_ALTPLATFORM_INFO_V2: https://learn.microsoft.com/windows/win32/api/setupapi/ns-setupapi-sp_altplatform_info_v2
@@ -429,9 +500,20 @@ type SP_ALTPLATFORM_INFO_V2 struct {
 }
 
 // SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union) Reserved() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union) Flags() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type SP_ALTPLATFORM_INFO_V3 struct {

@@ -5,6 +5,8 @@
 package audio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
@@ -162,9 +164,15 @@ type AMBISONICS_PARAMS struct {
 }
 
 // AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// ProcessLoopbackParams reinterprets the union as its ProcessLoopbackParams member.
+func (u *AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union) ProcessLoopbackParams() *AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS {
+	return (*AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS)(unsafe.Pointer(u))
 }
 
 // AUDIOCLIENT_ACTIVATION_PARAMS: https://learn.microsoft.com/windows/win32/api/audioclientactivationparams/ns-audioclientactivationparams-audioclient_activation_params
@@ -551,9 +559,25 @@ type SpatialAudioHrtfDirectivityCone struct {
 
 // SpatialAudioHrtfDirectivityUnion: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdirectivityunion
 // SpatialAudioHrtfDirectivityUnion is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SpatialAudioHrtfDirectivityUnion struct {
 	Data [16]byte
+}
+
+// Cone reinterprets the union as its Cone member.
+func (u *SpatialAudioHrtfDirectivityUnion) Cone() *SpatialAudioHrtfDirectivityCone {
+	return (*SpatialAudioHrtfDirectivityCone)(unsafe.Pointer(u))
+}
+
+// Cardiod reinterprets the union as its Cardiod member.
+func (u *SpatialAudioHrtfDirectivityUnion) Cardiod() *SpatialAudioHrtfDirectivityCardioid {
+	return (*SpatialAudioHrtfDirectivityCardioid)(unsafe.Pointer(u))
+}
+
+// Omni reinterprets the union as its Omni member.
+func (u *SpatialAudioHrtfDirectivityUnion) Omni() *SpatialAudioHrtfDirectivity {
+	return (*SpatialAudioHrtfDirectivity)(unsafe.Pointer(u))
 }
 
 // SpatialAudioHrtfDistanceDecay: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdistancedecay

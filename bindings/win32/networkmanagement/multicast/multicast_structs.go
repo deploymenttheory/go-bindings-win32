@@ -5,14 +5,27 @@
 package multicast
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 // IPNG_ADDRESS: https://learn.microsoft.com/windows/win32/api/madcapcl/ns-madcapcl-ipng_address
 // IPNG_ADDRESS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPNG_ADDRESS struct {
 	Data [4]uint32
+}
+
+// IpAddrV4 reinterprets the union as its IpAddrV4 member.
+func (u *IPNG_ADDRESS) IpAddrV4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// IpAddrV6 reinterprets the union as its IpAddrV6 member.
+func (u *IPNG_ADDRESS) IpAddrV6() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // MCAST_CLIENT_UID: https://learn.microsoft.com/windows/win32/api/madcapcl/ns-madcapcl-mcast_client_uid

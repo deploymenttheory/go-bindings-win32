@@ -80,6 +80,14 @@ var abiSystem_Memory = []abiCase{
 	{"systemmemory.PROCESS_HEAP_ENTRY.WFlags", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY{}.WFlags), 14},
 	{"systemmemory.PROCESS_HEAP_ENTRY.Anonymous", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY{}.Anonymous), 16},
 	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union size", unsafe.Sizeof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union{}), 24},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct size", unsafe.Sizeof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct{}), 24},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct.HMem", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct{}.HMem), 0},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct.DwReserved", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct{}.DwReserved), 8},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct size", unsafe.Sizeof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct{}), 24},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct.DwCommittedSize", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct{}.DwCommittedSize), 0},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct.DwUnCommittedSize", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct{}.DwUnCommittedSize), 4},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct.LpFirstBlock", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct{}.LpFirstBlock), 8},
+	{"systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct.LpLastBlock", unsafe.Offsetof(systemmemory.PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct{}.LpLastBlock), 16},
 	{"systemmemory.WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY size", unsafe.Sizeof(systemmemory.WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY{}), 32},
 	{"systemmemory.WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY.InitiatorNodeNumber", unsafe.Offsetof(systemmemory.WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY{}.InitiatorNodeNumber), 0},
 	{"systemmemory.WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY.TargetNodeNumber", unsafe.Offsetof(systemmemory.WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY{}.TargetNodeNumber), 4},
@@ -120,6 +128,8 @@ var abiSystem_Memory = []abiCase{
 	{"systemmemory.WIN32_MEMORY_REGION_INFORMATION.RegionSize", unsafe.Offsetof(systemmemory.WIN32_MEMORY_REGION_INFORMATION{}.RegionSize), 16},
 	{"systemmemory.WIN32_MEMORY_REGION_INFORMATION.CommitSize", unsafe.Offsetof(systemmemory.WIN32_MEMORY_REGION_INFORMATION{}.CommitSize), 24},
 	{"systemmemory.WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union size", unsafe.Sizeof(systemmemory.WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union{}), 4},
+	{"systemmemory.WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct size", unsafe.Sizeof(systemmemory.WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct{}), 4},
+	{"systemmemory.WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct.Bitfield", unsafe.Offsetof(systemmemory.WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct{}.Bitfield), 0},
 }
 
 func TestABI_System_Memory(t *testing.T) { checkABI(t, abiSystem_Memory) }

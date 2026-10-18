@@ -5,7 +5,10 @@
 package indexserver
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
 
@@ -29,15 +32,37 @@ type CI_STATE struct {
 }
 
 // DBID_uGuid_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DBID_uGuid_e__Union struct {
 	Data [2]uint64
 }
 
+// Guid reinterprets the union as its guid member.
+func (u *DBID_uGuid_e__Union) Guid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// Pguid reinterprets the union as its pguid member.
+func (u *DBID_uGuid_e__Union) Pguid() **win32.GUID {
+	return (**win32.GUID)(unsafe.Pointer(u))
+}
+
 // DBID_uName_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DBID_uName_e__Union struct {
 	Data [1]uint64
+}
+
+// PwszName reinterprets the union as its pwszName member.
+func (u *DBID_uName_e__Union) PwszName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// UlPropid reinterprets the union as its ulPropid member.
+func (u *DBID_uName_e__Union) UlPropid() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DBID: https://learn.microsoft.com/windows/win32/api/oledbguid/ns-oledbguid-dbid

@@ -51,9 +51,20 @@ type LIST_ENTRY64 struct {
 }
 
 // NT_TIB_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NT_TIB_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// FiberData reinterprets the union as its FiberData member.
+func (u *NT_TIB_Anonymous_e__Union) FiberData() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Version reinterprets the union as its Version member.
+func (u *NT_TIB_Anonymous_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NT_TIB struct {
@@ -79,25 +90,58 @@ type PROCESSOR_NUMBER struct {
 }
 
 // QUAD_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type QUAD_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// UseThisFieldToCopy reinterprets the union as its UseThisFieldToCopy member.
+func (u *QUAD_Anonymous_e__Union) UseThisFieldToCopy() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// DoNotUseThisField reinterprets the union as its DoNotUseThisField member.
+func (u *QUAD_Anonymous_e__Union) DoNotUseThisField() *float64 {
+	return (*float64)(unsafe.Pointer(u))
 }
 
 type QUAD struct {
 	Anonymous QUAD_Anonymous_e__Union
 }
 
+type RTL_BALANCED_NODE_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Left  *RTL_BALANCED_NODE
+	Right *RTL_BALANCED_NODE
+}
+
 // RTL_BALANCED_NODE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RTL_BALANCED_NODE_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
+// Children reinterprets the union as its Children member.
+func (u *RTL_BALANCED_NODE_Anonymous1_e__Union) Children() *[2]*RTL_BALANCED_NODE {
+	return (*[2]*RTL_BALANCED_NODE)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *RTL_BALANCED_NODE_Anonymous1_e__Union) Anonymous() *RTL_BALANCED_NODE_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*RTL_BALANCED_NODE_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
 // RTL_BALANCED_NODE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RTL_BALANCED_NODE_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// ParentValue reinterprets the union as its ParentValue member.
+func (u *RTL_BALANCED_NODE_Anonymous2_e__Union) ParentValue() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 type RTL_BALANCED_NODE struct {

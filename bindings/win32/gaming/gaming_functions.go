@@ -16,6 +16,7 @@ import (
 var (
 	modapi_ms_win_gaming_deviceinformation_l1_1_0 = win32.NewDLL("api-ms-win-gaming-deviceinformation-l1-1-0.dll")
 	modapi_ms_win_gaming_expandedresources_l1_1_0 = win32.NewDLL("api-ms-win-gaming-expandedresources-l1-1-0.dll")
+	modapi_ms_win_gaming_experience_l1_1_0        = win32.NewDLL("api-ms-win-gaming-experience-l1-1-0.dll")
 	modapi_ms_win_gaming_tcui_l1_1_0              = win32.NewDLL("api-ms-win-gaming-tcui-l1-1-0.dll")
 	modapi_ms_win_gaming_tcui_l1_1_1              = win32.NewDLL("api-ms-win-gaming-tcui-l1-1-1.dll")
 	modapi_ms_win_gaming_tcui_l1_1_2              = win32.NewDLL("api-ms-win-gaming-tcui-l1-1-2.dll")
@@ -24,36 +25,42 @@ var (
 )
 
 var (
-	procGetGamingDeviceModelInformation       = modapi_ms_win_gaming_deviceinformation_l1_1_0.NewProc("GetGamingDeviceModelInformation")
-	procGetExpandedResourceExclusiveCpuCount  = modapi_ms_win_gaming_expandedresources_l1_1_0.NewProc("GetExpandedResourceExclusiveCpuCount")
-	procHasExpandedResources                  = modapi_ms_win_gaming_expandedresources_l1_1_0.NewProc("HasExpandedResources")
-	procReleaseExclusiveCpuSets               = modapi_ms_win_gaming_expandedresources_l1_1_0.NewProc("ReleaseExclusiveCpuSets")
-	procProcessPendingGameUI                  = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ProcessPendingGameUI")
-	procShowChangeFriendRelationshipUI        = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowChangeFriendRelationshipUI")
-	procShowGameInviteUI                      = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowGameInviteUI")
-	procShowPlayerPickerUI                    = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowPlayerPickerUI")
-	procShowProfileCardUI                     = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowProfileCardUI")
-	procShowTitleAchievementsUI               = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowTitleAchievementsUI")
-	procTryCancelPendingGameUI                = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("TryCancelPendingGameUI")
-	procCheckGamingPrivilegeSilently          = modapi_ms_win_gaming_tcui_l1_1_1.NewProc("CheckGamingPrivilegeSilently")
-	procCheckGamingPrivilegeWithUI            = modapi_ms_win_gaming_tcui_l1_1_1.NewProc("CheckGamingPrivilegeWithUI")
-	procCheckGamingPrivilegeSilentlyForUser   = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("CheckGamingPrivilegeSilentlyForUser")
-	procCheckGamingPrivilegeWithUIForUser     = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("CheckGamingPrivilegeWithUIForUser")
-	procShowChangeFriendRelationshipUIForUser = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowChangeFriendRelationshipUIForUser")
-	procShowGameInviteUIForUser               = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowGameInviteUIForUser")
-	procShowPlayerPickerUIForUser             = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowPlayerPickerUIForUser")
-	procShowProfileCardUIForUser              = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowProfileCardUIForUser")
-	procShowTitleAchievementsUIForUser        = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowTitleAchievementsUIForUser")
-	procShowGameInviteUIWithContext           = modapi_ms_win_gaming_tcui_l1_1_3.NewProc("ShowGameInviteUIWithContext")
-	procShowGameInviteUIWithContextForUser    = modapi_ms_win_gaming_tcui_l1_1_3.NewProc("ShowGameInviteUIWithContextForUser")
-	procShowCustomizeUserProfileUI            = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowCustomizeUserProfileUI")
-	procShowCustomizeUserProfileUIForUser     = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowCustomizeUserProfileUIForUser")
-	procShowFindFriendsUI                     = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowFindFriendsUI")
-	procShowFindFriendsUIForUser              = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowFindFriendsUIForUser")
-	procShowGameInfoUI                        = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowGameInfoUI")
-	procShowGameInfoUIForUser                 = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowGameInfoUIForUser")
-	procShowUserSettingsUI                    = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowUserSettingsUI")
-	procShowUserSettingsUIForUser             = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowUserSettingsUIForUser")
+	procGetGamingDeviceModelInformation                        = modapi_ms_win_gaming_deviceinformation_l1_1_0.NewProc("GetGamingDeviceModelInformation")
+	procGetExpandedResourceExclusiveCpuCount                   = modapi_ms_win_gaming_expandedresources_l1_1_0.NewProc("GetExpandedResourceExclusiveCpuCount")
+	procHasExpandedResources                                   = modapi_ms_win_gaming_expandedresources_l1_1_0.NewProc("HasExpandedResources")
+	procReleaseExclusiveCpuSets                                = modapi_ms_win_gaming_expandedresources_l1_1_0.NewProc("ReleaseExclusiveCpuSets")
+	procCanSetGamingFullScreenExperience                       = modapi_ms_win_gaming_experience_l1_1_0.NewProc("CanSetGamingFullScreenExperience")
+	procIsGamingFullScreenExperienceActive                     = modapi_ms_win_gaming_experience_l1_1_0.NewProc("IsGamingFullScreenExperienceActive")
+	procIsGamingFullScreenExperienceSupported                  = modapi_ms_win_gaming_experience_l1_1_0.NewProc("IsGamingFullScreenExperienceSupported")
+	procRegisterGamingFullScreenExperienceChangeNotification   = modapi_ms_win_gaming_experience_l1_1_0.NewProc("RegisterGamingFullScreenExperienceChangeNotification")
+	procSetGamingFullScreenExperience                          = modapi_ms_win_gaming_experience_l1_1_0.NewProc("SetGamingFullScreenExperience")
+	procUnregisterGamingFullScreenExperienceChangeNotification = modapi_ms_win_gaming_experience_l1_1_0.NewProc("UnregisterGamingFullScreenExperienceChangeNotification")
+	procProcessPendingGameUI                                   = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ProcessPendingGameUI")
+	procShowChangeFriendRelationshipUI                         = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowChangeFriendRelationshipUI")
+	procShowGameInviteUI                                       = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowGameInviteUI")
+	procShowPlayerPickerUI                                     = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowPlayerPickerUI")
+	procShowProfileCardUI                                      = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowProfileCardUI")
+	procShowTitleAchievementsUI                                = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("ShowTitleAchievementsUI")
+	procTryCancelPendingGameUI                                 = modapi_ms_win_gaming_tcui_l1_1_0.NewProc("TryCancelPendingGameUI")
+	procCheckGamingPrivilegeSilently                           = modapi_ms_win_gaming_tcui_l1_1_1.NewProc("CheckGamingPrivilegeSilently")
+	procCheckGamingPrivilegeWithUI                             = modapi_ms_win_gaming_tcui_l1_1_1.NewProc("CheckGamingPrivilegeWithUI")
+	procCheckGamingPrivilegeSilentlyForUser                    = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("CheckGamingPrivilegeSilentlyForUser")
+	procCheckGamingPrivilegeWithUIForUser                      = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("CheckGamingPrivilegeWithUIForUser")
+	procShowChangeFriendRelationshipUIForUser                  = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowChangeFriendRelationshipUIForUser")
+	procShowGameInviteUIForUser                                = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowGameInviteUIForUser")
+	procShowPlayerPickerUIForUser                              = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowPlayerPickerUIForUser")
+	procShowProfileCardUIForUser                               = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowProfileCardUIForUser")
+	procShowTitleAchievementsUIForUser                         = modapi_ms_win_gaming_tcui_l1_1_2.NewProc("ShowTitleAchievementsUIForUser")
+	procShowGameInviteUIWithContext                            = modapi_ms_win_gaming_tcui_l1_1_3.NewProc("ShowGameInviteUIWithContext")
+	procShowGameInviteUIWithContextForUser                     = modapi_ms_win_gaming_tcui_l1_1_3.NewProc("ShowGameInviteUIWithContextForUser")
+	procShowCustomizeUserProfileUI                             = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowCustomizeUserProfileUI")
+	procShowCustomizeUserProfileUIForUser                      = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowCustomizeUserProfileUIForUser")
+	procShowFindFriendsUI                                      = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowFindFriendsUI")
+	procShowFindFriendsUIForUser                               = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowFindFriendsUIForUser")
+	procShowGameInfoUI                                         = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowGameInfoUI")
+	procShowGameInfoUIForUser                                  = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowGameInfoUIForUser")
+	procShowUserSettingsUI                                     = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowUserSettingsUI")
+	procShowUserSettingsUIForUser                              = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowUserSettingsUIForUser")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -61,67 +68,85 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
-	CheckGamingPrivilegeSilently          *win32.Proc
-	CheckGamingPrivilegeSilentlyForUser   *win32.Proc
-	CheckGamingPrivilegeWithUI            *win32.Proc
-	CheckGamingPrivilegeWithUIForUser     *win32.Proc
-	GetExpandedResourceExclusiveCpuCount  *win32.Proc
-	GetGamingDeviceModelInformation       *win32.Proc
-	HasExpandedResources                  *win32.Proc
-	ProcessPendingGameUI                  *win32.Proc
-	ReleaseExclusiveCpuSets               *win32.Proc
-	ShowChangeFriendRelationshipUI        *win32.Proc
-	ShowChangeFriendRelationshipUIForUser *win32.Proc
-	ShowCustomizeUserProfileUI            *win32.Proc
-	ShowCustomizeUserProfileUIForUser     *win32.Proc
-	ShowFindFriendsUI                     *win32.Proc
-	ShowFindFriendsUIForUser              *win32.Proc
-	ShowGameInfoUI                        *win32.Proc
-	ShowGameInfoUIForUser                 *win32.Proc
-	ShowGameInviteUI                      *win32.Proc
-	ShowGameInviteUIForUser               *win32.Proc
-	ShowGameInviteUIWithContext           *win32.Proc
-	ShowGameInviteUIWithContextForUser    *win32.Proc
-	ShowPlayerPickerUI                    *win32.Proc
-	ShowPlayerPickerUIForUser             *win32.Proc
-	ShowProfileCardUI                     *win32.Proc
-	ShowProfileCardUIForUser              *win32.Proc
-	ShowTitleAchievementsUI               *win32.Proc
-	ShowTitleAchievementsUIForUser        *win32.Proc
-	ShowUserSettingsUI                    *win32.Proc
-	ShowUserSettingsUIForUser             *win32.Proc
-	TryCancelPendingGameUI                *win32.Proc
+	CanSetGamingFullScreenExperience                       *win32.Proc
+	CheckGamingPrivilegeSilently                           *win32.Proc
+	CheckGamingPrivilegeSilentlyForUser                    *win32.Proc
+	CheckGamingPrivilegeWithUI                             *win32.Proc
+	CheckGamingPrivilegeWithUIForUser                      *win32.Proc
+	GetExpandedResourceExclusiveCpuCount                   *win32.Proc
+	GetGamingDeviceModelInformation                        *win32.Proc
+	HasExpandedResources                                   *win32.Proc
+	IsGamingFullScreenExperienceActive                     *win32.Proc
+	IsGamingFullScreenExperienceSupported                  *win32.Proc
+	ProcessPendingGameUI                                   *win32.Proc
+	RegisterGamingFullScreenExperienceChangeNotification   *win32.Proc
+	ReleaseExclusiveCpuSets                                *win32.Proc
+	SetGamingFullScreenExperience                          *win32.Proc
+	ShowChangeFriendRelationshipUI                         *win32.Proc
+	ShowChangeFriendRelationshipUIForUser                  *win32.Proc
+	ShowCustomizeUserProfileUI                             *win32.Proc
+	ShowCustomizeUserProfileUIForUser                      *win32.Proc
+	ShowFindFriendsUI                                      *win32.Proc
+	ShowFindFriendsUIForUser                               *win32.Proc
+	ShowGameInfoUI                                         *win32.Proc
+	ShowGameInfoUIForUser                                  *win32.Proc
+	ShowGameInviteUI                                       *win32.Proc
+	ShowGameInviteUIForUser                                *win32.Proc
+	ShowGameInviteUIWithContext                            *win32.Proc
+	ShowGameInviteUIWithContextForUser                     *win32.Proc
+	ShowPlayerPickerUI                                     *win32.Proc
+	ShowPlayerPickerUIForUser                              *win32.Proc
+	ShowProfileCardUI                                      *win32.Proc
+	ShowProfileCardUIForUser                               *win32.Proc
+	ShowTitleAchievementsUI                                *win32.Proc
+	ShowTitleAchievementsUIForUser                         *win32.Proc
+	ShowUserSettingsUI                                     *win32.Proc
+	ShowUserSettingsUIForUser                              *win32.Proc
+	TryCancelPendingGameUI                                 *win32.Proc
+	UnregisterGamingFullScreenExperienceChangeNotification *win32.Proc
 }{
-	CheckGamingPrivilegeSilently:          procCheckGamingPrivilegeSilently,
-	CheckGamingPrivilegeSilentlyForUser:   procCheckGamingPrivilegeSilentlyForUser,
-	CheckGamingPrivilegeWithUI:            procCheckGamingPrivilegeWithUI,
-	CheckGamingPrivilegeWithUIForUser:     procCheckGamingPrivilegeWithUIForUser,
-	GetExpandedResourceExclusiveCpuCount:  procGetExpandedResourceExclusiveCpuCount,
-	GetGamingDeviceModelInformation:       procGetGamingDeviceModelInformation,
-	HasExpandedResources:                  procHasExpandedResources,
-	ProcessPendingGameUI:                  procProcessPendingGameUI,
-	ReleaseExclusiveCpuSets:               procReleaseExclusiveCpuSets,
-	ShowChangeFriendRelationshipUI:        procShowChangeFriendRelationshipUI,
-	ShowChangeFriendRelationshipUIForUser: procShowChangeFriendRelationshipUIForUser,
-	ShowCustomizeUserProfileUI:            procShowCustomizeUserProfileUI,
-	ShowCustomizeUserProfileUIForUser:     procShowCustomizeUserProfileUIForUser,
-	ShowFindFriendsUI:                     procShowFindFriendsUI,
-	ShowFindFriendsUIForUser:              procShowFindFriendsUIForUser,
-	ShowGameInfoUI:                        procShowGameInfoUI,
-	ShowGameInfoUIForUser:                 procShowGameInfoUIForUser,
-	ShowGameInviteUI:                      procShowGameInviteUI,
-	ShowGameInviteUIForUser:               procShowGameInviteUIForUser,
-	ShowGameInviteUIWithContext:           procShowGameInviteUIWithContext,
-	ShowGameInviteUIWithContextForUser:    procShowGameInviteUIWithContextForUser,
-	ShowPlayerPickerUI:                    procShowPlayerPickerUI,
-	ShowPlayerPickerUIForUser:             procShowPlayerPickerUIForUser,
-	ShowProfileCardUI:                     procShowProfileCardUI,
-	ShowProfileCardUIForUser:              procShowProfileCardUIForUser,
-	ShowTitleAchievementsUI:               procShowTitleAchievementsUI,
-	ShowTitleAchievementsUIForUser:        procShowTitleAchievementsUIForUser,
-	ShowUserSettingsUI:                    procShowUserSettingsUI,
-	ShowUserSettingsUIForUser:             procShowUserSettingsUIForUser,
-	TryCancelPendingGameUI:                procTryCancelPendingGameUI,
+	CanSetGamingFullScreenExperience:                       procCanSetGamingFullScreenExperience,
+	CheckGamingPrivilegeSilently:                           procCheckGamingPrivilegeSilently,
+	CheckGamingPrivilegeSilentlyForUser:                    procCheckGamingPrivilegeSilentlyForUser,
+	CheckGamingPrivilegeWithUI:                             procCheckGamingPrivilegeWithUI,
+	CheckGamingPrivilegeWithUIForUser:                      procCheckGamingPrivilegeWithUIForUser,
+	GetExpandedResourceExclusiveCpuCount:                   procGetExpandedResourceExclusiveCpuCount,
+	GetGamingDeviceModelInformation:                        procGetGamingDeviceModelInformation,
+	HasExpandedResources:                                   procHasExpandedResources,
+	IsGamingFullScreenExperienceActive:                     procIsGamingFullScreenExperienceActive,
+	IsGamingFullScreenExperienceSupported:                  procIsGamingFullScreenExperienceSupported,
+	ProcessPendingGameUI:                                   procProcessPendingGameUI,
+	RegisterGamingFullScreenExperienceChangeNotification:   procRegisterGamingFullScreenExperienceChangeNotification,
+	ReleaseExclusiveCpuSets:                                procReleaseExclusiveCpuSets,
+	SetGamingFullScreenExperience:                          procSetGamingFullScreenExperience,
+	ShowChangeFriendRelationshipUI:                         procShowChangeFriendRelationshipUI,
+	ShowChangeFriendRelationshipUIForUser:                  procShowChangeFriendRelationshipUIForUser,
+	ShowCustomizeUserProfileUI:                             procShowCustomizeUserProfileUI,
+	ShowCustomizeUserProfileUIForUser:                      procShowCustomizeUserProfileUIForUser,
+	ShowFindFriendsUI:                                      procShowFindFriendsUI,
+	ShowFindFriendsUIForUser:                               procShowFindFriendsUIForUser,
+	ShowGameInfoUI:                                         procShowGameInfoUI,
+	ShowGameInfoUIForUser:                                  procShowGameInfoUIForUser,
+	ShowGameInviteUI:                                       procShowGameInviteUI,
+	ShowGameInviteUIForUser:                                procShowGameInviteUIForUser,
+	ShowGameInviteUIWithContext:                            procShowGameInviteUIWithContext,
+	ShowGameInviteUIWithContextForUser:                     procShowGameInviteUIWithContextForUser,
+	ShowPlayerPickerUI:                                     procShowPlayerPickerUI,
+	ShowPlayerPickerUIForUser:                              procShowPlayerPickerUIForUser,
+	ShowProfileCardUI:                                      procShowProfileCardUI,
+	ShowProfileCardUIForUser:                               procShowProfileCardUIForUser,
+	ShowTitleAchievementsUI:                                procShowTitleAchievementsUI,
+	ShowTitleAchievementsUIForUser:                         procShowTitleAchievementsUIForUser,
+	ShowUserSettingsUI:                                     procShowUserSettingsUI,
+	ShowUserSettingsUIForUser:                              procShowUserSettingsUIForUser,
+	TryCancelPendingGameUI:                                 procTryCancelPendingGameUI,
+	UnregisterGamingFullScreenExperienceChangeNotification: procUnregisterGamingFullScreenExperienceChangeNotification,
+}
+
+// CanSetGamingFullScreenExperience calls api-ms-win-gaming-experience-l1-1-0!CanSetGamingFullScreenExperience.
+func CanSetGamingFullScreenExperience() bool {
+	r1, _, _ := syscall.SyscallN(procCanSetGamingFullScreenExperience.Addr())
+	return r1 != 0
 }
 
 // CheckGamingPrivilegeSilently calls api-ms-win-gaming-tcui-l1-1-1!CheckGamingPrivilegeSilently.
@@ -170,6 +195,18 @@ func HasExpandedResources(hasExpandedResources *foundation.BOOL) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IsGamingFullScreenExperienceActive calls api-ms-win-gaming-experience-l1-1-0!IsGamingFullScreenExperienceActive.
+func IsGamingFullScreenExperienceActive() bool {
+	r1, _, _ := syscall.SyscallN(procIsGamingFullScreenExperienceActive.Addr())
+	return r1 != 0
+}
+
+// IsGamingFullScreenExperienceSupported calls api-ms-win-gaming-experience-l1-1-0!IsGamingFullScreenExperienceSupported.
+func IsGamingFullScreenExperienceSupported() bool {
+	r1, _, _ := syscall.SyscallN(procIsGamingFullScreenExperienceSupported.Addr())
+	return r1 != 0
+}
+
 // ProcessPendingGameUI calls api-ms-win-gaming-tcui-l1-1-0!ProcessPendingGameUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-processpendinggameui
 func ProcessPendingGameUI(waitForCompletion bool) error {
@@ -178,10 +215,23 @@ func ProcessPendingGameUI(waitForCompletion bool) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// RegisterGamingFullScreenExperienceChangeNotification calls api-ms-win-gaming-experience-l1-1-0!RegisterGamingFullScreenExperienceChangeNotification.
+func RegisterGamingFullScreenExperienceChangeNotification(routine PGAMING_FULL_SCREEN_EXPERIENCE_CHANGE_ROUTINE, context unsafe.Pointer, registration *GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION) error {
+	r1, _, _ := syscall.SyscallN(procRegisterGamingFullScreenExperienceChangeNotification.Addr(), uintptr(routine), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(registration)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ReleaseExclusiveCpuSets calls api-ms-win-gaming-expandedresources-l1-1-0!ReleaseExclusiveCpuSets.
 // https://learn.microsoft.com/windows/win32/api/expandedresources/nf-expandedresources-releaseexclusivecpusets
 func ReleaseExclusiveCpuSets() error {
 	r1, _, _ := syscall.SyscallN(procReleaseExclusiveCpuSets.Addr())
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetGamingFullScreenExperience calls api-ms-win-gaming-experience-l1-1-0!SetGamingFullScreenExperience.
+func SetGamingFullScreenExperience(active bool) error {
+	_active := win32.Bool32(active)
+	r1, _, _ := syscall.SyscallN(procSetGamingFullScreenExperience.Addr(), uintptr(_active))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -331,4 +381,9 @@ func ShowUserSettingsUIForUser(user *systemwinrt.IInspectable, completionRoutine
 func TryCancelPendingGameUI() bool {
 	r1, _, _ := syscall.SyscallN(procTryCancelPendingGameUI.Addr())
 	return r1 != 0
+}
+
+// UnregisterGamingFullScreenExperienceChangeNotification calls api-ms-win-gaming-experience-l1-1-0!UnregisterGamingFullScreenExperienceChangeNotification.
+func UnregisterGamingFullScreenExperienceChangeNotification(registration GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION) {
+	syscall.SyscallN(procUnregisterGamingFullScreenExperienceChangeNotification.Addr(), uintptr(registration))
 }

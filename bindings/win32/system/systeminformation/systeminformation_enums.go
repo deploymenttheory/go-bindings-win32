@@ -514,15 +514,16 @@ func (e IMAGE_FILE_MACHINE) String() string {
 type LOGICAL_PROCESSOR_RELATIONSHIP int32
 
 const (
-	RelationProcessorCore    LOGICAL_PROCESSOR_RELATIONSHIP = 0
-	RelationNumaNode         LOGICAL_PROCESSOR_RELATIONSHIP = 1
-	RelationCache            LOGICAL_PROCESSOR_RELATIONSHIP = 2
-	RelationProcessorPackage LOGICAL_PROCESSOR_RELATIONSHIP = 3
-	RelationGroup            LOGICAL_PROCESSOR_RELATIONSHIP = 4
-	RelationProcessorDie     LOGICAL_PROCESSOR_RELATIONSHIP = 5
-	RelationNumaNodeEx       LOGICAL_PROCESSOR_RELATIONSHIP = 6
-	RelationProcessorModule  LOGICAL_PROCESSOR_RELATIONSHIP = 7
-	RelationAll              LOGICAL_PROCESSOR_RELATIONSHIP = 65535
+	RelationProcessorCore              LOGICAL_PROCESSOR_RELATIONSHIP = 0
+	RelationNumaNode                   LOGICAL_PROCESSOR_RELATIONSHIP = 1
+	RelationCache                      LOGICAL_PROCESSOR_RELATIONSHIP = 2
+	RelationProcessorPackage           LOGICAL_PROCESSOR_RELATIONSHIP = 3
+	RelationGroup                      LOGICAL_PROCESSOR_RELATIONSHIP = 4
+	RelationProcessorDie               LOGICAL_PROCESSOR_RELATIONSHIP = 5
+	RelationNumaNodeEx                 LOGICAL_PROCESSOR_RELATIONSHIP = 6
+	RelationProcessorModule            LOGICAL_PROCESSOR_RELATIONSHIP = 7
+	RelationProcessorSharedComputeUnit LOGICAL_PROCESSOR_RELATIONSHIP = 8
+	RelationAll                        LOGICAL_PROCESSOR_RELATIONSHIP = 65535
 )
 
 // String returns the LOGICAL_PROCESSOR_RELATIONSHIP constant's name, or its numeric form when
@@ -545,6 +546,8 @@ func (e LOGICAL_PROCESSOR_RELATIONSHIP) String() string {
 		return "RelationNumaNodeEx"
 	case RelationProcessorModule:
 		return "RelationProcessorModule"
+	case RelationProcessorSharedComputeUnit:
+		return "RelationProcessorSharedComputeUnit"
 	case RelationAll:
 		return "RelationAll"
 	default:

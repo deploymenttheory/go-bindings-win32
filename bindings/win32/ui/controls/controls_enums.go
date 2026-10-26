@@ -7595,6 +7595,31 @@ func (e STATUSPARTS) String() string {
 	}
 }
 
+// Bitmask — values may be combined with |.
+type SYNTHETIC_DEVICE_CREATION_OPTIONS int32
+
+const (
+	SDCO_NONE                  SYNTHETIC_DEVICE_CREATION_OPTIONS = 0
+	SDCO_PHYSICAL_SIZE         SYNTHETIC_DEVICE_CREATION_OPTIONS = 1
+	SDCO_TOUCHPAD_GESTURE_ONLY SYNTHETIC_DEVICE_CREATION_OPTIONS = 2
+)
+
+// String returns the SYNTHETIC_DEVICE_CREATION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNTHETIC_DEVICE_CREATION_OPTIONS) String() string {
+	var parts []string
+	if e&SDCO_PHYSICAL_SIZE != 0 {
+		parts = append(parts, "SDCO_PHYSICAL_SIZE")
+	}
+	if e&SDCO_TOUCHPAD_GESTURE_ONLY != 0 {
+		parts = append(parts, "SDCO_TOUCHPAD_GESTURE_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SYSBUTTONSTATES int32
 
 const (

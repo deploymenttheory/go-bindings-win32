@@ -179,6 +179,7 @@ const (
 	HeapEnableTerminationOnCorruption HEAP_INFORMATION_CLASS = 1
 	HeapOptimizeResources             HEAP_INFORMATION_CLASS = 3
 	HeapTag                           HEAP_INFORMATION_CLASS = 7
+	HeapMemoryUsageInformation        HEAP_INFORMATION_CLASS = 8
 )
 
 // String returns the HEAP_INFORMATION_CLASS constant's name, or its numeric form when
@@ -193,6 +194,8 @@ func (e HEAP_INFORMATION_CLASS) String() string {
 		return "HeapOptimizeResources"
 	case HeapTag:
 		return "HeapTag"
+	case HeapMemoryUsageInformation:
+		return "HeapMemoryUsageInformation"
 	default:
 		return fmt.Sprintf("HEAP_INFORMATION_CLASS(%d)", int32(e))
 	}
@@ -331,7 +334,8 @@ const (
 	MemSectionExtendedParameterUserPhysicalFlags MEM_SECTION_EXTENDED_PARAMETER_TYPE = 1
 	MemSectionExtendedParameterNumaNode          MEM_SECTION_EXTENDED_PARAMETER_TYPE = 2
 	MemSectionExtendedParameterSigningLevel      MEM_SECTION_EXTENDED_PARAMETER_TYPE = 3
-	MemSectionExtendedParameterMax               MEM_SECTION_EXTENDED_PARAMETER_TYPE = 4
+	MemSectionExtendedParameterAttributeFlags    MEM_SECTION_EXTENDED_PARAMETER_TYPE = 4
+	MemSectionExtendedParameterMax               MEM_SECTION_EXTENDED_PARAMETER_TYPE = 5
 )
 
 // String returns the MEM_SECTION_EXTENDED_PARAMETER_TYPE constant's name, or its numeric form when
@@ -346,6 +350,8 @@ func (e MEM_SECTION_EXTENDED_PARAMETER_TYPE) String() string {
 		return "MemSectionExtendedParameterNumaNode"
 	case MemSectionExtendedParameterSigningLevel:
 		return "MemSectionExtendedParameterSigningLevel"
+	case MemSectionExtendedParameterAttributeFlags:
+		return "MemSectionExtendedParameterAttributeFlags"
 	case MemSectionExtendedParameterMax:
 		return "MemSectionExtendedParameterMax"
 	default:

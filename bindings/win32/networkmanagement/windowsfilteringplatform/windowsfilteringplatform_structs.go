@@ -196,15 +196,6 @@ type FWPM_LAYER_ENUM_TEMPLATE0 struct {
 	Reserved uint64
 }
 
-// FWPM_LAYER_STATISTICS0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_layer_statistics0
-type FWPM_LAYER_STATISTICS0 struct {
-	LayerId             win32.GUID
-	ClassifyPermitCount uint32
-	ClassifyBlockCount  uint32
-	ClassifyVetoCount   uint32
-	NumCacheEntries     uint32
-}
-
 type FWPM_LAYER_STATISTICS1 struct {
 	LayerId             win32.GUID
 	ClassifyPermitCount uint32
@@ -822,46 +813,6 @@ type FWPM_SESSION0 struct {
 // FWPM_SESSION_ENUM_TEMPLATE0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_session_enum_template0
 type FWPM_SESSION_ENUM_TEMPLATE0 struct {
 	Reserved uint64
-}
-
-// FWPM_STATISTICS0: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ns-fwpmtypes-fwpm_statistics0
-type FWPM_STATISTICS0 struct {
-	NumLayerStatistics                     uint32
-	LayerStatistics                        *FWPM_LAYER_STATISTICS0
-	InboundAllowedConnectionsV4            uint32
-	InboundBlockedConnectionsV4            uint32
-	OutboundAllowedConnectionsV4           uint32
-	OutboundBlockedConnectionsV4           uint32
-	InboundAllowedConnectionsV6            uint32
-	InboundBlockedConnectionsV6            uint32
-	OutboundAllowedConnectionsV6           uint32
-	OutboundBlockedConnectionsV6           uint32
-	InboundActiveConnectionsV4             uint32
-	OutboundActiveConnectionsV4            uint32
-	InboundActiveConnectionsV6             uint32
-	OutboundActiveConnectionsV6            uint32
-	ReauthDirInbound                       uint64
-	ReauthDirOutbound                      uint64
-	ReauthFamilyV4                         uint64
-	ReauthFamilyV6                         uint64
-	ReauthProtoOther                       uint64
-	ReauthProtoIPv4                        uint64
-	ReauthProtoIPv6                        uint64
-	ReauthProtoICMP                        uint64
-	ReauthProtoICMP6                       uint64
-	ReauthProtoUDP                         uint64
-	ReauthProtoTCP                         uint64
-	ReauthReasonPolicyChange               uint64
-	ReauthReasonNewArrivalInterface        uint64
-	ReauthReasonNewNextHopInterface        uint64
-	ReauthReasonProfileCrossing            uint64
-	ReauthReasonClassifyCompletion         uint64
-	ReauthReasonIPSecPropertiesChanged     uint64
-	ReauthReasonMidStreamInspection        uint64
-	ReauthReasonSocketPropertyChanged      uint64
-	ReauthReasonNewInboundMCastBCastPacket uint64
-	ReauthReasonEDPPolicyChanged           uint64
-	ReauthReasonProxyHandleChanged         uint64
 }
 
 type FWPM_STATISTICS1 struct {

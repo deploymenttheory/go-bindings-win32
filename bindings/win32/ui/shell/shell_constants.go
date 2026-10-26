@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+const ABC_OVERLAYDESKTOPICONS uint32 = 1
 const ABE_BOTTOM uint32 = 3
 const ABE_LEFT uint32 = 0
 const ABE_RIGHT uint32 = 2

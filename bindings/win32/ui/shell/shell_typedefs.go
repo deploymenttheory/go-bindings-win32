@@ -11,6 +11,8 @@ type HDROP uintptr
 // Invalid values: -1, 0.
 type HPSXA uintptr
 
+// Invalid values: 0.
 type PAPPCONSTRAIN_REGISTRATION uintptr
 
+// Invalid values: 0.
 type PAPPSTATE_REGISTRATION uintptr

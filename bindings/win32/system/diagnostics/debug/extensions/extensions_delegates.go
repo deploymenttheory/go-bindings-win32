@@ -117,6 +117,11 @@ type PDEBUG_EXTENSION_CANUNLOAD uintptr
 // foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDEBUG_EXTENSION_INITIALIZE uintptr
 
+// PDEBUG_EXTENSION_ISEXTENSIONAPI is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
+type PDEBUG_EXTENSION_ISEXTENSIONAPI uintptr
+
 // PDEBUG_EXTENSION_KNOWN_STRUCT is a callback pointer: create one with syscall.NewCallback
 // using the shape func(uint32, uint64, foundation.PSTR, foundation.PSTR, *uint32) uintptr (the native return type is
 // foundation.HRESULT; NewCallback requires a uintptr-sized result).

@@ -347,12 +347,15 @@ var (
 	procRegisterDeviceNotificationA                    = modUSER32.NewProc("RegisterDeviceNotificationA")
 	procRegisterForTooltipDismissNotification          = modUSER32.NewProc("RegisterForTooltipDismissNotification")
 	procRegisterShellHookWindow                        = modUSER32.NewProc("RegisterShellHookWindow")
+	procRegisterTouchpadCapableThread                  = modUSER32.NewProc("RegisterTouchpadCapableThread")
+	procRegisterTouchpadCapableWindow                  = modUSER32.NewProc("RegisterTouchpadCapableWindow")
 	procRegisterWindowMessage                          = modUSER32.NewProc("RegisterWindowMessageW")
 	procRegisterWindowMessageA                         = modUSER32.NewProc("RegisterWindowMessageA")
 	procRemoveMenu                                     = modUSER32.NewProc("RemoveMenu")
 	procRemoveProp                                     = modUSER32.NewProc("RemovePropW")
 	procRemovePropA                                    = modUSER32.NewProc("RemovePropA")
 	procReplyMessage                                   = modUSER32.NewProc("ReplyMessage")
+	procReportWindowContentInertia                     = modUSER32.NewProc("ReportWindowContentInertia")
 	procScrollDC                                       = modUSER32.NewProc("ScrollDC")
 	procScrollWindow                                   = modUSER32.NewProc("ScrollWindow")
 	procScrollWindowEx                                 = modUSER32.NewProc("ScrollWindowEx")
@@ -383,6 +386,7 @@ var (
 	procSetDlgItemTextA                                = modUSER32.NewProc("SetDlgItemTextA")
 	procSetForegroundWindow                            = modUSER32.NewProc("SetForegroundWindow")
 	procSetLayeredWindowAttributes                     = modUSER32.NewProc("SetLayeredWindowAttributes")
+	procSetMaxTouchpadSensitivity                      = modUSER32.NewProc("SetMaxTouchpadSensitivity")
 	procSetMenu                                        = modUSER32.NewProc("SetMenu")
 	procSetMenuDefaultItem                             = modUSER32.NewProc("SetMenuDefaultItem")
 	procSetMenuInfo                                    = modUSER32.NewProc("SetMenuInfo")
@@ -778,12 +782,15 @@ var Procs = struct {
 	RegisterDeviceNotificationA                    *win32.Proc
 	RegisterForTooltipDismissNotification          *win32.Proc
 	RegisterShellHookWindow                        *win32.Proc
+	RegisterTouchpadCapableThread                  *win32.Proc
+	RegisterTouchpadCapableWindow                  *win32.Proc
 	RegisterWindowMessage                          *win32.Proc
 	RegisterWindowMessageA                         *win32.Proc
 	RemoveMenu                                     *win32.Proc
 	RemoveProp                                     *win32.Proc
 	RemovePropA                                    *win32.Proc
 	ReplyMessage                                   *win32.Proc
+	ReportWindowContentInertia                     *win32.Proc
 	ScrollDC                                       *win32.Proc
 	ScrollWindow                                   *win32.Proc
 	ScrollWindowEx                                 *win32.Proc
@@ -814,6 +821,7 @@ var Procs = struct {
 	SetDlgItemTextA                                *win32.Proc
 	SetForegroundWindow                            *win32.Proc
 	SetLayeredWindowAttributes                     *win32.Proc
+	SetMaxTouchpadSensitivity                      *win32.Proc
 	SetMenu                                        *win32.Proc
 	SetMenuDefaultItem                             *win32.Proc
 	SetMenuInfo                                    *win32.Proc
@@ -1203,12 +1211,15 @@ var Procs = struct {
 	RegisterDeviceNotificationA:                    procRegisterDeviceNotificationA,
 	RegisterForTooltipDismissNotification:          procRegisterForTooltipDismissNotification,
 	RegisterShellHookWindow:                        procRegisterShellHookWindow,
+	RegisterTouchpadCapableThread:                  procRegisterTouchpadCapableThread,
+	RegisterTouchpadCapableWindow:                  procRegisterTouchpadCapableWindow,
 	RegisterWindowMessage:                          procRegisterWindowMessage,
 	RegisterWindowMessageA:                         procRegisterWindowMessageA,
 	RemoveMenu:                                     procRemoveMenu,
 	RemoveProp:                                     procRemoveProp,
 	RemovePropA:                                    procRemovePropA,
 	ReplyMessage:                                   procReplyMessage,
+	ReportWindowContentInertia:                     procReportWindowContentInertia,
 	ScrollDC:                                       procScrollDC,
 	ScrollWindow:                                   procScrollWindow,
 	ScrollWindowEx:                                 procScrollWindowEx,
@@ -1239,6 +1250,7 @@ var Procs = struct {
 	SetDlgItemTextA:                                procSetDlgItemTextA,
 	SetForegroundWindow:                            procSetForegroundWindow,
 	SetLayeredWindowAttributes:                     procSetLayeredWindowAttributes,
+	SetMaxTouchpadSensitivity:                      procSetMaxTouchpadSensitivity,
 	SetMenu:                                        procSetMenu,
 	SetMenuDefaultItem:                             procSetMenuDefaultItem,
 	SetMenuInfo:                                    procSetMenuInfo,
@@ -4635,6 +4647,20 @@ func RegisterShellHookWindow(hwnd foundation.HWND) bool {
 	return r1 != 0
 }
 
+// RegisterTouchpadCapableThread calls USER32!RegisterTouchpadCapableThread.
+func RegisterTouchpadCapableThread(fEnable bool) bool {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procRegisterTouchpadCapableThread.Addr(), uintptr(_fEnable))
+	return r1 != 0
+}
+
+// RegisterTouchpadCapableWindow calls USER32!RegisterTouchpadCapableWindow.
+func RegisterTouchpadCapableWindow(hWnd foundation.HWND, fEnable bool) bool {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procRegisterTouchpadCapableWindow.Addr(), uintptr(hWnd), uintptr(_fEnable))
+	return r1 != 0
+}
+
 // RegisterWindowMessage calls USER32!RegisterWindowMessageW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerwindowmessagew
 // Minimum OS: windows5.0.
@@ -4699,6 +4725,13 @@ func RemovePropA(hWnd foundation.HWND, lpString foundation.PSTR) (foundation.HAN
 // Minimum OS: windows5.0.
 func ReplyMessage(lResult foundation.LRESULT) bool {
 	r1, _, _ := syscall.SyscallN(procReplyMessage.Addr(), uintptr(lResult))
+	return r1 != 0
+}
+
+// ReportWindowContentInertia calls USER32!ReportWindowContentInertia.
+func ReportWindowContentInertia(hWnd foundation.HWND, bStartInertia bool) bool {
+	_bStartInertia := win32.Bool32(bStartInertia)
+	r1, _, _ := syscall.SyscallN(procReportWindowContentInertia.Addr(), uintptr(hWnd), uintptr(_bStartInertia))
 	return r1 != 0
 }
 
@@ -5014,6 +5047,13 @@ func SetLayeredWindowAttributes(hwnd foundation.HWND, crKey foundation.COLORREF,
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// SetMaxTouchpadSensitivity calls USER32!SetMaxTouchpadSensitivity.
+func SetMaxTouchpadSensitivity(maxSensitivity bool) bool {
+	_maxSensitivity := win32.Bool32(maxSensitivity)
+	r1, _, _ := syscall.SyscallN(procSetMaxTouchpadSensitivity.Addr(), uintptr(_maxSensitivity))
+	return r1 != 0
 }
 
 // SetMenu calls USER32!SetMenu.

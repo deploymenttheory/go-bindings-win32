@@ -281,7 +281,8 @@ const (
 	EventProviderSetReserved1      EVENT_INFO_CLASS = 1
 	EventProviderSetTraits         EVENT_INFO_CLASS = 2
 	EventProviderUseDescriptorType EVENT_INFO_CLASS = 3
-	MaxEventInfo                   EVENT_INFO_CLASS = 4
+	EventProviderSetReserved2      EVENT_INFO_CLASS = 4
+	MaxEventInfo                   EVENT_INFO_CLASS = 5
 )
 
 // String returns the EVENT_INFO_CLASS constant's name, or its numeric form when
@@ -296,6 +297,8 @@ func (e EVENT_INFO_CLASS) String() string {
 		return "EventProviderSetTraits"
 	case EventProviderUseDescriptorType:
 		return "EventProviderUseDescriptorType"
+	case EventProviderSetReserved2:
+		return "EventProviderSetReserved2"
 	case MaxEventInfo:
 		return "MaxEventInfo"
 	default:

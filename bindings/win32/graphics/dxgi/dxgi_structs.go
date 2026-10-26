@@ -70,6 +70,21 @@ type DXGI_ADAPTER_DESC3 struct {
 	ComputePreemptionGranularity  DXGI_COMPUTE_PREEMPTION_GRANULARITY
 }
 
+type DXGI_ADAPTER_DESC4 struct {
+	Description                   [128]uint16
+	VendorId                      uint32
+	DeviceId                      uint32
+	SubSysId                      uint32
+	Revision                      uint32
+	DedicatedVideoMemory          uintptr
+	DedicatedSystemMemory         uintptr
+	SharedSystemMemory            uintptr
+	AdapterLuid                   foundation.LUID
+	Flags                         DXGI_ADAPTER_FLAG4
+	GraphicsPreemptionGranularity DXGI_GRAPHICS_PREEMPTION_GRANULARITY
+	ComputePreemptionGranularity  DXGI_COMPUTE_PREEMPTION_GRANULARITY
+}
+
 // DXGI_DECODE_SWAP_CHAIN_DESC: https://learn.microsoft.com/windows/win32/api/dxgi1_3/ns-dxgi1_3-dxgi_decode_swap_chain_desc
 type DXGI_DECODE_SWAP_CHAIN_DESC struct {
 	Flags uint32
@@ -299,6 +314,21 @@ type DXGI_SWAP_CHAIN_DESC1 struct {
 	SwapEffect  DXGI_SWAP_EFFECT
 	AlphaMode   graphicsdxgicommon.DXGI_ALPHA_MODE
 	Flags       uint32
+}
+
+type DXGI_SWAP_CHAIN_DESC2 struct {
+	Width       uint32
+	Height      uint32
+	Format      graphicsdxgicommon.DXGI_FORMAT
+	Stereo      foundation.BOOL
+	SampleDesc  graphicsdxgicommon.DXGI_SAMPLE_DESC
+	BufferUsage DXGI_USAGE
+	BufferCount uint32
+	Scaling     DXGI_SCALING
+	SwapEffect  DXGI_SWAP_EFFECT
+	AlphaMode   graphicsdxgicommon.DXGI_ALPHA_MODE
+	Flags       uint32
+	ColorSpace  graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE
 }
 
 // DXGI_SWAP_CHAIN_FULLSCREEN_DESC: https://learn.microsoft.com/windows/win32/api/dxgi1_2/ns-dxgi1_2-dxgi_swap_chain_fullscreen_desc

@@ -227,6 +227,53 @@ func (e POINTER_FLAGS) String() string {
 	return strings.Join(parts, "|")
 }
 
+type TOUCHPAD_ACTION int32
+
+const (
+	TA_3FINGER_TAP     TOUCHPAD_ACTION = 0
+	TA_3FINGER_PRESS   TOUCHPAD_ACTION = 1
+	TA_3FINGER_RELEASE TOUCHPAD_ACTION = 2
+	TA_4FINGER_TAP     TOUCHPAD_ACTION = 3
+	TA_4FINGER_PRESS   TOUCHPAD_ACTION = 4
+	TA_4FINGER_RELEASE TOUCHPAD_ACTION = 5
+	TA_5FINGER_TAP     TOUCHPAD_ACTION = 6
+	TA_5FINGER_PRESS   TOUCHPAD_ACTION = 7
+	TA_5FINGER_RELEASE TOUCHPAD_ACTION = 8
+	TA_INERTIA_STOP    TOUCHPAD_ACTION = 9
+	TA_INERTIA_END     TOUCHPAD_ACTION = 10
+)
+
+// String returns the TOUCHPAD_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOUCHPAD_ACTION) String() string {
+	switch e {
+	case TA_3FINGER_TAP:
+		return "TA_3FINGER_TAP"
+	case TA_3FINGER_PRESS:
+		return "TA_3FINGER_PRESS"
+	case TA_3FINGER_RELEASE:
+		return "TA_3FINGER_RELEASE"
+	case TA_4FINGER_TAP:
+		return "TA_4FINGER_TAP"
+	case TA_4FINGER_PRESS:
+		return "TA_4FINGER_PRESS"
+	case TA_4FINGER_RELEASE:
+		return "TA_4FINGER_RELEASE"
+	case TA_5FINGER_TAP:
+		return "TA_5FINGER_TAP"
+	case TA_5FINGER_PRESS:
+		return "TA_5FINGER_PRESS"
+	case TA_5FINGER_RELEASE:
+		return "TA_5FINGER_RELEASE"
+	case TA_INERTIA_STOP:
+		return "TA_INERTIA_STOP"
+	case TA_INERTIA_END:
+		return "TA_INERTIA_END"
+	default:
+		return fmt.Sprintf("TOUCHPAD_ACTION(%d)", int32(e))
+	}
+}
+
 type TOUCH_FEEDBACK_MODE uint32
 
 const (

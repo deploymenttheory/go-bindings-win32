@@ -303,6 +303,7 @@ var (
 	procRtlUnwind                              = modKERNEL32.NewProc("RtlUnwind")
 	procRtlUnwindEx                            = modKERNEL32.NewProc("RtlUnwindEx")
 	procRtlVirtualUnwind                       = modKERNEL32.NewProc("RtlVirtualUnwind")
+	procRtlVirtualUnwind2                      = modKERNEL32.NewProc("RtlVirtualUnwind2")
 	procSetErrorMode                           = modKERNEL32.NewProc("SetErrorMode")
 	procSetThreadContext                       = modKERNEL32.NewProc("SetThreadContext")
 	procSetThreadErrorMode                     = modKERNEL32.NewProc("SetThreadErrorMode")
@@ -441,6 +442,7 @@ var Procs = struct {
 	RtlUnwind                              *win32.Proc
 	RtlUnwindEx                            *win32.Proc
 	RtlVirtualUnwind                       *win32.Proc
+	RtlVirtualUnwind2                      *win32.Proc
 	SearchTreeForFile                      *win32.Proc
 	SearchTreeForFileW                     *win32.Proc
 	SetCheckUserInterruptShared            *win32.Proc
@@ -734,6 +736,7 @@ var Procs = struct {
 	RtlUnwind:                              procRtlUnwind,
 	RtlUnwindEx:                            procRtlUnwindEx,
 	RtlVirtualUnwind:                       procRtlVirtualUnwind,
+	RtlVirtualUnwind2:                      procRtlVirtualUnwind2,
 	SearchTreeForFile:                      procSearchTreeForFile,
 	SearchTreeForFileW:                     procSearchTreeForFileW,
 	SetCheckUserInterruptShared:            procSetCheckUserInterruptShared,
@@ -1976,6 +1979,12 @@ func RtlUnwindEx(TargetFrame unsafe.Pointer, TargetIp unsafe.Pointer, ExceptionR
 func RtlVirtualUnwind(HandlerType RTL_VIRTUAL_UNWIND_HANDLER_TYPE, ImageBase uint64, ControlPc uint64, FunctionEntry *IMAGE_RUNTIME_FUNCTION_ENTRY, ContextRecord *CONTEXT, HandlerData *unsafe.Pointer, EstablisherFrame *uint64, ContextPointers *KNONVOLATILE_CONTEXT_POINTERS) systemkernel.EXCEPTION_ROUTINE {
 	r1, _, _ := syscall.SyscallN(procRtlVirtualUnwind.Addr(), uintptr(HandlerType), uintptr(ImageBase), uintptr(ControlPc), uintptr(unsafe.Pointer(FunctionEntry)), uintptr(unsafe.Pointer(ContextRecord)), uintptr(unsafe.Pointer(HandlerData)), uintptr(unsafe.Pointer(EstablisherFrame)), uintptr(unsafe.Pointer(ContextPointers)))
 	return systemkernel.EXCEPTION_ROUTINE(r1)
+}
+
+// RtlVirtualUnwind2 calls KERNEL32!RtlVirtualUnwind2.
+func RtlVirtualUnwind2(HandlerType uint32, ImageBase uint64, ControlPc uint64, FunctionEntry *IMAGE_RUNTIME_FUNCTION_ENTRY, ContextRecord *CONTEXT, MachineFrameUnwound *foundation.BOOLEAN, HandlerData *unsafe.Pointer, EstablisherFrame *uint64, ContextPointers *KNONVOLATILE_CONTEXT_POINTERS, LowLimit *uint64, HighLimit *uint64, HandlerRoutine *systemkernel.EXCEPTION_ROUTINE, UnwindFlags uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procRtlVirtualUnwind2.Addr(), uintptr(HandlerType), uintptr(ImageBase), uintptr(ControlPc), uintptr(unsafe.Pointer(FunctionEntry)), uintptr(unsafe.Pointer(ContextRecord)), uintptr(unsafe.Pointer(MachineFrameUnwound)), uintptr(unsafe.Pointer(HandlerData)), uintptr(unsafe.Pointer(EstablisherFrame)), uintptr(unsafe.Pointer(ContextPointers)), uintptr(unsafe.Pointer(LowLimit)), uintptr(unsafe.Pointer(HighLimit)), uintptr(unsafe.Pointer(HandlerRoutine)), uintptr(UnwindFlags))
+	return uint32(r1)
 }
 
 // SearchTreeForFile calls dbghelp!SearchTreeForFile.

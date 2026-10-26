@@ -686,7 +686,7 @@ type IKsTopology struct {
 var IID_IKsTopology = win32.GUID{Data1: 0x28f54683, Data2: 0x06fd, Data3: 0x11d2, Data4: [8]byte{0xb2, 0x7a, 0x00, 0xa0, 0xc9, 0x22, 0x31, 0x96}}
 
 // CreateNodeInstance dispatches through IKsTopology's vtable slot 3.
-func (self *IKsTopology) CreateNodeInstance(NodeId uint32, Flags uint32, DesiredAccess uint32, UnkOuter *systemcom.IUnknown, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
+func (self *IKsTopology) CreateNodeInstance(NodeId uint32, Flags uint32, DesiredAccess uint32, UnkOuter *systemcom.IUnknown, InterfaceId *win32.GUID, Interface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(NodeId), uintptr(Flags), uintptr(DesiredAccess), uintptr(unsafe.Pointer(UnkOuter)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
 	return win32.ErrIfFailed(int32(r1))
 }

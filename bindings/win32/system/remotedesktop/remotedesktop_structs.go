@@ -684,6 +684,17 @@ type WTSUSERCONFIGW struct {
 	TerminalServerHomeDirDrive    [4]uint16
 }
 
+type WTSWindowInfo struct {
+	Hwnd        foundation.HWND
+	Height      int32
+	Width       int32
+	ViewWidth   int32
+	ViewHeight  int32
+	ViewOffsetX int32
+	ViewOffsetY int32
+	Scale       float32
+}
+
 // WTS_CACHE_STATS: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_cache_stats
 type WTS_CACHE_STATS struct {
 	Specific     uint32

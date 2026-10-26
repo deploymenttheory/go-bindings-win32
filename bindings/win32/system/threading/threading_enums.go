@@ -281,6 +281,7 @@ const (
 	PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE   PROCESSOR_FEATURE_ID = 86
 	PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE    PROCESSOR_FEATURE_ID = 87
 	PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE     PROCESSOR_FEATURE_ID = 88
+	PF_UMONITOR_INSTRUCTION_AVAILABLE          PROCESSOR_FEATURE_ID = 89
 )
 
 // String returns the PROCESSOR_FEATURE_ID constant's name, or its numeric form when
@@ -465,6 +466,8 @@ func (e PROCESSOR_FEATURE_ID) String() string {
 		return "PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE"
 	case PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE:
 		return "PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE"
+	case PF_UMONITOR_INSTRUCTION_AVAILABLE:
+		return "PF_UMONITOR_INSTRUCTION_AVAILABLE"
 	default:
 		return fmt.Sprintf("PROCESSOR_FEATURE_ID(%d)", uint32(e))
 	}
@@ -834,26 +837,27 @@ func (e PROCESS_MEMORY_EXHAUSTION_TYPE) String() string {
 type PROCESS_MITIGATION_POLICY int32
 
 const (
-	ProcessDEPPolicy                   PROCESS_MITIGATION_POLICY = 0
-	ProcessASLRPolicy                  PROCESS_MITIGATION_POLICY = 1
-	ProcessDynamicCodePolicy           PROCESS_MITIGATION_POLICY = 2
-	ProcessStrictHandleCheckPolicy     PROCESS_MITIGATION_POLICY = 3
-	ProcessSystemCallDisablePolicy     PROCESS_MITIGATION_POLICY = 4
-	ProcessMitigationOptionsMask       PROCESS_MITIGATION_POLICY = 5
-	ProcessExtensionPointDisablePolicy PROCESS_MITIGATION_POLICY = 6
-	ProcessControlFlowGuardPolicy      PROCESS_MITIGATION_POLICY = 7
-	ProcessSignaturePolicy             PROCESS_MITIGATION_POLICY = 8
-	ProcessFontDisablePolicy           PROCESS_MITIGATION_POLICY = 9
-	ProcessImageLoadPolicy             PROCESS_MITIGATION_POLICY = 10
-	ProcessSystemCallFilterPolicy      PROCESS_MITIGATION_POLICY = 11
-	ProcessPayloadRestrictionPolicy    PROCESS_MITIGATION_POLICY = 12
-	ProcessChildProcessPolicy          PROCESS_MITIGATION_POLICY = 13
-	ProcessSideChannelIsolationPolicy  PROCESS_MITIGATION_POLICY = 14
-	ProcessUserShadowStackPolicy       PROCESS_MITIGATION_POLICY = 15
-	ProcessRedirectionTrustPolicy      PROCESS_MITIGATION_POLICY = 16
-	ProcessUserPointerAuthPolicy       PROCESS_MITIGATION_POLICY = 17
-	ProcessSEHOPPolicy                 PROCESS_MITIGATION_POLICY = 18
-	MaxProcessMitigationPolicy         PROCESS_MITIGATION_POLICY = 19
+	ProcessDEPPolicy                    PROCESS_MITIGATION_POLICY = 0
+	ProcessASLRPolicy                   PROCESS_MITIGATION_POLICY = 1
+	ProcessDynamicCodePolicy            PROCESS_MITIGATION_POLICY = 2
+	ProcessStrictHandleCheckPolicy      PROCESS_MITIGATION_POLICY = 3
+	ProcessSystemCallDisablePolicy      PROCESS_MITIGATION_POLICY = 4
+	ProcessMitigationOptionsMask        PROCESS_MITIGATION_POLICY = 5
+	ProcessExtensionPointDisablePolicy  PROCESS_MITIGATION_POLICY = 6
+	ProcessControlFlowGuardPolicy       PROCESS_MITIGATION_POLICY = 7
+	ProcessSignaturePolicy              PROCESS_MITIGATION_POLICY = 8
+	ProcessFontDisablePolicy            PROCESS_MITIGATION_POLICY = 9
+	ProcessImageLoadPolicy              PROCESS_MITIGATION_POLICY = 10
+	ProcessSystemCallFilterPolicy       PROCESS_MITIGATION_POLICY = 11
+	ProcessPayloadRestrictionPolicy     PROCESS_MITIGATION_POLICY = 12
+	ProcessChildProcessPolicy           PROCESS_MITIGATION_POLICY = 13
+	ProcessSideChannelIsolationPolicy   PROCESS_MITIGATION_POLICY = 14
+	ProcessUserShadowStackPolicy        PROCESS_MITIGATION_POLICY = 15
+	ProcessRedirectionTrustPolicy       PROCESS_MITIGATION_POLICY = 16
+	ProcessUserPointerAuthPolicy        PROCESS_MITIGATION_POLICY = 17
+	ProcessSEHOPPolicy                  PROCESS_MITIGATION_POLICY = 18
+	ProcessActivationContextTrustPolicy PROCESS_MITIGATION_POLICY = 19
+	MaxProcessMitigationPolicy          PROCESS_MITIGATION_POLICY = 20
 )
 
 // String returns the PROCESS_MITIGATION_POLICY constant's name, or its numeric form when
@@ -898,6 +902,8 @@ func (e PROCESS_MITIGATION_POLICY) String() string {
 		return "ProcessUserPointerAuthPolicy"
 	case ProcessSEHOPPolicy:
 		return "ProcessSEHOPPolicy"
+	case ProcessActivationContextTrustPolicy:
+		return "ProcessActivationContextTrustPolicy"
 	case MaxProcessMitigationPolicy:
 		return "MaxProcessMitigationPolicy"
 	default:
@@ -994,6 +1000,8 @@ const (
 	ProcThreadAttributeEnableOptionalXStateFeatures PROC_THREAD_ATTRIBUTE_NUM = 27
 	ProcThreadAttributeTrustedApp                   PROC_THREAD_ATTRIBUTE_NUM = 29
 	ProcThreadAttributeSveVectorLength              PROC_THREAD_ATTRIBUTE_NUM = 30
+	ProcThreadAttributeSmeVectorLength              PROC_THREAD_ATTRIBUTE_NUM = 31
+	ProcThreadAttributeContainmentConfiguration     PROC_THREAD_ATTRIBUTE_NUM = 33
 )
 
 // String returns the PROC_THREAD_ATTRIBUTE_NUM constant's name, or its numeric form when
@@ -1044,6 +1052,10 @@ func (e PROC_THREAD_ATTRIBUTE_NUM) String() string {
 		return "ProcThreadAttributeTrustedApp"
 	case ProcThreadAttributeSveVectorLength:
 		return "ProcThreadAttributeSveVectorLength"
+	case ProcThreadAttributeSmeVectorLength:
+		return "ProcThreadAttributeSmeVectorLength"
+	case ProcThreadAttributeContainmentConfiguration:
+		return "ProcThreadAttributeContainmentConfiguration"
 	default:
 		return fmt.Sprintf("PROC_THREAD_ATTRIBUTE_NUM(%d)", uint32(e))
 	}

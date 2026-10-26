@@ -319,6 +319,7 @@ const (
 	HcsResourceTypeJob       HCS_RESOURCE_TYPE = 2
 	HcsResourceTypeComObject HCS_RESOURCE_TYPE = 3
 	HcsResourceTypeSocket    HCS_RESOURCE_TYPE = 4
+	HcsResourceTypeSection   HCS_RESOURCE_TYPE = 5
 )
 
 // String returns the HCS_RESOURCE_TYPE constant's name, or its numeric form when
@@ -335,6 +336,8 @@ func (e HCS_RESOURCE_TYPE) String() string {
 		return "HcsResourceTypeComObject"
 	case HcsResourceTypeSocket:
 		return "HcsResourceTypeSocket"
+	case HcsResourceTypeSection:
+		return "HcsResourceTypeSection"
 	default:
 		return fmt.Sprintf("HCS_RESOURCE_TYPE(%d)", int32(e))
 	}

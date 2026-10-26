@@ -63,7 +63,8 @@ const (
 	JobObjectReserved27Information              JOBOBJECTINFOCLASS = 49
 	JobObjectReserved28Information              JOBOBJECTINFOCLASS = 50
 	JobObjectNetworkAccountingInformation       JOBOBJECTINFOCLASS = 51
-	MaxJobObjectInfoClass                       JOBOBJECTINFOCLASS = 52
+	JobObjectCpuPartition                       JOBOBJECTINFOCLASS = 52
+	MaxJobObjectInfoClass                       JOBOBJECTINFOCLASS = 53
 )
 
 // String returns the JOBOBJECTINFOCLASS constant's name, or its numeric form when
@@ -172,6 +173,8 @@ func (e JOBOBJECTINFOCLASS) String() string {
 		return "JobObjectReserved28Information"
 	case JobObjectNetworkAccountingInformation:
 		return "JobObjectNetworkAccountingInformation"
+	case JobObjectCpuPartition:
+		return "JobObjectCpuPartition"
 	case MaxJobObjectInfoClass:
 		return "MaxJobObjectInfoClass"
 	default:

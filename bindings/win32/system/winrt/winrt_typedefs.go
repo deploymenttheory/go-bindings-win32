@@ -17,4 +17,5 @@ type HSTRING uintptr
 type HSTRING_BUFFER uintptr
 
 // RO_REGISTRATION_COOKIE: https://learn.microsoft.com/windows/win32/WinRT/ro-registration-cookie
+// Invalid values: 0.
 type RO_REGISTRATION_COOKIE uintptr

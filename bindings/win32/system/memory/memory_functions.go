@@ -43,8 +43,11 @@ var (
 	procAllocateUserPhysicalPages2              = modapi_ms_win_core_memory_l1_1_8.NewProc("AllocateUserPhysicalPages2")
 	procOpenDedicatedMemoryPartition            = modapi_ms_win_core_memory_l1_1_8.NewProc("OpenDedicatedMemoryPartition")
 	procQueryPartitionInformation               = modapi_ms_win_core_memory_l1_1_8.NewProc("QueryPartitionInformation")
-	procGetMemoryNumaClosestInitiatorNode       = modapi_ms_win_core_memory_l1_1_9.NewProc("GetMemoryNumaClosestInitiatorNode")
-	procGetMemoryNumaPerformanceInformation     = modapi_ms_win_core_memory_l1_1_9.NewProc("GetMemoryNumaPerformanceInformation")
+	procGetNumaNodeMemoryClosestInitiatorNode   = modapi_ms_win_core_memory_l1_1_9.NewProc("GetNumaNodeMemoryClosestInitiatorNode")
+	procGetNumaNodeMemoryReadBandwidth          = modapi_ms_win_core_memory_l1_1_9.NewProc("GetNumaNodeMemoryReadBandwidth")
+	procGetNumaNodeMemoryReadLatency            = modapi_ms_win_core_memory_l1_1_9.NewProc("GetNumaNodeMemoryReadLatency")
+	procGetNumaNodeMemoryWriteBandwidth         = modapi_ms_win_core_memory_l1_1_9.NewProc("GetNumaNodeMemoryWriteBandwidth")
+	procGetNumaNodeMemoryWriteLatency           = modapi_ms_win_core_memory_l1_1_9.NewProc("GetNumaNodeMemoryWriteLatency")
 	procAddSecureMemoryCacheCallback            = modKERNEL32.NewProc("AddSecureMemoryCacheCallback")
 	procAllocateUserPhysicalPages               = modKERNEL32.NewProc("AllocateUserPhysicalPages")
 	procAllocateUserPhysicalPagesNuma           = modKERNEL32.NewProc("AllocateUserPhysicalPagesNuma")
@@ -155,8 +158,11 @@ var Procs = struct {
 	FreeUserPhysicalPages                   *win32.Proc
 	GetLargePageMinimum                     *win32.Proc
 	GetMemoryErrorHandlingCapabilities      *win32.Proc
-	GetMemoryNumaClosestInitiatorNode       *win32.Proc
-	GetMemoryNumaPerformanceInformation     *win32.Proc
+	GetNumaNodeMemoryClosestInitiatorNode   *win32.Proc
+	GetNumaNodeMemoryReadBandwidth          *win32.Proc
+	GetNumaNodeMemoryReadLatency            *win32.Proc
+	GetNumaNodeMemoryWriteBandwidth         *win32.Proc
+	GetNumaNodeMemoryWriteLatency           *win32.Proc
 	GetProcessHeap                          *win32.Proc
 	GetProcessHeaps                         *win32.Proc
 	GetProcessWorkingSetSizeEx              *win32.Proc
@@ -262,8 +268,11 @@ var Procs = struct {
 	FreeUserPhysicalPages:                   procFreeUserPhysicalPages,
 	GetLargePageMinimum:                     procGetLargePageMinimum,
 	GetMemoryErrorHandlingCapabilities:      procGetMemoryErrorHandlingCapabilities,
-	GetMemoryNumaClosestInitiatorNode:       procGetMemoryNumaClosestInitiatorNode,
-	GetMemoryNumaPerformanceInformation:     procGetMemoryNumaPerformanceInformation,
+	GetNumaNodeMemoryClosestInitiatorNode:   procGetNumaNodeMemoryClosestInitiatorNode,
+	GetNumaNodeMemoryReadBandwidth:          procGetNumaNodeMemoryReadBandwidth,
+	GetNumaNodeMemoryReadLatency:            procGetNumaNodeMemoryReadLatency,
+	GetNumaNodeMemoryWriteBandwidth:         procGetNumaNodeMemoryWriteBandwidth,
+	GetNumaNodeMemoryWriteLatency:           procGetNumaNodeMemoryWriteLatency,
 	GetProcessHeap:                          procGetProcessHeap,
 	GetProcessHeaps:                         procGetProcessHeaps,
 	GetProcessWorkingSetSizeEx:              procGetProcessWorkingSetSizeEx,
@@ -537,15 +546,33 @@ func GetMemoryErrorHandlingCapabilities(Capabilities *uint32) error {
 	return nil
 }
 
-// GetMemoryNumaClosestInitiatorNode calls api-ms-win-core-memory-l1-1-9!GetMemoryNumaClosestInitiatorNode.
-func GetMemoryNumaClosestInitiatorNode(TargetNodeNumber uint32, InitiatorNodeNumber *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetMemoryNumaClosestInitiatorNode.Addr(), uintptr(TargetNodeNumber), uintptr(unsafe.Pointer(InitiatorNodeNumber)))
+// GetNumaNodeMemoryClosestInitiatorNode calls api-ms-win-core-memory-l1-1-9!GetNumaNodeMemoryClosestInitiatorNode.
+func GetNumaNodeMemoryClosestInitiatorNode(TargetNodeNumber uint16, InitiatorNodeNumber *uint16) bool {
+	r1, _, _ := syscall.SyscallN(procGetNumaNodeMemoryClosestInitiatorNode.Addr(), uintptr(TargetNodeNumber), uintptr(unsafe.Pointer(InitiatorNodeNumber)))
 	return r1 != 0
 }
 
-// GetMemoryNumaPerformanceInformation calls api-ms-win-core-memory-l1-1-9!GetMemoryNumaPerformanceInformation.
-func GetMemoryNumaPerformanceInformation(NodeNumber uint32, DataType byte, PerfInfo **WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT) bool {
-	r1, _, _ := syscall.SyscallN(procGetMemoryNumaPerformanceInformation.Addr(), uintptr(NodeNumber), uintptr(DataType), uintptr(unsafe.Pointer(PerfInfo)))
+// GetNumaNodeMemoryReadBandwidth calls api-ms-win-core-memory-l1-1-9!GetNumaNodeMemoryReadBandwidth.
+func GetNumaNodeMemoryReadBandwidth(TargetNodeNumber uint16, InitiatorNodeNumber uint16, Bandwidth *NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH) bool {
+	r1, _, _ := syscall.SyscallN(procGetNumaNodeMemoryReadBandwidth.Addr(), uintptr(TargetNodeNumber), uintptr(InitiatorNodeNumber), uintptr(unsafe.Pointer(Bandwidth)))
+	return r1 != 0
+}
+
+// GetNumaNodeMemoryReadLatency calls api-ms-win-core-memory-l1-1-9!GetNumaNodeMemoryReadLatency.
+func GetNumaNodeMemoryReadLatency(TargetNodeNumber uint16, InitiatorNodeNumber uint16, Latency *NUMA_NODE_MEMORY_PERFORMANCE_LATENCY) bool {
+	r1, _, _ := syscall.SyscallN(procGetNumaNodeMemoryReadLatency.Addr(), uintptr(TargetNodeNumber), uintptr(InitiatorNodeNumber), uintptr(unsafe.Pointer(Latency)))
+	return r1 != 0
+}
+
+// GetNumaNodeMemoryWriteBandwidth calls api-ms-win-core-memory-l1-1-9!GetNumaNodeMemoryWriteBandwidth.
+func GetNumaNodeMemoryWriteBandwidth(TargetNodeNumber uint16, InitiatorNodeNumber uint16, Bandwidth *NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH) bool {
+	r1, _, _ := syscall.SyscallN(procGetNumaNodeMemoryWriteBandwidth.Addr(), uintptr(TargetNodeNumber), uintptr(InitiatorNodeNumber), uintptr(unsafe.Pointer(Bandwidth)))
+	return r1 != 0
+}
+
+// GetNumaNodeMemoryWriteLatency calls api-ms-win-core-memory-l1-1-9!GetNumaNodeMemoryWriteLatency.
+func GetNumaNodeMemoryWriteLatency(TargetNodeNumber uint16, InitiatorNodeNumber uint16, Latency *NUMA_NODE_MEMORY_PERFORMANCE_LATENCY) bool {
+	r1, _, _ := syscall.SyscallN(procGetNumaNodeMemoryWriteLatency.Addr(), uintptr(TargetNodeNumber), uintptr(InitiatorNodeNumber), uintptr(unsafe.Pointer(Latency)))
 	return r1 != 0
 }
 

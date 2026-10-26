@@ -6,6 +6,7 @@ package qos
 
 import (
 	"fmt"
+	"strings"
 )
 
 // FilterType: https://learn.microsoft.com/windows/win32/api/qossp/ne-qossp-filtertype
@@ -198,4 +199,33 @@ func (e QOS_TRAFFIC_TYPE) String() string {
 	default:
 		return fmt.Sprintf("QOS_TRAFFIC_TYPE(%d)", int32(e))
 	}
+}
+
+// Bitmask — values may be combined with |.
+type SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE int32
+
+const (
+	SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_NONE        SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE = 0
+	SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_CERTIFICATE SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE = 1
+	SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_TPM         SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE = 2
+	SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_KEY_RING    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE = 4
+)
+
+// String returns the SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE) String() string {
+	var parts []string
+	if e&SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_CERTIFICATE != 0 {
+		parts = append(parts, "SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_CERTIFICATE")
+	}
+	if e&SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_TPM != 0 {
+		parts = append(parts, "SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_TPM")
+	}
+	if e&SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_KEY_RING != 0 {
+		parts = append(parts, "SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_KEY_RING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }

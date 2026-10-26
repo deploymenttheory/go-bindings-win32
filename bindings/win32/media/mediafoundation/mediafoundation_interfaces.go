@@ -6470,6 +6470,26 @@ func (self *IMFMediaEngineTransferSource) TransferSourceToMediaEngine(destinatio
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IID: 6bdf1188-6ec8-44ff-8ccc-bfca0d12afa3
+type IMFMediaEngineVideoRendererEffect struct {
+	systemcom.IUnknown
+}
+
+// IID_IMFMediaEngineVideoRendererEffect is the interface identifier for IMFMediaEngineVideoRendererEffect.
+var IID_IMFMediaEngineVideoRendererEffect = win32.GUID{Data1: 0x6bdf1188, Data2: 0x6ec8, Data3: 0x44ff, Data4: [8]byte{0x8c, 0xcc, 0xbf, 0xca, 0x0d, 0x12, 0xaf, 0xa3}}
+
+// SetEffect dispatches through IMFMediaEngineVideoRendererEffect's vtable slot 3.
+func (self *IMFMediaEngineVideoRendererEffect) SetEffect(pEffect *systemcom.IUnknown) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// ClearEffect dispatches through IMFMediaEngineVideoRendererEffect's vtable slot 4.
+func (self *IMFMediaEngineVideoRendererEffect) ClearEffect() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IMFMediaEngineWebSupport: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaenginewebsupport
 // IID: ba2743a1-07e0-48ef-84b6-9a2ed023ca6c
 type IMFMediaEngineWebSupport struct {

@@ -185,7 +185,7 @@ type MIDL_STUB_MESSAGE struct {
 	FullPtrXlatTables      *FULL_PTR_XLAT_TABLES
 	FullPtrRefId           uint32
 	PointerLength          uint32
-	Bitfield               int32
+	Bitfield               uint32
 	DwDestContext          uint32
 	PvDestContext          unsafe.Pointer
 	SavedContextHandles    **NDR_SCONTEXT

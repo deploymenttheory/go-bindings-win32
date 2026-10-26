@@ -333,6 +333,17 @@ type PERUSERSECTIONW struct {
 	BRollback     foundation.BOOL
 }
 
+// PROCESS_CREATION_SME_VECTOR_LENGTH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type PROCESS_CREATION_SME_VECTOR_LENGTH_Anonymous_e__Union struct {
+	Data [1]uint32
+}
+
+type PROCESS_CREATION_SME_VECTOR_LENGTH struct {
+	Anonymous PROCESS_CREATION_SME_VECTOR_LENGTH_Anonymous_e__Union
+	Reserved  uint32
+}
+
 // PROCESS_CREATION_SVE_VECTOR_LENGTH is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type PROCESS_CREATION_SVE_VECTOR_LENGTH struct {
@@ -439,29 +450,29 @@ type SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION struct {
 }
 
 type SYSTEM_PROCESS_INFORMATION struct {
-	NextEntryOffset        uint32
-	NumberOfThreads        uint32
-	Reserved1              [48]byte
-	ImageName              foundation.UNICODE_STRING
-	BasePriority           int32
-	UniqueProcessId        foundation.HANDLE
-	Reserved2              unsafe.Pointer
-	HandleCount            uint32
-	SessionId              uint32
-	Reserved3              unsafe.Pointer
-	PeakVirtualSize        uintptr
-	VirtualSize            uintptr
-	Reserved4              uint32
-	PeakWorkingSetSize     uintptr
-	WorkingSetSize         uintptr
-	Reserved5              unsafe.Pointer
-	QuotaPagedPoolUsage    uintptr
-	Reserved6              unsafe.Pointer
-	QuotaNonPagedPoolUsage uintptr
-	PagefileUsage          uintptr
-	PeakPagefileUsage      uintptr
-	PrivatePageCount       uintptr
-	Reserved7              [6]int64
+	NextEntryOffset              uint32
+	NumberOfThreads              uint32
+	Reserved1                    [48]byte
+	ImageName                    foundation.UNICODE_STRING
+	BasePriority                 int32
+	UniqueProcessId              foundation.HANDLE
+	InheritedFromUniqueProcessId foundation.HANDLE
+	HandleCount                  uint32
+	SessionId                    uint32
+	Reserved3                    unsafe.Pointer
+	PeakVirtualSize              uintptr
+	VirtualSize                  uintptr
+	Reserved4                    uint32
+	PeakWorkingSetSize           uintptr
+	WorkingSetSize               uintptr
+	Reserved5                    unsafe.Pointer
+	QuotaPagedPoolUsage          uintptr
+	Reserved6                    unsafe.Pointer
+	QuotaNonPagedPoolUsage       uintptr
+	PagefileUsage                uintptr
+	PeakPagefileUsage            uintptr
+	PrivatePageCount             uintptr
+	Reserved7                    [6]int64
 }
 
 type SYSTEM_REGISTRY_QUOTA_INFORMATION struct {

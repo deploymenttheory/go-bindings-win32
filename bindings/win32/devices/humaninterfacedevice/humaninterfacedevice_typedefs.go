@@ -4,4 +4,5 @@
 
 package humaninterfacedevice
 
+// Invalid values: 0.
 type PHIDP_PREPARSED_DATA uintptr

@@ -15144,6 +15144,26 @@ func (self *IDebugHostFunctionIntrospection3) IsNoReturnFunction(pIsNoReturnFunc
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IID: f93f6699-1f2e-4fb2-8164-363a78f7914e
+type IDebugHostFunctionIntrospection4 struct {
+	IDebugHostFunctionIntrospection3
+}
+
+// IID_IDebugHostFunctionIntrospection4 is the interface identifier for IDebugHostFunctionIntrospection4.
+var IID_IDebugHostFunctionIntrospection4 = win32.GUID{Data1: 0xf93f6699, Data2: 0x1f2e, Data3: 0x4fb2, Data4: [8]byte{0x81, 0x64, 0x36, 0x3a, 0x78, 0xf7, 0x91, 0x4e}}
+
+// GetPrologueRange dispatches through IDebugHostFunctionIntrospection4's vtable slot 9.
+func (self *IDebugHostFunctionIntrospection4) GetPrologueRange(pPrologueStart *Location, pPrologueEnd *Location) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrologueStart)), uintptr(unsafe.Pointer(pPrologueEnd)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetEpilogueRange dispatches through IDebugHostFunctionIntrospection4's vtable slot 10.
+func (self *IDebugHostFunctionIntrospection4) GetEpilogueRange(pEpilogueStart *Location, pEpilogueEnd *Location) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEpilogueStart)), uintptr(unsafe.Pointer(pEpilogueEnd)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 89280ea8-b3b9-408c-be16-32ab28f5c0ac
 type IDebugHostFunctionLocalDetails struct {
 	systemcom.IUnknown
@@ -15539,6 +15559,20 @@ func (self *IDebugHostModule5) GetPrimaryCompilerInformation(pCompilerId *KnownC
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IID: 10efc47e-68d4-4f87-810f-6729a805940a
+type IDebugHostModule6 struct {
+	IDebugHostModule5
+}
+
+// IID_IDebugHostModule6 is the interface identifier for IDebugHostModule6.
+var IID_IDebugHostModule6 = win32.GUID{Data1: 0x10efc47e, Data2: 0x68d4, Data3: 0x4f87, Data4: [8]byte{0x81, 0x0f, 0x67, 0x29, 0xa8, 0x05, 0x94, 0x0a}}
+
+// GetArchitectureByRVA dispatches through IDebugHostModule6's vtable slot 20.
+func (self *IDebugHostModule6) GetArchitectureByRVA(rva uint64, pMachineArchitecture *uint32, pRangeRvaStart *uint64, pRangeRvaEnd *uint64) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(rva), uintptr(unsafe.Pointer(pMachineArchitecture)), uintptr(unsafe.Pointer(pRangeRvaStart)), uintptr(unsafe.Pointer(pRangeRvaEnd)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 31e53a5a-01ee-4bbb-b899-4b46ae7d595c
 type IDebugHostModuleSignature struct {
 	systemcom.IUnknown
@@ -15808,6 +15842,33 @@ var IID_IDebugHostSymbols2 = win32.GUID{Data1: 0x6baf1f48, Data2: 0x65ee, Data3:
 // DemangleSymbolName dispatches through IDebugHostSymbols2's vtable slot 10.
 func (self *IDebugHostSymbols2) DemangleSymbolName(pSymbol *IDebugHostSymbol, flags uint32, pDemangledSymbolName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSymbol)), uintptr(flags), uintptr(unsafe.Pointer(pDemangledSymbolName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// IID: 8535e318-4f4b-4ace-a21b-af9e134a4e9b
+type IDebugHostSymbols3 struct {
+	IDebugHostSymbols2
+}
+
+// IID_IDebugHostSymbols3 is the interface identifier for IDebugHostSymbols3.
+var IID_IDebugHostSymbols3 = win32.GUID{Data1: 0x8535e318, Data2: 0x4f4b, Data3: 0x4ace, Data4: [8]byte{0xa2, 0x1b, 0xaf, 0x9e, 0x13, 0x4a, 0x4e, 0x9b}}
+
+// CreateModuleSignature2 dispatches through IDebugHostSymbols3's vtable slot 11.
+func (self *IDebugHostSymbols3) CreateModuleSignature2(pwszModuleName string, allowLooseNameMatch byte, pwszMinVersion *string, pwszMaxVersion *string, ppModuleSignature **IDebugHostModuleSignature) error {
+	_pwszModuleName := win32.UTF16Ptr(pwszModuleName)
+	_pwszMinVersion := win32.UTF16PtrOrNil(pwszMinVersion)
+	_pwszMaxVersion := win32.UTF16PtrOrNil(pwszMaxVersion)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszModuleName)), uintptr(allowLooseNameMatch), uintptr(unsafe.Pointer(_pwszMinVersion)), uintptr(unsafe.Pointer(_pwszMaxVersion)), uintptr(unsafe.Pointer(ppModuleSignature)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// CreateTypeSignatureForModuleRange2 dispatches through IDebugHostSymbols3's vtable slot 12.
+func (self *IDebugHostSymbols3) CreateTypeSignatureForModuleRange2(signatureSpecification string, moduleName string, allowLooseNameMatch byte, minVersion *string, maxVersion *string, typeSignature **IDebugHostTypeSignature) error {
+	_signatureSpecification := win32.UTF16Ptr(signatureSpecification)
+	_moduleName := win32.UTF16Ptr(moduleName)
+	_minVersion := win32.UTF16PtrOrNil(minVersion)
+	_maxVersion := win32.UTF16PtrOrNil(maxVersion)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureSpecification)), uintptr(unsafe.Pointer(_moduleName)), uintptr(allowLooseNameMatch), uintptr(unsafe.Pointer(_minVersion)), uintptr(unsafe.Pointer(_maxVersion)), uintptr(unsafe.Pointer(typeSignature)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

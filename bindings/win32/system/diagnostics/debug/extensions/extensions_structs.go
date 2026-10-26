@@ -508,7 +508,7 @@ type DEBUG_STACK_FRAME_EX struct {
 	Virtual            foundation.BOOL
 	FrameNumber        uint32
 	InlineFrameContext uint32
-	Reserved1          uint32
+	FrameMachine       uint32
 }
 
 type DEBUG_SYMBOL_ENTRY struct {
@@ -1055,6 +1055,7 @@ type KDDEBUGGER_DATA64 struct {
 	ShadowStackEnabled                  uint64
 	PointerAuthMask                     uint64
 	OffsetPrcbExceptionStack            uint16
+	PointerIgnoreBits                   uint64
 }
 
 type KDEXTS_LOCK_INFO struct {

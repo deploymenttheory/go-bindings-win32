@@ -134,19 +134,6 @@ type EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS struct {
 	PbAuthenticatorInfo   *byte
 }
 
-type EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2 struct {
-	PwszAuthenticatorName       foundation.PWSTR
-	PClsid                      *win32.GUID
-	PwszPluginRpId              foundation.PWSTR
-	PwszLightThemeLogoSvg       foundation.PWSTR
-	PwszDarkThemeLogoSvg        foundation.PWSTR
-	CbAuthenticatorInfo         uint32
-	PbAuthenticatorInfo         *byte
-	CSupportedRpIds             uint32
-	PpwszSupportedRpIds         *foundation.PWSTR
-	PwszUserVerificationKeyName foundation.PWSTR
-}
-
 type EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE struct {
 	CbOpSignPubKey uint32
 	PbOpSignPubKey *byte
@@ -210,28 +197,6 @@ type EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS struct {
 	PwszDarkThemeLogo     foundation.PWSTR
 	CbAuthenticatorInfo   uint32
 	PbAuthenticatorInfo   *byte
-}
-
-type EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2 struct {
-	PwszAuthenticatorName       foundation.PWSTR
-	PClsid                      *win32.GUID
-	PClsidNew                   *win32.GUID
-	PwszLightThemeLogoSvg       foundation.PWSTR
-	PwszDarkThemeLogoSvg        foundation.PWSTR
-	CbAuthenticatorInfo         uint32
-	PbAuthenticatorInfo         *byte
-	CSupportedRpIds             uint32
-	PpwszSupportedRpIds         *foundation.PWSTR
-	PwszUserVerificationKeyName foundation.PWSTR
-}
-
-type EXPERIMENTAL_WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2 struct {
-	Hwnd               foundation.HWND
-	PGuidTransactionId *win32.GUID
-	PwszUsername       foundation.PWSTR
-	PwszDisplayHint    foundation.PWSTR
-	CbBufferToSign     uint32
-	PbBufferToSign     *byte
 }
 
 // WEBAUTHN_ASSERTION: https://learn.microsoft.com/windows/win32/api/webauthn/ns-webauthn-webauthn_assertion
@@ -624,6 +589,19 @@ type WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS struct {
 	PpwszSupportedRpIds   *foundation.PWSTR
 }
 
+type WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2 struct {
+	PwszAuthenticatorName       foundation.PWSTR
+	PClsid                      *win32.GUID
+	PwszPluginRpId              foundation.PWSTR
+	PwszLightThemeLogoSvg       foundation.PWSTR
+	PwszDarkThemeLogoSvg        foundation.PWSTR
+	CbAuthenticatorInfo         uint32
+	PbAuthenticatorInfo         *byte
+	CSupportedRpIds             uint32
+	PpwszSupportedRpIds         *foundation.PWSTR
+	PwszUserVerificationKeyName foundation.PWSTR
+}
+
 type WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE struct {
 	CbOpSignPubKey uint32
 	PbOpSignPubKey *byte
@@ -673,11 +651,33 @@ type WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS struct {
 	PpwszSupportedRpIds   *foundation.PWSTR
 }
 
+type WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2 struct {
+	PwszAuthenticatorName       foundation.PWSTR
+	PClsid                      *win32.GUID
+	PClsidNew                   *win32.GUID
+	PwszLightThemeLogoSvg       foundation.PWSTR
+	PwszDarkThemeLogoSvg        foundation.PWSTR
+	CbAuthenticatorInfo         uint32
+	PbAuthenticatorInfo         *byte
+	CSupportedRpIds             uint32
+	PpwszSupportedRpIds         *foundation.PWSTR
+	PwszUserVerificationKeyName foundation.PWSTR
+}
+
 type WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST struct {
 	Hwnd               foundation.HWND
 	RguidTransactionId *win32.GUID
 	PwszUsername       foundation.PWSTR
 	PwszDisplayHint    foundation.PWSTR
+}
+
+type WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2 struct {
+	Hwnd               foundation.HWND
+	PGuidTransactionId *win32.GUID
+	PwszUsername       foundation.PWSTR
+	PwszDisplayHint    foundation.PWSTR
+	CbBufferToSign     uint32
+	PbBufferToSign     *byte
 }
 
 // WEBAUTHN_RP_ENTITY_INFORMATION: https://learn.microsoft.com/windows/win32/api/webauthn/ns-webauthn-webauthn_rp_entity_information

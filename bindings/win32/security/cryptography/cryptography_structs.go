@@ -229,12 +229,6 @@ type BCRYPT_KEY_LENGTHS_STRUCT struct {
 	DwIncrement uint32
 }
 
-type BCRYPT_MLKEM_KEY_BLOB struct {
-	DwMagic        uint32
-	CbParameterSet uint32
-	CbKey          uint32
-}
-
 // BCRYPT_MULTI_HASH_OPERATION: https://learn.microsoft.com/windows/win32/api/bcrypt/ns-bcrypt-bcrypt_multi_hash_operation
 type BCRYPT_MULTI_HASH_OPERATION struct {
 	IHash         uint32
@@ -268,6 +262,17 @@ type BCRYPT_OID_LIST struct {
 	POIDs      *BCRYPT_OID
 }
 
+type BCRYPT_PARAMETER_SET_KEY_BLOB struct {
+	DwMagic        uint32
+	CbParameterSet uint32
+	CbKey          uint32
+}
+
+type BCRYPT_PARAMETER_SET_NAMES struct {
+	DwParameterSetNames   uint32
+	PpszParameterSetNames *foundation.PWSTR
+}
+
 type BCRYPT_PKCS11_RSA_AES_WRAP_BLOB struct {
 	DwMagic        uint32
 	CbKey          uint32
@@ -278,12 +283,6 @@ type BCRYPT_PKCS11_RSA_AES_WRAP_BLOB struct {
 // BCRYPT_PKCS1_PADDING_INFO: https://learn.microsoft.com/windows/win32/api/bcrypt/ns-bcrypt-bcrypt_pkcs1_padding_info
 type BCRYPT_PKCS1_PADDING_INFO struct {
 	PszAlgId foundation.PWSTR
-}
-
-type BCRYPT_PQDSA_KEY_BLOB struct {
-	DwMagic        uint32
-	CbParameterSet uint32
-	CbKey          uint32
 }
 
 type BCRYPT_PQDSA_PADDING_INFO struct {
@@ -3890,6 +3889,19 @@ type SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS struct {
 	CbSize       uint32
 	LError       int32
 	WszErrorText [512]uint16
+}
+
+type TLS_HYBRID_KEYEXCHANGE_BLOB struct {
+	DwMagic        uint32
+	DwKeyType      uint32
+	NumBlobs       byte
+	RgwszBlobTypes [4]foundation.PWSTR
+	RgbBlobs       [4]*byte
+}
+
+type TLS_KEM_CIPHERTEXT_BLOB struct {
+	DwMagic  uint32
+	CbLength uint32
 }
 
 // VTableProvStruc: https://learn.microsoft.com/windows/win32/SecCrypto/vtableprovstruc

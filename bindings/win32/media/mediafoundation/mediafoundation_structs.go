@@ -386,6 +386,9 @@ type CODECAPI_AVEnableInLoopDeblockFilter struct {
 type CODECAPI_AVEncAACEnableVBR struct {
 }
 
+type CODECAPI_AVEncAV1EncoderOperatingMode struct {
+}
+
 // CODECAPI_AVEncAdaptiveMode: https://learn.microsoft.com/windows/win32/medfound/codecapi-avencadaptivemode
 type CODECAPI_AVEncAdaptiveMode struct {
 }
@@ -865,6 +868,9 @@ type CODECAPI_AVEncVideoConsecutiveFramesForLayer struct {
 
 // CODECAPI_AVEncVideoContentType: https://learn.microsoft.com/windows/win32/medfound/codecapi-avencvideocontenttype
 type CODECAPI_AVEncVideoContentType struct {
+}
+
+type CODECAPI_AVEncVideoD3D12ReconstructedPictureOutputMode struct {
 }
 
 type CODECAPI_AVEncVideoDefaultUpperFieldDominant struct {

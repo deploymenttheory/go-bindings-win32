@@ -471,7 +471,7 @@ func (self *IDirectSoundBuffer8) AcquireResources(dwFlags uint32, pdwResultCodes
 }
 
 // GetObjectInPath dispatches through IDirectSoundBuffer8's vtable slot 23.
-func (self *IDirectSoundBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject *unsafe.Pointer) error {
+func (self *IDirectSoundBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidObject)), uintptr(dwIndex), uintptr(unsafe.Pointer(rguidInterface)), uintptr(unsafe.Pointer(ppObject)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -581,7 +581,7 @@ type IDirectSoundCaptureBuffer8 struct {
 var IID_IDirectSoundCaptureBuffer8 = win32.GUID{Data1: 0x00990df4, Data2: 0x0dbb, Data3: 0x4872, Data4: [8]byte{0x83, 0x3e, 0x6d, 0x30, 0x3e, 0x80, 0xae, 0xb6}}
 
 // GetObjectInPath dispatches through IDirectSoundCaptureBuffer8's vtable slot 12.
-func (self *IDirectSoundCaptureBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject *unsafe.Pointer) error {
+func (self *IDirectSoundCaptureBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidObject)), uintptr(dwIndex), uintptr(unsafe.Pointer(rguidInterface)), uintptr(unsafe.Pointer(ppObject)))
 	return win32.ErrIfFailed(int32(r1))
 }

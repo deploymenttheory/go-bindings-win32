@@ -96,6 +96,25 @@ type MEM_EXTENDED_PARAMETER struct {
 	Anonymous2 MEM_EXTENDED_PARAMETER_Anonymous2_e__Union
 }
 
+type NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH struct {
+	Condition NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION
+	Bandwidth uint64
+}
+
+type NUMA_NODE_MEMORY_PERFORMANCE_LATENCY struct {
+	Condition NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION
+	Latency   uint64
+}
+
+type NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION_Flags_e__Struct struct {
+	Bitfield byte
+}
+
+type NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION struct {
+	Flags                  NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION_Flags_e__Struct
+	MinTransferSizeInBytes uint64
+}
+
 // PROCESS_HEAP_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type PROCESS_HEAP_ENTRY_Anonymous_e__Union struct {
@@ -110,24 +129,6 @@ type PROCESS_HEAP_ENTRY struct {
 	IRegionIndex byte
 	WFlags       uint16
 	Anonymous    PROCESS_HEAP_ENTRY_Anonymous_e__Union
-}
-
-type WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY_Flags_e__Struct struct {
-	Bitfield byte
-}
-
-type WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY struct {
-	InitiatorNodeNumber    uint32
-	TargetNodeNumber       uint32
-	DataType               byte
-	Flags                  WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY_Flags_e__Struct
-	MinTransferSizeInBytes uint64
-	EntryValue             uint64
-}
-
-type WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT struct {
-	EntryCount         uint32
-	PerformanceEntries [1]WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY
 }
 
 type WIN32_MEMORY_PARTITION_INFORMATION struct {

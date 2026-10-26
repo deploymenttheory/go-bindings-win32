@@ -309,7 +309,7 @@ func D3DReadFileToBlob(pFileName string, ppContents **graphicsdirect3d.ID3DBlob)
 
 // D3DReflect calls D3DCOMPILER_47!D3DReflect.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect
-func D3DReflect(pSrcData []byte, pInterface *win32.GUID, ppReflector *unsafe.Pointer) error {
+func D3DReflect(pSrcData []byte, pInterface *win32.GUID, ppReflector **win32.IUnknown) error {
 	var _pSrcData *byte
 	if len(pSrcData) > 0 {
 		_pSrcData = &pSrcData[0]

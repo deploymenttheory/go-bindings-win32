@@ -800,7 +800,7 @@ func (self *ID3D10Device) GetCreationFlags() uint32 {
 }
 
 // OpenSharedResource dispatches through ID3D10Device's vtable slot 95.
-func (self *ID3D10Device) OpenSharedResource(hResource foundation.HANDLE, ReturnedInterface *win32.GUID, ppResource *unsafe.Pointer) error {
+func (self *ID3D10Device) OpenSharedResource(hResource foundation.HANDLE, ReturnedInterface *win32.GUID, ppResource **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(hResource), uintptr(unsafe.Pointer(ReturnedInterface)), uintptr(unsafe.Pointer(ppResource)))
 	return win32.ErrIfFailed(int32(r1))
 }

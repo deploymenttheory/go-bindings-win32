@@ -4,4 +4,5 @@
 
 package devicequery
 
+// Invalid values: 0.
 type HDEVQUERY uintptr

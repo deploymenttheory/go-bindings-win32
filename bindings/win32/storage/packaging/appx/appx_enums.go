@@ -422,6 +422,23 @@ func (e AddPackageDependencyOptions2) String() string {
 	return strings.Join(parts, "|")
 }
 
+type AppModelPackageFeature int32
+
+const (
+	AppModelPackageFeature_SignedSBOM AppModelPackageFeature = 1
+)
+
+// String returns the AppModelPackageFeature constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppModelPackageFeature) String() string {
+	switch e {
+	case AppModelPackageFeature_SignedSBOM:
+		return "AppModelPackageFeature_SignedSBOM"
+	default:
+		return fmt.Sprintf("AppModelPackageFeature(%d)", int32(e))
+	}
+}
+
 // AppPolicyClrCompat: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicyclrcompat
 type AppPolicyClrCompat int32
 
@@ -748,6 +765,7 @@ const (
 	PackageOrigin_DeveloperUnsigned PackageOrigin = 4
 	PackageOrigin_DeveloperSigned   PackageOrigin = 5
 	PackageOrigin_LineOfBusiness    PackageOrigin = 6
+	PackageOrigin_SignedSBOM        PackageOrigin = 7
 )
 
 // String returns the PackageOrigin constant's name, or its numeric form when
@@ -768,8 +786,48 @@ func (e PackageOrigin) String() string {
 		return "PackageOrigin_DeveloperSigned"
 	case PackageOrigin_LineOfBusiness:
 		return "PackageOrigin_LineOfBusiness"
+	case PackageOrigin_SignedSBOM:
+		return "PackageOrigin_SignedSBOM"
 	default:
 		return fmt.Sprintf("PackageOrigin(%d)", int32(e))
+	}
+}
+
+type PackageOrigin2 int32
+
+const (
+	PackageOrigin2_Unknown           PackageOrigin2 = 0
+	PackageOrigin2_Unsigned          PackageOrigin2 = 1
+	PackageOrigin2_Inbox             PackageOrigin2 = 2
+	PackageOrigin2_Store             PackageOrigin2 = 3
+	PackageOrigin2_DeveloperUnsigned PackageOrigin2 = 4
+	PackageOrigin2_DeveloperSigned   PackageOrigin2 = 5
+	PackageOrigin2_LineOfBusiness    PackageOrigin2 = 6
+	PackageOrigin2_SignedSBOM        PackageOrigin2 = 7
+)
+
+// String returns the PackageOrigin2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PackageOrigin2) String() string {
+	switch e {
+	case PackageOrigin2_Unknown:
+		return "PackageOrigin2_Unknown"
+	case PackageOrigin2_Unsigned:
+		return "PackageOrigin2_Unsigned"
+	case PackageOrigin2_Inbox:
+		return "PackageOrigin2_Inbox"
+	case PackageOrigin2_Store:
+		return "PackageOrigin2_Store"
+	case PackageOrigin2_DeveloperUnsigned:
+		return "PackageOrigin2_DeveloperUnsigned"
+	case PackageOrigin2_DeveloperSigned:
+		return "PackageOrigin2_DeveloperSigned"
+	case PackageOrigin2_LineOfBusiness:
+		return "PackageOrigin2_LineOfBusiness"
+	case PackageOrigin2_SignedSBOM:
+		return "PackageOrigin2_SignedSBOM"
+	default:
+		return fmt.Sprintf("PackageOrigin2(%d)", int32(e))
 	}
 }
 

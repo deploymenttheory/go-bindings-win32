@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
+	systemsysteminformation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/systeminformation"
 )
 
 type ANON_OBJECT_HEADER struct {
@@ -57,9 +58,36 @@ type APPLICATIONLAUNCH_SETTING_VALUE struct {
 	ButtonInstanceID uint32
 }
 
+type ARM64_TPIDR2_BLOCK struct {
+	ZaSaveBuffer    unsafe.Pointer
+	NumZaSaveSlices uint16
+	Reserved1       uint16
+	Reserved2       uint32
+}
+
 type ATTRIBUTES_AND_SID struct {
 	Attributes uint32
 	SidStart   uint32
+}
+
+type CODE_INTEGRITY_REPORT_GENERATION_HEADER struct {
+	Version    uint16
+	Reserved   uint16
+	RecordSize uint32
+	CommitTime uint64
+}
+
+type CODE_INTEGRITY_REPORT_RECORD_HEADER struct {
+	Version       uint16
+	Reserved      uint16
+	RecordSize    uint32
+	SipaEventCode uint32
+}
+
+type CODE_INTEGRITY_RUNTIME_REPORT struct {
+	Header              RUNTIME_REPORT_HEADER
+	CurrentGeneration   uint64
+	NumberOfGenerations uint32
 }
 
 type COMPONENT_FILTER struct {
@@ -84,7 +112,7 @@ type DRIVER_INFO_ENTRY struct {
 	PublisherThumbprintHashAlgorithm uint16
 	ImageHashOffset                  uint32
 	PublisherThumbprintOffset        uint32
-	LoadCount                        uint16
+	NumberOfLoadingTimes             uint16
 	OemNameSize                      uint16
 	OemNameOffset                    uint32
 	Flags                            DRIVER_INFO_ENTRY_Flags_e__Union
@@ -188,6 +216,18 @@ type GDI_NONREMOTE_u_e__Struct struct {
 type GDI_NONREMOTE struct {
 	FContext int32
 	U        GDI_NONREMOTE_u_e__Struct
+}
+
+type HEAP_MEMORY_USAGE_ENTRY struct {
+	HeapHandle          unsafe.Pointer
+	TotalCommittedBytes uintptr
+	TotalReservedBytes  uintptr
+}
+
+type HEAP_MEMORY_USAGE_INFORMATION struct {
+	Version    uint16
+	EntryCount uintptr
+	Entries    [1]HEAP_MEMORY_USAGE_ENTRY
 }
 
 // HEAP_OPTIMIZE_RESOURCES_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-heap_optimize_resources_information
@@ -389,6 +429,16 @@ type IMAGE_EXPORT_DIRECTORY struct {
 	AddressOfNameOrdinals uint32
 }
 
+// IMAGE_FILE_MACHINES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type IMAGE_FILE_MACHINES_Anonymous_e__Union struct {
+	Data [1]uint32
+}
+
+type IMAGE_FILE_MACHINES struct {
+	Anonymous IMAGE_FILE_MACHINES_Anonymous_e__Union
+}
+
 // IMAGE_FUNCTION_OVERRIDE_DYNAMIC_RELOCATION is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
@@ -401,6 +451,40 @@ type IMAGE_FUNCTION_OVERRIDE_DYNAMIC_RELOCATION struct {
 // field through an unsafe.Pointer cast.
 type IMAGE_FUNCTION_OVERRIDE_HEADER struct {
 	Data [4]byte
+}
+
+type IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_ENTRY_V2 struct {
+	Common       IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON
+	IntArgs      uint32
+	FloatArgs    uint32
+	ArgStackSize uint32
+	ReturnType   IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN
+	Name         [1]byte
+}
+
+type IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON struct {
+	Size       uint32
+	Rva        uint32
+	NameSize   uint32
+	NameOffset uint32
+}
+
+type IMAGE_HOTSWAP_ENDPOINT_INFO_HEADER_COMMON struct {
+	Version uint32
+	Size    uint32
+}
+
+type IMAGE_HOTSWAP_ENDPOINT_INFO_HEADER_V2 struct {
+	Common IMAGE_HOTSWAP_ENDPOINT_INFO_HEADER_COMMON
+	Count  uint32
+}
+
+type IMAGE_HOTSWAP_X64_ENDPOINT_INFO_ENTRY_V2 struct {
+	Common       IMAGE_HOTSWAP_ENDPOINT_INFO_ENTRY_COMMON
+	ArgRegs      [4]IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG
+	ArgStackSize uint32
+	RetReg       IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG
+	Name         [1]byte
 }
 
 type IMAGE_HOT_PATCH_BASE struct {
@@ -1214,6 +1298,20 @@ type SCRUB_PARITY_EXTENT_DATA struct {
 	ParityExtents                [1]SCRUB_PARITY_EXTENT
 }
 
+// SECURITY_CONTAINMENT_CONFIGURATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type SECURITY_CONTAINMENT_CONFIGURATION_Anonymous_e__Union struct {
+	Data [1]uint32
+}
+
+type SECURITY_CONTAINMENT_CONFIGURATION struct {
+	Size                       uint32
+	Anonymous                  SECURITY_CONTAINMENT_CONFIGURATION_Anonymous_e__Union
+	ExistingTokenHandle        foundation.HANDLE
+	SecurityCapabilities       security.SECURITY_CAPABILITIES
+	AppContainerIntegrityLevel uint32
+}
+
 type SECURITY_OBJECT_AI_PARAMS struct {
 	Size           uint32
 	ConstraintMask uint32
@@ -1251,6 +1349,14 @@ type SE_TOKEN_USER_Anonymous2_e__Union struct {
 type SE_TOKEN_USER struct {
 	Anonymous1 SE_TOKEN_USER_Anonymous1_e__Union
 	Anonymous2 SE_TOKEN_USER_Anonymous2_e__Union
+}
+
+type SHARED_COMPUTE_UNIT_RELATIONSHIP struct {
+	Type             uint32
+	ComputeUnitCount uint32
+	Reserved         [14]byte
+	GroupCount       uint16
+	GroupMasks       [1]systemsysteminformation.GROUP_AFFINITY
 }
 
 type SHARED_VIRTUAL_DISK_SUPPORT struct {
@@ -1436,11 +1542,39 @@ type UMS_CREATE_THREAD_ATTRIBUTES struct {
 	UmsCompletionList unsafe.Pointer
 }
 
+type XSAVE_ARM64_SME_TPIDR2_HEADER struct {
+	Reserved [8]uint32
+}
+
+// XSAVE_ARM64_SME_ZA_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type XSAVE_ARM64_SME_ZA_HEADER_Anonymous_e__Union struct {
+	Data [1]uint32
+}
+
+type XSAVE_ARM64_SME_ZA_HEADER struct {
+	VectorLength uint32
+	Anonymous    XSAVE_ARM64_SME_ZA_HEADER_Anonymous_e__Union
+	Reserved     [6]uint32
+}
+
+type XSAVE_ARM64_SME_ZT_HEADER struct {
+	RegisterCount uint32
+	Reserved      [7]uint32
+}
+
+// XSAVE_ARM64_SVE_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type XSAVE_ARM64_SVE_HEADER_Anonymous_e__Union struct {
+	Data [1]uint32
+}
+
 type XSAVE_ARM64_SVE_HEADER struct {
 	VectorLength            uint32
 	VectorRegisterOffset    uint32
 	PredicateRegisterOffset uint32
-	Reserved                [5]uint32
+	Anonymous               XSAVE_ARM64_SVE_HEADER_Anonymous_e__Union
+	Reserved                [4]uint32
 }
 
 type XSAVE_CET_U_FORMAT struct {

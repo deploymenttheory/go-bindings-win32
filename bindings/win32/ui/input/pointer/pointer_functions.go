@@ -18,35 +18,40 @@ var (
 )
 
 var (
-	procDestroySyntheticPointerDevice   = modUSER32.NewProc("DestroySyntheticPointerDevice")
-	procEnableMouseInPointer            = modUSER32.NewProc("EnableMouseInPointer")
-	procGetPointerCursorId              = modUSER32.NewProc("GetPointerCursorId")
-	procGetPointerDevice                = modUSER32.NewProc("GetPointerDevice")
-	procGetPointerDeviceCursors         = modUSER32.NewProc("GetPointerDeviceCursors")
-	procGetPointerDeviceProperties      = modUSER32.NewProc("GetPointerDeviceProperties")
-	procGetPointerDeviceRects           = modUSER32.NewProc("GetPointerDeviceRects")
-	procGetPointerDevices               = modUSER32.NewProc("GetPointerDevices")
-	procGetPointerFrameInfo             = modUSER32.NewProc("GetPointerFrameInfo")
-	procGetPointerFrameInfoHistory      = modUSER32.NewProc("GetPointerFrameInfoHistory")
-	procGetPointerFramePenInfo          = modUSER32.NewProc("GetPointerFramePenInfo")
-	procGetPointerFramePenInfoHistory   = modUSER32.NewProc("GetPointerFramePenInfoHistory")
-	procGetPointerFrameTouchInfo        = modUSER32.NewProc("GetPointerFrameTouchInfo")
-	procGetPointerFrameTouchInfoHistory = modUSER32.NewProc("GetPointerFrameTouchInfoHistory")
-	procGetPointerInfo                  = modUSER32.NewProc("GetPointerInfo")
-	procGetPointerInfoHistory           = modUSER32.NewProc("GetPointerInfoHistory")
-	procGetPointerInputTransform        = modUSER32.NewProc("GetPointerInputTransform")
-	procGetPointerPenInfo               = modUSER32.NewProc("GetPointerPenInfo")
-	procGetPointerPenInfoHistory        = modUSER32.NewProc("GetPointerPenInfoHistory")
-	procGetPointerTouchInfo             = modUSER32.NewProc("GetPointerTouchInfo")
-	procGetPointerTouchInfoHistory      = modUSER32.NewProc("GetPointerTouchInfoHistory")
-	procGetPointerType                  = modUSER32.NewProc("GetPointerType")
-	procGetRawPointerDeviceData         = modUSER32.NewProc("GetRawPointerDeviceData")
-	procGetUnpredictedMessagePos        = modUSER32.NewProc("GetUnpredictedMessagePos")
-	procInitializeTouchInjection        = modUSER32.NewProc("InitializeTouchInjection")
-	procInjectSyntheticPointerInput     = modUSER32.NewProc("InjectSyntheticPointerInput")
-	procInjectTouchInput                = modUSER32.NewProc("InjectTouchInput")
-	procIsMouseInPointerEnabled         = modUSER32.NewProc("IsMouseInPointerEnabled")
-	procSkipPointerFrameMessages        = modUSER32.NewProc("SkipPointerFrameMessages")
+	procDestroySyntheticPointerDevice      = modUSER32.NewProc("DestroySyntheticPointerDevice")
+	procEnableMouseInPointer               = modUSER32.NewProc("EnableMouseInPointer")
+	procGetPointerCursorId                 = modUSER32.NewProc("GetPointerCursorId")
+	procGetPointerDevice                   = modUSER32.NewProc("GetPointerDevice")
+	procGetPointerDeviceCursors            = modUSER32.NewProc("GetPointerDeviceCursors")
+	procGetPointerDeviceProperties         = modUSER32.NewProc("GetPointerDeviceProperties")
+	procGetPointerDeviceRects              = modUSER32.NewProc("GetPointerDeviceRects")
+	procGetPointerDevices                  = modUSER32.NewProc("GetPointerDevices")
+	procGetPointerFrameInfo                = modUSER32.NewProc("GetPointerFrameInfo")
+	procGetPointerFrameInfoHistory         = modUSER32.NewProc("GetPointerFrameInfoHistory")
+	procGetPointerFramePenInfo             = modUSER32.NewProc("GetPointerFramePenInfo")
+	procGetPointerFramePenInfoHistory      = modUSER32.NewProc("GetPointerFramePenInfoHistory")
+	procGetPointerFrameTouchInfo           = modUSER32.NewProc("GetPointerFrameTouchInfo")
+	procGetPointerFrameTouchInfoHistory    = modUSER32.NewProc("GetPointerFrameTouchInfoHistory")
+	procGetPointerFrameTouchpadInfo        = modUSER32.NewProc("GetPointerFrameTouchpadInfo")
+	procGetPointerFrameTouchpadInfoHistory = modUSER32.NewProc("GetPointerFrameTouchpadInfoHistory")
+	procGetPointerInfo                     = modUSER32.NewProc("GetPointerInfo")
+	procGetPointerInfoHistory              = modUSER32.NewProc("GetPointerInfoHistory")
+	procGetPointerInputTransform           = modUSER32.NewProc("GetPointerInputTransform")
+	procGetPointerPenInfo                  = modUSER32.NewProc("GetPointerPenInfo")
+	procGetPointerPenInfoHistory           = modUSER32.NewProc("GetPointerPenInfoHistory")
+	procGetPointerTouchInfo                = modUSER32.NewProc("GetPointerTouchInfo")
+	procGetPointerTouchInfoHistory         = modUSER32.NewProc("GetPointerTouchInfoHistory")
+	procGetPointerTouchpadInfo             = modUSER32.NewProc("GetPointerTouchpadInfo")
+	procGetPointerTouchpadInfoHistory      = modUSER32.NewProc("GetPointerTouchpadInfoHistory")
+	procGetPointerType                     = modUSER32.NewProc("GetPointerType")
+	procGetRawPointerDeviceData            = modUSER32.NewProc("GetRawPointerDeviceData")
+	procGetUnpredictedMessagePos           = modUSER32.NewProc("GetUnpredictedMessagePos")
+	procInitializeTouchInjection           = modUSER32.NewProc("InitializeTouchInjection")
+	procInjectSyntheticPointerInput        = modUSER32.NewProc("InjectSyntheticPointerInput")
+	procInjectTouchInput                   = modUSER32.NewProc("InjectTouchInput")
+	procInjectTouchpadAction               = modUSER32.NewProc("InjectTouchpadAction")
+	procIsMouseInPointerEnabled            = modUSER32.NewProc("IsMouseInPointerEnabled")
+	procSkipPointerFrameMessages           = modUSER32.NewProc("SkipPointerFrameMessages")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -54,65 +59,75 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
-	DestroySyntheticPointerDevice   *win32.Proc
-	EnableMouseInPointer            *win32.Proc
-	GetPointerCursorId              *win32.Proc
-	GetPointerDevice                *win32.Proc
-	GetPointerDeviceCursors         *win32.Proc
-	GetPointerDeviceProperties      *win32.Proc
-	GetPointerDeviceRects           *win32.Proc
-	GetPointerDevices               *win32.Proc
-	GetPointerFrameInfo             *win32.Proc
-	GetPointerFrameInfoHistory      *win32.Proc
-	GetPointerFramePenInfo          *win32.Proc
-	GetPointerFramePenInfoHistory   *win32.Proc
-	GetPointerFrameTouchInfo        *win32.Proc
-	GetPointerFrameTouchInfoHistory *win32.Proc
-	GetPointerInfo                  *win32.Proc
-	GetPointerInfoHistory           *win32.Proc
-	GetPointerInputTransform        *win32.Proc
-	GetPointerPenInfo               *win32.Proc
-	GetPointerPenInfoHistory        *win32.Proc
-	GetPointerTouchInfo             *win32.Proc
-	GetPointerTouchInfoHistory      *win32.Proc
-	GetPointerType                  *win32.Proc
-	GetRawPointerDeviceData         *win32.Proc
-	GetUnpredictedMessagePos        *win32.Proc
-	InitializeTouchInjection        *win32.Proc
-	InjectSyntheticPointerInput     *win32.Proc
-	InjectTouchInput                *win32.Proc
-	IsMouseInPointerEnabled         *win32.Proc
-	SkipPointerFrameMessages        *win32.Proc
+	DestroySyntheticPointerDevice      *win32.Proc
+	EnableMouseInPointer               *win32.Proc
+	GetPointerCursorId                 *win32.Proc
+	GetPointerDevice                   *win32.Proc
+	GetPointerDeviceCursors            *win32.Proc
+	GetPointerDeviceProperties         *win32.Proc
+	GetPointerDeviceRects              *win32.Proc
+	GetPointerDevices                  *win32.Proc
+	GetPointerFrameInfo                *win32.Proc
+	GetPointerFrameInfoHistory         *win32.Proc
+	GetPointerFramePenInfo             *win32.Proc
+	GetPointerFramePenInfoHistory      *win32.Proc
+	GetPointerFrameTouchInfo           *win32.Proc
+	GetPointerFrameTouchInfoHistory    *win32.Proc
+	GetPointerFrameTouchpadInfo        *win32.Proc
+	GetPointerFrameTouchpadInfoHistory *win32.Proc
+	GetPointerInfo                     *win32.Proc
+	GetPointerInfoHistory              *win32.Proc
+	GetPointerInputTransform           *win32.Proc
+	GetPointerPenInfo                  *win32.Proc
+	GetPointerPenInfoHistory           *win32.Proc
+	GetPointerTouchInfo                *win32.Proc
+	GetPointerTouchInfoHistory         *win32.Proc
+	GetPointerTouchpadInfo             *win32.Proc
+	GetPointerTouchpadInfoHistory      *win32.Proc
+	GetPointerType                     *win32.Proc
+	GetRawPointerDeviceData            *win32.Proc
+	GetUnpredictedMessagePos           *win32.Proc
+	InitializeTouchInjection           *win32.Proc
+	InjectSyntheticPointerInput        *win32.Proc
+	InjectTouchInput                   *win32.Proc
+	InjectTouchpadAction               *win32.Proc
+	IsMouseInPointerEnabled            *win32.Proc
+	SkipPointerFrameMessages           *win32.Proc
 }{
-	DestroySyntheticPointerDevice:   procDestroySyntheticPointerDevice,
-	EnableMouseInPointer:            procEnableMouseInPointer,
-	GetPointerCursorId:              procGetPointerCursorId,
-	GetPointerDevice:                procGetPointerDevice,
-	GetPointerDeviceCursors:         procGetPointerDeviceCursors,
-	GetPointerDeviceProperties:      procGetPointerDeviceProperties,
-	GetPointerDeviceRects:           procGetPointerDeviceRects,
-	GetPointerDevices:               procGetPointerDevices,
-	GetPointerFrameInfo:             procGetPointerFrameInfo,
-	GetPointerFrameInfoHistory:      procGetPointerFrameInfoHistory,
-	GetPointerFramePenInfo:          procGetPointerFramePenInfo,
-	GetPointerFramePenInfoHistory:   procGetPointerFramePenInfoHistory,
-	GetPointerFrameTouchInfo:        procGetPointerFrameTouchInfo,
-	GetPointerFrameTouchInfoHistory: procGetPointerFrameTouchInfoHistory,
-	GetPointerInfo:                  procGetPointerInfo,
-	GetPointerInfoHistory:           procGetPointerInfoHistory,
-	GetPointerInputTransform:        procGetPointerInputTransform,
-	GetPointerPenInfo:               procGetPointerPenInfo,
-	GetPointerPenInfoHistory:        procGetPointerPenInfoHistory,
-	GetPointerTouchInfo:             procGetPointerTouchInfo,
-	GetPointerTouchInfoHistory:      procGetPointerTouchInfoHistory,
-	GetPointerType:                  procGetPointerType,
-	GetRawPointerDeviceData:         procGetRawPointerDeviceData,
-	GetUnpredictedMessagePos:        procGetUnpredictedMessagePos,
-	InitializeTouchInjection:        procInitializeTouchInjection,
-	InjectSyntheticPointerInput:     procInjectSyntheticPointerInput,
-	InjectTouchInput:                procInjectTouchInput,
-	IsMouseInPointerEnabled:         procIsMouseInPointerEnabled,
-	SkipPointerFrameMessages:        procSkipPointerFrameMessages,
+	DestroySyntheticPointerDevice:      procDestroySyntheticPointerDevice,
+	EnableMouseInPointer:               procEnableMouseInPointer,
+	GetPointerCursorId:                 procGetPointerCursorId,
+	GetPointerDevice:                   procGetPointerDevice,
+	GetPointerDeviceCursors:            procGetPointerDeviceCursors,
+	GetPointerDeviceProperties:         procGetPointerDeviceProperties,
+	GetPointerDeviceRects:              procGetPointerDeviceRects,
+	GetPointerDevices:                  procGetPointerDevices,
+	GetPointerFrameInfo:                procGetPointerFrameInfo,
+	GetPointerFrameInfoHistory:         procGetPointerFrameInfoHistory,
+	GetPointerFramePenInfo:             procGetPointerFramePenInfo,
+	GetPointerFramePenInfoHistory:      procGetPointerFramePenInfoHistory,
+	GetPointerFrameTouchInfo:           procGetPointerFrameTouchInfo,
+	GetPointerFrameTouchInfoHistory:    procGetPointerFrameTouchInfoHistory,
+	GetPointerFrameTouchpadInfo:        procGetPointerFrameTouchpadInfo,
+	GetPointerFrameTouchpadInfoHistory: procGetPointerFrameTouchpadInfoHistory,
+	GetPointerInfo:                     procGetPointerInfo,
+	GetPointerInfoHistory:              procGetPointerInfoHistory,
+	GetPointerInputTransform:           procGetPointerInputTransform,
+	GetPointerPenInfo:                  procGetPointerPenInfo,
+	GetPointerPenInfoHistory:           procGetPointerPenInfoHistory,
+	GetPointerTouchInfo:                procGetPointerTouchInfo,
+	GetPointerTouchInfoHistory:         procGetPointerTouchInfoHistory,
+	GetPointerTouchpadInfo:             procGetPointerTouchpadInfo,
+	GetPointerTouchpadInfoHistory:      procGetPointerTouchpadInfoHistory,
+	GetPointerType:                     procGetPointerType,
+	GetRawPointerDeviceData:            procGetRawPointerDeviceData,
+	GetUnpredictedMessagePos:           procGetUnpredictedMessagePos,
+	InitializeTouchInjection:           procInitializeTouchInjection,
+	InjectSyntheticPointerInput:        procInjectSyntheticPointerInput,
+	InjectTouchInput:                   procInjectTouchInput,
+	InjectTouchpadAction:               procInjectTouchpadAction,
+	IsMouseInPointerEnabled:            procIsMouseInPointerEnabled,
+	SkipPointerFrameMessages:           procSkipPointerFrameMessages,
 }
 
 // DestroySyntheticPointerDevice calls USER32!DestroySyntheticPointerDevice.
@@ -266,6 +281,18 @@ func GetPointerFrameTouchInfoHistory(pointerId uint32, entriesCount *uint32, poi
 	return nil
 }
 
+// GetPointerFrameTouchpadInfo calls USER32!GetPointerFrameTouchpadInfo.
+func GetPointerFrameTouchpadInfo(pointerId uint32, pointerCount *uint32, touchpadInfo *POINTER_TOUCH_INFO) bool {
+	r1, _, _ := syscall.SyscallN(procGetPointerFrameTouchpadInfo.Addr(), uintptr(pointerId), uintptr(unsafe.Pointer(pointerCount)), uintptr(unsafe.Pointer(touchpadInfo)))
+	return r1 != 0
+}
+
+// GetPointerFrameTouchpadInfoHistory calls USER32!GetPointerFrameTouchpadInfoHistory.
+func GetPointerFrameTouchpadInfoHistory(pointerId uint32, entriesCount *uint32, pointerCount *uint32, touchpadInfo *POINTER_TOUCH_INFO) bool {
+	r1, _, _ := syscall.SyscallN(procGetPointerFrameTouchpadInfoHistory.Addr(), uintptr(pointerId), uintptr(unsafe.Pointer(entriesCount)), uintptr(unsafe.Pointer(pointerCount)), uintptr(unsafe.Pointer(touchpadInfo)))
+	return r1 != 0
+}
+
 // GetPointerInfo calls USER32!GetPointerInfo.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpointerinfo
 // Minimum OS: windows8.0.
@@ -347,6 +374,18 @@ func GetPointerTouchInfoHistory(pointerId uint32, entriesCount *uint32, touchInf
 	return nil
 }
 
+// GetPointerTouchpadInfo calls USER32!GetPointerTouchpadInfo.
+func GetPointerTouchpadInfo(pointerId uint32, touchpadInfo *POINTER_TOUCH_INFO) bool {
+	r1, _, _ := syscall.SyscallN(procGetPointerTouchpadInfo.Addr(), uintptr(pointerId), uintptr(unsafe.Pointer(touchpadInfo)))
+	return r1 != 0
+}
+
+// GetPointerTouchpadInfoHistory calls USER32!GetPointerTouchpadInfoHistory.
+func GetPointerTouchpadInfoHistory(pointerId uint32, entriesCount *uint32, touchpadInfo *POINTER_TOUCH_INFO) bool {
+	r1, _, _ := syscall.SyscallN(procGetPointerTouchpadInfoHistory.Addr(), uintptr(pointerId), uintptr(unsafe.Pointer(entriesCount)), uintptr(unsafe.Pointer(touchpadInfo)))
+	return r1 != 0
+}
+
 // GetPointerType calls USER32!GetPointerType.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpointertype
 // Minimum OS: windows8.0.
@@ -420,6 +459,12 @@ func InjectTouchInput(contacts []POINTER_TOUCH_INFO) error {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// InjectTouchpadAction calls USER32!InjectTouchpadAction.
+func InjectTouchpadAction(hDevice HSYNTHETICPOINTERDEVICE, action TOUCHPAD_ACTION) bool {
+	r1, _, _ := syscall.SyscallN(procInjectTouchpadAction.Addr(), uintptr(hDevice), uintptr(action))
+	return r1 != 0
 }
 
 // IsMouseInPointerEnabled calls USER32!IsMouseInPointerEnabled.

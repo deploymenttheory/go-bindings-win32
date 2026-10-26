@@ -766,6 +766,7 @@ var PKEY_Devices_StorageFreeSpace = foundation.PROPERTYKEY{Fmtid: win32.GUID{Dat
 var PKEY_Devices_StorageFreeSpacePercent = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 1238179702, Data2: 22054, Data3: 19223, Data4: [8]byte{164, 232, 24, 180, 170, 26, 34, 19}}, Pid: 14}
 var PKEY_Devices_TextMessages = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 1238179702, Data2: 22054, Data3: 19223, Data4: [8]byte{164, 232, 24, 180, 170, 26, 34, 19}}, Pid: 3}
 var PKEY_Devices_Voicemail = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 1238179702, Data2: 22054, Data3: 19223, Data4: [8]byte{164, 232, 24, 180, 170, 26, 34, 19}}, Pid: 6}
+var PKEY_Devices_WiFiAware_IsSupported = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 2637078119, Data2: 28884, Data3: 19738, Data4: [8]byte{174, 253, 17, 60, 246, 167, 223, 202}}, Pid: 2}
 var PKEY_Devices_WiFiDirectServices_AdvertisementId = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 833845059, Data2: 31838, Data3: 16389, Data4: [8]byte{147, 230, 233, 83, 249, 43, 130, 233}}, Pid: 5}
 var PKEY_Devices_WiFiDirectServices_RequestServiceInformation = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 833845059, Data2: 31838, Data3: 16389, Data4: [8]byte{147, 230, 233, 83, 249, 43, 130, 233}}, Pid: 7}
 var PKEY_Devices_WiFiDirectServices_ServiceAddress = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 833845059, Data2: 31838, Data3: 16389, Data4: [8]byte{147, 230, 233, 83, 249, 43, 130, 233}}, Pid: 2}

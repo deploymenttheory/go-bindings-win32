@@ -849,7 +849,9 @@ const (
 	TokenIsAppSilo                       TOKEN_INFORMATION_CLASS = 48
 	TokenLoggingInformation              TOKEN_INFORMATION_CLASS = 49
 	TokenLearningMode                    TOKEN_INFORMATION_CLASS = 50
-	MaxTokenInfoClass                    TOKEN_INFORMATION_CLASS = 51
+	TokenIsSystemManagedAdmin            TOKEN_INFORMATION_CLASS = 51
+	TokenIsInstaller                     TOKEN_INFORMATION_CLASS = 52
+	MaxTokenInfoClass                    TOKEN_INFORMATION_CLASS = 53
 )
 
 // String returns the TOKEN_INFORMATION_CLASS constant's name, or its numeric form when
@@ -956,6 +958,10 @@ func (e TOKEN_INFORMATION_CLASS) String() string {
 		return "TokenLoggingInformation"
 	case TokenLearningMode:
 		return "TokenLearningMode"
+	case TokenIsSystemManagedAdmin:
+		return "TokenIsSystemManagedAdmin"
+	case TokenIsInstaller:
+		return "TokenIsInstaller"
 	case MaxTokenInfoClass:
 		return "MaxTokenInfoClass"
 	default:
@@ -1168,6 +1174,7 @@ const (
 	WinBuiltinDeviceOwnersSid                     WELL_KNOWN_SID_TYPE = 119
 	WinBuiltinUserModeHardwareOperatorsSid        WELL_KNOWN_SID_TYPE = 120
 	WinBuiltinOpenSSHUsersSid                     WELL_KNOWN_SID_TYPE = 121
+	WinBuiltinCUAUsersSid                         WELL_KNOWN_SID_TYPE = 122
 )
 
 // String returns the WELL_KNOWN_SID_TYPE constant's name, or its numeric form when
@@ -1418,6 +1425,8 @@ func (e WELL_KNOWN_SID_TYPE) String() string {
 		return "WinBuiltinUserModeHardwareOperatorsSid"
 	case WinBuiltinOpenSSHUsersSid:
 		return "WinBuiltinOpenSSHUsersSid"
+	case WinBuiltinCUAUsersSid:
+		return "WinBuiltinCUAUsersSid"
 	default:
 		return fmt.Sprintf("WELL_KNOWN_SID_TYPE(%d)", int32(e))
 	}

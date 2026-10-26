@@ -110,12 +110,6 @@ type WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS struct {
 	Data [1]uint32
 }
 
-// WHV_CAPABILITY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_CAPABILITY struct {
-	Data [3]uint64
-}
-
 // WHV_CAPABILITY_FEATURES is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_CAPABILITY_FEATURES struct {
@@ -135,6 +129,24 @@ type WHV_CPUID_OUTPUT struct {
 	Ebx uint32
 	Ecx uint32
 	Edx uint32
+}
+
+// WHV_DELIVERABILITY_NOTIFICATIONS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_DELIVERABILITY_NOTIFICATIONS_REGISTER struct {
+	Data [1]uint64
+}
+
+// WHV_DISABLE_PARTITION_VTL_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_DISABLE_PARTITION_VTL_FLAGS struct {
+	Data [1]byte
+}
+
+// WHV_DISABLE_VP_VTL_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_DISABLE_VP_VTL_FLAGS struct {
+	Data [1]byte
 }
 
 type WHV_DOORBELL_MATCH_DATA struct {
@@ -174,50 +186,28 @@ type WHV_EMULATOR_STATUS struct {
 	Data [1]uint32
 }
 
+// WHV_ENABLE_PARTITION_VTL_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_ENABLE_PARTITION_VTL_FLAGS struct {
+	Data [1]byte
+}
+
 // WHV_EXTENDED_VM_EXITS is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_EXTENDED_VM_EXITS struct {
 	Data [1]uint64
 }
 
-type WHV_HYPERCALL_CONTEXT struct {
-	Rax          uint64
-	Rbx          uint64
-	Rcx          uint64
-	Rdx          uint64
-	R8           uint64
-	Rsi          uint64
-	Rdi          uint64
-	Reserved0    uint64
-	XmmRegisters [6]WHV_UINT128
-	Reserved1    [2]uint64
+// WHV_INPUT_VTL is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_INPUT_VTL struct {
+	Data [1]byte
 }
 
 // WHV_INTERNAL_ACTIVITY_REGISTER is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_INTERNAL_ACTIVITY_REGISTER struct {
 	Data [1]uint64
-}
-
-type WHV_INTERRUPT_CONTROL struct {
-	Bitfield    uint64
-	Destination uint32
-	Vector      uint32
-}
-
-type WHV_MEMORY_ACCESS_CONTEXT struct {
-	InstructionByteCount byte
-	Reserved             [3]byte
-	InstructionBytes     [16]byte
-	AccessInfo           WHV_MEMORY_ACCESS_INFO
-	Gpa                  uint64
-	Gva                  uint64
-}
-
-// WHV_MEMORY_ACCESS_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_MEMORY_ACCESS_INFO struct {
-	Data [1]uint32
 }
 
 type WHV_MEMORY_RANGE_ENTRY struct {
@@ -232,6 +222,23 @@ type WHV_MSR_ACTION_ENTRY struct {
 	Reserved    uint16
 }
 
+// WHV_NESTED_ENLIGHTENMENTS_CONTROL_Features_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_NESTED_ENLIGHTENMENTS_CONTROL_Features_e__Union struct {
+	Data [1]uint32
+}
+
+// WHV_NESTED_ENLIGHTENMENTS_CONTROL_HypercallControls_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_NESTED_ENLIGHTENMENTS_CONTROL_HypercallControls_e__Union struct {
+	Data [1]uint32
+}
+
+type WHV_NESTED_ENLIGHTENMENTS_CONTROL struct {
+	Features          WHV_NESTED_ENLIGHTENMENTS_CONTROL_Features_e__Union
+	HypercallControls WHV_NESTED_ENLIGHTENMENTS_CONTROL_HypercallControls_e__Union
+}
+
 // WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union struct {
@@ -240,7 +247,9 @@ type WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union struct {
 
 type WHV_NOTIFICATION_PORT_PARAMETERS struct {
 	NotificationPortType WHV_NOTIFICATION_PORT_TYPE
-	Reserved             uint32
+	Reserved             uint16
+	Reserved1            byte
+	ConnectionVtl        byte
 	Anonymous            WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union
 }
 
@@ -248,12 +257,6 @@ type WHV_PARTITION_MEMORY_COUNTERS struct {
 	Mapped4KPageCount uint64
 	Mapped2MPageCount uint64
 	Mapped1GPageCount uint64
-}
-
-// WHV_PARTITION_PROPERTY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_PARTITION_PROPERTY struct {
-	Data [6]uint64
 }
 
 type WHV_PROCESSOR_APIC_COUNTERS struct {
@@ -268,18 +271,6 @@ type WHV_PROCESSOR_EVENT_COUNTERS struct {
 	PageFaultCount uint64
 	ExceptionCount uint64
 	InterruptCount uint64
-}
-
-// WHV_PROCESSOR_FEATURES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_PROCESSOR_FEATURES struct {
-	Data [1]uint64
-}
-
-// WHV_PROCESSOR_FEATURES1 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_PROCESSOR_FEATURES1 struct {
-	Data [1]uint64
 }
 
 // WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -297,23 +288,6 @@ type WHV_PROCESSOR_FEATURES_BANKS struct {
 type WHV_PROCESSOR_INTERCEPT_COUNTER struct {
 	Count     uint64
 	Time100ns uint64
-}
-
-type WHV_PROCESSOR_INTERCEPT_COUNTERS struct {
-	PageInvalidations         WHV_PROCESSOR_INTERCEPT_COUNTER
-	ControlRegisterAccesses   WHV_PROCESSOR_INTERCEPT_COUNTER
-	IoInstructions            WHV_PROCESSOR_INTERCEPT_COUNTER
-	HaltInstructions          WHV_PROCESSOR_INTERCEPT_COUNTER
-	CpuidInstructions         WHV_PROCESSOR_INTERCEPT_COUNTER
-	MsrAccesses               WHV_PROCESSOR_INTERCEPT_COUNTER
-	OtherIntercepts           WHV_PROCESSOR_INTERCEPT_COUNTER
-	PendingInterrupts         WHV_PROCESSOR_INTERCEPT_COUNTER
-	EmulatedInstructions      WHV_PROCESSOR_INTERCEPT_COUNTER
-	DebugRegisterAccesses     WHV_PROCESSOR_INTERCEPT_COUNTER
-	PageFaultIntercepts       WHV_PROCESSOR_INTERCEPT_COUNTER
-	NestedPageFaultIntercepts WHV_PROCESSOR_INTERCEPT_COUNTER
-	Hypercalls                WHV_PROCESSOR_INTERCEPT_COUNTER
-	RdpmcInstructions         WHV_PROCESSOR_INTERCEPT_COUNTER
 }
 
 // WHV_PROCESSOR_PERFMON_FEATURES is a C union, exposed as correctly sized and aligned backing
@@ -342,27 +316,8 @@ type WHV_PROCESSOR_XSAVE_FEATURES struct {
 	Data [1]uint64
 }
 
-// WHV_REGISTER_VALUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_REGISTER_VALUE struct {
-	Data [2]uint64
-}
-
 type WHV_RUN_VP_CANCELED_CONTEXT struct {
 	CancelReason WHV_RUN_VP_CANCEL_REASON
-}
-
-// WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union struct {
-	Data [22]uint64
-}
-
-type WHV_RUN_VP_EXIT_CONTEXT struct {
-	ExitReason WHV_RUN_VP_EXIT_REASON
-	Reserved   uint32
-	VpContext  WHV_VP_EXIT_CONTEXT
-	Anonymous  WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union
 }
 
 // WHV_SCHEDULER_FEATURES is a C union, exposed as correctly sized and aligned backing
@@ -378,17 +333,37 @@ type WHV_SRIOV_RESOURCE_DESCRIPTOR struct {
 	Reserved             uint16
 }
 
+type WHV_SVM_NESTED_HOST_STATE struct {
+	Rip        uint64
+	Rsp        uint64
+	Rflags     uint64
+	Rax        uint64
+	Es         WHV_SVM_VMCB_SELECTOR
+	Cs         WHV_SVM_VMCB_SELECTOR
+	Ss         WHV_SVM_VMCB_SELECTOR
+	Ds         WHV_SVM_VMCB_SELECTOR
+	Gdtr       WHV_SVM_VMCB_SELECTOR
+	Idtr       WHV_SVM_VMCB_SELECTOR
+	Efer       uint64
+	Cr0        uint64
+	Cr3        uint64
+	Cr4        uint64
+	VirtualTpr uint64
+	Reserved   [6]uint64
+}
+
+// WHV_SVM_VMCB_SELECTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHV_SVM_VMCB_SELECTOR struct {
+	Data [16]byte
+}
+
 type WHV_SYNIC_EVENT_PARAMETERS struct {
 	VpIndex    uint32
 	TargetSint byte
-	Reserved   byte
+	TargetVtl  byte
 	FlagNumber uint16
-}
-
-type WHV_SYNIC_SINT_DELIVERABLE_CONTEXT struct {
-	DeliverableSints uint16
-	Reserved1        uint16
-	Reserved2        uint32
 }
 
 // WHV_SYNTHETIC_PROCESSOR_FEATURES is a C union, exposed as correctly sized and aligned backing
@@ -409,21 +384,15 @@ type WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS struct {
 	Anonymous  WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union
 }
 
+// WHV_TRANSLATE_GVA_2_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_TRANSLATE_GVA_2_FLAGS struct {
+	Data [1]uint64
+}
+
 type WHV_TRANSLATE_GVA_RESULT struct {
 	ResultCode WHV_TRANSLATE_GVA_RESULT_CODE
 	Reserved   uint32
-}
-
-// WHV_TRIGGER_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_TRIGGER_PARAMETERS_Anonymous_e__Union struct {
-	Data [3]uint64
-}
-
-type WHV_TRIGGER_PARAMETERS struct {
-	TriggerType WHV_TRIGGER_TYPE
-	Reserved    uint32
-	Anonymous   WHV_TRIGGER_PARAMETERS_Anonymous_e__Union
 }
 
 // WHV_UINT128 is a C union, exposed as correctly sized and aligned backing
@@ -509,14 +478,10 @@ type WHV_VP_EXCEPTION_INFO struct {
 	Data [1]uint32
 }
 
-type WHV_VP_EXIT_CONTEXT struct {
-	ExecutionState WHV_X64_VP_EXECUTION_STATE
-	Bitfield       byte
-	Reserved       byte
-	Reserved2      uint32
-	Cs             WHV_X64_SEGMENT_REGISTER
-	Rip            uint64
-	Rflags         uint64
+// WHV_VTL_PERMISSION_SET is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_VTL_PERMISSION_SET struct {
+	Data [1]uint32
 }
 
 type WHV_X64_APIC_EOI_CONTEXT struct {
@@ -566,12 +531,6 @@ type WHV_X64_CPUID_RESULT2 struct {
 	Mask     WHV_CPUID_OUTPUT
 }
 
-// WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
-type WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER struct {
-	Data [1]uint64
-}
-
 // WHV_X64_FP_CONTROL_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_FP_CONTROL_STATUS_REGISTER struct {
@@ -582,6 +541,19 @@ type WHV_X64_FP_CONTROL_STATUS_REGISTER struct {
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_FP_REGISTER struct {
 	Data [2]uint64
+}
+
+type WHV_X64_HYPERCALL_CONTEXT struct {
+	Rax          uint64
+	Rbx          uint64
+	Rcx          uint64
+	Rdx          uint64
+	R8           uint64
+	Rsi          uint64
+	Rdi          uint64
+	Reserved0    uint64
+	XmmRegisters [6]WHV_UINT128
+	Reserved1    [2]uint64
 }
 
 type WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT struct {
@@ -634,6 +606,30 @@ type WHV_X64_MSR_EXIT_BITMAP struct {
 	Data [1]uint64
 }
 
+// WHV_X64_NESTED_GUEST_STATE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_NESTED_GUEST_STATE struct {
+	Data [2]uint64
+}
+
+// WHV_X64_NESTED_INVEPT_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_NESTED_INVEPT_REGISTER struct {
+	Data [2]uint64
+}
+
+// WHV_X64_NESTED_INVVPID_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_NESTED_INVVPID_REGISTER struct {
+	Data [2]uint64
+}
+
+// WHV_X64_NESTED_STATE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_NESTED_STATE struct {
+	Data [1024]uint64
+}
+
 // WHV_X64_PENDING_DEBUG_EXCEPTION is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_PENDING_DEBUG_EXCEPTION struct {
@@ -655,6 +651,66 @@ type WHV_X64_PENDING_EXT_INT_EVENT struct {
 // WHV_X64_PENDING_INTERRUPTION_REGISTER is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_PENDING_INTERRUPTION_REGISTER struct {
+	Data [1]uint64
+}
+
+// WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT0 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT0 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT1 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT1 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT2 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT2 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT3 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_SVM_NESTED_EXIT_EVENT3 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT0 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT0 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT1 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT1 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT2 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT2 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT3 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PENDING_VMX_NESTED_EXIT_EVENT3 struct {
+	Data [2]uint64
+}
+
+// WHV_X64_PROCESSOR_FEATURES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PROCESSOR_FEATURES struct {
+	Data [1]uint64
+}
+
+// WHV_X64_PROCESSOR_FEATURES1 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type WHV_X64_PROCESSOR_FEATURES1 struct {
 	Data [1]uint64
 }
 
@@ -685,6 +741,23 @@ type WHV_X64_SEGMENT_REGISTER struct {
 	Anonymous WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union
 }
 
+type WHV_X64_SVM_NESTED_STATE_Flags_e__Struct struct {
+	Bitfield uint32
+}
+
+type WHV_X64_SVM_NESTED_STATE struct {
+	Vendor                      WHV_NESTED_STATE_TYPE
+	Flags                       WHV_X64_SVM_NESTED_STATE_Flags_e__Struct
+	NestedEnlightenmentsControl WHV_NESTED_ENLIGHTENMENTS_CONTROL
+	HostSaveGpa                 uint64
+	VmControlMsr                uint64
+	VirtualTscRatioMsr          uint64
+	VmcbGpa                     uint64
+	HostState                   WHV_SVM_NESTED_HOST_STATE
+	Reserved                    [3832]byte
+	VmcbBytes                   [4096]byte
+}
+
 type WHV_X64_TABLE_REGISTER struct {
 	Pad   [3]uint16
 	Limit uint16
@@ -697,10 +770,46 @@ type WHV_X64_UNSUPPORTED_FEATURE_CONTEXT struct {
 	FeatureParameter uint64
 }
 
+type WHV_X64_VMX_NESTED_STATE_Flags_e__Struct struct {
+	Bitfield uint32
+}
+
+type WHV_X64_VMX_NESTED_STATE_VirtualApicRegs_e__Struct struct {
+	Tpr     uint32
+	Ppr     uint32
+	Isr     [8]uint32
+	Irr     [8]uint32
+	IcrLow  uint32
+	IcrHigh uint32
+}
+
+type WHV_X64_VMX_NESTED_STATE struct {
+	Vendor                      WHV_NESTED_STATE_TYPE
+	Flags                       WHV_X64_VMX_NESTED_STATE_Flags_e__Struct
+	NestedEnlightenmentsControl WHV_NESTED_ENLIGHTENMENTS_CONTROL
+	Pdpt                        [4]uint64
+	VmxonRegionGpa              uint64
+	VmcsGpa                     uint64
+	CurrentEnlightenedVmcs      uint64
+	VirtualApicRegs             WHV_X64_VMX_NESTED_STATE_VirtualApicRegs_e__Struct
+	Reserved                    [3944]byte
+	VmcsBytes                   [4096]byte
+}
+
 // WHV_X64_VP_EXECUTION_STATE is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_VP_EXECUTION_STATE struct {
 	Data [1]uint16
+}
+
+type WHV_X64_VP_EXIT_CONTEXT struct {
+	ExecutionState WHV_X64_VP_EXECUTION_STATE
+	Bitfield       byte
+	Reserved       byte
+	Reserved2      uint32
+	Cs             WHV_X64_SEGMENT_REGISTER
+	Rip            uint64
+	Rflags         uint64
 }
 
 // WHV_X64_XMM_CONTROL_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing

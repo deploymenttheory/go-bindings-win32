@@ -4,6 +4,7 @@
 
 package services
 
+// Invalid values: 0.
 type PSC_NOTIFICATION_REGISTRATION uintptr
 
 // Release with CloseServiceHandle.

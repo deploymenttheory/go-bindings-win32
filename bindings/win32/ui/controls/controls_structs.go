@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
+	uiinputpointer "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/pointer"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
 
@@ -1883,6 +1884,16 @@ type REBARINFO struct {
 	CbSize uint32
 	FMask  uint32
 	Himl   HIMAGELIST
+}
+
+type SYNTHETIC_DEVICE_CREATION_PARAMS struct {
+	PointerType  uiwindowsandmessaging.POINTER_INPUT_TYPE
+	MaxCount     uint32
+	FeedbackMode uiinputpointer.POINTER_FEEDBACK_MODE
+	HMonitor     graphicsgdi.HMONITOR
+	DeviceWidth  uint32
+	DeviceHeight uint32
+	Options      SYNTHETIC_DEVICE_CREATION_OPTIONS
 }
 
 // TASKDIALOGCONFIG: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-taskdialogconfig

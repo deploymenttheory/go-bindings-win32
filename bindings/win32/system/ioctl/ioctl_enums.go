@@ -384,6 +384,1207 @@ func (e CSV_CONTROL_OP) String() string {
 	}
 }
 
+type CXL_ADDITIONAL_HEALTH_STATUS int32
+
+const (
+	CxlAdditionalHealthStatus_Normal   CXL_ADDITIONAL_HEALTH_STATUS = 0
+	CxlAdditionalHealthStatus_Warning  CXL_ADDITIONAL_HEALTH_STATUS = 1
+	CxlAdditionalHealthStatus_Critical CXL_ADDITIONAL_HEALTH_STATUS = 2
+)
+
+// String returns the CXL_ADDITIONAL_HEALTH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_ADDITIONAL_HEALTH_STATUS) String() string {
+	switch e {
+	case CxlAdditionalHealthStatus_Normal:
+		return "CxlAdditionalHealthStatus_Normal"
+	case CxlAdditionalHealthStatus_Warning:
+		return "CxlAdditionalHealthStatus_Warning"
+	case CxlAdditionalHealthStatus_Critical:
+		return "CxlAdditionalHealthStatus_Critical"
+	default:
+		return fmt.Sprintf("CXL_ADDITIONAL_HEALTH_STATUS(%d)", int32(e))
+	}
+}
+
+type CXL_CACHEMEM_CAPABILITY_ID int32
+
+const (
+	CxlCacheMemCapabilityID_NullCapability                CXL_CACHEMEM_CAPABILITY_ID = 0
+	CxlCacheMemCapabilityID_Capability                    CXL_CACHEMEM_CAPABILITY_ID = 1
+	CxlCacheMemCapabilityID_RASCapability                 CXL_CACHEMEM_CAPABILITY_ID = 2
+	CxlCacheMemCapabilityID_SecurityCapability            CXL_CACHEMEM_CAPABILITY_ID = 3
+	CxlCacheMemCapabilityID_LinkCapability                CXL_CACHEMEM_CAPABILITY_ID = 4
+	CxlCacheMemCapabilityID_HDMDecoderCapability          CXL_CACHEMEM_CAPABILITY_ID = 5
+	CxlCacheMemCapabilityID_ExtendedSecurityCapability    CXL_CACHEMEM_CAPABILITY_ID = 6
+	CxlCacheMemCapabilityID_IDECapability                 CXL_CACHEMEM_CAPABILITY_ID = 7
+	CxlCacheMemCapabilityID_SnoopFilterCapability         CXL_CACHEMEM_CAPABILITY_ID = 8
+	CxlCacheMemCapabilityID_TimeoutAndIsolationCapability CXL_CACHEMEM_CAPABILITY_ID = 9
+	CxlCacheMemCapabilityID_ExtendedRegisterCapability    CXL_CACHEMEM_CAPABILITY_ID = 10
+	CxlCacheMemCapabilityID_BIRouteTableCapability        CXL_CACHEMEM_CAPABILITY_ID = 11
+	CxlCacheMemCapabilityID_BIDecoderCapability           CXL_CACHEMEM_CAPABILITY_ID = 12
+	CxlCacheMemCapabilityID_CacheIDRouteTableCapability   CXL_CACHEMEM_CAPABILITY_ID = 13
+	CxlCacheMemCapabilityID_CacheIDDecoderCapability      CXL_CACHEMEM_CAPABILITY_ID = 14
+	CxlCacheMemCapabilityID_ExtendedHDMDecoderCapability  CXL_CACHEMEM_CAPABILITY_ID = 15
+	CxlCacheMemCapabilityID_ExtendedMetadataCapability    CXL_CACHEMEM_CAPABILITY_ID = 16
+)
+
+// String returns the CXL_CACHEMEM_CAPABILITY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_CACHEMEM_CAPABILITY_ID) String() string {
+	switch e {
+	case CxlCacheMemCapabilityID_NullCapability:
+		return "CxlCacheMemCapabilityID_NullCapability"
+	case CxlCacheMemCapabilityID_Capability:
+		return "CxlCacheMemCapabilityID_Capability"
+	case CxlCacheMemCapabilityID_RASCapability:
+		return "CxlCacheMemCapabilityID_RASCapability"
+	case CxlCacheMemCapabilityID_SecurityCapability:
+		return "CxlCacheMemCapabilityID_SecurityCapability"
+	case CxlCacheMemCapabilityID_LinkCapability:
+		return "CxlCacheMemCapabilityID_LinkCapability"
+	case CxlCacheMemCapabilityID_HDMDecoderCapability:
+		return "CxlCacheMemCapabilityID_HDMDecoderCapability"
+	case CxlCacheMemCapabilityID_ExtendedSecurityCapability:
+		return "CxlCacheMemCapabilityID_ExtendedSecurityCapability"
+	case CxlCacheMemCapabilityID_IDECapability:
+		return "CxlCacheMemCapabilityID_IDECapability"
+	case CxlCacheMemCapabilityID_SnoopFilterCapability:
+		return "CxlCacheMemCapabilityID_SnoopFilterCapability"
+	case CxlCacheMemCapabilityID_TimeoutAndIsolationCapability:
+		return "CxlCacheMemCapabilityID_TimeoutAndIsolationCapability"
+	case CxlCacheMemCapabilityID_ExtendedRegisterCapability:
+		return "CxlCacheMemCapabilityID_ExtendedRegisterCapability"
+	case CxlCacheMemCapabilityID_BIRouteTableCapability:
+		return "CxlCacheMemCapabilityID_BIRouteTableCapability"
+	case CxlCacheMemCapabilityID_BIDecoderCapability:
+		return "CxlCacheMemCapabilityID_BIDecoderCapability"
+	case CxlCacheMemCapabilityID_CacheIDRouteTableCapability:
+		return "CxlCacheMemCapabilityID_CacheIDRouteTableCapability"
+	case CxlCacheMemCapabilityID_CacheIDDecoderCapability:
+		return "CxlCacheMemCapabilityID_CacheIDDecoderCapability"
+	case CxlCacheMemCapabilityID_ExtendedHDMDecoderCapability:
+		return "CxlCacheMemCapabilityID_ExtendedHDMDecoderCapability"
+	case CxlCacheMemCapabilityID_ExtendedMetadataCapability:
+		return "CxlCacheMemCapabilityID_ExtendedMetadataCapability"
+	default:
+		return fmt.Sprintf("CXL_CACHEMEM_CAPABILITY_ID(%d)", int32(e))
+	}
+}
+
+type CXL_COMMAND_RETURN_CODE int32
+
+const (
+	CxlCommandReturnCode_Success                                       CXL_COMMAND_RETURN_CODE = 0
+	CxlCommandReturnCode_BackgroundCommandStarted                      CXL_COMMAND_RETURN_CODE = 1
+	CxlCommandReturnCode_InvalidInput                                  CXL_COMMAND_RETURN_CODE = 2
+	CxlCommandReturnCode_Unsupported                                   CXL_COMMAND_RETURN_CODE = 3
+	CxlCommandReturnCode_InternalError                                 CXL_COMMAND_RETURN_CODE = 4
+	CxlCommandReturnCode_RetryRequired                                 CXL_COMMAND_RETURN_CODE = 5
+	CxlCommandReturnCode_Busy                                          CXL_COMMAND_RETURN_CODE = 6
+	CxlCommandReturnCode_MediaDisabled                                 CXL_COMMAND_RETURN_CODE = 7
+	CxlCommandReturnCode_FWTransferInProgress                          CXL_COMMAND_RETURN_CODE = 8
+	CxlCommandReturnCode_FWTransferOutOfOrder                          CXL_COMMAND_RETURN_CODE = 9
+	CxlCommandReturnCode_FWVerificationFailed                          CXL_COMMAND_RETURN_CODE = 10
+	CxlCommandReturnCode_InvalidSlot                                   CXL_COMMAND_RETURN_CODE = 11
+	CxlCommandReturnCode_ActivationFailed_FWRolledBack                 CXL_COMMAND_RETURN_CODE = 12
+	CxlCommandReturnCode_ActivationFailed_ColdResetRequired            CXL_COMMAND_RETURN_CODE = 13
+	CxlCommandReturnCode_InvalidHandle                                 CXL_COMMAND_RETURN_CODE = 14
+	CxlCommandReturnCode_InvalidPhysicalAddress                        CXL_COMMAND_RETURN_CODE = 15
+	CxlCommandReturnCode_InjectPoisonLimitReached                      CXL_COMMAND_RETURN_CODE = 16
+	CxlCommandReturnCode_PermanentMediaFailure                         CXL_COMMAND_RETURN_CODE = 17
+	CxlCommandReturnCode_Aborted                                       CXL_COMMAND_RETURN_CODE = 18
+	CxlCommandReturnCode_InvalidSecurityState                          CXL_COMMAND_RETURN_CODE = 19
+	CxlCommandReturnCode_IncorrectPassphrase                           CXL_COMMAND_RETURN_CODE = 20
+	CxlCommandReturnCode_UnsupportedMailboxOrCCI                       CXL_COMMAND_RETURN_CODE = 21
+	CxlCommandReturnCode_InvalidPayloadLength                          CXL_COMMAND_RETURN_CODE = 22
+	CxlCommandReturnCode_InvalidLog                                    CXL_COMMAND_RETURN_CODE = 23
+	CxlCommandReturnCode_Interrupted                                   CXL_COMMAND_RETURN_CODE = 24
+	CxlCommandReturnCode_UnsupportedFeatureVersion                     CXL_COMMAND_RETURN_CODE = 25
+	CxlCommandReturnCode_UnsupportedFeatureSelectionValue              CXL_COMMAND_RETURN_CODE = 26
+	CxlCommandReturnCode_FeatureTransferInProgress                     CXL_COMMAND_RETURN_CODE = 27
+	CxlCommandReturnCode_FeatureTransferOutOfOrder                     CXL_COMMAND_RETURN_CODE = 28
+	CxlCommandReturnCode_ResourcesExhausted                            CXL_COMMAND_RETURN_CODE = 29
+	CxlCommandReturnCode_InvalidExtentList                             CXL_COMMAND_RETURN_CODE = 30
+	CxlCommandReturnCode_TransferOutOfOrder                            CXL_COMMAND_RETURN_CODE = 31
+	CxlCommandReturnCode_RequestAbortNotSupportedByBackgroundOperation CXL_COMMAND_RETURN_CODE = 32
+	CxlCommandReturnCode_Max                                           CXL_COMMAND_RETURN_CODE = 33
+)
+
+// String returns the CXL_COMMAND_RETURN_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_COMMAND_RETURN_CODE) String() string {
+	switch e {
+	case CxlCommandReturnCode_Success:
+		return "CxlCommandReturnCode_Success"
+	case CxlCommandReturnCode_BackgroundCommandStarted:
+		return "CxlCommandReturnCode_BackgroundCommandStarted"
+	case CxlCommandReturnCode_InvalidInput:
+		return "CxlCommandReturnCode_InvalidInput"
+	case CxlCommandReturnCode_Unsupported:
+		return "CxlCommandReturnCode_Unsupported"
+	case CxlCommandReturnCode_InternalError:
+		return "CxlCommandReturnCode_InternalError"
+	case CxlCommandReturnCode_RetryRequired:
+		return "CxlCommandReturnCode_RetryRequired"
+	case CxlCommandReturnCode_Busy:
+		return "CxlCommandReturnCode_Busy"
+	case CxlCommandReturnCode_MediaDisabled:
+		return "CxlCommandReturnCode_MediaDisabled"
+	case CxlCommandReturnCode_FWTransferInProgress:
+		return "CxlCommandReturnCode_FWTransferInProgress"
+	case CxlCommandReturnCode_FWTransferOutOfOrder:
+		return "CxlCommandReturnCode_FWTransferOutOfOrder"
+	case CxlCommandReturnCode_FWVerificationFailed:
+		return "CxlCommandReturnCode_FWVerificationFailed"
+	case CxlCommandReturnCode_InvalidSlot:
+		return "CxlCommandReturnCode_InvalidSlot"
+	case CxlCommandReturnCode_ActivationFailed_FWRolledBack:
+		return "CxlCommandReturnCode_ActivationFailed_FWRolledBack"
+	case CxlCommandReturnCode_ActivationFailed_ColdResetRequired:
+		return "CxlCommandReturnCode_ActivationFailed_ColdResetRequired"
+	case CxlCommandReturnCode_InvalidHandle:
+		return "CxlCommandReturnCode_InvalidHandle"
+	case CxlCommandReturnCode_InvalidPhysicalAddress:
+		return "CxlCommandReturnCode_InvalidPhysicalAddress"
+	case CxlCommandReturnCode_InjectPoisonLimitReached:
+		return "CxlCommandReturnCode_InjectPoisonLimitReached"
+	case CxlCommandReturnCode_PermanentMediaFailure:
+		return "CxlCommandReturnCode_PermanentMediaFailure"
+	case CxlCommandReturnCode_Aborted:
+		return "CxlCommandReturnCode_Aborted"
+	case CxlCommandReturnCode_InvalidSecurityState:
+		return "CxlCommandReturnCode_InvalidSecurityState"
+	case CxlCommandReturnCode_IncorrectPassphrase:
+		return "CxlCommandReturnCode_IncorrectPassphrase"
+	case CxlCommandReturnCode_UnsupportedMailboxOrCCI:
+		return "CxlCommandReturnCode_UnsupportedMailboxOrCCI"
+	case CxlCommandReturnCode_InvalidPayloadLength:
+		return "CxlCommandReturnCode_InvalidPayloadLength"
+	case CxlCommandReturnCode_InvalidLog:
+		return "CxlCommandReturnCode_InvalidLog"
+	case CxlCommandReturnCode_Interrupted:
+		return "CxlCommandReturnCode_Interrupted"
+	case CxlCommandReturnCode_UnsupportedFeatureVersion:
+		return "CxlCommandReturnCode_UnsupportedFeatureVersion"
+	case CxlCommandReturnCode_UnsupportedFeatureSelectionValue:
+		return "CxlCommandReturnCode_UnsupportedFeatureSelectionValue"
+	case CxlCommandReturnCode_FeatureTransferInProgress:
+		return "CxlCommandReturnCode_FeatureTransferInProgress"
+	case CxlCommandReturnCode_FeatureTransferOutOfOrder:
+		return "CxlCommandReturnCode_FeatureTransferOutOfOrder"
+	case CxlCommandReturnCode_ResourcesExhausted:
+		return "CxlCommandReturnCode_ResourcesExhausted"
+	case CxlCommandReturnCode_InvalidExtentList:
+		return "CxlCommandReturnCode_InvalidExtentList"
+	case CxlCommandReturnCode_TransferOutOfOrder:
+		return "CxlCommandReturnCode_TransferOutOfOrder"
+	case CxlCommandReturnCode_RequestAbortNotSupportedByBackgroundOperation:
+		return "CxlCommandReturnCode_RequestAbortNotSupportedByBackgroundOperation"
+	case CxlCommandReturnCode_Max:
+		return "CxlCommandReturnCode_Max"
+	default:
+		return fmt.Sprintf("CXL_COMMAND_RETURN_CODE(%d)", int32(e))
+	}
+}
+
+type CXL_DEVICE_CAPABILITY_ARRAY_TYPE int32
+
+const (
+	CxlDeviceCapabilityArrayType_InferredFromPciClassCode     CXL_DEVICE_CAPABILITY_ARRAY_TYPE = 0
+	CxlDeviceCapabilityArrayType_MemoryDeviceCapabilities     CXL_DEVICE_CAPABILITY_ARRAY_TYPE = 1
+	CxlDeviceCapabilityArrayType_SwitchMailboxCCICapabilities CXL_DEVICE_CAPABILITY_ARRAY_TYPE = 2
+	CxlDeviceCapabilityArrayType_Max                          CXL_DEVICE_CAPABILITY_ARRAY_TYPE = 3
+)
+
+// String returns the CXL_DEVICE_CAPABILITY_ARRAY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_DEVICE_CAPABILITY_ARRAY_TYPE) String() string {
+	switch e {
+	case CxlDeviceCapabilityArrayType_InferredFromPciClassCode:
+		return "CxlDeviceCapabilityArrayType_InferredFromPciClassCode"
+	case CxlDeviceCapabilityArrayType_MemoryDeviceCapabilities:
+		return "CxlDeviceCapabilityArrayType_MemoryDeviceCapabilities"
+	case CxlDeviceCapabilityArrayType_SwitchMailboxCCICapabilities:
+		return "CxlDeviceCapabilityArrayType_SwitchMailboxCCICapabilities"
+	case CxlDeviceCapabilityArrayType_Max:
+		return "CxlDeviceCapabilityArrayType_Max"
+	default:
+		return fmt.Sprintf("CXL_DEVICE_CAPABILITY_ARRAY_TYPE(%d)", int32(e))
+	}
+}
+
+type CXL_DEVICE_CAPABILITY_ID int32
+
+const (
+	CxlDeviceCapabilityID_CapabilityArray             CXL_DEVICE_CAPABILITY_ID = 0
+	CxlDeviceCapabilityID_DeviceStatusRegisters       CXL_DEVICE_CAPABILITY_ID = 1
+	CxlDeviceCapabilityID_PrimaryMailboxRegisters     CXL_DEVICE_CAPABILITY_ID = 2
+	CxlDeviceCapabilityID_SecondaryMailboxRegisters   CXL_DEVICE_CAPABILITY_ID = 3
+	CxlDeviceCapabilityID_MemoryDeviceStatusRegisters CXL_DEVICE_CAPABILITY_ID = 16384
+)
+
+// String returns the CXL_DEVICE_CAPABILITY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_DEVICE_CAPABILITY_ID) String() string {
+	switch e {
+	case CxlDeviceCapabilityID_CapabilityArray:
+		return "CxlDeviceCapabilityID_CapabilityArray"
+	case CxlDeviceCapabilityID_DeviceStatusRegisters:
+		return "CxlDeviceCapabilityID_DeviceStatusRegisters"
+	case CxlDeviceCapabilityID_PrimaryMailboxRegisters:
+		return "CxlDeviceCapabilityID_PrimaryMailboxRegisters"
+	case CxlDeviceCapabilityID_SecondaryMailboxRegisters:
+		return "CxlDeviceCapabilityID_SecondaryMailboxRegisters"
+	case CxlDeviceCapabilityID_MemoryDeviceStatusRegisters:
+		return "CxlDeviceCapabilityID_MemoryDeviceStatusRegisters"
+	default:
+		return fmt.Sprintf("CXL_DEVICE_CAPABILITY_ID(%d)", int32(e))
+	}
+}
+
+type CXL_DEVICE_EVENT_SUBTYPE int32
+
+const (
+	CxlDeviceEventSubtype_NotReported                  CXL_DEVICE_EVENT_SUBTYPE = 0
+	CxlDeviceEventSubtype_InvalidConfigurationData     CXL_DEVICE_EVENT_SUBTYPE = 1
+	CxlDeviceEventSubtype_UnsupportedConfigurationData CXL_DEVICE_EVENT_SUBTYPE = 2
+	CxlDeviceEventSubtype_UnsuportedMemoryMediaFru     CXL_DEVICE_EVENT_SUBTYPE = 3
+)
+
+// String returns the CXL_DEVICE_EVENT_SUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_DEVICE_EVENT_SUBTYPE) String() string {
+	switch e {
+	case CxlDeviceEventSubtype_NotReported:
+		return "CxlDeviceEventSubtype_NotReported"
+	case CxlDeviceEventSubtype_InvalidConfigurationData:
+		return "CxlDeviceEventSubtype_InvalidConfigurationData"
+	case CxlDeviceEventSubtype_UnsupportedConfigurationData:
+		return "CxlDeviceEventSubtype_UnsupportedConfigurationData"
+	case CxlDeviceEventSubtype_UnsuportedMemoryMediaFru:
+		return "CxlDeviceEventSubtype_UnsuportedMemoryMediaFru"
+	default:
+		return fmt.Sprintf("CXL_DEVICE_EVENT_SUBTYPE(%d)", int32(e))
+	}
+}
+
+type CXL_DEVICE_EVENT_TYPE int32
+
+const (
+	CxlDeviceEventType_HealthStatusChange                     CXL_DEVICE_EVENT_TYPE = 0
+	CxlDeviceEventType_MediaStatusChange                      CXL_DEVICE_EVENT_TYPE = 1
+	CxlDeviceEventType_LifeUsedChange                         CXL_DEVICE_EVENT_TYPE = 2
+	CxlDeviceEventType_TemperatureChange                      CXL_DEVICE_EVENT_TYPE = 3
+	CxlDeviceEventType_DataPathError                          CXL_DEVICE_EVENT_TYPE = 4
+	CxlDeviceEventType_LsaError                               CXL_DEVICE_EVENT_TYPE = 5
+	CxlDeviceEventType_UnrecorverableInternalSideBandBusError CXL_DEVICE_EVENT_TYPE = 6
+	CxlDeviceEventType_MemoryMediaFruError                    CXL_DEVICE_EVENT_TYPE = 7
+	CxlDeviceEventType_PowerManagementFault                   CXL_DEVICE_EVENT_TYPE = 8
+)
+
+// String returns the CXL_DEVICE_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_DEVICE_EVENT_TYPE) String() string {
+	switch e {
+	case CxlDeviceEventType_HealthStatusChange:
+		return "CxlDeviceEventType_HealthStatusChange"
+	case CxlDeviceEventType_MediaStatusChange:
+		return "CxlDeviceEventType_MediaStatusChange"
+	case CxlDeviceEventType_LifeUsedChange:
+		return "CxlDeviceEventType_LifeUsedChange"
+	case CxlDeviceEventType_TemperatureChange:
+		return "CxlDeviceEventType_TemperatureChange"
+	case CxlDeviceEventType_DataPathError:
+		return "CxlDeviceEventType_DataPathError"
+	case CxlDeviceEventType_LsaError:
+		return "CxlDeviceEventType_LsaError"
+	case CxlDeviceEventType_UnrecorverableInternalSideBandBusError:
+		return "CxlDeviceEventType_UnrecorverableInternalSideBandBusError"
+	case CxlDeviceEventType_MemoryMediaFruError:
+		return "CxlDeviceEventType_MemoryMediaFruError"
+	case CxlDeviceEventType_PowerManagementFault:
+		return "CxlDeviceEventType_PowerManagementFault"
+	default:
+		return fmt.Sprintf("CXL_DEVICE_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
+type CXL_DRAM_EVENT_TYPE int32
+
+const (
+	CxlDRAMEventType_MediaEccError               CXL_DRAM_EVENT_TYPE = 0
+	CxlDRAMEventType_ScrubMediaEccError          CXL_DRAM_EVENT_TYPE = 1
+	CxlDRAMEventType_InvAddress                  CXL_DRAM_EVENT_TYPE = 2
+	CxlDRAMEventType_DataPathError               CXL_DRAM_EVENT_TYPE = 3
+	CxlDRAMEventType_TeStateViolation            CXL_DRAM_EVENT_TYPE = 4
+	CxlDRAMEventType_AdvProgCorrMemErrCounterExp CXL_DRAM_EVENT_TYPE = 5
+	CxlDRAMEventType_CkidViolation               CXL_DRAM_EVENT_TYPE = 6
+)
+
+// String returns the CXL_DRAM_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_DRAM_EVENT_TYPE) String() string {
+	switch e {
+	case CxlDRAMEventType_MediaEccError:
+		return "CxlDRAMEventType_MediaEccError"
+	case CxlDRAMEventType_ScrubMediaEccError:
+		return "CxlDRAMEventType_ScrubMediaEccError"
+	case CxlDRAMEventType_InvAddress:
+		return "CxlDRAMEventType_InvAddress"
+	case CxlDRAMEventType_DataPathError:
+		return "CxlDRAMEventType_DataPathError"
+	case CxlDRAMEventType_TeStateViolation:
+		return "CxlDRAMEventType_TeStateViolation"
+	case CxlDRAMEventType_AdvProgCorrMemErrCounterExp:
+		return "CxlDRAMEventType_AdvProgCorrMemErrCounterExp"
+	case CxlDRAMEventType_CkidViolation:
+		return "CxlDRAMEventType_CkidViolation"
+	default:
+		return fmt.Sprintf("CXL_DRAM_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
+type CXL_EVENT_RECORD_SEVERITY int32
+
+const (
+	CxlEventRecordSeverity_Informational CXL_EVENT_RECORD_SEVERITY = 0
+	CxlEventRecordSeverity_Warning       CXL_EVENT_RECORD_SEVERITY = 1
+	CxlEventRecordSeverity_Failure       CXL_EVENT_RECORD_SEVERITY = 2
+	CxlEventRecordSeverity_Fatal         CXL_EVENT_RECORD_SEVERITY = 3
+	CxlEventRecordSeverity_Max           CXL_EVENT_RECORD_SEVERITY = 4
+)
+
+// String returns the CXL_EVENT_RECORD_SEVERITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_EVENT_RECORD_SEVERITY) String() string {
+	switch e {
+	case CxlEventRecordSeverity_Informational:
+		return "CxlEventRecordSeverity_Informational"
+	case CxlEventRecordSeverity_Warning:
+		return "CxlEventRecordSeverity_Warning"
+	case CxlEventRecordSeverity_Failure:
+		return "CxlEventRecordSeverity_Failure"
+	case CxlEventRecordSeverity_Fatal:
+		return "CxlEventRecordSeverity_Fatal"
+	case CxlEventRecordSeverity_Max:
+		return "CxlEventRecordSeverity_Max"
+	default:
+		return fmt.Sprintf("CXL_EVENT_RECORD_SEVERITY(%d)", int32(e))
+	}
+}
+
+type CXL_GENERAL_MEDIA_EVENT_TYPE int32
+
+const (
+	CxlGeneralMediaEventType_MediaEccError               CXL_GENERAL_MEDIA_EVENT_TYPE = 0
+	CxlGeneralMediaEventType_InvAddress                  CXL_GENERAL_MEDIA_EVENT_TYPE = 1
+	CxlGeneralMediaEventType_DataPathError               CXL_GENERAL_MEDIA_EVENT_TYPE = 2
+	CxlGeneralMediaEventType_TeStateViolation            CXL_GENERAL_MEDIA_EVENT_TYPE = 3
+	CxlGeneralMediaEventType_ScrubMediaEccError          CXL_GENERAL_MEDIA_EVENT_TYPE = 4
+	CxlGeneralMediaEventType_AdvProgCorrMemErrCounterExp CXL_GENERAL_MEDIA_EVENT_TYPE = 5
+	CxlGeneralMediaEventType_CkidViolation               CXL_GENERAL_MEDIA_EVENT_TYPE = 6
+)
+
+// String returns the CXL_GENERAL_MEDIA_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_GENERAL_MEDIA_EVENT_TYPE) String() string {
+	switch e {
+	case CxlGeneralMediaEventType_MediaEccError:
+		return "CxlGeneralMediaEventType_MediaEccError"
+	case CxlGeneralMediaEventType_InvAddress:
+		return "CxlGeneralMediaEventType_InvAddress"
+	case CxlGeneralMediaEventType_DataPathError:
+		return "CxlGeneralMediaEventType_DataPathError"
+	case CxlGeneralMediaEventType_TeStateViolation:
+		return "CxlGeneralMediaEventType_TeStateViolation"
+	case CxlGeneralMediaEventType_ScrubMediaEccError:
+		return "CxlGeneralMediaEventType_ScrubMediaEccError"
+	case CxlGeneralMediaEventType_AdvProgCorrMemErrCounterExp:
+		return "CxlGeneralMediaEventType_AdvProgCorrMemErrCounterExp"
+	case CxlGeneralMediaEventType_CkidViolation:
+		return "CxlGeneralMediaEventType_CkidViolation"
+	default:
+		return fmt.Sprintf("CXL_GENERAL_MEDIA_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
+type CXL_HDM_DECODER_COUNT int32
+
+const (
+	CxlHdmDecoderCount_1   CXL_HDM_DECODER_COUNT = 0
+	CxlHdmDecoderCount_2   CXL_HDM_DECODER_COUNT = 1
+	CxlHdmDecoderCount_4   CXL_HDM_DECODER_COUNT = 2
+	CxlHdmDecoderCount_6   CXL_HDM_DECODER_COUNT = 3
+	CxlHdmDecoderCount_8   CXL_HDM_DECODER_COUNT = 4
+	CxlHdmDecoderCount_10  CXL_HDM_DECODER_COUNT = 5
+	CxlHdmDecoderCount_12  CXL_HDM_DECODER_COUNT = 6
+	CxlHdmDecoderCount_14  CXL_HDM_DECODER_COUNT = 7
+	CxlHdmDecoderCount_16  CXL_HDM_DECODER_COUNT = 8
+	CxlHdmDecoderCount_20  CXL_HDM_DECODER_COUNT = 9
+	CxlHdmDecoderCount_24  CXL_HDM_DECODER_COUNT = 10
+	CxlHdmDecoderCount_28  CXL_HDM_DECODER_COUNT = 11
+	CxlHdmDecoderCount_32  CXL_HDM_DECODER_COUNT = 12
+	CxlHdmDecoderCount_Max CXL_HDM_DECODER_COUNT = 13
+)
+
+// String returns the CXL_HDM_DECODER_COUNT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_HDM_DECODER_COUNT) String() string {
+	switch e {
+	case CxlHdmDecoderCount_1:
+		return "CxlHdmDecoderCount_1"
+	case CxlHdmDecoderCount_2:
+		return "CxlHdmDecoderCount_2"
+	case CxlHdmDecoderCount_4:
+		return "CxlHdmDecoderCount_4"
+	case CxlHdmDecoderCount_6:
+		return "CxlHdmDecoderCount_6"
+	case CxlHdmDecoderCount_8:
+		return "CxlHdmDecoderCount_8"
+	case CxlHdmDecoderCount_10:
+		return "CxlHdmDecoderCount_10"
+	case CxlHdmDecoderCount_12:
+		return "CxlHdmDecoderCount_12"
+	case CxlHdmDecoderCount_14:
+		return "CxlHdmDecoderCount_14"
+	case CxlHdmDecoderCount_16:
+		return "CxlHdmDecoderCount_16"
+	case CxlHdmDecoderCount_20:
+		return "CxlHdmDecoderCount_20"
+	case CxlHdmDecoderCount_24:
+		return "CxlHdmDecoderCount_24"
+	case CxlHdmDecoderCount_28:
+		return "CxlHdmDecoderCount_28"
+	case CxlHdmDecoderCount_32:
+		return "CxlHdmDecoderCount_32"
+	case CxlHdmDecoderCount_Max:
+		return "CxlHdmDecoderCount_Max"
+	default:
+		return fmt.Sprintf("CXL_HDM_DECODER_COUNT(%d)", int32(e))
+	}
+}
+
+type CXL_INTERLEAVE_GRANULARITY int32
+
+const (
+	CxlInterleaveGranularity_256   CXL_INTERLEAVE_GRANULARITY = 0
+	CxlInterleaveGranularity_512   CXL_INTERLEAVE_GRANULARITY = 1
+	CxlInterleaveGranularity_1024  CXL_INTERLEAVE_GRANULARITY = 2
+	CxlInterleaveGranularity_2048  CXL_INTERLEAVE_GRANULARITY = 3
+	CxlInterleaveGranularity_4096  CXL_INTERLEAVE_GRANULARITY = 4
+	CxlInterleaveGranularity_8192  CXL_INTERLEAVE_GRANULARITY = 5
+	CxlInterleaveGranularity_16384 CXL_INTERLEAVE_GRANULARITY = 6
+	CxlInterleaveGranularity_Max   CXL_INTERLEAVE_GRANULARITY = 7
+)
+
+// String returns the CXL_INTERLEAVE_GRANULARITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_INTERLEAVE_GRANULARITY) String() string {
+	switch e {
+	case CxlInterleaveGranularity_256:
+		return "CxlInterleaveGranularity_256"
+	case CxlInterleaveGranularity_512:
+		return "CxlInterleaveGranularity_512"
+	case CxlInterleaveGranularity_1024:
+		return "CxlInterleaveGranularity_1024"
+	case CxlInterleaveGranularity_2048:
+		return "CxlInterleaveGranularity_2048"
+	case CxlInterleaveGranularity_4096:
+		return "CxlInterleaveGranularity_4096"
+	case CxlInterleaveGranularity_8192:
+		return "CxlInterleaveGranularity_8192"
+	case CxlInterleaveGranularity_16384:
+		return "CxlInterleaveGranularity_16384"
+	case CxlInterleaveGranularity_Max:
+		return "CxlInterleaveGranularity_Max"
+	default:
+		return fmt.Sprintf("CXL_INTERLEAVE_GRANULARITY(%d)", int32(e))
+	}
+}
+
+type CXL_INTERLEAVE_WAYS int32
+
+const (
+	CxlInterleaveWays_1Way  CXL_INTERLEAVE_WAYS = 0
+	CxlInterleaveWays_2Way  CXL_INTERLEAVE_WAYS = 1
+	CxlInterleaveWays_4Way  CXL_INTERLEAVE_WAYS = 2
+	CxlInterleaveWays_8Way  CXL_INTERLEAVE_WAYS = 3
+	CxlInterleaveWays_16Way CXL_INTERLEAVE_WAYS = 4
+	CxlInterleaveWays_3Way  CXL_INTERLEAVE_WAYS = 8
+	CxlInterleaveWays_6Way  CXL_INTERLEAVE_WAYS = 9
+	CxlInterleaveWays_12Way CXL_INTERLEAVE_WAYS = 10
+	CxlInterleaveWays_Max   CXL_INTERLEAVE_WAYS = 11
+)
+
+// String returns the CXL_INTERLEAVE_WAYS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_INTERLEAVE_WAYS) String() string {
+	switch e {
+	case CxlInterleaveWays_1Way:
+		return "CxlInterleaveWays_1Way"
+	case CxlInterleaveWays_2Way:
+		return "CxlInterleaveWays_2Way"
+	case CxlInterleaveWays_4Way:
+		return "CxlInterleaveWays_4Way"
+	case CxlInterleaveWays_8Way:
+		return "CxlInterleaveWays_8Way"
+	case CxlInterleaveWays_16Way:
+		return "CxlInterleaveWays_16Way"
+	case CxlInterleaveWays_3Way:
+		return "CxlInterleaveWays_3Way"
+	case CxlInterleaveWays_6Way:
+		return "CxlInterleaveWays_6Way"
+	case CxlInterleaveWays_12Way:
+		return "CxlInterleaveWays_12Way"
+	case CxlInterleaveWays_Max:
+		return "CxlInterleaveWays_Max"
+	default:
+		return fmt.Sprintf("CXL_INTERLEAVE_WAYS(%d)", int32(e))
+	}
+}
+
+type CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION int32
+
+const (
+	CxlMailboxActivateFWAction_Online      CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION = 0
+	CxlMailboxActivateFWAction_OnNextReset CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION = 1
+	CxlMailboxActivateFWAction_Max         CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION = 2
+)
+
+// String returns the CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION) String() string {
+	switch e {
+	case CxlMailboxActivateFWAction_Online:
+		return "CxlMailboxActivateFWAction_Online"
+	case CxlMailboxActivateFWAction_OnNextReset:
+		return "CxlMailboxActivateFWAction_OnNextReset"
+	case CxlMailboxActivateFWAction_Max:
+		return "CxlMailboxActivateFWAction_Max"
+	default:
+		return fmt.Sprintf("CXL_MAILBOX_ACTIVATE_FIRMWARE_ACTION(%d)", int32(e))
+	}
+}
+
+type CXL_MAILBOX_CAPABILITY_TYPE int32
+
+const (
+	CxlMailboxCapabilityType_InferredFromPciClassCode CXL_MAILBOX_CAPABILITY_TYPE = 0
+	CxlMailboxCapabilityType_MemoryDeviceCommands     CXL_MAILBOX_CAPABILITY_TYPE = 1
+	CxlMailboxCapabilityType_FMApiCommands            CXL_MAILBOX_CAPABILITY_TYPE = 2
+	CxlMailboxCapabilityType_Max                      CXL_MAILBOX_CAPABILITY_TYPE = 3
+)
+
+// String returns the CXL_MAILBOX_CAPABILITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MAILBOX_CAPABILITY_TYPE) String() string {
+	switch e {
+	case CxlMailboxCapabilityType_InferredFromPciClassCode:
+		return "CxlMailboxCapabilityType_InferredFromPciClassCode"
+	case CxlMailboxCapabilityType_MemoryDeviceCommands:
+		return "CxlMailboxCapabilityType_MemoryDeviceCommands"
+	case CxlMailboxCapabilityType_FMApiCommands:
+		return "CxlMailboxCapabilityType_FMApiCommands"
+	case CxlMailboxCapabilityType_Max:
+		return "CxlMailboxCapabilityType_Max"
+	default:
+		return fmt.Sprintf("CXL_MAILBOX_CAPABILITY_TYPE(%d)", int32(e))
+	}
+}
+
+type CXL_MAILBOX_COMMAND int32
+
+const (
+	CxlMailboxCommand_Identify                          CXL_MAILBOX_COMMAND = 1
+	CxlMailboxCommand_BackgroundOperationStatus         CXL_MAILBOX_COMMAND = 2
+	CxlMailboxCommand_GetResponseMessageLimit           CXL_MAILBOX_COMMAND = 3
+	CxlMailboxCommand_SetResponseMessageLimit           CXL_MAILBOX_COMMAND = 4
+	CxlMailboxCommand_RequestAbortBackgroundOperation   CXL_MAILBOX_COMMAND = 5
+	CxlMailboxCommand_GetEventRecords                   CXL_MAILBOX_COMMAND = 256
+	CxlMailboxCommand_ClearEventRecords                 CXL_MAILBOX_COMMAND = 257
+	CxlMailboxCommand_GetEventInterruptPolicy           CXL_MAILBOX_COMMAND = 258
+	CxlMailboxCommand_SetEventInterruptPolicy           CXL_MAILBOX_COMMAND = 259
+	CxlMailboxCommand_GetMCTPEventInterruptPolicy       CXL_MAILBOX_COMMAND = 260
+	CxlMailboxCommand_SetMCTPEventInterruptPolicy       CXL_MAILBOX_COMMAND = 261
+	CxlMailboxCommand_EventNotification                 CXL_MAILBOX_COMMAND = 262
+	CxlMailboxCommand_GFDEnhancedEventNotification      CXL_MAILBOX_COMMAND = 263
+	CxlMailboxCommand_GFDtoGAEEnhancedEventNotification CXL_MAILBOX_COMMAND = 264
+	CxlMailboxCommand_GetGAMBuffer                      CXL_MAILBOX_COMMAND = 265
+	CxlMailboxCommand_SetGAMBuffer                      CXL_MAILBOX_COMMAND = 266
+	CxlMailboxCommand_GetFWInfo                         CXL_MAILBOX_COMMAND = 512
+	CxlMailboxCommand_TransferFW                        CXL_MAILBOX_COMMAND = 513
+	CxlMailboxCommand_ActivateFW                        CXL_MAILBOX_COMMAND = 514
+	CxlMailboxCommand_GetTimestamp                      CXL_MAILBOX_COMMAND = 768
+	CxlMailboxCommand_SetTimestamp                      CXL_MAILBOX_COMMAND = 769
+	CxlMailboxCommand_GetSupportedLogs                  CXL_MAILBOX_COMMAND = 1024
+	CxlMailboxCommand_GetLog                            CXL_MAILBOX_COMMAND = 1025
+	CxlMailboxCommand_GetLogCapabilities                CXL_MAILBOX_COMMAND = 1026
+	CxlMailboxCommand_ClearLog                          CXL_MAILBOX_COMMAND = 1027
+	CxlMailboxCommand_PopulateLog                       CXL_MAILBOX_COMMAND = 1028
+	CxlMailboxCommand_GetSupportedLogSubList            CXL_MAILBOX_COMMAND = 1029
+	CxlMailboxCommand_GetSupportedFeatures              CXL_MAILBOX_COMMAND = 1280
+	CxlMailboxCommand_GetFeature                        CXL_MAILBOX_COMMAND = 1281
+	CxlMailboxCommand_SetFeature                        CXL_MAILBOX_COMMAND = 1282
+	CxlMailboxCommand_PerformMaintenance                CXL_MAILBOX_COMMAND = 1536
+	CxlMailboxCommand_IdentifyPBRComponent              CXL_MAILBOX_COMMAND = 1792
+	CxlMailboxCommand_ClaimOwnership                    CXL_MAILBOX_COMMAND = 1793
+	CxlMailboxCommand_ReadCDAT                          CXL_MAILBOX_COMMAND = 1794
+	CxlMailboxCommand_IdentifyMemoryDevice              CXL_MAILBOX_COMMAND = 16384
+	CxlMailboxCommand_GetPartitionInfo                  CXL_MAILBOX_COMMAND = 16640
+	CxlMailboxCommand_SetPartitionInfo                  CXL_MAILBOX_COMMAND = 16641
+	CxlMailboxCommand_GetLSA                            CXL_MAILBOX_COMMAND = 16642
+	CxlMailboxCommand_SetLSA                            CXL_MAILBOX_COMMAND = 16643
+	CxlMailboxCommand_GetHealthInfo                     CXL_MAILBOX_COMMAND = 16896
+	CxlMailboxCommand_GetAlertConfiguration             CXL_MAILBOX_COMMAND = 16897
+	CxlMailboxCommand_SetAlertConfiguration             CXL_MAILBOX_COMMAND = 16898
+	CxlMailboxCommand_GetShutdownState                  CXL_MAILBOX_COMMAND = 16899
+	CxlMailboxCommand_SetShutdownState                  CXL_MAILBOX_COMMAND = 16900
+	CxlMailboxCommand_GetPoisonList                     CXL_MAILBOX_COMMAND = 17152
+	CxlMailboxCommand_InjectPoison                      CXL_MAILBOX_COMMAND = 17153
+	CxlMailboxCommand_ClearPoison                       CXL_MAILBOX_COMMAND = 17154
+	CxlMailboxCommand_GetScanMediaCapabilities          CXL_MAILBOX_COMMAND = 17155
+	CxlMailboxCommand_ScanMedia                         CXL_MAILBOX_COMMAND = 17156
+	CxlMailboxCommand_GetScanMediaResults               CXL_MAILBOX_COMMAND = 17157
+	CxlMailboxCommand_Sanitize                          CXL_MAILBOX_COMMAND = 17408
+	CxlMailboxCommand_SecureErase                       CXL_MAILBOX_COMMAND = 17409
+	CxlMailboxCommand_MediaOperations                   CXL_MAILBOX_COMMAND = 17410
+	CxlMailboxCommand_GetSecurityState                  CXL_MAILBOX_COMMAND = 17664
+	CxlMailboxCommand_SetPassphrase                     CXL_MAILBOX_COMMAND = 17665
+	CxlMailboxCommand_DisablePassphrase                 CXL_MAILBOX_COMMAND = 17666
+	CxlMailboxCommand_Unlock                            CXL_MAILBOX_COMMAND = 17667
+	CxlMailboxCommand_FreezeSecurityState               CXL_MAILBOX_COMMAND = 17668
+	CxlMailboxCommand_passphraseSecureErase             CXL_MAILBOX_COMMAND = 17669
+	CxlMailboxCommand_SecuritySend                      CXL_MAILBOX_COMMAND = 17920
+	CxlMailboxCommand_SecurityReceive                   CXL_MAILBOX_COMMAND = 17921
+	CxlMailboxCommand_GetSLDQoSControl                  CXL_MAILBOX_COMMAND = 18176
+	CxlMailboxCommand_SetSLDQoSControl                  CXL_MAILBOX_COMMAND = 18177
+	CxlMailboxCommand_GetSLDQoSStatus                   CXL_MAILBOX_COMMAND = 18178
+	CxlMailboxCommand_GetDynamicCapacityConfiguration   CXL_MAILBOX_COMMAND = 18432
+	CxlMailboxCommand_GetDynamicCapacityExtentList      CXL_MAILBOX_COMMAND = 18433
+	CxlMailboxCommand_AddDynamicCapacityResponse        CXL_MAILBOX_COMMAND = 18434
+	CxlMailboxCommand_ReleaseDynamicCapacity            CXL_MAILBOX_COMMAND = 18435
+	CxlMailboxCommand_IdentifyGFD                       CXL_MAILBOX_COMMAND = 18688
+	CxlMailboxCommand_GetGFDStatus                      CXL_MAILBOX_COMMAND = 18689
+	CxlMailboxCommand_GetGFDDcRegionConfiguration       CXL_MAILBOX_COMMAND = 18690
+	CxlMailboxCommand_SetGFDDcRegionConfiguration       CXL_MAILBOX_COMMAND = 18691
+	CxlMailboxCommand_GetGFDDcRegionExtentLists         CXL_MAILBOX_COMMAND = 18692
+	CxlMailboxCommand_GetGFDDmpConfiguration            CXL_MAILBOX_COMMAND = 18693
+	CxlMailboxCommand_SetGFDDmpConfiguration            CXL_MAILBOX_COMMAND = 18694
+	CxlMailboxCommand_GFDDynamicCapacityAdd             CXL_MAILBOX_COMMAND = 18695
+	CxlMailboxCommand_GFDDynamicCapacityRelease         CXL_MAILBOX_COMMAND = 18696
+	CxlMailboxCommand_GFDDynamicCapacityAddReference    CXL_MAILBOX_COMMAND = 18697
+	CxlMailboxCommand_GFDDynamicCapacityRemoveReference CXL_MAILBOX_COMMAND = 18698
+	CxlMailboxCommand_GFDDynamicCapacityListTags        CXL_MAILBOX_COMMAND = 18699
+	CxlMailboxCommand_GetGFDSatEntry                    CXL_MAILBOX_COMMAND = 18700
+	CxlMailboxCommand_SetGFDSatEntry                    CXL_MAILBOX_COMMAND = 18701
+	CxlMailboxCommand_GetGFDQoSControl                  CXL_MAILBOX_COMMAND = 18702
+	CxlMailboxCommand_SetGFDQoSControl                  CXL_MAILBOX_COMMAND = 18703
+	CxlMailboxCommand_GetGFDQoSStatus                   CXL_MAILBOX_COMMAND = 18704
+	CxlMailboxCommand_GetGFDQoSBWLimit                  CXL_MAILBOX_COMMAND = 18705
+	CxlMailboxCommand_SetGFDQoSBWLimit                  CXL_MAILBOX_COMMAND = 18706
+	CxlMailboxCommand_GetGDTConfiguration               CXL_MAILBOX_COMMAND = 18707
+	CxlMailboxCommand_SetGDTConfiguration               CXL_MAILBOX_COMMAND = 18708
+)
+
+// String returns the CXL_MAILBOX_COMMAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MAILBOX_COMMAND) String() string {
+	switch e {
+	case CxlMailboxCommand_Identify:
+		return "CxlMailboxCommand_Identify"
+	case CxlMailboxCommand_BackgroundOperationStatus:
+		return "CxlMailboxCommand_BackgroundOperationStatus"
+	case CxlMailboxCommand_GetResponseMessageLimit:
+		return "CxlMailboxCommand_GetResponseMessageLimit"
+	case CxlMailboxCommand_SetResponseMessageLimit:
+		return "CxlMailboxCommand_SetResponseMessageLimit"
+	case CxlMailboxCommand_RequestAbortBackgroundOperation:
+		return "CxlMailboxCommand_RequestAbortBackgroundOperation"
+	case CxlMailboxCommand_GetEventRecords:
+		return "CxlMailboxCommand_GetEventRecords"
+	case CxlMailboxCommand_ClearEventRecords:
+		return "CxlMailboxCommand_ClearEventRecords"
+	case CxlMailboxCommand_GetEventInterruptPolicy:
+		return "CxlMailboxCommand_GetEventInterruptPolicy"
+	case CxlMailboxCommand_SetEventInterruptPolicy:
+		return "CxlMailboxCommand_SetEventInterruptPolicy"
+	case CxlMailboxCommand_GetMCTPEventInterruptPolicy:
+		return "CxlMailboxCommand_GetMCTPEventInterruptPolicy"
+	case CxlMailboxCommand_SetMCTPEventInterruptPolicy:
+		return "CxlMailboxCommand_SetMCTPEventInterruptPolicy"
+	case CxlMailboxCommand_EventNotification:
+		return "CxlMailboxCommand_EventNotification"
+	case CxlMailboxCommand_GFDEnhancedEventNotification:
+		return "CxlMailboxCommand_GFDEnhancedEventNotification"
+	case CxlMailboxCommand_GFDtoGAEEnhancedEventNotification:
+		return "CxlMailboxCommand_GFDtoGAEEnhancedEventNotification"
+	case CxlMailboxCommand_GetGAMBuffer:
+		return "CxlMailboxCommand_GetGAMBuffer"
+	case CxlMailboxCommand_SetGAMBuffer:
+		return "CxlMailboxCommand_SetGAMBuffer"
+	case CxlMailboxCommand_GetFWInfo:
+		return "CxlMailboxCommand_GetFWInfo"
+	case CxlMailboxCommand_TransferFW:
+		return "CxlMailboxCommand_TransferFW"
+	case CxlMailboxCommand_ActivateFW:
+		return "CxlMailboxCommand_ActivateFW"
+	case CxlMailboxCommand_GetTimestamp:
+		return "CxlMailboxCommand_GetTimestamp"
+	case CxlMailboxCommand_SetTimestamp:
+		return "CxlMailboxCommand_SetTimestamp"
+	case CxlMailboxCommand_GetSupportedLogs:
+		return "CxlMailboxCommand_GetSupportedLogs"
+	case CxlMailboxCommand_GetLog:
+		return "CxlMailboxCommand_GetLog"
+	case CxlMailboxCommand_GetLogCapabilities:
+		return "CxlMailboxCommand_GetLogCapabilities"
+	case CxlMailboxCommand_ClearLog:
+		return "CxlMailboxCommand_ClearLog"
+	case CxlMailboxCommand_PopulateLog:
+		return "CxlMailboxCommand_PopulateLog"
+	case CxlMailboxCommand_GetSupportedLogSubList:
+		return "CxlMailboxCommand_GetSupportedLogSubList"
+	case CxlMailboxCommand_GetSupportedFeatures:
+		return "CxlMailboxCommand_GetSupportedFeatures"
+	case CxlMailboxCommand_GetFeature:
+		return "CxlMailboxCommand_GetFeature"
+	case CxlMailboxCommand_SetFeature:
+		return "CxlMailboxCommand_SetFeature"
+	case CxlMailboxCommand_PerformMaintenance:
+		return "CxlMailboxCommand_PerformMaintenance"
+	case CxlMailboxCommand_IdentifyPBRComponent:
+		return "CxlMailboxCommand_IdentifyPBRComponent"
+	case CxlMailboxCommand_ClaimOwnership:
+		return "CxlMailboxCommand_ClaimOwnership"
+	case CxlMailboxCommand_ReadCDAT:
+		return "CxlMailboxCommand_ReadCDAT"
+	case CxlMailboxCommand_IdentifyMemoryDevice:
+		return "CxlMailboxCommand_IdentifyMemoryDevice"
+	case CxlMailboxCommand_GetPartitionInfo:
+		return "CxlMailboxCommand_GetPartitionInfo"
+	case CxlMailboxCommand_SetPartitionInfo:
+		return "CxlMailboxCommand_SetPartitionInfo"
+	case CxlMailboxCommand_GetLSA:
+		return "CxlMailboxCommand_GetLSA"
+	case CxlMailboxCommand_SetLSA:
+		return "CxlMailboxCommand_SetLSA"
+	case CxlMailboxCommand_GetHealthInfo:
+		return "CxlMailboxCommand_GetHealthInfo"
+	case CxlMailboxCommand_GetAlertConfiguration:
+		return "CxlMailboxCommand_GetAlertConfiguration"
+	case CxlMailboxCommand_SetAlertConfiguration:
+		return "CxlMailboxCommand_SetAlertConfiguration"
+	case CxlMailboxCommand_GetShutdownState:
+		return "CxlMailboxCommand_GetShutdownState"
+	case CxlMailboxCommand_SetShutdownState:
+		return "CxlMailboxCommand_SetShutdownState"
+	case CxlMailboxCommand_GetPoisonList:
+		return "CxlMailboxCommand_GetPoisonList"
+	case CxlMailboxCommand_InjectPoison:
+		return "CxlMailboxCommand_InjectPoison"
+	case CxlMailboxCommand_ClearPoison:
+		return "CxlMailboxCommand_ClearPoison"
+	case CxlMailboxCommand_GetScanMediaCapabilities:
+		return "CxlMailboxCommand_GetScanMediaCapabilities"
+	case CxlMailboxCommand_ScanMedia:
+		return "CxlMailboxCommand_ScanMedia"
+	case CxlMailboxCommand_GetScanMediaResults:
+		return "CxlMailboxCommand_GetScanMediaResults"
+	case CxlMailboxCommand_Sanitize:
+		return "CxlMailboxCommand_Sanitize"
+	case CxlMailboxCommand_SecureErase:
+		return "CxlMailboxCommand_SecureErase"
+	case CxlMailboxCommand_MediaOperations:
+		return "CxlMailboxCommand_MediaOperations"
+	case CxlMailboxCommand_GetSecurityState:
+		return "CxlMailboxCommand_GetSecurityState"
+	case CxlMailboxCommand_SetPassphrase:
+		return "CxlMailboxCommand_SetPassphrase"
+	case CxlMailboxCommand_DisablePassphrase:
+		return "CxlMailboxCommand_DisablePassphrase"
+	case CxlMailboxCommand_Unlock:
+		return "CxlMailboxCommand_Unlock"
+	case CxlMailboxCommand_FreezeSecurityState:
+		return "CxlMailboxCommand_FreezeSecurityState"
+	case CxlMailboxCommand_passphraseSecureErase:
+		return "CxlMailboxCommand_passphraseSecureErase"
+	case CxlMailboxCommand_SecuritySend:
+		return "CxlMailboxCommand_SecuritySend"
+	case CxlMailboxCommand_SecurityReceive:
+		return "CxlMailboxCommand_SecurityReceive"
+	case CxlMailboxCommand_GetSLDQoSControl:
+		return "CxlMailboxCommand_GetSLDQoSControl"
+	case CxlMailboxCommand_SetSLDQoSControl:
+		return "CxlMailboxCommand_SetSLDQoSControl"
+	case CxlMailboxCommand_GetSLDQoSStatus:
+		return "CxlMailboxCommand_GetSLDQoSStatus"
+	case CxlMailboxCommand_GetDynamicCapacityConfiguration:
+		return "CxlMailboxCommand_GetDynamicCapacityConfiguration"
+	case CxlMailboxCommand_GetDynamicCapacityExtentList:
+		return "CxlMailboxCommand_GetDynamicCapacityExtentList"
+	case CxlMailboxCommand_AddDynamicCapacityResponse:
+		return "CxlMailboxCommand_AddDynamicCapacityResponse"
+	case CxlMailboxCommand_ReleaseDynamicCapacity:
+		return "CxlMailboxCommand_ReleaseDynamicCapacity"
+	case CxlMailboxCommand_IdentifyGFD:
+		return "CxlMailboxCommand_IdentifyGFD"
+	case CxlMailboxCommand_GetGFDStatus:
+		return "CxlMailboxCommand_GetGFDStatus"
+	case CxlMailboxCommand_GetGFDDcRegionConfiguration:
+		return "CxlMailboxCommand_GetGFDDcRegionConfiguration"
+	case CxlMailboxCommand_SetGFDDcRegionConfiguration:
+		return "CxlMailboxCommand_SetGFDDcRegionConfiguration"
+	case CxlMailboxCommand_GetGFDDcRegionExtentLists:
+		return "CxlMailboxCommand_GetGFDDcRegionExtentLists"
+	case CxlMailboxCommand_GetGFDDmpConfiguration:
+		return "CxlMailboxCommand_GetGFDDmpConfiguration"
+	case CxlMailboxCommand_SetGFDDmpConfiguration:
+		return "CxlMailboxCommand_SetGFDDmpConfiguration"
+	case CxlMailboxCommand_GFDDynamicCapacityAdd:
+		return "CxlMailboxCommand_GFDDynamicCapacityAdd"
+	case CxlMailboxCommand_GFDDynamicCapacityRelease:
+		return "CxlMailboxCommand_GFDDynamicCapacityRelease"
+	case CxlMailboxCommand_GFDDynamicCapacityAddReference:
+		return "CxlMailboxCommand_GFDDynamicCapacityAddReference"
+	case CxlMailboxCommand_GFDDynamicCapacityRemoveReference:
+		return "CxlMailboxCommand_GFDDynamicCapacityRemoveReference"
+	case CxlMailboxCommand_GFDDynamicCapacityListTags:
+		return "CxlMailboxCommand_GFDDynamicCapacityListTags"
+	case CxlMailboxCommand_GetGFDSatEntry:
+		return "CxlMailboxCommand_GetGFDSatEntry"
+	case CxlMailboxCommand_SetGFDSatEntry:
+		return "CxlMailboxCommand_SetGFDSatEntry"
+	case CxlMailboxCommand_GetGFDQoSControl:
+		return "CxlMailboxCommand_GetGFDQoSControl"
+	case CxlMailboxCommand_SetGFDQoSControl:
+		return "CxlMailboxCommand_SetGFDQoSControl"
+	case CxlMailboxCommand_GetGFDQoSStatus:
+		return "CxlMailboxCommand_GetGFDQoSStatus"
+	case CxlMailboxCommand_GetGFDQoSBWLimit:
+		return "CxlMailboxCommand_GetGFDQoSBWLimit"
+	case CxlMailboxCommand_SetGFDQoSBWLimit:
+		return "CxlMailboxCommand_SetGFDQoSBWLimit"
+	case CxlMailboxCommand_GetGDTConfiguration:
+		return "CxlMailboxCommand_GetGDTConfiguration"
+	case CxlMailboxCommand_SetGDTConfiguration:
+		return "CxlMailboxCommand_SetGDTConfiguration"
+	default:
+		return fmt.Sprintf("CXL_MAILBOX_COMMAND(%d)", int32(e))
+	}
+}
+
+type CXL_MAILBOX_EVENT_LOG int32
+
+const (
+	CxlMailboxEventRecords_InformationalEventLog   CXL_MAILBOX_EVENT_LOG = 0
+	CxlMailboxEventRecords_WarningEventLog         CXL_MAILBOX_EVENT_LOG = 1
+	CxlMailboxEventRecords_FailureEventLog         CXL_MAILBOX_EVENT_LOG = 2
+	CxlMailboxEventRecords_FatalEventLog           CXL_MAILBOX_EVENT_LOG = 3
+	CxlMailboxEventRecords_DynamicCapacityEventLog CXL_MAILBOX_EVENT_LOG = 4
+)
+
+// String returns the CXL_MAILBOX_EVENT_LOG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MAILBOX_EVENT_LOG) String() string {
+	switch e {
+	case CxlMailboxEventRecords_InformationalEventLog:
+		return "CxlMailboxEventRecords_InformationalEventLog"
+	case CxlMailboxEventRecords_WarningEventLog:
+		return "CxlMailboxEventRecords_WarningEventLog"
+	case CxlMailboxEventRecords_FailureEventLog:
+		return "CxlMailboxEventRecords_FailureEventLog"
+	case CxlMailboxEventRecords_FatalEventLog:
+		return "CxlMailboxEventRecords_FatalEventLog"
+	case CxlMailboxEventRecords_DynamicCapacityEventLog:
+		return "CxlMailboxEventRecords_DynamicCapacityEventLog"
+	default:
+		return fmt.Sprintf("CXL_MAILBOX_EVENT_LOG(%d)", int32(e))
+	}
+}
+
+type CXL_MAILBOX_INTERRUPT_POLICY_MODE int32
+
+const (
+	CxlMailboxInterruptPolicyMode_NoInterrupts CXL_MAILBOX_INTERRUPT_POLICY_MODE = 0
+	CxlMailboxInterruptPolicyMode_MsiMsiX      CXL_MAILBOX_INTERRUPT_POLICY_MODE = 1
+	CxlMailboxInterruptPolicyMode_FwInterrupt  CXL_MAILBOX_INTERRUPT_POLICY_MODE = 2
+	CxlMailboxInterruptPolicyMode_Reserved     CXL_MAILBOX_INTERRUPT_POLICY_MODE = 3
+)
+
+// String returns the CXL_MAILBOX_INTERRUPT_POLICY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MAILBOX_INTERRUPT_POLICY_MODE) String() string {
+	switch e {
+	case CxlMailboxInterruptPolicyMode_NoInterrupts:
+		return "CxlMailboxInterruptPolicyMode_NoInterrupts"
+	case CxlMailboxInterruptPolicyMode_MsiMsiX:
+		return "CxlMailboxInterruptPolicyMode_MsiMsiX"
+	case CxlMailboxInterruptPolicyMode_FwInterrupt:
+		return "CxlMailboxInterruptPolicyMode_FwInterrupt"
+	case CxlMailboxInterruptPolicyMode_Reserved:
+		return "CxlMailboxInterruptPolicyMode_Reserved"
+	default:
+		return fmt.Sprintf("CXL_MAILBOX_INTERRUPT_POLICY_MODE(%d)", int32(e))
+	}
+}
+
+type CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE int32
+
+const (
+	CxlMailboxErrorRecordSource_Unknown        CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE = 0
+	CxlMailboxErrorRecordSource_External       CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE = 1
+	CxlMailboxErrorRecordSource_Internal       CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE = 2
+	CxlMailboxErrorRecordSource_Injected       CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE = 3
+	CxlMailboxErrorRecordSource_VendorSpecific CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE = 4
+	CxlMailboxErrorRecordSource_Max            CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE = 5
+)
+
+// String returns the CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE) String() string {
+	switch e {
+	case CxlMailboxErrorRecordSource_Unknown:
+		return "CxlMailboxErrorRecordSource_Unknown"
+	case CxlMailboxErrorRecordSource_External:
+		return "CxlMailboxErrorRecordSource_External"
+	case CxlMailboxErrorRecordSource_Internal:
+		return "CxlMailboxErrorRecordSource_Internal"
+	case CxlMailboxErrorRecordSource_Injected:
+		return "CxlMailboxErrorRecordSource_Injected"
+	case CxlMailboxErrorRecordSource_VendorSpecific:
+		return "CxlMailboxErrorRecordSource_VendorSpecific"
+	case CxlMailboxErrorRecordSource_Max:
+		return "CxlMailboxErrorRecordSource_Max"
+	default:
+		return fmt.Sprintf("CXL_MAILBOX_MEDIA_ERROR_RECORD_SOURCE(%d)", int32(e))
+	}
+}
+
+type CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION int32
+
+const (
+	CxlMailboxTransferFWAction_FullFWTransfer     CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION = 0
+	CxlMailboxTransferFWAction_InitiateFWTransfer CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION = 1
+	CxlMailboxTransferFWAction_ContinueFWTransfer CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION = 2
+	CxlMailboxTransferFWAction_EndTransfer        CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION = 3
+	CxlMailboxTransferFWAction_AbortTransfer      CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION = 4
+	CxlMailboxTransferFWAction_Max                CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION = 5
+)
+
+// String returns the CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION) String() string {
+	switch e {
+	case CxlMailboxTransferFWAction_FullFWTransfer:
+		return "CxlMailboxTransferFWAction_FullFWTransfer"
+	case CxlMailboxTransferFWAction_InitiateFWTransfer:
+		return "CxlMailboxTransferFWAction_InitiateFWTransfer"
+	case CxlMailboxTransferFWAction_ContinueFWTransfer:
+		return "CxlMailboxTransferFWAction_ContinueFWTransfer"
+	case CxlMailboxTransferFWAction_EndTransfer:
+		return "CxlMailboxTransferFWAction_EndTransfer"
+	case CxlMailboxTransferFWAction_AbortTransfer:
+		return "CxlMailboxTransferFWAction_AbortTransfer"
+	case CxlMailboxTransferFWAction_Max:
+		return "CxlMailboxTransferFWAction_Max"
+	default:
+		return fmt.Sprintf("CXL_MAILBOX_TRANSFER_FIRMWARE_ACTION(%d)", int32(e))
+	}
+}
+
+type CXL_MEDIA_STATUS int32
+
+const (
+	CxlMediaStatus_Normal                        CXL_MEDIA_STATUS = 0
+	CxlMediaStatus_NotReady                      CXL_MEDIA_STATUS = 1
+	CxlMediaStatus_WritePersistencyLost          CXL_MEDIA_STATUS = 2
+	CxlMediaStatus_AllDataLost                   CXL_MEDIA_STATUS = 3
+	CxlMediaStatus_WritePersistencyLossPowerLoss CXL_MEDIA_STATUS = 4
+	CxlMediaStatus_WritePersistencyLossShutdown  CXL_MEDIA_STATUS = 5
+	CxlMediaStatus_WritePersistencyLossImminent  CXL_MEDIA_STATUS = 6
+	CxlMediaStatus_AllDataLossPowerLoss          CXL_MEDIA_STATUS = 7
+	CxlMediaStatus_AllDataLossShutdown           CXL_MEDIA_STATUS = 8
+	CxlMediaStatus_AllDataLossImminent           CXL_MEDIA_STATUS = 9
+)
+
+// String returns the CXL_MEDIA_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MEDIA_STATUS) String() string {
+	switch e {
+	case CxlMediaStatus_Normal:
+		return "CxlMediaStatus_Normal"
+	case CxlMediaStatus_NotReady:
+		return "CxlMediaStatus_NotReady"
+	case CxlMediaStatus_WritePersistencyLost:
+		return "CxlMediaStatus_WritePersistencyLost"
+	case CxlMediaStatus_AllDataLost:
+		return "CxlMediaStatus_AllDataLost"
+	case CxlMediaStatus_WritePersistencyLossPowerLoss:
+		return "CxlMediaStatus_WritePersistencyLossPowerLoss"
+	case CxlMediaStatus_WritePersistencyLossShutdown:
+		return "CxlMediaStatus_WritePersistencyLossShutdown"
+	case CxlMediaStatus_WritePersistencyLossImminent:
+		return "CxlMediaStatus_WritePersistencyLossImminent"
+	case CxlMediaStatus_AllDataLossPowerLoss:
+		return "CxlMediaStatus_AllDataLossPowerLoss"
+	case CxlMediaStatus_AllDataLossShutdown:
+		return "CxlMediaStatus_AllDataLossShutdown"
+	case CxlMediaStatus_AllDataLossImminent:
+		return "CxlMediaStatus_AllDataLossImminent"
+	default:
+		return fmt.Sprintf("CXL_MEDIA_STATUS(%d)", int32(e))
+	}
+}
+
+type CXL_MEMORY_DEVICE_MEDIA_STATUS int32
+
+const (
+	CxlMemoryDeviceMediaStatus_NotReady CXL_MEMORY_DEVICE_MEDIA_STATUS = 0
+	CxlMemoryDeviceMediaStatus_Ready    CXL_MEMORY_DEVICE_MEDIA_STATUS = 1
+	CxlMemoryDeviceMediaStatus_Error    CXL_MEMORY_DEVICE_MEDIA_STATUS = 2
+	CxlMemoryDeviceMediaStatus_Disabled CXL_MEMORY_DEVICE_MEDIA_STATUS = 3
+	CxlMemoryDeviceMediaStatus_Max      CXL_MEMORY_DEVICE_MEDIA_STATUS = 4
+)
+
+// String returns the CXL_MEMORY_DEVICE_MEDIA_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MEMORY_DEVICE_MEDIA_STATUS) String() string {
+	switch e {
+	case CxlMemoryDeviceMediaStatus_NotReady:
+		return "CxlMemoryDeviceMediaStatus_NotReady"
+	case CxlMemoryDeviceMediaStatus_Ready:
+		return "CxlMemoryDeviceMediaStatus_Ready"
+	case CxlMemoryDeviceMediaStatus_Error:
+		return "CxlMemoryDeviceMediaStatus_Error"
+	case CxlMemoryDeviceMediaStatus_Disabled:
+		return "CxlMemoryDeviceMediaStatus_Disabled"
+	case CxlMemoryDeviceMediaStatus_Max:
+		return "CxlMemoryDeviceMediaStatus_Max"
+	default:
+		return fmt.Sprintf("CXL_MEMORY_DEVICE_MEDIA_STATUS(%d)", int32(e))
+	}
+}
+
+type CXL_MEMORY_EVENT_SUBTYPE int32
+
+const (
+	CxlMemoryEventSubtype_NotReported                   CXL_MEMORY_EVENT_SUBTYPE = 0
+	CxlMemoryEventSubtype_InternalDatapathError         CXL_MEMORY_EVENT_SUBTYPE = 1
+	CxlMemoryEventSubtype_MediaLinkCommandTrainingError CXL_MEMORY_EVENT_SUBTYPE = 2
+	CxlMemoryEventSubtype_MediaLinkDataTrainingError    CXL_MEMORY_EVENT_SUBTYPE = 3
+	CxlMemoryEventSubtype_MediaLinkCrcError             CXL_MEMORY_EVENT_SUBTYPE = 4
+)
+
+// String returns the CXL_MEMORY_EVENT_SUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_MEMORY_EVENT_SUBTYPE) String() string {
+	switch e {
+	case CxlMemoryEventSubtype_NotReported:
+		return "CxlMemoryEventSubtype_NotReported"
+	case CxlMemoryEventSubtype_InternalDatapathError:
+		return "CxlMemoryEventSubtype_InternalDatapathError"
+	case CxlMemoryEventSubtype_MediaLinkCommandTrainingError:
+		return "CxlMemoryEventSubtype_MediaLinkCommandTrainingError"
+	case CxlMemoryEventSubtype_MediaLinkDataTrainingError:
+		return "CxlMemoryEventSubtype_MediaLinkDataTrainingError"
+	case CxlMemoryEventSubtype_MediaLinkCrcError:
+		return "CxlMemoryEventSubtype_MediaLinkCrcError"
+	default:
+		return fmt.Sprintf("CXL_MEMORY_EVENT_SUBTYPE(%d)", int32(e))
+	}
+}
+
+type CXL_SPARE_RESOURCES int32
+
+const (
+	CxlSpareResources_NoneAvailable        CXL_SPARE_RESOURCES = 0
+	CxlSpareResources_OneAvailable         CXL_SPARE_RESOURCES = 1
+	CxlSpareResources_TwoAvailable         CXL_SPARE_RESOURCES = 2
+	CxlSpareResources_ThreeOrMoreAvailable CXL_SPARE_RESOURCES = 3
+)
+
+// String returns the CXL_SPARE_RESOURCES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_SPARE_RESOURCES) String() string {
+	switch e {
+	case CxlSpareResources_NoneAvailable:
+		return "CxlSpareResources_NoneAvailable"
+	case CxlSpareResources_OneAvailable:
+		return "CxlSpareResources_OneAvailable"
+	case CxlSpareResources_TwoAvailable:
+		return "CxlSpareResources_TwoAvailable"
+	case CxlSpareResources_ThreeOrMoreAvailable:
+		return "CxlSpareResources_ThreeOrMoreAvailable"
+	default:
+		return fmt.Sprintf("CXL_SPARE_RESOURCES(%d)", int32(e))
+	}
+}
+
+type CXL_SPARING_RESULT int32
+
+const (
+	CxlSparingResult_Success            CXL_SPARING_RESULT = 0
+	CxlSparingResult_ResourcesExhausted CXL_SPARING_RESULT = 1
+	CxlSparingResult_GeneralFailure     CXL_SPARING_RESULT = 255
+)
+
+// String returns the CXL_SPARING_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_SPARING_RESULT) String() string {
+	switch e {
+	case CxlSparingResult_Success:
+		return "CxlSparingResult_Success"
+	case CxlSparingResult_ResourcesExhausted:
+		return "CxlSparingResult_ResourcesExhausted"
+	case CxlSparingResult_GeneralFailure:
+		return "CxlSparingResult_GeneralFailure"
+	default:
+		return fmt.Sprintf("CXL_SPARING_RESULT(%d)", int32(e))
+	}
+}
+
+type CXL_TRANSACTION_TYPE int32
+
+const (
+	CxlTransactionType_Unknown                 CXL_TRANSACTION_TYPE = 0
+	CxlTransactionType_HostRead                CXL_TRANSACTION_TYPE = 1
+	CxlTransactionType_HostWrite               CXL_TRANSACTION_TYPE = 2
+	CxlTransactionType_HostScanMedia           CXL_TRANSACTION_TYPE = 3
+	CxlTransactionType_HostInjectPoison        CXL_TRANSACTION_TYPE = 4
+	CxlTransactionType_MediaPatrolScrub        CXL_TRANSACTION_TYPE = 5
+	CxlTransactionType_MediaManagement         CXL_TRANSACTION_TYPE = 6
+	CxlTransactionType_InternalMediaCheckScrub CXL_TRANSACTION_TYPE = 7
+	CxlTransactionType_MediaInitialization     CXL_TRANSACTION_TYPE = 8
+)
+
+// String returns the CXL_TRANSACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CXL_TRANSACTION_TYPE) String() string {
+	switch e {
+	case CxlTransactionType_Unknown:
+		return "CxlTransactionType_Unknown"
+	case CxlTransactionType_HostRead:
+		return "CxlTransactionType_HostRead"
+	case CxlTransactionType_HostWrite:
+		return "CxlTransactionType_HostWrite"
+	case CxlTransactionType_HostScanMedia:
+		return "CxlTransactionType_HostScanMedia"
+	case CxlTransactionType_HostInjectPoison:
+		return "CxlTransactionType_HostInjectPoison"
+	case CxlTransactionType_MediaPatrolScrub:
+		return "CxlTransactionType_MediaPatrolScrub"
+	case CxlTransactionType_MediaManagement:
+		return "CxlTransactionType_MediaManagement"
+	case CxlTransactionType_InternalMediaCheckScrub:
+		return "CxlTransactionType_InternalMediaCheckScrub"
+	case CxlTransactionType_MediaInitialization:
+		return "CxlTransactionType_MediaInitialization"
+	default:
+		return fmt.Sprintf("CXL_TRANSACTION_TYPE(%d)", int32(e))
+	}
+}
+
 type DETECTION_TYPE int32
 
 const (

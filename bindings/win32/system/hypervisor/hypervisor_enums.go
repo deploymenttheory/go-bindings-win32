@@ -871,12 +871,102 @@ func (e WHV_ALLOCATE_VPCI_RESOURCE_FLAGS) String() string {
 	return strings.Join(parts, "|")
 }
 
+type WHV_ARM64_IC_EMULATION_MODE int32
+
+const (
+	WHvArm64IcEmulationModeNone  WHV_ARM64_IC_EMULATION_MODE = 0
+	WHvArm64IcEmulationModeGicV3 WHV_ARM64_IC_EMULATION_MODE = 1
+)
+
+// String returns the WHV_ARM64_IC_EMULATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_ARM64_IC_EMULATION_MODE) String() string {
+	switch e {
+	case WHvArm64IcEmulationModeNone:
+		return "WHvArm64IcEmulationModeNone"
+	case WHvArm64IcEmulationModeGicV3:
+		return "WHvArm64IcEmulationModeGicV3"
+	default:
+		return fmt.Sprintf("WHV_ARM64_IC_EMULATION_MODE(%d)", int32(e))
+	}
+}
+
+type WHV_ARM64_PENDING_EVENT_TYPE int32
+
+const (
+	WHvArm64PendingEventException          WHV_ARM64_PENDING_EVENT_TYPE = 0
+	WHvArm64PendingEventSyntheticException WHV_ARM64_PENDING_EVENT_TYPE = 1
+)
+
+// String returns the WHV_ARM64_PENDING_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_ARM64_PENDING_EVENT_TYPE) String() string {
+	switch e {
+	case WHvArm64PendingEventException:
+		return "WHvArm64PendingEventException"
+	case WHvArm64PendingEventSyntheticException:
+		return "WHvArm64PendingEventSyntheticException"
+	default:
+		return fmt.Sprintf("WHV_ARM64_PENDING_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
+type WHV_ARM64_RESET_TYPE int32
+
+const (
+	WHvArm64ResetTypePowerOff WHV_ARM64_RESET_TYPE = 0
+	WHvArm64ResetTypeReboot   WHV_ARM64_RESET_TYPE = 1
+)
+
+// String returns the WHV_ARM64_RESET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_ARM64_RESET_TYPE) String() string {
+	switch e {
+	case WHvArm64ResetTypePowerOff:
+		return "WHvArm64ResetTypePowerOff"
+	case WHvArm64ResetTypeReboot:
+		return "WHvArm64ResetTypeReboot"
+	default:
+		return fmt.Sprintf("WHV_ARM64_RESET_TYPE(%d)", int32(e))
+	}
+}
+
+type WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE int32
+
+const (
+	WHvArm64SyntheticExceptionTypeSmc                 WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE = 0
+	WHvArm64SyntheticExceptionTypeSecure              WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE = 1
+	WHvArm64SyntheticExceptionTypeCrashdump           WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE = 2
+	WHvArm64SyntheticExceptionTypeVirtualizationFault WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE = 3
+	WHvArm64SyntheticExceptionTypeMax                 WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE = 64
+)
+
+// String returns the WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE) String() string {
+	switch e {
+	case WHvArm64SyntheticExceptionTypeSmc:
+		return "WHvArm64SyntheticExceptionTypeSmc"
+	case WHvArm64SyntheticExceptionTypeSecure:
+		return "WHvArm64SyntheticExceptionTypeSecure"
+	case WHvArm64SyntheticExceptionTypeCrashdump:
+		return "WHvArm64SyntheticExceptionTypeCrashdump"
+	case WHvArm64SyntheticExceptionTypeVirtualizationFault:
+		return "WHvArm64SyntheticExceptionTypeVirtualizationFault"
+	case WHvArm64SyntheticExceptionTypeMax:
+		return "WHvArm64SyntheticExceptionTypeMax"
+	default:
+		return fmt.Sprintf("WHV_ARM64_SYNTHETIC_EXCEPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_CACHE_TYPE int32
 
 const (
 	WHvCacheTypeUncached       WHV_CACHE_TYPE = 0
 	WHvCacheTypeWriteCombining WHV_CACHE_TYPE = 1
 	WHvCacheTypeWriteThrough   WHV_CACHE_TYPE = 4
+	WHvCacheTypeWriteProtected WHV_CACHE_TYPE = 5
 	WHvCacheTypeWriteBack      WHV_CACHE_TYPE = 6
 )
 
@@ -890,6 +980,8 @@ func (e WHV_CACHE_TYPE) String() string {
 		return "WHvCacheTypeWriteCombining"
 	case WHvCacheTypeWriteThrough:
 		return "WHvCacheTypeWriteThrough"
+	case WHvCacheTypeWriteProtected:
+		return "WHvCacheTypeWriteProtected"
 	case WHvCacheTypeWriteBack:
 		return "WHvCacheTypeWriteBack"
 	default:
@@ -917,6 +1009,24 @@ const (
 	WHvCapabilityCodeProcessorFrequencyCap           WHV_CAPABILITY_CODE = 4103
 	WHvCapabilityCodeSyntheticProcessorFeaturesBanks WHV_CAPABILITY_CODE = 4104
 	WHvCapabilityCodeProcessorPerfmonFeatures        WHV_CAPABILITY_CODE = 4105
+	WHvCapabilityCodePhysicalAddressWidth            WHV_CAPABILITY_CODE = 4106
+	WHvCapabilityCodeVmxBasic                        WHV_CAPABILITY_CODE = 8192
+	WHvCapabilityCodeVmxPinbasedCtls                 WHV_CAPABILITY_CODE = 8193
+	WHvCapabilityCodeVmxProcbasedCtls                WHV_CAPABILITY_CODE = 8194
+	WHvCapabilityCodeVmxExitCtls                     WHV_CAPABILITY_CODE = 8195
+	WHvCapabilityCodeVmxEntryCtls                    WHV_CAPABILITY_CODE = 8196
+	WHvCapabilityCodeVmxMisc                         WHV_CAPABILITY_CODE = 8197
+	WHvCapabilityCodeVmxCr0Fixed0                    WHV_CAPABILITY_CODE = 8198
+	WHvCapabilityCodeVmxCr0Fixed1                    WHV_CAPABILITY_CODE = 8199
+	WHvCapabilityCodeVmxCr4Fixed0                    WHV_CAPABILITY_CODE = 8200
+	WHvCapabilityCodeVmxCr4Fixed1                    WHV_CAPABILITY_CODE = 8201
+	WHvCapabilityCodeVmxVmcsEnum                     WHV_CAPABILITY_CODE = 8202
+	WHvCapabilityCodeVmxProcbasedCtls2               WHV_CAPABILITY_CODE = 8203
+	WHvCapabilityCodeVmxEptVpidCap                   WHV_CAPABILITY_CODE = 8204
+	WHvCapabilityCodeVmxTruePinbasedCtls             WHV_CAPABILITY_CODE = 8205
+	WHvCapabilityCodeVmxTrueProcbasedCtls            WHV_CAPABILITY_CODE = 8206
+	WHvCapabilityCodeVmxTrueExitCtls                 WHV_CAPABILITY_CODE = 8207
+	WHvCapabilityCodeVmxTrueEntryCtls                WHV_CAPABILITY_CODE = 8208
 )
 
 // String returns the WHV_CAPABILITY_CODE constant's name, or its numeric form when
@@ -957,6 +1067,42 @@ func (e WHV_CAPABILITY_CODE) String() string {
 		return "WHvCapabilityCodeSyntheticProcessorFeaturesBanks"
 	case WHvCapabilityCodeProcessorPerfmonFeatures:
 		return "WHvCapabilityCodeProcessorPerfmonFeatures"
+	case WHvCapabilityCodePhysicalAddressWidth:
+		return "WHvCapabilityCodePhysicalAddressWidth"
+	case WHvCapabilityCodeVmxBasic:
+		return "WHvCapabilityCodeVmxBasic"
+	case WHvCapabilityCodeVmxPinbasedCtls:
+		return "WHvCapabilityCodeVmxPinbasedCtls"
+	case WHvCapabilityCodeVmxProcbasedCtls:
+		return "WHvCapabilityCodeVmxProcbasedCtls"
+	case WHvCapabilityCodeVmxExitCtls:
+		return "WHvCapabilityCodeVmxExitCtls"
+	case WHvCapabilityCodeVmxEntryCtls:
+		return "WHvCapabilityCodeVmxEntryCtls"
+	case WHvCapabilityCodeVmxMisc:
+		return "WHvCapabilityCodeVmxMisc"
+	case WHvCapabilityCodeVmxCr0Fixed0:
+		return "WHvCapabilityCodeVmxCr0Fixed0"
+	case WHvCapabilityCodeVmxCr0Fixed1:
+		return "WHvCapabilityCodeVmxCr0Fixed1"
+	case WHvCapabilityCodeVmxCr4Fixed0:
+		return "WHvCapabilityCodeVmxCr4Fixed0"
+	case WHvCapabilityCodeVmxCr4Fixed1:
+		return "WHvCapabilityCodeVmxCr4Fixed1"
+	case WHvCapabilityCodeVmxVmcsEnum:
+		return "WHvCapabilityCodeVmxVmcsEnum"
+	case WHvCapabilityCodeVmxProcbasedCtls2:
+		return "WHvCapabilityCodeVmxProcbasedCtls2"
+	case WHvCapabilityCodeVmxEptVpidCap:
+		return "WHvCapabilityCodeVmxEptVpidCap"
+	case WHvCapabilityCodeVmxTruePinbasedCtls:
+		return "WHvCapabilityCodeVmxTruePinbasedCtls"
+	case WHvCapabilityCodeVmxTrueProcbasedCtls:
+		return "WHvCapabilityCodeVmxTrueProcbasedCtls"
+	case WHvCapabilityCodeVmxTrueExitCtls:
+		return "WHvCapabilityCodeVmxTrueExitCtls"
+	case WHvCapabilityCodeVmxTrueEntryCtls:
+		return "WHvCapabilityCodeVmxTrueEntryCtls"
 	default:
 		return fmt.Sprintf("WHV_CAPABILITY_CODE(%d)", int32(e))
 	}
@@ -1007,6 +1153,7 @@ const (
 	WHvX64ExceptionTypeAlignmentCheckFault          WHV_EXCEPTION_TYPE = 17
 	WHvX64ExceptionTypeMachineCheckAbort            WHV_EXCEPTION_TYPE = 18
 	WHvX64ExceptionTypeSimdFloatingPointFault       WHV_EXCEPTION_TYPE = 19
+	WHvX64ExceptionTypeControlProtectionFault       WHV_EXCEPTION_TYPE = 21
 )
 
 // String returns the WHV_EXCEPTION_TYPE constant's name, or its numeric form when
@@ -1047,6 +1194,8 @@ func (e WHV_EXCEPTION_TYPE) String() string {
 		return "WHvX64ExceptionTypeMachineCheckAbort"
 	case WHvX64ExceptionTypeSimdFloatingPointFault:
 		return "WHvX64ExceptionTypeSimdFloatingPointFault"
+	case WHvX64ExceptionTypeControlProtectionFault:
+		return "WHvX64ExceptionTypeControlProtectionFault"
 	default:
 		return fmt.Sprintf("WHV_EXCEPTION_TYPE(%d)", int32(e))
 	}
@@ -1203,6 +1352,26 @@ func (e WHV_MSR_ACTION) String() string {
 	}
 }
 
+type WHV_NESTED_STATE_TYPE int32
+
+const (
+	WHvNestedStateTypeVmx WHV_NESTED_STATE_TYPE = 0
+	WHvNestedStateTypeSvm WHV_NESTED_STATE_TYPE = 1
+)
+
+// String returns the WHV_NESTED_STATE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_NESTED_STATE_TYPE) String() string {
+	switch e {
+	case WHvNestedStateTypeVmx:
+		return "WHvNestedStateTypeVmx"
+	case WHvNestedStateTypeSvm:
+		return "WHvNestedStateTypeSvm"
+	default:
+		return fmt.Sprintf("WHV_NESTED_STATE_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_NOTIFICATION_PORT_PROPERTY_CODE int32
 
 const (
@@ -1292,6 +1461,7 @@ const (
 	WHvPartitionPropertyCodeProcessorPerfmonFeatures        WHV_PARTITION_PROPERTY_CODE = 4110
 	WHvPartitionPropertyCodeMsrActionList                   WHV_PARTITION_PROPERTY_CODE = 4111
 	WHvPartitionPropertyCodeUnimplementedMsrAction          WHV_PARTITION_PROPERTY_CODE = 4112
+	WHvPartitionPropertyCodePhysicalAddressWidth            WHV_PARTITION_PROPERTY_CODE = 4113
 	WHvPartitionPropertyCodeProcessorCount                  WHV_PARTITION_PROPERTY_CODE = 8191
 )
 
@@ -1357,6 +1527,8 @@ func (e WHV_PARTITION_PROPERTY_CODE) String() string {
 		return "WHvPartitionPropertyCodeMsrActionList"
 	case WHvPartitionPropertyCodeUnimplementedMsrAction:
 		return "WHvPartitionPropertyCodeUnimplementedMsrAction"
+	case WHvPartitionPropertyCodePhysicalAddressWidth:
+		return "WHvPartitionPropertyCodePhysicalAddressWidth"
 	case WHvPartitionPropertyCodeProcessorCount:
 		return "WHvPartitionPropertyCodeProcessorCount"
 	default:
@@ -1399,6 +1571,7 @@ const (
 	WHvProcessorVendorAmd   WHV_PROCESSOR_VENDOR = 0
 	WHvProcessorVendorIntel WHV_PROCESSOR_VENDOR = 1
 	WHvProcessorVendorHygon WHV_PROCESSOR_VENDOR = 2
+	WHvProcessorVendorArm   WHV_PROCESSOR_VENDOR = 16
 )
 
 // String returns the WHV_PROCESSOR_VENDOR constant's name, or its numeric form when
@@ -1411,6 +1584,8 @@ func (e WHV_PROCESSOR_VENDOR) String() string {
 		return "WHvProcessorVendorIntel"
 	case WHvProcessorVendorHygon:
 		return "WHvProcessorVendorHygon"
+	case WHvProcessorVendorArm:
+		return "WHvProcessorVendorArm"
 	default:
 		return fmt.Sprintf("WHV_PROCESSOR_VENDOR(%d)", int32(e))
 	}
@@ -1569,6 +1744,27 @@ const (
 	WHvX64RegisterUmwaitControl               WHV_REGISTER_NAME = 8344
 	WHvX64RegisterXfd                         WHV_REGISTER_NAME = 8345
 	WHvX64RegisterXfdErr                      WHV_REGISTER_NAME = 8346
+	WHvX64RegisterMsrIa32MiscEnable           WHV_REGISTER_NAME = 8352
+	WHvX64RegisterIa32FeatureControl          WHV_REGISTER_NAME = 8353
+	WHvX64RegisterIa32VmxBasic                WHV_REGISTER_NAME = 8354
+	WHvX64RegisterIa32VmxPinbasedCtls         WHV_REGISTER_NAME = 8355
+	WHvX64RegisterIa32VmxProcbasedCtls        WHV_REGISTER_NAME = 8356
+	WHvX64RegisterIa32VmxExitCtls             WHV_REGISTER_NAME = 8357
+	WHvX64RegisterIa32VmxEntryCtls            WHV_REGISTER_NAME = 8358
+	WHvX64RegisterIa32VmxMisc                 WHV_REGISTER_NAME = 8359
+	WHvX64RegisterIa32VmxCr0Fixed0            WHV_REGISTER_NAME = 8360
+	WHvX64RegisterIa32VmxCr0Fixed1            WHV_REGISTER_NAME = 8361
+	WHvX64RegisterIa32VmxCr4Fixed0            WHV_REGISTER_NAME = 8362
+	WHvX64RegisterIa32VmxCr4Fixed1            WHV_REGISTER_NAME = 8363
+	WHvX64RegisterIa32VmxVmcsEnum             WHV_REGISTER_NAME = 8364
+	WHvX64RegisterIa32VmxProcbasedCtls2       WHV_REGISTER_NAME = 8365
+	WHvX64RegisterIa32VmxEptVpidCap           WHV_REGISTER_NAME = 8366
+	WHvX64RegisterIa32VmxTruePinbasedCtls     WHV_REGISTER_NAME = 8367
+	WHvX64RegisterIa32VmxTrueProcbasedCtls    WHV_REGISTER_NAME = 8368
+	WHvX64RegisterIa32VmxTrueExitCtls         WHV_REGISTER_NAME = 8369
+	WHvX64RegisterIa32VmxTrueEntryCtls        WHV_REGISTER_NAME = 8370
+	WHvX64RegisterAmdVmHsavePa                WHV_REGISTER_NAME = 8371
+	WHvX64RegisterAmdVmCr                     WHV_REGISTER_NAME = 8372
 	WHvX64RegisterApicId                      WHV_REGISTER_NAME = 12290
 	WHvX64RegisterApicVersion                 WHV_REGISTER_NAME = 12291
 	WHvX64RegisterApicTpr                     WHV_REGISTER_NAME = 12296
@@ -1639,12 +1835,20 @@ const (
 	WHvRegisterVpAssistPage                   WHV_REGISTER_NAME = 20499
 	WHvRegisterReferenceTsc                   WHV_REGISTER_NAME = 20503
 	WHvRegisterReferenceTscSequence           WHV_REGISTER_NAME = 20506
+	WHvX64RegisterNestedGuestState            WHV_REGISTER_NAME = 20560
+	WHvX64RegisterNestedCurrentVmGpa          WHV_REGISTER_NAME = 20561
+	WHvX64RegisterNestedVmxInvEpt             WHV_REGISTER_NAME = 20562
+	WHvX64RegisterNestedVmxInvVpid            WHV_REGISTER_NAME = 20563
 	WHvRegisterPendingInterruption            WHV_REGISTER_NAME = -2147483648
 	WHvRegisterInterruptState                 WHV_REGISTER_NAME = -2147483647
 	WHvRegisterPendingEvent                   WHV_REGISTER_NAME = -2147483646
+	WHvRegisterPendingEvent1                  WHV_REGISTER_NAME = -2147483645
 	WHvX64RegisterDeliverabilityNotifications WHV_REGISTER_NAME = -2147483644
+	WHvRegisterDeliverabilityNotifications    WHV_REGISTER_NAME = -2147483644
 	WHvRegisterInternalActivityState          WHV_REGISTER_NAME = -2147483643
 	WHvX64RegisterPendingDebugException       WHV_REGISTER_NAME = -2147483642
+	WHvRegisterPendingEvent2                  WHV_REGISTER_NAME = -2147483641
+	WHvRegisterPendingEvent3                  WHV_REGISTER_NAME = -2147483640
 )
 
 // String returns the WHV_REGISTER_NAME constant's name, or its numeric form when
@@ -1951,6 +2155,48 @@ func (e WHV_REGISTER_NAME) String() string {
 		return "WHvX64RegisterXfd"
 	case WHvX64RegisterXfdErr:
 		return "WHvX64RegisterXfdErr"
+	case WHvX64RegisterMsrIa32MiscEnable:
+		return "WHvX64RegisterMsrIa32MiscEnable"
+	case WHvX64RegisterIa32FeatureControl:
+		return "WHvX64RegisterIa32FeatureControl"
+	case WHvX64RegisterIa32VmxBasic:
+		return "WHvX64RegisterIa32VmxBasic"
+	case WHvX64RegisterIa32VmxPinbasedCtls:
+		return "WHvX64RegisterIa32VmxPinbasedCtls"
+	case WHvX64RegisterIa32VmxProcbasedCtls:
+		return "WHvX64RegisterIa32VmxProcbasedCtls"
+	case WHvX64RegisterIa32VmxExitCtls:
+		return "WHvX64RegisterIa32VmxExitCtls"
+	case WHvX64RegisterIa32VmxEntryCtls:
+		return "WHvX64RegisterIa32VmxEntryCtls"
+	case WHvX64RegisterIa32VmxMisc:
+		return "WHvX64RegisterIa32VmxMisc"
+	case WHvX64RegisterIa32VmxCr0Fixed0:
+		return "WHvX64RegisterIa32VmxCr0Fixed0"
+	case WHvX64RegisterIa32VmxCr0Fixed1:
+		return "WHvX64RegisterIa32VmxCr0Fixed1"
+	case WHvX64RegisterIa32VmxCr4Fixed0:
+		return "WHvX64RegisterIa32VmxCr4Fixed0"
+	case WHvX64RegisterIa32VmxCr4Fixed1:
+		return "WHvX64RegisterIa32VmxCr4Fixed1"
+	case WHvX64RegisterIa32VmxVmcsEnum:
+		return "WHvX64RegisterIa32VmxVmcsEnum"
+	case WHvX64RegisterIa32VmxProcbasedCtls2:
+		return "WHvX64RegisterIa32VmxProcbasedCtls2"
+	case WHvX64RegisterIa32VmxEptVpidCap:
+		return "WHvX64RegisterIa32VmxEptVpidCap"
+	case WHvX64RegisterIa32VmxTruePinbasedCtls:
+		return "WHvX64RegisterIa32VmxTruePinbasedCtls"
+	case WHvX64RegisterIa32VmxTrueProcbasedCtls:
+		return "WHvX64RegisterIa32VmxTrueProcbasedCtls"
+	case WHvX64RegisterIa32VmxTrueExitCtls:
+		return "WHvX64RegisterIa32VmxTrueExitCtls"
+	case WHvX64RegisterIa32VmxTrueEntryCtls:
+		return "WHvX64RegisterIa32VmxTrueEntryCtls"
+	case WHvX64RegisterAmdVmHsavePa:
+		return "WHvX64RegisterAmdVmHsavePa"
+	case WHvX64RegisterAmdVmCr:
+		return "WHvX64RegisterAmdVmCr"
 	case WHvX64RegisterApicId:
 		return "WHvX64RegisterApicId"
 	case WHvX64RegisterApicVersion:
@@ -2091,18 +2337,32 @@ func (e WHV_REGISTER_NAME) String() string {
 		return "WHvRegisterReferenceTsc"
 	case WHvRegisterReferenceTscSequence:
 		return "WHvRegisterReferenceTscSequence"
+	case WHvX64RegisterNestedGuestState:
+		return "WHvX64RegisterNestedGuestState"
+	case WHvX64RegisterNestedCurrentVmGpa:
+		return "WHvX64RegisterNestedCurrentVmGpa"
+	case WHvX64RegisterNestedVmxInvEpt:
+		return "WHvX64RegisterNestedVmxInvEpt"
+	case WHvX64RegisterNestedVmxInvVpid:
+		return "WHvX64RegisterNestedVmxInvVpid"
 	case WHvRegisterPendingInterruption:
 		return "WHvRegisterPendingInterruption"
 	case WHvRegisterInterruptState:
 		return "WHvRegisterInterruptState"
 	case WHvRegisterPendingEvent:
 		return "WHvRegisterPendingEvent"
+	case WHvRegisterPendingEvent1:
+		return "WHvRegisterPendingEvent1"
 	case WHvX64RegisterDeliverabilityNotifications:
 		return "WHvX64RegisterDeliverabilityNotifications"
 	case WHvRegisterInternalActivityState:
 		return "WHvRegisterInternalActivityState"
 	case WHvX64RegisterPendingDebugException:
 		return "WHvX64RegisterPendingDebugException"
+	case WHvRegisterPendingEvent2:
+		return "WHvRegisterPendingEvent2"
+	case WHvRegisterPendingEvent3:
+		return "WHvRegisterPendingEvent3"
 	default:
 		return fmt.Sprintf("WHV_REGISTER_NAME(%d)", int32(e))
 	}
@@ -2330,6 +2590,7 @@ const (
 	WHvVirtualProcessorStateTypeSynicTimerState           WHV_VIRTUAL_PROCESSOR_STATE_TYPE = 2
 	WHvVirtualProcessorStateTypeInterruptControllerState2 WHV_VIRTUAL_PROCESSOR_STATE_TYPE = 4096
 	WHvVirtualProcessorStateTypeXsaveState                WHV_VIRTUAL_PROCESSOR_STATE_TYPE = 4097
+	WHvVirtualProcessorStateTypeNestedState               WHV_VIRTUAL_PROCESSOR_STATE_TYPE = 4098
 )
 
 // String returns the WHV_VIRTUAL_PROCESSOR_STATE_TYPE constant's name, or its numeric form when
@@ -2346,6 +2607,8 @@ func (e WHV_VIRTUAL_PROCESSOR_STATE_TYPE) String() string {
 		return "WHvVirtualProcessorStateTypeInterruptControllerState2"
 	case WHvVirtualProcessorStateTypeXsaveState:
 		return "WHvVirtualProcessorStateTypeXsaveState"
+	case WHvVirtualProcessorStateTypeNestedState:
+		return "WHvVirtualProcessorStateTypeNestedState"
 	default:
 		return fmt.Sprintf("WHV_VIRTUAL_PROCESSOR_STATE_TYPE(%d)", int32(e))
 	}
@@ -2556,8 +2819,10 @@ func (e WHV_X64_LOCAL_APIC_EMULATION_MODE) String() string {
 type WHV_X64_PENDING_EVENT_TYPE int32
 
 const (
-	WHvX64PendingEventException WHV_X64_PENDING_EVENT_TYPE = 0
-	WHvX64PendingEventExtInt    WHV_X64_PENDING_EVENT_TYPE = 5
+	WHvX64PendingEventException     WHV_X64_PENDING_EVENT_TYPE = 0
+	WHvX64PendingEventExtInt        WHV_X64_PENDING_EVENT_TYPE = 5
+	WHvX64PendingEventSvmNestedExit WHV_X64_PENDING_EVENT_TYPE = 7
+	WHvX64PendingEventVmxNestedExit WHV_X64_PENDING_EVENT_TYPE = 8
 )
 
 // String returns the WHV_X64_PENDING_EVENT_TYPE constant's name, or its numeric form when
@@ -2568,6 +2833,10 @@ func (e WHV_X64_PENDING_EVENT_TYPE) String() string {
 		return "WHvX64PendingEventException"
 	case WHvX64PendingEventExtInt:
 		return "WHvX64PendingEventExtInt"
+	case WHvX64PendingEventSvmNestedExit:
+		return "WHvX64PendingEventSvmNestedExit"
+	case WHvX64PendingEventVmxNestedExit:
+		return "WHvX64PendingEventVmxNestedExit"
 	default:
 		return fmt.Sprintf("WHV_X64_PENDING_EVENT_TYPE(%d)", int32(e))
 	}

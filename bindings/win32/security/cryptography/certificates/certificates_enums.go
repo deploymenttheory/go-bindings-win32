@@ -4335,6 +4335,7 @@ const (
 	SCEPMessageGetCert              X509SCEPMessageType = 21
 	SCEPMessageGetCRL               X509SCEPMessageType = 22
 	SCEPMessageClaimChallengeAnswer X509SCEPMessageType = 41
+	SCEPMessageGetCertifier         X509SCEPMessageType = 198
 )
 
 // String returns the X509SCEPMessageType constant's name, or its numeric form when
@@ -4355,6 +4356,8 @@ func (e X509SCEPMessageType) String() string {
 		return "SCEPMessageGetCRL"
 	case SCEPMessageClaimChallengeAnswer:
 		return "SCEPMessageClaimChallengeAnswer"
+	case SCEPMessageGetCertifier:
+		return "SCEPMessageGetCertifier"
 	default:
 		return fmt.Sprintf("X509SCEPMessageType(%d)", int32(e))
 	}

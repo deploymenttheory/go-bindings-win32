@@ -369,6 +369,20 @@ type NVME_AUTO_POWER_STATE_TRANSITION_ENTRY struct {
 	Reserved1 uint32
 }
 
+// NVME_BOOT_PARTITION_INFORMATION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type NVME_BOOT_PARTITION_INFORMATION struct {
+	Data [1]uint32
+}
+
+type NVME_BOOT_PARTITION_LOG struct {
+	LogIdentifier     byte
+	Reserved0         [3]byte
+	BpInfo            NVME_BOOT_PARTITION_INFORMATION
+	Reserved1         [8]byte
+	BootPartitionData [1]byte
+}
+
 // NVME_CDW0_FEATURE_DSSD_POWER_STATE is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type NVME_CDW0_FEATURE_DSSD_POWER_STATE struct {
@@ -1140,7 +1154,8 @@ type NVME_CONTROLLER_REGISTERS struct {
 	ACQ       NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS
 	CMBLOC    NVME_CONTROLLER_MEMORY_BUFFER_LOCATION
 	CMBSZ     NVME_CONTROLLER_MEMORY_BUFFER_SIZE
-	Reserved1 [9]uint32
+	BPINFO    NVME_BOOT_PARTITION_INFORMATION
+	Reserved1 [8]uint32
 	NSSD      NVME_NVM_SUBSYSTEM_SHUTDOWN
 	CRTO      NVME_CONTROLLER_READY_TIMEOUTS
 	Reserved2 [933]uint32

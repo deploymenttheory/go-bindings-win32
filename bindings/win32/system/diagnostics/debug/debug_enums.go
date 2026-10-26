@@ -161,6 +161,7 @@ const (
 	BOOTPROC_INITIALIZATION_FAILED                           BUGCHECK_ERROR = 110
 	VSL_INITIALIZATION_FAILED                                BUGCHECK_ERROR = 111
 	SOFT_RESTART_FATAL_ERROR                                 BUGCHECK_ERROR = 112
+	SOFT_RESTART_LIVE_DUMP                                   BUGCHECK_ERROR = 113
 	ASSIGN_DRIVE_LETTERS_FAILED                              BUGCHECK_ERROR = 114
 	CONFIG_LIST_FAILED                                       BUGCHECK_ERROR = 115
 	BAD_SYSTEM_CONFIG_INFO                                   BUGCHECK_ERROR = 116
@@ -260,6 +261,7 @@ const (
 	SYSTEM_PTE_MISUSE                                        BUGCHECK_ERROR = 218
 	DRIVER_CORRUPTED_SYSPTES                                 BUGCHECK_ERROR = 219
 	DRIVER_INVALID_STACK_ACCESS                              BUGCHECK_ERROR = 220
+	DRIVER_VERIFIER_MISMATCH                                 BUGCHECK_ERROR = 221
 	POOL_CORRUPTION_IN_FILE_AREA                             BUGCHECK_ERROR = 222
 	IMPERSONATING_WORKER_THREAD                              BUGCHECK_ERROR = 223
 	ACPI_BIOS_FATAL_ERROR                                    BUGCHECK_ERROR = 224
@@ -565,7 +567,14 @@ const (
 	PROCESS_TERMINATE_LIKELY_DEADLOCK                        BUGCHECK_ERROR = 513
 	UNEXPECTED_CODEPATH                                      BUGCHECK_ERROR = 514
 	INVALID_EXTENSION_STATE                                  BUGCHECK_ERROR = 515
-	STORAGE_DRIVER_LIVEDUMP                                  BUGCHECK_ERROR = 519
+	INVALID_CACHED_SYSTEM_TABLE                              BUGCHECK_ERROR = 516
+	KCSAN_RACY_ACCESS                                        BUGCHECK_ERROR = 517
+	MULTITIER_MEMORY_DRIVER_INTERNAL                         BUGCHECK_ERROR = 518
+	FILEINFO_POSSIBLE_DEADLOCK_LIVE_DUMP                     BUGCHECK_ERROR = 519
+	STORAGE_DRIVER_LIVEDUMP                                  BUGCHECK_ERROR = 520
+	STORVSP_LIVEDUMP                                         BUGCHECK_ERROR = 1073742345
+	INTERRUPTS_STATE_MISMATCH                                BUGCHECK_ERROR = 522
+	TEST_INITIATED_CRASH                                     BUGCHECK_ERROR = 523
 	XBOX_VMCTRL_CS_TIMEOUT                                   BUGCHECK_ERROR = 854
 	XBOX_CORRUPTED_IMAGE                                     BUGCHECK_ERROR = 855
 	XBOX_INVERTED_FUNCTION_TABLE_OVERFLOW                    BUGCHECK_ERROR = 856
@@ -577,13 +586,16 @@ const (
 	XBOX_360_SYSTEM_CRASH_RESERVED                           BUGCHECK_ERROR = 1056
 	XBOX_SECURITY_FAILUE                                     BUGCHECK_ERROR = 1057
 	KERNEL_CFG_INIT_FAILURE                                  BUGCHECK_ERROR = 1058
+	ASSERTBUGCODE_I3CHOST_DRIVER                             BUGCHECK_ERROR = 1059
 	MANUALLY_INITIATED_POWER_BUTTON_HOLD_LIVE_DUMP           BUGCHECK_ERROR = 4552
+	MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP          BUGCHECK_ERROR = 8648
+	MANUALLY_INITIATED_POWER_BUTTON_HOLD_KERNEL_LIVE_DUMP    BUGCHECK_ERROR = 12744
 	HYPERVISOR_ERROR                                         BUGCHECK_ERROR = 131073
 	XBOX_MANUALLY_INITIATED_CRASH                            BUGCHECK_ERROR = 196614
-	MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP          BUGCHECK_ERROR = 8648
 	WINLOGON_FATAL_ERROR                                     BUGCHECK_ERROR = 3221226010
 	MANUALLY_INITIATED_CRASH1                                BUGCHECK_ERROR = 3735936685
 	BUGCHECK_CONTEXT_MODIFIER                                BUGCHECK_ERROR = 2147483648
+	SMBD_BUGCHECK_CODE                                       BUGCHECK_ERROR = 1397572164
 )
 
 // String returns the BUGCHECK_ERROR constant's name, or its numeric form when
@@ -836,6 +848,8 @@ func (e BUGCHECK_ERROR) String() string {
 		return "VSL_INITIALIZATION_FAILED"
 	case SOFT_RESTART_FATAL_ERROR:
 		return "SOFT_RESTART_FATAL_ERROR"
+	case SOFT_RESTART_LIVE_DUMP:
+		return "SOFT_RESTART_LIVE_DUMP"
 	case ASSIGN_DRIVE_LETTERS_FAILED:
 		return "ASSIGN_DRIVE_LETTERS_FAILED"
 	case CONFIG_LIST_FAILED:
@@ -1034,6 +1048,8 @@ func (e BUGCHECK_ERROR) String() string {
 		return "DRIVER_CORRUPTED_SYSPTES"
 	case DRIVER_INVALID_STACK_ACCESS:
 		return "DRIVER_INVALID_STACK_ACCESS"
+	case DRIVER_VERIFIER_MISMATCH:
+		return "DRIVER_VERIFIER_MISMATCH"
 	case POOL_CORRUPTION_IN_FILE_AREA:
 		return "POOL_CORRUPTION_IN_FILE_AREA"
 	case IMPERSONATING_WORKER_THREAD:
@@ -1644,8 +1660,22 @@ func (e BUGCHECK_ERROR) String() string {
 		return "UNEXPECTED_CODEPATH"
 	case INVALID_EXTENSION_STATE:
 		return "INVALID_EXTENSION_STATE"
+	case INVALID_CACHED_SYSTEM_TABLE:
+		return "INVALID_CACHED_SYSTEM_TABLE"
+	case KCSAN_RACY_ACCESS:
+		return "KCSAN_RACY_ACCESS"
+	case MULTITIER_MEMORY_DRIVER_INTERNAL:
+		return "MULTITIER_MEMORY_DRIVER_INTERNAL"
+	case FILEINFO_POSSIBLE_DEADLOCK_LIVE_DUMP:
+		return "FILEINFO_POSSIBLE_DEADLOCK_LIVE_DUMP"
 	case STORAGE_DRIVER_LIVEDUMP:
 		return "STORAGE_DRIVER_LIVEDUMP"
+	case STORVSP_LIVEDUMP:
+		return "STORVSP_LIVEDUMP"
+	case INTERRUPTS_STATE_MISMATCH:
+		return "INTERRUPTS_STATE_MISMATCH"
+	case TEST_INITIATED_CRASH:
+		return "TEST_INITIATED_CRASH"
 	case XBOX_VMCTRL_CS_TIMEOUT:
 		return "XBOX_VMCTRL_CS_TIMEOUT"
 	case XBOX_CORRUPTED_IMAGE:
@@ -1668,20 +1698,26 @@ func (e BUGCHECK_ERROR) String() string {
 		return "XBOX_SECURITY_FAILUE"
 	case KERNEL_CFG_INIT_FAILURE:
 		return "KERNEL_CFG_INIT_FAILURE"
+	case ASSERTBUGCODE_I3CHOST_DRIVER:
+		return "ASSERTBUGCODE_I3CHOST_DRIVER"
 	case MANUALLY_INITIATED_POWER_BUTTON_HOLD_LIVE_DUMP:
 		return "MANUALLY_INITIATED_POWER_BUTTON_HOLD_LIVE_DUMP"
+	case MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP:
+		return "MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP"
+	case MANUALLY_INITIATED_POWER_BUTTON_HOLD_KERNEL_LIVE_DUMP:
+		return "MANUALLY_INITIATED_POWER_BUTTON_HOLD_KERNEL_LIVE_DUMP"
 	case HYPERVISOR_ERROR:
 		return "HYPERVISOR_ERROR"
 	case XBOX_MANUALLY_INITIATED_CRASH:
 		return "XBOX_MANUALLY_INITIATED_CRASH"
-	case MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP:
-		return "MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP"
 	case WINLOGON_FATAL_ERROR:
 		return "WINLOGON_FATAL_ERROR"
 	case MANUALLY_INITIATED_CRASH1:
 		return "MANUALLY_INITIATED_CRASH1"
 	case BUGCHECK_CONTEXT_MODIFIER:
 		return "BUGCHECK_CONTEXT_MODIFIER"
+	case SMBD_BUGCHECK_CODE:
+		return "SMBD_BUGCHECK_CODE"
 	default:
 		return fmt.Sprintf("BUGCHECK_ERROR(%d)", uint32(e))
 	}
@@ -2746,7 +2782,8 @@ const (
 	SYMOPT_EX_LASTVALIDDEBUGDIRECTORY IMAGEHLP_EXTENDED_OPTIONS = 1
 	SYMOPT_EX_NOIMPLICITPATTERNSEARCH IMAGEHLP_EXTENDED_OPTIONS = 2
 	SYMOPT_EX_NEVERLOADSYMBOLS        IMAGEHLP_EXTENDED_OPTIONS = 3
-	SYMOPT_EX_MAX                     IMAGEHLP_EXTENDED_OPTIONS = 4
+	SYMOPT_EX_DISALLOW_NETWORK_PATHS  IMAGEHLP_EXTENDED_OPTIONS = 4
+	SYMOPT_EX_MAX                     IMAGEHLP_EXTENDED_OPTIONS = 5
 )
 
 // String returns the IMAGEHLP_EXTENDED_OPTIONS constant's name, or its numeric form when
@@ -2761,6 +2798,8 @@ func (e IMAGEHLP_EXTENDED_OPTIONS) String() string {
 		return "SYMOPT_EX_NOIMPLICITPATTERNSEARCH"
 	case SYMOPT_EX_NEVERLOADSYMBOLS:
 		return "SYMOPT_EX_NEVERLOADSYMBOLS"
+	case SYMOPT_EX_DISALLOW_NETWORK_PATHS:
+		return "SYMOPT_EX_DISALLOW_NETWORK_PATHS"
 	case SYMOPT_EX_MAX:
 		return "SYMOPT_EX_MAX"
 	default:
@@ -3699,27 +3738,29 @@ func (e IPMI_OS_SEL_RECORD_TYPE) String() string {
 type MINIDUMP_CALLBACK_TYPE int32
 
 const (
-	ModuleCallback               MINIDUMP_CALLBACK_TYPE = 0
-	ThreadCallback               MINIDUMP_CALLBACK_TYPE = 1
-	ThreadExCallback             MINIDUMP_CALLBACK_TYPE = 2
-	IncludeThreadCallback        MINIDUMP_CALLBACK_TYPE = 3
-	IncludeModuleCallback        MINIDUMP_CALLBACK_TYPE = 4
-	MemoryCallback               MINIDUMP_CALLBACK_TYPE = 5
-	CancelCallback               MINIDUMP_CALLBACK_TYPE = 6
-	WriteKernelMinidumpCallback  MINIDUMP_CALLBACK_TYPE = 7
-	KernelMinidumpStatusCallback MINIDUMP_CALLBACK_TYPE = 8
-	RemoveMemoryCallback         MINIDUMP_CALLBACK_TYPE = 9
-	IncludeVmRegionCallback      MINIDUMP_CALLBACK_TYPE = 10
-	IoStartCallback              MINIDUMP_CALLBACK_TYPE = 11
-	IoWriteAllCallback           MINIDUMP_CALLBACK_TYPE = 12
-	IoFinishCallback             MINIDUMP_CALLBACK_TYPE = 13
-	ReadMemoryFailureCallback    MINIDUMP_CALLBACK_TYPE = 14
-	SecondaryFlagsCallback       MINIDUMP_CALLBACK_TYPE = 15
-	IsProcessSnapshotCallback    MINIDUMP_CALLBACK_TYPE = 16
-	VmStartCallback              MINIDUMP_CALLBACK_TYPE = 17
-	VmQueryCallback              MINIDUMP_CALLBACK_TYPE = 18
-	VmPreReadCallback            MINIDUMP_CALLBACK_TYPE = 19
-	VmPostReadCallback           MINIDUMP_CALLBACK_TYPE = 20
+	ModuleCallback                       MINIDUMP_CALLBACK_TYPE = 0
+	ThreadCallback                       MINIDUMP_CALLBACK_TYPE = 1
+	ThreadExCallback                     MINIDUMP_CALLBACK_TYPE = 2
+	IncludeThreadCallback                MINIDUMP_CALLBACK_TYPE = 3
+	IncludeModuleCallback                MINIDUMP_CALLBACK_TYPE = 4
+	MemoryCallback                       MINIDUMP_CALLBACK_TYPE = 5
+	CancelCallback                       MINIDUMP_CALLBACK_TYPE = 6
+	WriteKernelMinidumpCallback          MINIDUMP_CALLBACK_TYPE = 7
+	KernelMinidumpStatusCallback         MINIDUMP_CALLBACK_TYPE = 8
+	RemoveMemoryCallback                 MINIDUMP_CALLBACK_TYPE = 9
+	IncludeVmRegionCallback              MINIDUMP_CALLBACK_TYPE = 10
+	IoStartCallback                      MINIDUMP_CALLBACK_TYPE = 11
+	IoWriteAllCallback                   MINIDUMP_CALLBACK_TYPE = 12
+	IoFinishCallback                     MINIDUMP_CALLBACK_TYPE = 13
+	ReadMemoryFailureCallback            MINIDUMP_CALLBACK_TYPE = 14
+	SecondaryFlagsCallback               MINIDUMP_CALLBACK_TYPE = 15
+	IsProcessSnapshotCallback            MINIDUMP_CALLBACK_TYPE = 16
+	VmStartCallback                      MINIDUMP_CALLBACK_TYPE = 17
+	VmQueryCallback                      MINIDUMP_CALLBACK_TYPE = 18
+	VmPreReadCallback                    MINIDUMP_CALLBACK_TYPE = 19
+	VmPostReadCallback                   MINIDUMP_CALLBACK_TYPE = 20
+	CompressedMemoryStreamStartCallback  MINIDUMP_CALLBACK_TYPE = 21
+	CompressedMemoryStreamFinishCallback MINIDUMP_CALLBACK_TYPE = 22
 )
 
 // String returns the MINIDUMP_CALLBACK_TYPE constant's name, or its numeric form when
@@ -3768,6 +3809,10 @@ func (e MINIDUMP_CALLBACK_TYPE) String() string {
 		return "VmPreReadCallback"
 	case VmPostReadCallback:
 		return "VmPostReadCallback"
+	case CompressedMemoryStreamStartCallback:
+		return "CompressedMemoryStreamStartCallback"
+	case CompressedMemoryStreamFinishCallback:
+		return "CompressedMemoryStreamFinishCallback"
 	default:
 		return fmt.Sprintf("MINIDUMP_CALLBACK_TYPE(%d)", int32(e))
 	}
@@ -3890,6 +3935,8 @@ const (
 	ProcessVmCountersStream     MINIDUMP_STREAM_TYPE = 22
 	IptTraceStream              MINIDUMP_STREAM_TYPE = 23
 	ThreadNamesStream           MINIDUMP_STREAM_TYPE = 24
+	CompressedMemoryStream      MINIDUMP_STREAM_TYPE = 25
+	CompressedMemoryStreamSQL   MINIDUMP_STREAM_TYPE = 28672
 	CeStreamNull                MINIDUMP_STREAM_TYPE = 32768
 	CeStreamSystemInfo          MINIDUMP_STREAM_TYPE = 32769
 	CeStreamException           MINIDUMP_STREAM_TYPE = 32770
@@ -3960,6 +4007,10 @@ func (e MINIDUMP_STREAM_TYPE) String() string {
 		return "IptTraceStream"
 	case ThreadNamesStream:
 		return "ThreadNamesStream"
+	case CompressedMemoryStream:
+		return "CompressedMemoryStream"
+	case CompressedMemoryStreamSQL:
+		return "CompressedMemoryStreamSQL"
 	case CeStreamNull:
 		return "CeStreamNull"
 	case CeStreamSystemInfo:
@@ -4056,9 +4107,10 @@ const (
 	MiniDumpWithIptTrace                   MINIDUMP_TYPE = 4194304
 	MiniDumpScanInaccessiblePartialPages   MINIDUMP_TYPE = 8388608
 	MiniDumpFilterWriteCombinedMemory      MINIDUMP_TYPE = 16777216
-	MiniDumpValidTypeFlags                 MINIDUMP_TYPE = 33554431
+	MiniDumpWithMemoryCompressed           MINIDUMP_TYPE = 67108864
+	MiniDumpValidTypeFlags                 MINIDUMP_TYPE = 100663295
 	MiniDumpNoIgnoreInaccessibleMemory     MINIDUMP_TYPE = 33554432
-	MiniDumpValidTypeFlagsEx               MINIDUMP_TYPE = 67108863
+	MiniDumpValidTypeFlagsEx               MINIDUMP_TYPE = 134217727
 )
 
 // String returns the MINIDUMP_TYPE constant's name, or its numeric form when
@@ -4139,6 +4191,9 @@ func (e MINIDUMP_TYPE) String() string {
 	}
 	if e&MiniDumpFilterWriteCombinedMemory != 0 {
 		parts = append(parts, "MiniDumpFilterWriteCombinedMemory")
+	}
+	if e&MiniDumpWithMemoryCompressed != 0 {
+		parts = append(parts, "MiniDumpWithMemoryCompressed")
 	}
 	if e&MiniDumpValidTypeFlags != 0 {
 		parts = append(parts, "MiniDumpValidTypeFlags")

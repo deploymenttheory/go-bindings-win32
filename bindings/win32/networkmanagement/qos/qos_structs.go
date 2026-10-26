@@ -316,6 +316,37 @@ type SIPAEVENT_KSR_SIGNATURE_PAYLOAD struct {
 	Data [9]byte
 }
 
+type SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER struct {
+	Size                             uint32
+	Version                          uint32
+	LeafCertificateFingerprintSize   uint32
+	LeafCertificateFingerprint       [64]byte
+	RootCertificateFingerprintSize   uint32
+	RootCertificateFingerprint       [64]byte
+	AttestedHashSize                 uint32
+	AttestedHash                     [64]byte
+	UserPayloadOffset                uint32
+	UserPayloadSize                  uint32
+	LeafCertificateIssuerBlobOffset  uint32
+	LeafCertificateIssuerBlobSize    uint32
+	LeafCertificateSubjectBlobOffset uint32
+	LeafCertificateSubjectBlobSize   uint32
+	Reserved                         [2]uint64
+	Data                             [1]byte
+}
+
+type SIPAEVENT_REFS_ATTESTATION_SUMMARY_HEADER struct {
+	Size                  uint32
+	Version               uint32
+	AttestedType          SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE
+	AttestedHashSize      uint32
+	AttestedHash          [64]byte
+	ProofOfOriginHashSize uint32
+	ProofOfOriginHash     [64]byte
+	Reserved              [4]uint64
+	CertificateHeader     SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER
+}
+
 type SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA struct {
 	ChecksumType   uint16
 	ChecksumBuffer [1]byte
@@ -354,6 +385,13 @@ type SIPAEVENT_SI_POLICY_PAYLOAD struct {
 // field through an unsafe.Pointer cast.
 type SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD struct {
 	Data [17]byte
+}
+
+// SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY_INFO_V1 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY_INFO_V1 struct {
+	Data [12]byte
 }
 
 // SIPAEVENT_VSM_IDK_INFO_PAYLOAD is a packed C struct (non-default field alignment), exposed as

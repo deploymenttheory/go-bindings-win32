@@ -3170,6 +3170,32 @@ func (e PreferredFormat) String() string {
 	}
 }
 
+type PreferredGraphForm int32
+
+const (
+	GraphFormUnspecified PreferredGraphForm = 0
+	GraphFormGraph       PreferredGraphForm = 1
+	GraphFormTree        PreferredGraphForm = 2
+	GraphFormLinearFlow  PreferredGraphForm = 3
+)
+
+// String returns the PreferredGraphForm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PreferredGraphForm) String() string {
+	switch e {
+	case GraphFormUnspecified:
+		return "GraphFormUnspecified"
+	case GraphFormGraph:
+		return "GraphFormGraph"
+	case GraphFormTree:
+		return "GraphFormTree"
+	case GraphFormLinearFlow:
+		return "GraphFormLinearFlow"
+	default:
+		return fmt.Sprintf("PreferredGraphForm(%d)", int32(e))
+	}
+}
+
 type RawSearchFlags int32
 
 const (

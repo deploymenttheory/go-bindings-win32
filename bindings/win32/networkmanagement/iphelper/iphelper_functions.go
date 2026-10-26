@@ -1088,8 +1088,8 @@ func GetBestInterface(dwDestAddr uint32, pdwBestIfIndex *uint32) uint32 {
 // GetBestInterfaceEx calls IPHLPAPI!GetBestInterfaceEx.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getbestinterfaceex
 // Minimum OS: windows5.1.2600.
-func GetBestInterfaceEx(pDestAddr *networkingwinsock.SOCKADDR, pdwBestIfIndex *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetBestInterfaceEx.Addr(), uintptr(unsafe.Pointer(pDestAddr)), uintptr(unsafe.Pointer(pdwBestIfIndex)))
+func GetBestInterfaceEx(DestinationAddress *networkingwinsock.SOCKADDR, BestIfIndex *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetBestInterfaceEx.Addr(), uintptr(unsafe.Pointer(DestinationAddress)), uintptr(unsafe.Pointer(BestIfIndex)))
 	return uint32(r1)
 }
 

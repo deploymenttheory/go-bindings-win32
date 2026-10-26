@@ -229,6 +229,7 @@ const (
 	DevProp_PciDevice_SriovSupport_MissingPfDriver    DEVPROP_PCIDEVICE_SRIOVSUPPORT = 2
 	DevProp_PciDevice_SriovSupport_NoBusResource      DEVPROP_PCIDEVICE_SRIOVSUPPORT = 3
 	DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace DEVPROP_PCIDEVICE_SRIOVSUPPORT = 4
+	DevProp_PciDevice_SriovSupport_NoSriovCap         DEVPROP_PCIDEVICE_SRIOVSUPPORT = 5
 )
 
 // String returns the DEVPROP_PCIDEVICE_SRIOVSUPPORT constant's name, or its numeric form when
@@ -245,6 +246,8 @@ func (e DEVPROP_PCIDEVICE_SRIOVSUPPORT) String() string {
 		return "DevProp_PciDevice_SriovSupport_NoBusResource"
 	case DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace:
 		return "DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace"
+	case DevProp_PciDevice_SriovSupport_NoSriovCap:
+		return "DevProp_PciDevice_SriovSupport_NoSriovCap"
 	default:
 		return fmt.Sprintf("DEVPROP_PCIDEVICE_SRIOVSUPPORT(%d)", uint32(e))
 	}

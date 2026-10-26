@@ -292,6 +292,548 @@ type CSV_SET_VOLUME_ID struct {
 	VolumeId win32.GUID
 }
 
+// CXL_BACKGROUND_COMMAND_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_BACKGROUND_COMMAND_STATUS_REGISTER struct {
+	Data [1]uint64
+}
+
+// CXL_CACHEMEM_CAPABILITY_HEADER_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_CACHEMEM_CAPABILITY_HEADER_REGISTER struct {
+	Data [1]uint32
+}
+
+type CXL_CACHEMEM_REGISTERS struct {
+	CapabilityHeaderRegister         CXL_CAPABILITY_HEADER_REGISTER
+	CacheMemCapabilityHeaderRegister [1]CXL_CACHEMEM_CAPABILITY_HEADER_REGISTER
+}
+
+// CXL_CAPABILITY_HEADER_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_CAPABILITY_HEADER_REGISTER struct {
+	Data [1]uint32
+}
+
+type CXL_COMMAND_PAYLOAD_REGISTERS struct {
+	Payload [1]uint32
+}
+
+// CXL_COMMAND_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_COMMAND_REGISTER struct {
+	Data [1]uint64
+}
+
+type CXL_COMMON_EVENT_RECORD struct {
+	Header          CXL_COMMON_EVENT_RECORD_HEADER
+	EventRecordData [80]byte
+}
+
+// CXL_COMMON_EVENT_RECORD_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_COMMON_EVENT_RECORD_HEADER struct {
+	Data [48]byte
+}
+
+type CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER struct {
+	Header            CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER_HEADER
+	CapabilitiesCount uint16
+	Reserved          uint16
+	Reserved1         [2]uint32
+}
+
+// CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER_HEADER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER_HEADER struct {
+	Data [1]uint32
+}
+
+type CXL_DEVICE_CAPABILITY_HEADER_REGISTER struct {
+	Header   CXL_DEVICE_CAPABILITY_HEADER_REGISTER_HEADER
+	Offset   uint32
+	Length   uint32
+	Reserved uint32
+}
+
+// CXL_DEVICE_CAPABILITY_HEADER_REGISTER_HEADER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_DEVICE_CAPABILITY_HEADER_REGISTER_HEADER struct {
+	Data [1]uint32
+}
+
+// CXL_DEVICE_HEALTH_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_DEVICE_HEALTH_INFO struct {
+	Data [18]byte
+}
+
+type CXL_DEVICE_REGISTERS struct {
+	CapabilityArrayRegister  CXL_DEVICE_CAPABILITIES_ARRAY_REGISTER
+	CapabilityHeaderRegister [1]CXL_DEVICE_CAPABILITY_HEADER_REGISTER
+}
+
+type CXL_DEVICE_STATUS_REGISTERS struct {
+	EventStatusRegister CXL_EVENT_STATUS_REGISTER
+}
+
+type CXL_DRAM_EVENT_RECORD_AdvProgCorrMemErrThresholdEventFlags_e__Struct struct {
+	Bitfield byte
+}
+
+type CXL_DRAM_EVENT_RECORD_MemoryEventDescriptor_e__Struct struct {
+	Bitfield byte
+}
+
+// CXL_DRAM_EVENT_RECORD_PhysicalAddress_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_DRAM_EVENT_RECORD_PhysicalAddress_e__Struct struct {
+	Data [8]byte
+}
+
+// CXL_DRAM_EVENT_RECORD_ValidityFlags_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_DRAM_EVENT_RECORD_ValidityFlags_e__Struct struct {
+	Data [2]byte
+}
+
+type CXL_DRAM_EVENT_RECORD struct {
+	Header                               CXL_COMMON_EVENT_RECORD_HEADER
+	PhysicalAddress                      CXL_DRAM_EVENT_RECORD_PhysicalAddress_e__Struct
+	MemoryEventDescriptor                CXL_DRAM_EVENT_RECORD_MemoryEventDescriptor_e__Struct
+	MemoryEventType                      byte
+	TransactionType                      byte
+	ValidityFlags                        CXL_DRAM_EVENT_RECORD_ValidityFlags_e__Struct
+	Channel                              byte
+	Rank                                 byte
+	NibbleMask                           [3]byte
+	BankGroup                            byte
+	Bank                                 byte
+	Row                                  [3]byte
+	Column                               [2]byte
+	CorrectionMask                       [32]byte
+	ComponentIdentifier                  [16]byte
+	SubChannel                           byte
+	AdvProgCorrMemErrThresholdEventFlags CXL_DRAM_EVENT_RECORD_AdvProgCorrMemErrThresholdEventFlags_e__Struct
+	CVMECountAtEvent                     [3]byte
+	MemoryEventSubType                   byte
+	Reserved                             byte
+}
+
+// CXL_EVENT_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_EVENT_STATUS_REGISTER struct {
+	Data [1]uint64
+}
+
+type CXL_GENERAL_MEDIA_EVENT_RECORD_AdvProgCorrMemErrThresholdEventFlags_e__Struct struct {
+	Bitfield byte
+}
+
+type CXL_GENERAL_MEDIA_EVENT_RECORD_MemoryEventDescriptor_e__Struct struct {
+	Bitfield byte
+}
+
+// CXL_GENERAL_MEDIA_EVENT_RECORD_PhysicalAddress_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_GENERAL_MEDIA_EVENT_RECORD_PhysicalAddress_e__Struct struct {
+	Data [8]byte
+}
+
+// CXL_GENERAL_MEDIA_EVENT_RECORD_ValidityFlags_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_GENERAL_MEDIA_EVENT_RECORD_ValidityFlags_e__Struct struct {
+	Data [2]byte
+}
+
+type CXL_GENERAL_MEDIA_EVENT_RECORD struct {
+	Header                               CXL_COMMON_EVENT_RECORD_HEADER
+	PhysicalAddress                      CXL_GENERAL_MEDIA_EVENT_RECORD_PhysicalAddress_e__Struct
+	MemoryEventDescriptor                CXL_GENERAL_MEDIA_EVENT_RECORD_MemoryEventDescriptor_e__Struct
+	MemoryEventType                      byte
+	TransactionType                      byte
+	ValidityFlags                        CXL_GENERAL_MEDIA_EVENT_RECORD_ValidityFlags_e__Struct
+	Channel                              byte
+	Rank                                 byte
+	Device                               [3]byte
+	ComponentIdentifier                  [16]byte
+	AdvProgCorrMemErrThresholdEventFlags CXL_GENERAL_MEDIA_EVENT_RECORD_AdvProgCorrMemErrThresholdEventFlags_e__Struct
+	CorrectedMemoryCountAtEvent          [3]byte
+	MemoryEventSubType                   byte
+	Reserved                             [41]byte
+}
+
+// CXL_HDM_DECODER_CAPABILITY_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_CAPABILITY_REGISTER struct {
+	Data [1]uint32
+}
+
+type CXL_HDM_DECODER_CAPABILITY_STRUCTURE struct {
+	CapabilityRegister    CXL_HDM_DECODER_CAPABILITY_REGISTER
+	GlobalControlRegister CXL_HDM_DECODER_GLOBAL_CONTROL_REGISTER
+	Reserved              [2]uint32
+	Decoders              [1]CXL_HDM_DECODER_REGISTERS
+}
+
+// CXL_HDM_DECODER_CONTROL_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_CONTROL_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_HDM_DECODER_DPA_SKIP_LOW_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_DPA_SKIP_LOW_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_HDM_DECODER_GLOBAL_CONTROL_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_GLOBAL_CONTROL_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_HDM_DECODER_REGISTERS_u1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_REGISTERS_u1_e__Union struct {
+	Data [1]uint32
+}
+
+// CXL_HDM_DECODER_REGISTERS_u2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_REGISTERS_u2_e__Union struct {
+	Data [1]uint32
+}
+
+type CXL_HDM_DECODER_REGISTERS struct {
+	MemoryBaseLow  CXL_HDM_MEMORY_BASE_LOW
+	MemoryBaseHigh uint32
+	MemorySizeLow  CXL_HDM_MEMORY_SIZE_LOW
+	MemorySizeHigh uint32
+	Control        CXL_HDM_DECODER_CONTROL_REGISTER
+	U1             CXL_HDM_DECODER_REGISTERS_u1_e__Union
+	U2             CXL_HDM_DECODER_REGISTERS_u2_e__Union
+	Reserved       uint32
+}
+
+// CXL_HDM_DECODER_TARGET_LIST_HIGH_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_TARGET_LIST_HIGH_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_HDM_DECODER_TARGET_LIST_LOW_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_DECODER_TARGET_LIST_LOW_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_HDM_MEMORY_BASE_LOW is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_MEMORY_BASE_LOW struct {
+	Data [1]uint32
+}
+
+// CXL_HDM_MEMORY_SIZE_LOW is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_HDM_MEMORY_SIZE_LOW struct {
+	Data [1]uint32
+}
+
+type CXL_INTERRUPT_POLICY struct {
+	Bitfield byte
+}
+
+type CXL_MAILBOX_ACTIVATE_FIRMWARE struct {
+	Action byte
+	Slot   byte
+}
+
+// CXL_MAILBOX_CAPABILITY_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_MAILBOX_CAPABILITY_REGISTER struct {
+	Data [1]uint32
+}
+
+type CXL_MAILBOX_CEL_ENTRY_CommandEffect_e__Struct struct {
+	Bitfield uint16
+}
+
+type CXL_MAILBOX_CEL_ENTRY struct {
+	Opcode        uint16
+	CommandEffect CXL_MAILBOX_CEL_ENTRY_CommandEffect_e__Struct
+}
+
+type CXL_MAILBOX_CEL_LOG struct {
+	LogEntry [1]CXL_MAILBOX_CEL_ENTRY
+}
+
+// CXL_MAILBOX_CLEAR_EVENT_RECORDS_INPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MAILBOX_CLEAR_EVENT_RECORDS_INPUT struct {
+	Data [8]byte
+}
+
+type CXL_MAILBOX_CLEAR_POISON_INPUT struct {
+	ClearPoisonPhysicalAddress uint64
+	ClearPoisonWriteData       [64]byte
+}
+
+// CXL_MAILBOX_CONTROL_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_MAILBOX_CONTROL_REGISTER struct {
+	Data [1]uint32
+}
+
+type CXL_MAILBOX_FIRMWARE_INFO_FWActivationCapabilities_e__Struct struct {
+	Bitfield byte
+}
+
+type CXL_MAILBOX_FIRMWARE_INFO_FWSlotInfo_e__Struct struct {
+	Bitfield byte
+}
+
+type CXL_MAILBOX_FIRMWARE_INFO struct {
+	FWSlotsSupported         byte
+	FWSlotInfo               CXL_MAILBOX_FIRMWARE_INFO_FWSlotInfo_e__Struct
+	FWActivationCapabilities CXL_MAILBOX_FIRMWARE_INFO_FWActivationCapabilities_e__Struct
+	Reserved3                [13]byte
+	SlotFWRevisions          [64]foundation.CHAR
+}
+
+// CXL_MAILBOX_GET_ALERT_CONFIG_OUTPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MAILBOX_GET_ALERT_CONFIG_OUTPUT struct {
+	Data [16]byte
+}
+
+type CXL_MAILBOX_GET_EVENT_RECORDS_INPUT struct {
+	EventLog byte
+}
+
+// CXL_MAILBOX_GET_EVENT_RECORDS_OUTPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MAILBOX_GET_EVENT_RECORDS_OUTPUT struct {
+	Data [160]byte
+}
+
+type CXL_MAILBOX_GET_LOG_CAPABILITIES_INPUT struct {
+	LogIdentifier win32.GUID
+}
+
+type CXL_MAILBOX_GET_LOG_CAPABILITIES_OUTPUT struct {
+	Bitfield uint32
+}
+
+type CXL_MAILBOX_GET_LOG_INPUT struct {
+	LogIdentifier win32.GUID
+	Offset        uint32
+	Length        uint32
+}
+
+// CXL_MAILBOX_GET_POISON_LIST_INPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MAILBOX_GET_POISON_LIST_INPUT struct {
+	Data [16]byte
+}
+
+// CXL_MAILBOX_GET_POISON_LIST_OUTPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MAILBOX_GET_POISON_LIST_OUTPUT struct {
+	Data [48]byte
+}
+
+type CXL_MAILBOX_GET_SUPPORTED_LOGS struct {
+	NumberOfSupportedLogsEntries uint16
+	Reserved                     [6]byte
+	SupportedLogEntries          [1]CXL_MAILBOX_SUPPORTED_LOG_ENTRY
+}
+
+type CXL_MAILBOX_INJECT_POISON_INPUT struct {
+	InjectPoisonPhysicalAddress uint64
+}
+
+type CXL_MAILBOX_INTERRUPT_POLICY struct {
+	InformationalEventLogInterruptSettings   CXL_INTERRUPT_POLICY
+	WarningEventLogInterruptSettings         CXL_INTERRUPT_POLICY
+	FailureEventLogInterruptSettings         CXL_INTERRUPT_POLICY
+	FatalEventLogInterruptSettings           CXL_INTERRUPT_POLICY
+	DynamicCapacityEventLogInterruptSettings CXL_INTERRUPT_POLICY
+}
+
+type CXL_MAILBOX_INTERRUPT_POLICY_2_0 struct {
+	InformationalEventLogInterruptSettings CXL_INTERRUPT_POLICY
+	WarningEventLogInterruptSettings       CXL_INTERRUPT_POLICY
+	FailureEventLogInterruptSettings       CXL_INTERRUPT_POLICY
+	FatalEventLogInterruptSettings         CXL_INTERRUPT_POLICY
+}
+
+// CXL_MAILBOX_MEDIA_ERROR_RECORD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MAILBOX_MEDIA_ERROR_RECORD struct {
+	Data [16]byte
+}
+
+type CXL_MAILBOX_MEMORY_DEVICE_IDENTIFY_INFO_PoisonHandlingCapabilities_e__Struct struct {
+	Bitfield byte
+}
+
+type CXL_MAILBOX_MEMORY_DEVICE_IDENTIFY_INFO_QoSTelemetryCapabilities_e__Struct struct {
+	Bitfield byte
+}
+
+type CXL_MAILBOX_MEMORY_DEVICE_IDENTIFY_INFO struct {
+	FWRevision                         [16]foundation.CHAR
+	TotalCapacity                      [8]byte
+	VolatileOnlyCapacity               [8]byte
+	PersistentOnlyCapacity             [8]byte
+	PartitionAlignment                 [8]byte
+	InformationEventLogSize            [2]byte
+	WarningEventLogSize                [2]byte
+	FailureEventLogSize                [2]byte
+	FatalEventLogSize                  [2]byte
+	LSASize                            [4]byte
+	PoisonListMaximumMediaErrorRecords [3]byte
+	InjectPoisonLimit                  [2]byte
+	PoisonHandlingCapabilities         CXL_MAILBOX_MEMORY_DEVICE_IDENTIFY_INFO_PoisonHandlingCapabilities_e__Struct
+	QoSTelemetryCapabilities           CXL_MAILBOX_MEMORY_DEVICE_IDENTIFY_INFO_QoSTelemetryCapabilities_e__Struct
+	DynamicCapacityEventLogSize        [2]byte
+	Reserved                           [3]byte
+}
+
+type CXL_MAILBOX_REGISTERS struct {
+	CapabilityRegister              CXL_MAILBOX_CAPABILITY_REGISTER
+	ControlRegister                 CXL_MAILBOX_CONTROL_REGISTER
+	CommandRegister                 CXL_COMMAND_REGISTER
+	StatusRegister                  CXL_MAILBOX_STATUS_REGISTER
+	BackgroundCommandStatusRegister CXL_BACKGROUND_COMMAND_STATUS_REGISTER
+	PayloadRegisters                CXL_COMMAND_PAYLOAD_REGISTERS
+}
+
+// CXL_MAILBOX_SET_ALERT_CONFIG_INPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MAILBOX_SET_ALERT_CONFIG_INPUT struct {
+	Data [12]byte
+}
+
+// CXL_MAILBOX_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_MAILBOX_STATUS_REGISTER struct {
+	Data [1]uint64
+}
+
+type CXL_MAILBOX_SUPPORTED_LOG_ENTRY struct {
+	LogIdentifier win32.GUID
+	LogSize       uint32
+}
+
+type CXL_MAILBOX_TRANSFER_FIRMWARE struct {
+	Action    byte
+	Slot      byte
+	Reserved  uint16
+	Offset    uint32
+	Reserved2 [120]byte
+	Data      [1]byte
+}
+
+// CXL_MEMORY_DEVICE_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_MEMORY_DEVICE_STATUS_REGISTER struct {
+	Data [1]uint64
+}
+
+type CXL_MEMORY_DEVICE_STATUS_REGISTERS struct {
+	MemoryDeviceStatusRegister CXL_MEMORY_DEVICE_STATUS_REGISTER
+}
+
+// CXL_MEMORY_MODULE_EVENT_RECORD_ValidityFlags_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MEMORY_MODULE_EVENT_RECORD_ValidityFlags_e__Struct struct {
+	Data [2]byte
+}
+
+type CXL_MEMORY_MODULE_EVENT_RECORD struct {
+	Header              CXL_COMMON_EVENT_RECORD_HEADER
+	DeviceEventType     byte
+	DeviceHealthInfo    CXL_DEVICE_HEALTH_INFO
+	ValidityFlags       CXL_MEMORY_MODULE_EVENT_RECORD_ValidityFlags_e__Struct
+	ComponentIdentifier [16]byte
+	DeviceEventSubtype  byte
+	Reserved            [42]byte
+}
+
+// CXL_MEMORY_SPARING_EVENT_RECORD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CXL_MEMORY_SPARING_EVENT_RECORD struct {
+	Data [128]byte
+}
+
+type CXL_RAS_CAPABILITY_STRUCTURE struct {
+	UncorrectableErrorStatusRegister   CXL_RAS_UNCORRECTABLE_ERROR_STATUS_REGISTER
+	UncorrectableErrorMaskRegister     CXL_RAS_UNCORRECTABLE_ERROR_MASK_REGISTER
+	UncorrectableErrorSeverityRegister CXL_RAS_UNCORRECTABLE_ERROR_SEVERITY_REGISTER
+	CorrectableErrorStatusRegister     CXL_RAS_CORRECTABLE_ERROR_STATUS_REGISTER
+	CorrectableErrorMaskRegister       CXL_RAS_CORRECTABLE_ERROR_MASK_REGISTER
+	ErrorCapabilityAndControlRegister  CXL_RAS_ERROR_CAPABILITY_AND_CONTROL_REGISTER
+	HeaderLogRegisters                 CXL_RAS_HEADER_LOG_REGISTERS
+}
+
+// CXL_RAS_CORRECTABLE_ERROR_MASK_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_RAS_CORRECTABLE_ERROR_MASK_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_RAS_CORRECTABLE_ERROR_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_RAS_CORRECTABLE_ERROR_STATUS_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_RAS_ERROR_CAPABILITY_AND_CONTROL_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_RAS_ERROR_CAPABILITY_AND_CONTROL_REGISTER struct {
+	Data [1]uint32
+}
+
+type CXL_RAS_HEADER_LOG_REGISTERS struct {
+	HeaderLogArray [16]uint32
+}
+
+// CXL_RAS_UNCORRECTABLE_ERROR_MASK_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_RAS_UNCORRECTABLE_ERROR_MASK_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_RAS_UNCORRECTABLE_ERROR_SEVERITY_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_RAS_UNCORRECTABLE_ERROR_SEVERITY_REGISTER struct {
+	Data [1]uint32
+}
+
+// CXL_RAS_UNCORRECTABLE_ERROR_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type CXL_RAS_UNCORRECTABLE_ERROR_STATUS_REGISTER struct {
+	Data [1]uint32
+}
+
 type DECRYPTION_STATUS_BUFFER struct {
 	NoEncryptedStreams foundation.BOOLEAN
 }
@@ -1843,6 +2385,7 @@ type PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 // PARTITION_INFORMATION_EX: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-partition_information_ex
 type PARTITION_INFORMATION_EX struct {
 	PartitionStyle     PARTITION_STYLE
+	PartitionOrdinal   uint16
 	StartingOffset     int64
 	PartitionLength    int64
 	PartitionNumber    uint32
@@ -2985,6 +3528,36 @@ type STORAGE_HOTPLUG_INFO struct {
 	WriteCacheEnableOverride foundation.BOOLEAN
 }
 
+type STORAGE_HW_BOOT_PARTITION_ACTIVATE struct {
+	Version  uint32
+	Size     uint32
+	Flags    uint32
+	BPID     byte
+	Reserved [3]byte
+}
+
+type STORAGE_HW_BOOT_PARTITION_DOWNLOAD struct {
+	Version     uint32
+	Size        uint32
+	Flags       uint32
+	BPID        byte
+	Reserved    [3]byte
+	Offset      uint64
+	BufferSize  uint64
+	ImageBuffer [1]byte
+}
+
+type STORAGE_HW_BOOT_PARTITION_INFO struct {
+	Version               uint32
+	Size                  uint32
+	BPSZ                  uint64
+	Flags                 uint32
+	ImagePayloadAlignment uint32
+	ImagePayloadMaxSize   uint32
+	SlotCount             byte
+	ABPID                 byte
+}
+
 type STORAGE_HW_CRYPTO_CAPABILITY struct {
 	Version                   uint32
 	Size                      uint32
@@ -3546,6 +4119,20 @@ type STORAGE_ZONE_GROUP struct {
 	ZoneCount uint32
 	ZoneType  STORAGE_ZONE_TYPES
 	ZoneSize  uint64
+}
+
+// STOR_PAGING_DEVICE_DUMP_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type STOR_PAGING_DEVICE_DUMP_DATA struct {
+	Data [138]byte
+}
+
+// STOR_PAGING_DEVICE_DUMP_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type STOR_PAGING_DEVICE_DUMP_ENTRY struct {
+	Data [118]byte
 }
 
 type STREAMS_ASSOCIATE_ID_INPUT_BUFFER struct {

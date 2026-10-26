@@ -50,13 +50,13 @@ func CreateDataModelManager(debugHost *IDebugHost, manager **IDataModelManager) 
 }
 
 // DebugConnect calls dbgeng!DebugConnect.
-func DebugConnect(RemoteOptions foundation.PSTR, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
+func DebugConnect(RemoteOptions foundation.PSTR, InterfaceId *win32.GUID, Interface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDebugConnect.Addr(), uintptr(unsafe.Pointer(RemoteOptions)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DebugConnectWide calls dbgeng!DebugConnectWide.
-func DebugConnectWide(RemoteOptions string, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
+func DebugConnectWide(RemoteOptions string, InterfaceId *win32.GUID, Interface **win32.IUnknown) error {
 	_RemoteOptions := win32.UTF16Ptr(RemoteOptions)
 	r1, _, _ := syscall.SyscallN(procDebugConnectWide.Addr(), uintptr(unsafe.Pointer(_RemoteOptions)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
 	return win32.ErrIfFailed(int32(r1))

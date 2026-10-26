@@ -907,13 +907,13 @@ func WHvEmulatorDestroyEmulator(Emulator unsafe.Pointer) error {
 }
 
 // WHvEmulatorTryIoEmulation calls WinHvEmulation!WHvEmulatorTryIoEmulation.
-func WHvEmulatorTryIoEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_VP_EXIT_CONTEXT, IoInstructionContext *WHV_X64_IO_PORT_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) error {
+func WHvEmulatorTryIoEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_X64_VP_EXIT_CONTEXT, IoInstructionContext *WHV_X64_IO_PORT_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procWHvEmulatorTryIoEmulation.Addr(), uintptr(unsafe.Pointer(Emulator)), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(VpContext)), uintptr(unsafe.Pointer(IoInstructionContext)), uintptr(unsafe.Pointer(EmulatorReturnStatus)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WHvEmulatorTryMmioEmulation calls WinHvEmulation!WHvEmulatorTryMmioEmulation.
-func WHvEmulatorTryMmioEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_VP_EXIT_CONTEXT, MmioInstructionContext *WHV_MEMORY_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) error {
+func WHvEmulatorTryMmioEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_X64_VP_EXIT_CONTEXT, MmioInstructionContext *WHV_MEMORY_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procWHvEmulatorTryMmioEmulation.Addr(), uintptr(unsafe.Pointer(Emulator)), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(VpContext)), uintptr(unsafe.Pointer(MmioInstructionContext)), uintptr(unsafe.Pointer(EmulatorReturnStatus)))
 	return win32.ErrIfFailed(int32(r1))
 }

@@ -135,6 +135,32 @@ func (self *IDXGIAdapter4) GetDesc3() (DXGI_ADAPTER_DESC3, error) {
 	return *_pDesc, win32.ErrIfFailed(int32(r1))
 }
 
+// IID: 9464643c-c95b-4674-8a7d-ee0548e8c022
+type IDXGIAdapter5 struct {
+	IDXGIAdapter4
+}
+
+// IID_IDXGIAdapter5 is the interface identifier for IDXGIAdapter5.
+var IID_IDXGIAdapter5 = win32.GUID{Data1: 0x9464643c, Data2: 0xc95b, Data3: 0x4674, Data4: [8]byte{0x8a, 0x7d, 0xee, 0x05, 0x48, 0xe8, 0xc0, 0x22}}
+
+// GetDesc4 dispatches through IDXGIAdapter5's vtable slot 19.
+func (self *IDXGIAdapter5) GetDesc4(pDesc *DXGI_ADAPTER_DESC4) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetSingleAdapterHybridMode dispatches through IDXGIAdapter5's vtable slot 20.
+func (self *IDXGIAdapter5) GetSingleAdapterHybridMode(pSingleAdapterHybridMode *DXGI_SINGLE_ADAPTER_HYBRID_MODE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSingleAdapterHybridMode)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// SetSingleAdapterHybridMode dispatches through IDXGIAdapter5's vtable slot 21.
+func (self *IDXGIAdapter5) SetSingleAdapterHybridMode(SingleAdapterHybridMode DXGI_SINGLE_ADAPTER_HYBRID_MODE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(SingleAdapterHybridMode))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDXGIDebug: https://learn.microsoft.com/windows/win32/api/dxgidebug/nn-dxgidebug-idxgidebug
 // IID: 119e7452-de9e-40fe-8806-88f90c12b441
 type IDXGIDebug struct {
@@ -634,6 +660,32 @@ func (self *IDXGIFactory7) UnregisterAdaptersChangedEvent(dwCookie uint32) error
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IID: 693c45c1-39a7-4c1f-bdd3-d9a3229b8321
+type IDXGIFactory8 struct {
+	IDXGIFactory7
+}
+
+// IID_IDXGIFactory8 is the interface identifier for IDXGIFactory8.
+var IID_IDXGIFactory8 = win32.GUID{Data1: 0x693c45c1, Data2: 0x39a7, Data3: 0x4c1f, Data4: [8]byte{0xbd, 0xd3, 0xd9, 0xa3, 0x22, 0x9b, 0x83, 0x21}}
+
+// CreateSwapChainForHwnd1 dispatches through IDXGIFactory8's vtable slot 32.
+func (self *IDXGIFactory8) CreateSwapChainForHwnd1(pDevice *systemcom.IUnknown, hWnd foundation.HWND, pDesc *DXGI_SWAP_CHAIN_DESC2, pFullscreenDesc *DXGI_SWAP_CHAIN_FULLSCREEN_DESC, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain5) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hWnd), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pFullscreenDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// CreateSwapChainForCoreWindow1 dispatches through IDXGIFactory8's vtable slot 33.
+func (self *IDXGIFactory8) CreateSwapChainForCoreWindow1(pDevice *systemcom.IUnknown, pWindow *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC2, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain5) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pWindow)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// CreateSwapChainForComposition1 dispatches through IDXGIFactory8's vtable slot 34.
+func (self *IDXGIFactory8) CreateSwapChainForComposition1(pDevice *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC2, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain5) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDXGIFactoryMedia: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgifactorymedia
 // IID: 41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12
 type IDXGIFactoryMedia struct {
@@ -652,6 +704,20 @@ func (self *IDXGIFactoryMedia) CreateSwapChainForCompositionSurfaceHandle(pDevic
 // CreateDecodeSwapChainForCompositionSurfaceHandle dispatches through IDXGIFactoryMedia's vtable slot 4.
 func (self *IDXGIFactoryMedia) CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_DECODE_SWAP_CHAIN_DESC, pYuvDecodeBuffers *IDXGIResource, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGIDecodeSwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hSurface), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pYuvDecodeBuffers)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// IID: 98ec0b90-2b18-42a6-9fcf-43b46f654022
+type IDXGIFactoryMedia2 struct {
+	IDXGIFactoryMedia
+}
+
+// IID_IDXGIFactoryMedia2 is the interface identifier for IDXGIFactoryMedia2.
+var IID_IDXGIFactoryMedia2 = win32.GUID{Data1: 0x98ec0b90, Data2: 0x2b18, Data3: 0x42a6, Data4: [8]byte{0x9f, 0xcf, 0x43, 0xb4, 0x6f, 0x65, 0x40, 0x22}}
+
+// CreateSwapChainForCompositionSurfaceHandle1 dispatches through IDXGIFactoryMedia2's vtable slot 5.
+func (self *IDXGIFactoryMedia2) CreateSwapChainForCompositionSurfaceHandle1(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_SWAP_CHAIN_DESC2, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain5) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hSurface), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1639,6 +1705,32 @@ var IID_IDXGISwapChain4 = win32.GUID{Data1: 0x3d585d5a, Data2: 0xbd4a, Data3: 0x
 // SetHDRMetaData dispatches through IDXGISwapChain4's vtable slot 40.
 func (self *IDXGISwapChain4) SetHDRMetaData(Type DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Size), uintptr(unsafe.Pointer(pMetaData)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// IID: 9086bf22-9338-43bb-87ce-7790b6438a7f
+type IDXGISwapChain5 struct {
+	IDXGISwapChain4
+}
+
+// IID_IDXGISwapChain5 is the interface identifier for IDXGISwapChain5.
+var IID_IDXGISwapChain5 = win32.GUID{Data1: 0x9086bf22, Data2: 0x9338, Data3: 0x43bb, Data4: [8]byte{0x87, 0xce, 0x77, 0x90, 0xb6, 0x43, 0x8a, 0x7f}}
+
+// GetDesc2 dispatches through IDXGISwapChain5's vtable slot 41.
+func (self *IDXGISwapChain5) GetDesc2(pDesc *DXGI_SWAP_CHAIN_DESC2) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetColorSpace1 dispatches through IDXGISwapChain5's vtable slot 42.
+func (self *IDXGISwapChain5) GetColorSpace1() graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)))
+	return graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE(r1)
+}
+
+// ResizeBuffers2 dispatches through IDXGISwapChain5's vtable slot 43.
+func (self *IDXGISwapChain5) ResizeBuffers2(BufferCount uint32, Width uint32, Height uint32, Format graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32, pCreationNodeMask *uint32, ppPresentQueue **systemcom.IUnknown, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(BufferCount), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(SwapChainFlags), uintptr(unsafe.Pointer(pCreationNodeMask)), uintptr(unsafe.Pointer(ppPresentQueue)), uintptr(ColorSpace))
 	return win32.ErrIfFailed(int32(r1))
 }
 

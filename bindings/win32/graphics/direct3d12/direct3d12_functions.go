@@ -61,7 +61,7 @@ func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphic
 
 // D3D12CreateRootSignatureDeserializer calls d3d12!D3D12CreateRootSignatureDeserializer.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createrootsignaturedeserializer
-func D3D12CreateRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer *unsafe.Pointer) error {
+func D3D12CreateRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer **win32.IUnknown) error {
 	var _pSrcData *byte
 	if len(pSrcData) > 0 {
 		_pSrcData = &pSrcData[0]
@@ -72,7 +72,7 @@ func D3D12CreateRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeseria
 
 // D3D12CreateVersionedRootSignatureDeserializer calls d3d12!D3D12CreateVersionedRootSignatureDeserializer.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createversionedrootsignaturedeserializer
-func D3D12CreateVersionedRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer *unsafe.Pointer) error {
+func D3D12CreateVersionedRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer **win32.IUnknown) error {
 	var _pSrcData *byte
 	if len(pSrcData) > 0 {
 		_pSrcData = &pSrcData[0]

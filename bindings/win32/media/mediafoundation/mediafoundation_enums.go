@@ -12014,6 +12014,29 @@ func (e MIDL___MIDL_itf_mfobjects_0000_0013_0001) String() string {
 	}
 }
 
+type EAV1EncoderOperatingMode int32
+
+const (
+	EAV1EncoderOperatingMode_Auto      EAV1EncoderOperatingMode = 0
+	EAV1EncoderOperatingMode_Reference EAV1EncoderOperatingMode = 1
+	EAV1EncoderOperatingMode_Optimized EAV1EncoderOperatingMode = 2
+)
+
+// String returns the EAV1EncoderOperatingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAV1EncoderOperatingMode) String() string {
+	switch e {
+	case EAV1EncoderOperatingMode_Auto:
+		return "EAV1EncoderOperatingMode_Auto"
+	case EAV1EncoderOperatingMode_Reference:
+		return "EAV1EncoderOperatingMode_Reference"
+	case EAV1EncoderOperatingMode_Optimized:
+		return "EAV1EncoderOperatingMode_Optimized"
+	default:
+		return fmt.Sprintf("EAV1EncoderOperatingMode(%d)", int32(e))
+	}
+}
+
 // EAVAudioChannelConfig: https://learn.microsoft.com/windows/win32/api/codecapi/ne-codecapi-eavaudiochannelconfig
 type EAVAudioChannelConfig int32
 
@@ -12262,6 +12285,7 @@ const (
 	EAVDecDDOperationalMode_PORTABLE8  EAVDecDDOperationalMode = 5
 	EAVDecDDOperationalMode_PORTABLE11 EAVDecDDOperationalMode = 6
 	EAVDecDDOperationalMode_PORTABLE14 EAVDecDDOperationalMode = 7
+	EAVDecDDOperationalMode_PORTABLE16 EAVDecDDOperationalMode = 8
 )
 
 // String returns the EAVDecDDOperationalMode constant's name, or its numeric form when
@@ -12284,6 +12308,8 @@ func (e EAVDecDDOperationalMode) String() string {
 		return "EAVDecDDOperationalMode_PORTABLE11"
 	case EAVDecDDOperationalMode_PORTABLE14:
 		return "EAVDecDDOperationalMode_PORTABLE14"
+	case EAVDecDDOperationalMode_PORTABLE16:
+		return "EAVDecDDOperationalMode_PORTABLE16"
 	default:
 		return fmt.Sprintf("EAVDecDDOperationalMode(%d)", int32(e))
 	}
@@ -13998,6 +14024,29 @@ func (e EAVEncVideoContentType) String() string {
 		return "EAVEncVideoContentType_FixedCameraAngle"
 	default:
 		return fmt.Sprintf("EAVEncVideoContentType(%d)", int32(e))
+	}
+}
+
+type EAVEncVideoD3D12ReconstructedPictureOutputMode int32
+
+const (
+	EAVEncVideoEncodeD3D12ReconstructedPictureMode_None   EAVEncVideoD3D12ReconstructedPictureOutputMode = 0
+	EAVEncVideoEncodeD3D12ReconstructedPictureMode_Copy   EAVEncVideoD3D12ReconstructedPictureOutputMode = 1
+	EAVEncVideoEncodeD3D12ReconstructedPictureMode_Shared EAVEncVideoD3D12ReconstructedPictureOutputMode = 2
+)
+
+// String returns the EAVEncVideoD3D12ReconstructedPictureOutputMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAVEncVideoD3D12ReconstructedPictureOutputMode) String() string {
+	switch e {
+	case EAVEncVideoEncodeD3D12ReconstructedPictureMode_None:
+		return "EAVEncVideoEncodeD3D12ReconstructedPictureMode_None"
+	case EAVEncVideoEncodeD3D12ReconstructedPictureMode_Copy:
+		return "EAVEncVideoEncodeD3D12ReconstructedPictureMode_Copy"
+	case EAVEncVideoEncodeD3D12ReconstructedPictureMode_Shared:
+		return "EAVEncVideoEncodeD3D12ReconstructedPictureMode_Shared"
+	default:
+		return fmt.Sprintf("EAVEncVideoD3D12ReconstructedPictureOutputMode(%d)", int32(e))
 	}
 }
 

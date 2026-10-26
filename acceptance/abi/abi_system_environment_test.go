@@ -21,6 +21,7 @@ var abiSystem_Environment = []abiCase{
 	{"systemenvironment.ENCLAVE_INFORMATION.BaseAddress", unsafe.Offsetof(systemenvironment.ENCLAVE_INFORMATION{}.BaseAddress), 8},
 	{"systemenvironment.ENCLAVE_INFORMATION.Size", unsafe.Offsetof(systemenvironment.ENCLAVE_INFORMATION{}.Size), 16},
 	{"systemenvironment.ENCLAVE_INFORMATION.Identity", unsafe.Offsetof(systemenvironment.ENCLAVE_INFORMATION{}.Identity), 24},
+	{"systemenvironment.ENCLAVE_PACKAGE_IDENTITY size", unsafe.Sizeof(systemenvironment.ENCLAVE_PACKAGE_IDENTITY{}), 40},
 	{"systemenvironment.ENCLAVE_VBS_BASIC_KEY_REQUEST size", unsafe.Sizeof(systemenvironment.ENCLAVE_VBS_BASIC_KEY_REQUEST{}), 20},
 	{"systemenvironment.ENCLAVE_VBS_BASIC_KEY_REQUEST.RequestSize", unsafe.Offsetof(systemenvironment.ENCLAVE_VBS_BASIC_KEY_REQUEST{}.RequestSize), 0},
 	{"systemenvironment.ENCLAVE_VBS_BASIC_KEY_REQUEST.Flags", unsafe.Offsetof(systemenvironment.ENCLAVE_VBS_BASIC_KEY_REQUEST{}.Flags), 4},
@@ -69,6 +70,9 @@ var abiSystem_Environment = []abiCase{
 	{"systemenvironment.VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64.ExceptionActive", unsafe.Offsetof(systemenvironment.VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64{}.ExceptionActive), 64},
 	{"systemenvironment.VBS_ENCLAVE_REPORT size", unsafe.Sizeof(systemenvironment.VBS_ENCLAVE_REPORT{}), 224},
 	{"systemenvironment.VBS_ENCLAVE_REPORT_MODULE size", unsafe.Sizeof(systemenvironment.VBS_ENCLAVE_REPORT_MODULE{}), 110},
+	{"systemenvironment.VBS_ENCLAVE_REPORT_PACKAGE_ID size", unsafe.Sizeof(systemenvironment.VBS_ENCLAVE_REPORT_PACKAGE_ID{}), 48},
+	{"systemenvironment.VBS_ENCLAVE_REPORT_PACKAGE_ID.Header", unsafe.Offsetof(systemenvironment.VBS_ENCLAVE_REPORT_PACKAGE_ID{}.Header), 0},
+	{"systemenvironment.VBS_ENCLAVE_REPORT_PACKAGE_ID.PackageIdentity", unsafe.Offsetof(systemenvironment.VBS_ENCLAVE_REPORT_PACKAGE_ID{}.PackageIdentity), 8},
 	{"systemenvironment.VBS_ENCLAVE_REPORT_PKG_HEADER size", unsafe.Sizeof(systemenvironment.VBS_ENCLAVE_REPORT_PKG_HEADER{}), 24},
 	{"systemenvironment.VBS_ENCLAVE_REPORT_VARDATA_HEADER size", unsafe.Sizeof(systemenvironment.VBS_ENCLAVE_REPORT_VARDATA_HEADER{}), 8},
 }

@@ -413,6 +413,26 @@ func (e RD_FARM_TYPE) String() string {
 	}
 }
 
+type RdpSessionType int32
+
+const (
+	Desktop   RdpSessionType = 0
+	RemoteApp RdpSessionType = 1
+)
+
+// String returns the RdpSessionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RdpSessionType) String() string {
+	switch e {
+	case Desktop:
+		return "Desktop"
+	case RemoteApp:
+		return "RemoteApp"
+	default:
+		return fmt.Sprintf("RdpSessionType(%d)", int32(e))
+	}
+}
+
 // RemoteActionType: https://learn.microsoft.com/windows/win32/api/rdpappcontainerclient/ne-rdpappcontainerclient-remoteactiontype
 type RemoteActionType int32
 

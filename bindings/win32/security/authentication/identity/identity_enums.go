@@ -2057,6 +2057,7 @@ const (
 	SecpkgFailureReason_NoLineOfSight SECPKG_FAILURE_SPECIAL_REASON = 9
 	SecpkgFailureReason_Loopback      SECPKG_FAILURE_SPECIAL_REASON = 10
 	SecpkgFailureReason_NullSession   SECPKG_FAILURE_SPECIAL_REASON = 11
+	SecpkgFailureReason_GlobalSPN     SECPKG_FAILURE_SPECIAL_REASON = 12
 )
 
 // String returns the SECPKG_FAILURE_SPECIAL_REASON constant's name, or its numeric form when
@@ -2087,6 +2088,8 @@ func (e SECPKG_FAILURE_SPECIAL_REASON) String() string {
 		return "SecpkgFailureReason_Loopback"
 	case SecpkgFailureReason_NullSession:
 		return "SecpkgFailureReason_NullSession"
+	case SecpkgFailureReason_GlobalSPN:
+		return "SecpkgFailureReason_GlobalSPN"
 	default:
 		return fmt.Sprintf("SECPKG_FAILURE_SPECIAL_REASON(%d)", int32(e))
 	}

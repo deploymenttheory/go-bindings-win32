@@ -688,6 +688,94 @@ func (e IMAGE_AUX_SYMBOL_TYPE) String() string {
 	}
 }
 
+type IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN int32
+
+const (
+	EndpointReturnTypeNone  IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 0
+	EndpointReturnTypeX0    IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 1
+	EndpointReturnTypeX0_X1 IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 2
+	EndpointReturnTypeX0_X2 IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 3
+	EndpointReturnTypeX0_X3 IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 4
+	EndpointReturnTypeQ0    IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 5
+	EndpointReturnTypeQ0_Q1 IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 6
+	EndpointReturnTypeQ0_Q2 IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 7
+	EndpointReturnTypeQ0_Q3 IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 8
+	EndpointReturnTypeX8    IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN = 9
+)
+
+// String returns the IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN) String() string {
+	switch e {
+	case EndpointReturnTypeNone:
+		return "EndpointReturnTypeNone"
+	case EndpointReturnTypeX0:
+		return "EndpointReturnTypeX0"
+	case EndpointReturnTypeX0_X1:
+		return "EndpointReturnTypeX0_X1"
+	case EndpointReturnTypeX0_X2:
+		return "EndpointReturnTypeX0_X2"
+	case EndpointReturnTypeX0_X3:
+		return "EndpointReturnTypeX0_X3"
+	case EndpointReturnTypeQ0:
+		return "EndpointReturnTypeQ0"
+	case EndpointReturnTypeQ0_Q1:
+		return "EndpointReturnTypeQ0_Q1"
+	case EndpointReturnTypeQ0_Q2:
+		return "EndpointReturnTypeQ0_Q2"
+	case EndpointReturnTypeQ0_Q3:
+		return "EndpointReturnTypeQ0_Q3"
+	case EndpointReturnTypeX8:
+		return "EndpointReturnTypeX8"
+	default:
+		return fmt.Sprintf("IMAGE_HOTSWAP_ARM64_ENDPOINT_INFO_CC_RETURN(%d)", int32(e))
+	}
+}
+
+type IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG int32
+
+const (
+	EndpointParamRegNone IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 0
+	EndpointParamRegRAX  IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 1
+	EndpointParamRegRCX  IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 2
+	EndpointParamRegRDX  IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 3
+	EndpointParamRegR8   IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 9
+	EndpointParamRegR9   IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 10
+	EndpointParamRegXMM0 IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 200
+	EndpointParamRegXMM1 IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 201
+	EndpointParamRegXMM2 IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 202
+	EndpointParamRegXMM3 IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG = 203
+)
+
+// String returns the IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG) String() string {
+	switch e {
+	case EndpointParamRegNone:
+		return "EndpointParamRegNone"
+	case EndpointParamRegRAX:
+		return "EndpointParamRegRAX"
+	case EndpointParamRegRCX:
+		return "EndpointParamRegRCX"
+	case EndpointParamRegRDX:
+		return "EndpointParamRegRDX"
+	case EndpointParamRegR8:
+		return "EndpointParamRegR8"
+	case EndpointParamRegR9:
+		return "EndpointParamRegR9"
+	case EndpointParamRegXMM0:
+		return "EndpointParamRegXMM0"
+	case EndpointParamRegXMM1:
+		return "EndpointParamRegXMM1"
+	case EndpointParamRegXMM2:
+		return "EndpointParamRegXMM2"
+	case EndpointParamRegXMM3:
+		return "EndpointParamRegXMM3"
+	default:
+		return fmt.Sprintf("IMAGE_HOTSWAP_X64_ENDPOINT_INFO_CC_REG(%d)", int32(e))
+	}
+}
+
 type IMAGE_POLICY_ENTRY_TYPE int32
 
 const (
@@ -987,6 +1075,23 @@ func (e POWER_LIMIT_TYPES) String() string {
 	}
 }
 
+type PROCESSOR_SHARED_COMPUTE_UNIT_TYPE int32
+
+const (
+	SharedComputeUnitArm64SMCU PROCESSOR_SHARED_COMPUTE_UNIT_TYPE = 0
+)
+
+// String returns the PROCESSOR_SHARED_COMPUTE_UNIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESSOR_SHARED_COMPUTE_UNIT_TYPE) String() string {
+	switch e {
+	case SharedComputeUnitArm64SMCU:
+		return "SharedComputeUnitArm64SMCU"
+	default:
+		return fmt.Sprintf("PROCESSOR_SHARED_COMPUTE_UNIT_TYPE(%d)", int32(e))
+	}
+}
+
 // Bitmask — values may be combined with |.
 type RECO_FLAGS uint32
 
@@ -1066,8 +1171,9 @@ func (e RTL_UMS_SCHEDULER_REASON) String() string {
 type RUNTIME_REPORT_TYPE int32
 
 const (
-	RuntimeReportTypeDriver RUNTIME_REPORT_TYPE = 0
-	RuntimeReportTypeMax    RUNTIME_REPORT_TYPE = 1
+	RuntimeReportTypeDriver        RUNTIME_REPORT_TYPE = 0
+	RuntimeReportTypeCodeIntegrity RUNTIME_REPORT_TYPE = 1
+	RuntimeReportTypeMax           RUNTIME_REPORT_TYPE = 2
 )
 
 // String returns the RUNTIME_REPORT_TYPE constant's name, or its numeric form when
@@ -1076,6 +1182,8 @@ func (e RUNTIME_REPORT_TYPE) String() string {
 	switch e {
 	case RuntimeReportTypeDriver:
 		return "RuntimeReportTypeDriver"
+	case RuntimeReportTypeCodeIntegrity:
+		return "RuntimeReportTypeCodeIntegrity"
 	case RuntimeReportTypeMax:
 		return "RuntimeReportTypeMax"
 	default:

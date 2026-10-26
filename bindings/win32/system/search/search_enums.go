@@ -153,6 +153,7 @@ const (
 	CLUSIONREASON_DEFAULT      CLUSION_REASON = 1
 	CLUSIONREASON_USER         CLUSION_REASON = 2
 	CLUSIONREASON_GROUPPOLICY  CLUSION_REASON = 3
+	CLUSIONREASON_USAGE        CLUSION_REASON = 4
 )
 
 // String returns the CLUSION_REASON constant's name, or its numeric form when
@@ -167,6 +168,8 @@ func (e CLUSION_REASON) String() string {
 		return "CLUSIONREASON_USER"
 	case CLUSIONREASON_GROUPPOLICY:
 		return "CLUSIONREASON_GROUPPOLICY"
+	case CLUSIONREASON_USAGE:
+		return "CLUSIONREASON_USAGE"
 	default:
 		return fmt.Sprintf("CLUSION_REASON(%d)", int32(e))
 	}

@@ -39,6 +39,7 @@ var (
 	procWebAuthNGetW3CExceptionDOMError                       = modwebauthn.NewProc("WebAuthNGetW3CExceptionDOMError")
 	procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable = modwebauthn.NewProc("WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable")
 	procWebAuthNPluginAddAuthenticator                        = modwebauthn.NewProc("WebAuthNPluginAddAuthenticator")
+	procWebAuthNPluginAddAuthenticator2                       = modwebauthn.NewProc("WebAuthNPluginAddAuthenticator2")
 	procWebAuthNPluginAuthenticatorAddCredentials             = modwebauthn.NewProc("WebAuthNPluginAuthenticatorAddCredentials")
 	procWebAuthNPluginAuthenticatorFreeCredentialDetailsArray = modwebauthn.NewProc("WebAuthNPluginAuthenticatorFreeCredentialDetailsArray")
 	procWebAuthNPluginAuthenticatorGetAllCredentials          = modwebauthn.NewProc("WebAuthNPluginAuthenticatorGetAllCredentials")
@@ -52,10 +53,12 @@ var (
 	procWebAuthNPluginGetUserVerificationCount                = modwebauthn.NewProc("WebAuthNPluginGetUserVerificationCount")
 	procWebAuthNPluginGetUserVerificationPublicKey            = modwebauthn.NewProc("WebAuthNPluginGetUserVerificationPublicKey")
 	procWebAuthNPluginPerformUserVerification                 = modwebauthn.NewProc("WebAuthNPluginPerformUserVerification")
+	procWebAuthNPluginPerformUserVerification2                = modwebauthn.NewProc("WebAuthNPluginPerformUserVerification2")
 	procWebAuthNPluginRegisterStatusChangeCallback            = modwebauthn.NewProc("WebAuthNPluginRegisterStatusChangeCallback")
 	procWebAuthNPluginRemoveAuthenticator                     = modwebauthn.NewProc("WebAuthNPluginRemoveAuthenticator")
 	procWebAuthNPluginUnregisterStatusChangeCallback          = modwebauthn.NewProc("WebAuthNPluginUnregisterStatusChangeCallback")
 	procWebAuthNPluginUpdateAuthenticatorDetails              = modwebauthn.NewProc("WebAuthNPluginUpdateAuthenticatorDetails")
+	procWebAuthNPluginUpdateAuthenticatorDetails2             = modwebauthn.NewProc("WebAuthNPluginUpdateAuthenticatorDetails2")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -85,6 +88,7 @@ var Procs = struct {
 	WebAuthNGetW3CExceptionDOMError                       *win32.Proc
 	WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable *win32.Proc
 	WebAuthNPluginAddAuthenticator                        *win32.Proc
+	WebAuthNPluginAddAuthenticator2                       *win32.Proc
 	WebAuthNPluginAuthenticatorAddCredentials             *win32.Proc
 	WebAuthNPluginAuthenticatorFreeCredentialDetailsArray *win32.Proc
 	WebAuthNPluginAuthenticatorGetAllCredentials          *win32.Proc
@@ -98,10 +102,12 @@ var Procs = struct {
 	WebAuthNPluginGetUserVerificationCount                *win32.Proc
 	WebAuthNPluginGetUserVerificationPublicKey            *win32.Proc
 	WebAuthNPluginPerformUserVerification                 *win32.Proc
+	WebAuthNPluginPerformUserVerification2                *win32.Proc
 	WebAuthNPluginRegisterStatusChangeCallback            *win32.Proc
 	WebAuthNPluginRemoveAuthenticator                     *win32.Proc
 	WebAuthNPluginUnregisterStatusChangeCallback          *win32.Proc
 	WebAuthNPluginUpdateAuthenticatorDetails              *win32.Proc
+	WebAuthNPluginUpdateAuthenticatorDetails2             *win32.Proc
 }{
 	WebAuthNAuthenticatorGetAssertion:                     procWebAuthNAuthenticatorGetAssertion,
 	WebAuthNAuthenticatorMakeCredential:                   procWebAuthNAuthenticatorMakeCredential,
@@ -125,6 +131,7 @@ var Procs = struct {
 	WebAuthNGetW3CExceptionDOMError:                       procWebAuthNGetW3CExceptionDOMError,
 	WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable: procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable,
 	WebAuthNPluginAddAuthenticator:                        procWebAuthNPluginAddAuthenticator,
+	WebAuthNPluginAddAuthenticator2:                       procWebAuthNPluginAddAuthenticator2,
 	WebAuthNPluginAuthenticatorAddCredentials:             procWebAuthNPluginAuthenticatorAddCredentials,
 	WebAuthNPluginAuthenticatorFreeCredentialDetailsArray: procWebAuthNPluginAuthenticatorFreeCredentialDetailsArray,
 	WebAuthNPluginAuthenticatorGetAllCredentials:          procWebAuthNPluginAuthenticatorGetAllCredentials,
@@ -138,10 +145,12 @@ var Procs = struct {
 	WebAuthNPluginGetUserVerificationCount:                procWebAuthNPluginGetUserVerificationCount,
 	WebAuthNPluginGetUserVerificationPublicKey:            procWebAuthNPluginGetUserVerificationPublicKey,
 	WebAuthNPluginPerformUserVerification:                 procWebAuthNPluginPerformUserVerification,
+	WebAuthNPluginPerformUserVerification2:                procWebAuthNPluginPerformUserVerification2,
 	WebAuthNPluginRegisterStatusChangeCallback:            procWebAuthNPluginRegisterStatusChangeCallback,
 	WebAuthNPluginRemoveAuthenticator:                     procWebAuthNPluginRemoveAuthenticator,
 	WebAuthNPluginUnregisterStatusChangeCallback:          procWebAuthNPluginUnregisterStatusChangeCallback,
 	WebAuthNPluginUpdateAuthenticatorDetails:              procWebAuthNPluginUpdateAuthenticatorDetails,
+	WebAuthNPluginUpdateAuthenticatorDetails2:             procWebAuthNPluginUpdateAuthenticatorDetails2,
 }
 
 // WebAuthNAuthenticatorGetAssertion calls webauthn!WebAuthNAuthenticatorGetAssertion.
@@ -296,6 +305,12 @@ func WebAuthNPluginAddAuthenticator(pPluginAddAuthenticatorOptions *WEBAUTHN_PLU
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// WebAuthNPluginAddAuthenticator2 calls webauthn!WebAuthNPluginAddAuthenticator2.
+func WebAuthNPluginAddAuthenticator2(pPluginAddAuthenticatorOptions *WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2, ppPluginAddAuthenticatorResponse **WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginAddAuthenticator2.Addr(), uintptr(unsafe.Pointer(pPluginAddAuthenticatorOptions)), uintptr(unsafe.Pointer(ppPluginAddAuthenticatorResponse)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // WebAuthNPluginAuthenticatorAddCredentials calls webauthn!WebAuthNPluginAuthenticatorAddCredentials.
 func WebAuthNPluginAuthenticatorAddCredentials(rclsid *win32.GUID, pCredentialDetails []WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS) error {
 	var _pCredentialDetails *WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS
@@ -382,6 +397,12 @@ func WebAuthNPluginPerformUserVerification(pPluginUserVerification *WEBAUTHN_PLU
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// WebAuthNPluginPerformUserVerification2 calls webauthn!WebAuthNPluginPerformUserVerification2.
+func WebAuthNPluginPerformUserVerification2(pPluginUserVerification *WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2, pcbResponse *uint32, ppbResponse **byte) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginPerformUserVerification2.Addr(), uintptr(unsafe.Pointer(pPluginUserVerification)), uintptr(unsafe.Pointer(pcbResponse)), uintptr(unsafe.Pointer(ppbResponse)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // WebAuthNPluginRegisterStatusChangeCallback calls webauthn!WebAuthNPluginRegisterStatusChangeCallback.
 func WebAuthNPluginRegisterStatusChangeCallback(callback WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK, context unsafe.Pointer, rclsid *win32.GUID, pdwRegister *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNPluginRegisterStatusChangeCallback.Addr(), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pdwRegister)))
@@ -403,5 +424,11 @@ func WebAuthNPluginUnregisterStatusChangeCallback(pdwRegister *uint32) error {
 // WebAuthNPluginUpdateAuthenticatorDetails calls webauthn!WebAuthNPluginUpdateAuthenticatorDetails.
 func WebAuthNPluginUpdateAuthenticatorDetails(pPluginUpdateAuthenticatorDetails *WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS) error {
 	r1, _, _ := syscall.SyscallN(procWebAuthNPluginUpdateAuthenticatorDetails.Addr(), uintptr(unsafe.Pointer(pPluginUpdateAuthenticatorDetails)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// WebAuthNPluginUpdateAuthenticatorDetails2 calls webauthn!WebAuthNPluginUpdateAuthenticatorDetails2.
+func WebAuthNPluginUpdateAuthenticatorDetails2(pPluginUpdateAuthenticatorDetails *WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2) error {
+	r1, _, _ := syscall.SyscallN(procWebAuthNPluginUpdateAuthenticatorDetails2.Addr(), uintptr(unsafe.Pointer(pPluginUpdateAuthenticatorDetails)))
 	return win32.ErrIfFailed(int32(r1))
 }

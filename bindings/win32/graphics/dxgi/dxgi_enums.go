@@ -77,6 +77,51 @@ func (e DXGI_ADAPTER_FLAG3) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Bitmask — values may be combined with |.
+type DXGI_ADAPTER_FLAG4 int32
+
+const (
+	DXGI_ADAPTER_FLAG4_NONE                               DXGI_ADAPTER_FLAG4 = 0
+	DXGI_ADAPTER_FLAG4_REMOTE                             DXGI_ADAPTER_FLAG4 = 1
+	DXGI_ADAPTER_FLAG4_SOFTWARE                           DXGI_ADAPTER_FLAG4 = 2
+	DXGI_ADAPTER_FLAG4_ACG_COMPATIBLE                     DXGI_ADAPTER_FLAG4 = 4
+	DXGI_ADAPTER_FLAG4_SUPPORT_MONITORED_FENCES           DXGI_ADAPTER_FLAG4 = 8
+	DXGI_ADAPTER_FLAG4_SUPPORT_NON_MONITORED_FENCES       DXGI_ADAPTER_FLAG4 = 16
+	DXGI_ADAPTER_FLAG4_KEYED_MUTEX_CONFORMANCE            DXGI_ADAPTER_FLAG4 = 32
+	DXGI_ADAPTER_FLAG4_SUPPORT_SINGLE_ADAPTER_HYBRID_MODE DXGI_ADAPTER_FLAG4 = 64
+)
+
+// String returns the DXGI_ADAPTER_FLAG4 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_ADAPTER_FLAG4) String() string {
+	var parts []string
+	if e&DXGI_ADAPTER_FLAG4_REMOTE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG4_REMOTE")
+	}
+	if e&DXGI_ADAPTER_FLAG4_SOFTWARE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG4_SOFTWARE")
+	}
+	if e&DXGI_ADAPTER_FLAG4_ACG_COMPATIBLE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG4_ACG_COMPATIBLE")
+	}
+	if e&DXGI_ADAPTER_FLAG4_SUPPORT_MONITORED_FENCES != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG4_SUPPORT_MONITORED_FENCES")
+	}
+	if e&DXGI_ADAPTER_FLAG4_SUPPORT_NON_MONITORED_FENCES != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG4_SUPPORT_NON_MONITORED_FENCES")
+	}
+	if e&DXGI_ADAPTER_FLAG4_KEYED_MUTEX_CONFORMANCE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG4_KEYED_MUTEX_CONFORMANCE")
+	}
+	if e&DXGI_ADAPTER_FLAG4_SUPPORT_SINGLE_ADAPTER_HYBRID_MODE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG4_SUPPORT_SINGLE_ADAPTER_HYBRID_MODE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_COMPUTE_PREEMPTION_GRANULARITY: https://learn.microsoft.com/windows/win32/api/dxgi1_2/ne-dxgi1_2-dxgi_compute_preemption_granularity
 type DXGI_COMPUTE_PREEMPTION_GRANULARITY int32
 
@@ -835,6 +880,12 @@ const (
 	DXGI_MSG_IDXGISwapChain_Present_11On12_Released_Resource                                                            DXGI_Message_Id = 296
 	DXGI_MSG_IDXGIFactory_CreateSwapChain_MultipleSwapchainRefToSurface_DeferredDtr                                     DXGI_Message_Id = 297
 	DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior                                                            DXGI_Message_Id = 298
+	DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpaceFlag                                                        DXGI_Message_Id = 299
+	DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpace                                                            DXGI_Message_Id = 300
+	DXGI_MSG_IDXGISwapChain5_ResizeBuffers2_InvalidColorSpace                                                           DXGI_Message_Id = 301
+	DXGI_MSG_IDXGISwapChain5_SetColorSpace1_Unsupported                                                                 DXGI_Message_Id = 302
+	DXGI_MSG_IDXGIAdapter5_GetSingleAdapterHybridMode_Unsupported                                                       DXGI_Message_Id = 303
+	DXGI_MSG_IDXGIAdapter5_SetSingleAdapterHybridMode_Unsupported                                                       DXGI_Message_Id = 304
 	DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow                                                     DXGI_Message_Id = 1000
 	DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_DISCARD_BufferCount                                                     DXGI_Message_Id = 1001
 	DXGI_MSG_Phone_IDXGISwapChain_SetFullscreenState_NotAvailable                                                       DXGI_Message_Id = 1002
@@ -1471,6 +1522,18 @@ func (e DXGI_Message_Id) String() string {
 		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_MultipleSwapchainRefToSurface_DeferredDtr"
 	case DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior:
 		return "DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior"
+	case DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpaceFlag:
+		return "DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpaceFlag"
+	case DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpace:
+		return "DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpace"
+	case DXGI_MSG_IDXGISwapChain5_ResizeBuffers2_InvalidColorSpace:
+		return "DXGI_MSG_IDXGISwapChain5_ResizeBuffers2_InvalidColorSpace"
+	case DXGI_MSG_IDXGISwapChain5_SetColorSpace1_Unsupported:
+		return "DXGI_MSG_IDXGISwapChain5_SetColorSpace1_Unsupported"
+	case DXGI_MSG_IDXGIAdapter5_GetSingleAdapterHybridMode_Unsupported:
+		return "DXGI_MSG_IDXGIAdapter5_GetSingleAdapterHybridMode_Unsupported"
+	case DXGI_MSG_IDXGIAdapter5_SetSingleAdapterHybridMode_Unsupported:
+		return "DXGI_MSG_IDXGIAdapter5_SetSingleAdapterHybridMode_Unsupported"
 	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow:
 		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow"
 	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_DISCARD_BufferCount:
@@ -1854,6 +1917,29 @@ func (e DXGI_SHARED_RESOURCE_RW) String() string {
 	return strings.Join(parts, "|")
 }
 
+type DXGI_SINGLE_ADAPTER_HYBRID_MODE int32
+
+const (
+	DXGI_SINGLE_ADAPTER_HYBRID_MODE_UNSPECIFIED      DXGI_SINGLE_ADAPTER_HYBRID_MODE = 0
+	DXGI_SINGLE_ADAPTER_HYBRID_MODE_MINIMUM_POWER    DXGI_SINGLE_ADAPTER_HYBRID_MODE = 1
+	DXGI_SINGLE_ADAPTER_HYBRID_MODE_HIGH_PERFORMANCE DXGI_SINGLE_ADAPTER_HYBRID_MODE = 2
+)
+
+// String returns the DXGI_SINGLE_ADAPTER_HYBRID_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_SINGLE_ADAPTER_HYBRID_MODE) String() string {
+	switch e {
+	case DXGI_SINGLE_ADAPTER_HYBRID_MODE_UNSPECIFIED:
+		return "DXGI_SINGLE_ADAPTER_HYBRID_MODE_UNSPECIFIED"
+	case DXGI_SINGLE_ADAPTER_HYBRID_MODE_MINIMUM_POWER:
+		return "DXGI_SINGLE_ADAPTER_HYBRID_MODE_MINIMUM_POWER"
+	case DXGI_SINGLE_ADAPTER_HYBRID_MODE_HIGH_PERFORMANCE:
+		return "DXGI_SINGLE_ADAPTER_HYBRID_MODE_HIGH_PERFORMANCE"
+	default:
+		return fmt.Sprintf("DXGI_SINGLE_ADAPTER_HYBRID_MODE(%d)", int32(e))
+	}
+}
+
 // DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG: https://learn.microsoft.com/windows/win32/api/dxgi1_4/ne-dxgi1_4-dxgi_swap_chain_color_space_support_flag
 // Bitmask — values may be combined with |.
 type DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG int32
@@ -1897,6 +1983,7 @@ const (
 	DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED                           DXGI_SWAP_CHAIN_FLAG = 1024
 	DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING                          DXGI_SWAP_CHAIN_FLAG = 2048
 	DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS DXGI_SWAP_CHAIN_FLAG = 4096
+	DXGI_SWAP_CHAIN_FLAG_USE_DEFAULT_COLOR_SPACE                DXGI_SWAP_CHAIN_FLAG = 32768
 )
 
 // String returns the DXGI_SWAP_CHAIN_FLAG constant's name, or its numeric form when
@@ -1941,6 +2028,9 @@ func (e DXGI_SWAP_CHAIN_FLAG) String() string {
 	}
 	if e&DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS != 0 {
 		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_USE_DEFAULT_COLOR_SPACE != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_USE_DEFAULT_COLOR_SPACE")
 	}
 	if len(parts) == 0 {
 		return "0"

@@ -944,7 +944,7 @@ const (
 	MonitorRequestReasonPdcSignalSensorsHumanPresence  POWER_MONITOR_REQUEST_REASON = 52
 	MonitorRequestReasonBatteryPreCritical             POWER_MONITOR_REQUEST_REASON = 53
 	MonitorRequestReasonUserInputTouch                 POWER_MONITOR_REQUEST_REASON = 54
-	MonitorRequestReasonAusterityBatteryDrain          POWER_MONITOR_REQUEST_REASON = 55
+	MonitorRequestReasonRestrictedStandbyBatteryDrain  POWER_MONITOR_REQUEST_REASON = 55
 	MonitorRequestReasonDozeRestrictedStandby          POWER_MONITOR_REQUEST_REASON = 56
 	MonitorRequestReasonSmartRestrictedStandby         POWER_MONITOR_REQUEST_REASON = 57
 	MonitorRequestReasonMax                            POWER_MONITOR_REQUEST_REASON = 58
@@ -1064,8 +1064,8 @@ func (e POWER_MONITOR_REQUEST_REASON) String() string {
 		return "MonitorRequestReasonBatteryPreCritical"
 	case MonitorRequestReasonUserInputTouch:
 		return "MonitorRequestReasonUserInputTouch"
-	case MonitorRequestReasonAusterityBatteryDrain:
-		return "MonitorRequestReasonAusterityBatteryDrain"
+	case MonitorRequestReasonRestrictedStandbyBatteryDrain:
+		return "MonitorRequestReasonRestrictedStandbyBatteryDrain"
 	case MonitorRequestReasonDozeRestrictedStandby:
 		return "MonitorRequestReasonDozeRestrictedStandby"
 	case MonitorRequestReasonSmartRestrictedStandby:

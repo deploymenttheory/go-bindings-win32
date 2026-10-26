@@ -920,6 +920,12 @@ type MEMORY_DEFECT struct {
 	Data [36]byte
 }
 
+// MEMORY_DEFECT_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type MEMORY_DEFECT_FLAGS struct {
+	Data [2]byte
+}
+
 // MINIDUMP_CALLBACK_INFORMATION: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_callback_information
 // MINIDUMP_CALLBACK_INFORMATION is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -934,6 +940,20 @@ type MINIDUMP_CALLBACK_INFORMATION struct {
 // field through an unsafe.Pointer cast.
 type MINIDUMP_CALLBACK_OUTPUT struct {
 	Data [14]uint32
+}
+
+// MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK struct {
+	Data [3]uint32
+}
+
+// MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK struct {
+	Data [6]uint32
 }
 
 // MINIDUMP_DIRECTORY: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_directory
@@ -1782,6 +1802,13 @@ type WHEA_ERROR_SOURCE_DESCRIPTOR struct {
 	Data [972]byte
 }
 
+// WHEA_ERROR_SOURCE_DESCRIPTOR_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_ERROR_SOURCE_DESCRIPTOR_V2 struct {
+	Data [1868]byte
+}
+
 // WHEA_GENERIC_ERROR_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
@@ -1853,11 +1880,25 @@ type WHEA_XPF_CMC_DESCRIPTOR struct {
 	Data [932]byte
 }
 
+// WHEA_XPF_CMC_DESCRIPTOR_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_XPF_CMC_DESCRIPTOR_V2 struct {
+	Data [1828]byte
+}
+
 // WHEA_XPF_MCE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
 type WHEA_XPF_MCE_DESCRIPTOR struct {
 	Data [920]byte
+}
+
+// WHEA_XPF_MCE_DESCRIPTOR_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_XPF_MCE_DESCRIPTOR_V2 struct {
+	Data [1816]byte
 }
 
 // WHEA_XPF_MC_BANK_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
@@ -1976,17 +2017,23 @@ type XSAVE_FORMAT struct {
 	Reserved4      [96]byte
 }
 
-// XSTATE_CONFIGURATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// XSTATE_CONFIGURATION_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
-type XSTATE_CONFIGURATION_Anonymous_e__Union struct {
+type XSTATE_CONFIGURATION_Anonymous1_e__Union struct {
 	Data [1]uint32
+}
+
+// XSTATE_CONFIGURATION_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
+type XSTATE_CONFIGURATION_Anonymous2_e__Union struct {
+	Data [3]uint32
 }
 
 type XSTATE_CONFIGURATION struct {
 	EnabledFeatures                      uint64
 	EnabledVolatileFeatures              uint64
 	Size                                 uint32
-	Anonymous                            XSTATE_CONFIGURATION_Anonymous_e__Union
+	Anonymous1                           XSTATE_CONFIGURATION_Anonymous1_e__Union
 	Features                             [64]XSTATE_FEATURE
 	EnabledSupervisorFeatures            uint64
 	AlignedFeatures                      uint64
@@ -1995,8 +2042,8 @@ type XSTATE_CONFIGURATION struct {
 	EnabledUserVisibleSupervisorFeatures uint64
 	ExtendedFeatureDisableFeatures       uint64
 	AllNonLargeFeatureSize               uint32
-	MaxSveVectorLength                   uint16
-	Spare1                               uint16
+	Anonymous2                           XSTATE_CONFIGURATION_Anonymous2_e__Union
+	Spare                                uint64
 }
 
 // XSTATE_CONFIG_FEATURE_MSC_INFO is a packed C struct (non-default field alignment), exposed as

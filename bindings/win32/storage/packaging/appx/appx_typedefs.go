@@ -4,6 +4,8 @@
 
 package appx
 
+// Invalid values: 0.
 type PACKAGEDEPENDENCY_CONTEXT uintptr
 
+// Invalid values: 0.
 type PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE uintptr

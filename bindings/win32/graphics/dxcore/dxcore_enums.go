@@ -117,6 +117,7 @@ const (
 	AdapterInUseProcessSet                        DXCoreAdapterState = 8
 	AdapterEngineFrequencyHertz                   DXCoreAdapterState = 9
 	AdapterMemoryFrequencyHertz                   DXCoreAdapterState = 10
+	SingleAdapterHybridMode                       DXCoreAdapterState = 11
 )
 
 // String returns the DXCoreAdapterState constant's name, or its numeric form when
@@ -145,6 +146,8 @@ func (e DXCoreAdapterState) String() string {
 		return "AdapterEngineFrequencyHertz"
 	case AdapterMemoryFrequencyHertz:
 		return "AdapterMemoryFrequencyHertz"
+	case SingleAdapterHybridMode:
+		return "SingleAdapterHybridMode"
 	default:
 		return fmt.Sprintf("DXCoreAdapterState(%d)", uint32(e))
 	}
@@ -272,6 +275,23 @@ func (e DXCoreSegmentGroup) String() string {
 		return "NonLocal"
 	default:
 		return fmt.Sprintf("DXCoreSegmentGroup(%d)", uint32(e))
+	}
+}
+
+type DXCoreSingleAdapterHybridMode uint32
+
+const (
+	Unspecified DXCoreSingleAdapterHybridMode = 0
+)
+
+// String returns the DXCoreSingleAdapterHybridMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreSingleAdapterHybridMode) String() string {
+	switch e {
+	case Unspecified:
+		return "Unspecified"
+	default:
+		return fmt.Sprintf("DXCoreSingleAdapterHybridMode(%d)", uint32(e))
 	}
 }
 

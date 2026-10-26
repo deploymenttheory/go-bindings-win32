@@ -136,6 +136,7 @@ var (
 	procCheckDlgButton                         = modUSER32.NewProc("CheckDlgButton")
 	procCheckRadioButton                       = modUSER32.NewProc("CheckRadioButton")
 	procCreateSyntheticPointerDevice           = modUSER32.NewProc("CreateSyntheticPointerDevice")
+	procCreateSyntheticPointerDevice2          = modUSER32.NewProc("CreateSyntheticPointerDevice2")
 	procDlgDirList                             = modUSER32.NewProc("DlgDirListW")
 	procDlgDirListA                            = modUSER32.NewProc("DlgDirListA")
 	procDlgDirListComboBox                     = modUSER32.NewProc("DlgDirListComboBoxW")
@@ -260,6 +261,7 @@ var Procs = struct {
 	CreateStatusWindow                     *win32.Proc
 	CreateStatusWindowA                    *win32.Proc
 	CreateSyntheticPointerDevice           *win32.Proc
+	CreateSyntheticPointerDevice2          *win32.Proc
 	CreateToolbarEx                        *win32.Proc
 	CreateUpDownControl                    *win32.Proc
 	DPA_Clone                              *win32.Proc
@@ -473,6 +475,7 @@ var Procs = struct {
 	CreateStatusWindow:                     procCreateStatusWindow,
 	CreateStatusWindowA:                    procCreateStatusWindowA,
 	CreateSyntheticPointerDevice:           procCreateSyntheticPointerDevice,
+	CreateSyntheticPointerDevice2:          procCreateSyntheticPointerDevice2,
 	CreateToolbarEx:                        procCreateToolbarEx,
 	CreateUpDownControl:                    procCreateUpDownControl,
 	DPA_Clone:                              procDPA_Clone,
@@ -837,6 +840,12 @@ func CreateSyntheticPointerDevice(pointerType uiwindowsandmessaging.POINTER_INPU
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
+}
+
+// CreateSyntheticPointerDevice2 calls USER32!CreateSyntheticPointerDevice2.
+func CreateSyntheticPointerDevice2(pParams *SYNTHETIC_DEVICE_CREATION_PARAMS) uiinputpointer.HSYNTHETICPOINTERDEVICE {
+	r1, _, _ := syscall.SyscallN(procCreateSyntheticPointerDevice2.Addr(), uintptr(unsafe.Pointer(pParams)))
+	return uiinputpointer.HSYNTHETICPOINTERDEVICE(r1)
 }
 
 // CreateToolbarEx calls COMCTL32!CreateToolbarEx.

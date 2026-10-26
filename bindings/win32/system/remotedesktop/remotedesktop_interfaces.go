@@ -2319,6 +2319,21 @@ func (self *IWRdsProtocolConnection2) GetSerializedUserCredential(userCredential
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IID: 3aa87da3-f60b-4280-b385-f1cc22ad5d9f
+type IWRdsProtocolConnection3_Experimental struct {
+	IWRdsProtocolConnection2
+}
+
+// IID_IWRdsProtocolConnection3_Experimental is the interface identifier for IWRdsProtocolConnection3_Experimental.
+var IID_IWRdsProtocolConnection3_Experimental = win32.GUID{Data1: 0x3aa87da3, Data2: 0xf60b, Data3: 0x4280, Data4: [8]byte{0xb3, 0x85, 0xf1, 0xcc, 0x22, 0xad, 0x5d, 0x9f}}
+
+// GetSerializedUserCredentialInteractively dispatches through IWRdsProtocolConnection3_Experimental's vtable slot 28.
+func (self *IWRdsProtocolConnection3_Experimental) GetSerializedUserCredentialInteractively(scenarioId *win32.GUID, usernameHint string, userCredential **WTS_SERIALIZED_USER_CREDENTIAL) error {
+	_usernameHint := win32.UTF16Ptr(usernameHint)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scenarioId)), uintptr(unsafe.Pointer(_usernameHint)), uintptr(unsafe.Pointer(userCredential)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IWRdsProtocolConnectionCallback: https://learn.microsoft.com/windows/win32/api/wtsprotocol/nn-wtsprotocol-iwrdsprotocolconnectioncallback
 // IID: f1d70332-d070-4ef1-a088-78313536c2d6
 type IWRdsProtocolConnectionCallback struct {
@@ -3433,6 +3448,60 @@ var IID_IWTSVirtualChannelManager = win32.GUID{Data1: 0xa1230205, Data2: 0xd6a7,
 // CreateListener dispatches through IWTSVirtualChannelManager's vtable slot 3.
 func (self *IWTSVirtualChannelManager) CreateListener(pszChannelName foundation.PSTR, uFlags uint32, pListenerCallback *IWTSListenerCallback, ppListener **IWTSListener) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszChannelName)), uintptr(uFlags), uintptr(unsafe.Pointer(pListenerCallback)), uintptr(unsafe.Pointer(ppListener)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// IID: e8a47fd3-1af6-4d7f-8e15-515ccae1c00c
+type IWTSWindowChangedCallback struct {
+	systemcom.IUnknown
+}
+
+// IID_IWTSWindowChangedCallback is the interface identifier for IWTSWindowChangedCallback.
+var IID_IWTSWindowChangedCallback = win32.GUID{Data1: 0xe8a47fd3, Data2: 0x1af6, Data3: 0x4d7f, Data4: [8]byte{0x8e, 0x15, 0x51, 0x5c, 0xca, 0xe1, 0xc0, 0x0c}}
+
+// WindowChanged dispatches through IWTSWindowChangedCallback's vtable slot 3.
+func (self *IWTSWindowChangedCallback) WindowChanged(windowInfo *WTSWindowInfo) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(windowInfo)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// IID: 2a002c7b-0120-4d04-bfb1-3c73110c8581
+type IWTSWindowInfoService struct {
+	systemcom.IUnknown
+}
+
+// IID_IWTSWindowInfoService is the interface identifier for IWTSWindowInfoService.
+var IID_IWTSWindowInfoService = win32.GUID{Data1: 0x2a002c7b, Data2: 0x0120, Data3: 0x4d04, Data4: [8]byte{0xbf, 0xb1, 0x3c, 0x73, 0x11, 0x0c, 0x85, 0x81}}
+
+// GetWindowInfo dispatches through IWTSWindowInfoService's vtable slot 3.
+func (self *IWTSWindowInfoService) GetWindowInfo(remoteHwnd foundation.HWND, windowInfo *WTSWindowInfo) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(remoteHwnd), uintptr(unsafe.Pointer(windowInfo)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetRdpClientProcessId dispatches through IWTSWindowInfoService's vtable slot 4.
+func (self *IWTSWindowInfoService) GetRdpClientProcessId() (uint32, error) {
+	_processId := new(uint32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_processId))))
+	return *_processId, win32.ErrIfFailed(int32(r1))
+}
+
+// GetRdpSessionType dispatches through IWTSWindowInfoService's vtable slot 5.
+func (self *IWTSWindowInfoService) GetRdpSessionType() (RdpSessionType, error) {
+	_sessionType := new(RdpSessionType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_sessionType))))
+	return *_sessionType, win32.ErrIfFailed(int32(r1))
+}
+
+// SubscribeWindowChanged dispatches through IWTSWindowInfoService's vtable slot 6.
+func (self *IWTSWindowInfoService) SubscribeWindowChanged(remoteHwnd foundation.HWND, windowChanged *IWTSWindowChangedCallback) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(remoteHwnd), uintptr(unsafe.Pointer(windowChanged)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// UnsubscribeWindowChanged dispatches through IWTSWindowInfoService's vtable slot 7.
+func (self *IWTSWindowInfoService) UnsubscribeWindowChanged(remoteHwnd foundation.HWND, windowChanged *IWTSWindowChangedCallback) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(remoteHwnd), uintptr(unsafe.Pointer(windowChanged)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

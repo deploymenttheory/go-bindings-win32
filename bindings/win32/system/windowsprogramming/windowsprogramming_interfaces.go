@@ -118,8 +118,8 @@ type IClipServiceNotificationHelper struct {
 var IID_IClipServiceNotificationHelper = win32.GUID{Data1: 0xc39948f0, Data2: 0x6142, Data3: 0x44fd, Data4: [8]byte{0x98, 0xca, 0xe1, 0x68, 0x1a, 0x8d, 0x68, 0xb5}}
 
 // ShowToast dispatches through IClipServiceNotificationHelper's vtable slot 3.
-func (self *IClipServiceNotificationHelper) ShowToast(titleText foundation.BSTR, bodyText foundation.BSTR, packageName foundation.BSTR, appId foundation.BSTR, launchCommand foundation.BSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(titleText)), uintptr(unsafe.Pointer(bodyText)), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(appId)), uintptr(unsafe.Pointer(launchCommand)))
+func (self *IClipServiceNotificationHelper) ShowToast() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
 	return win32.ErrIfFailed(int32(r1))
 }
 

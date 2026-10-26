@@ -72,6 +72,15 @@ type ATA_PASS_THROUGH_EX32 struct {
 	CurrentTaskFile    [8]byte
 }
 
+type BOOT_PARTITION_REQUEST_BLOCK struct {
+	Version          uint32
+	Size             uint32
+	Function         uint32
+	Flags            uint32
+	DataBufferOffset uint32
+	DataBufferLength uint32
+}
+
 type DSM_NOTIFICATION_REQUEST_BLOCK struct {
 	Size               uint32
 	Version            uint32
@@ -815,6 +824,32 @@ type SRB_IO_CONTROL struct {
 	ControlCode  uint32
 	ReturnCode   uint32
 	Length       uint32
+}
+
+type STORAGE_BOOT_PARTITION_ACTIVATE struct {
+	Version   uint32
+	Size      uint32
+	BPID      byte
+	Reserved0 [3]byte
+}
+
+type STORAGE_BOOT_PARTITION_DOWNLOAD struct {
+	Version     uint32
+	Size        uint32
+	BPID        byte
+	Offset      uint64
+	BufferSize  uint64
+	ImageBuffer [1]byte
+}
+
+type STORAGE_BOOT_PARTITION_INFO struct {
+	Version               uint32
+	Size                  uint32
+	BPSZ                  uint64
+	ImagePayloadAlignment uint32
+	ImagePayloadMaxSize   uint32
+	SlotCount             byte
+	ABPID                 byte
 }
 
 type STORAGE_DIAGNOSTIC_MP_REQUEST struct {

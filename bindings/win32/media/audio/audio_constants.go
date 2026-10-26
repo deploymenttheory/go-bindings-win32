@@ -391,6 +391,7 @@ var PKEY_AudioEndpoint_JackSubType = foundation.PROPERTYKEY{Fmtid: win32.GUID{Da
 var PKEY_AudioEndpoint_Max_VolumeInDb = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 497408003, Data2: 54418, Data3: 20189, Data4: [8]byte{140, 35, 224, 192, 255, 238, 127, 14}}, Pid: 10}
 var PKEY_AudioEndpoint_Min_VolumeInDb = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 497408003, Data2: 54418, Data3: 20189, Data4: [8]byte{140, 35, 224, 192, 255, 238, 127, 14}}, Pid: 11}
 var PKEY_AudioEndpoint_PhysicalSpeakers = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 497408003, Data2: 54418, Data3: 20189, Data4: [8]byte{140, 35, 224, 192, 255, 238, 127, 14}}, Pid: 3}
+var PKEY_AudioEndpoint_StableId = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 497408003, Data2: 54418, Data3: 20189, Data4: [8]byte{140, 35, 224, 192, 255, 238, 127, 14}}, Pid: 12}
 var PKEY_AudioEndpoint_Supports_EventDriven_Mode = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 497408003, Data2: 54418, Data3: 20189, Data4: [8]byte{140, 35, 224, 192, 255, 238, 127, 14}}, Pid: 7}
 var PKEY_AudioEngine_DeviceFormat = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 4053730893, Data2: 2092, Data3: 20007, Data4: [8]byte{188, 115, 104, 130, 161, 187, 142, 76}}, Pid: 0}
 var PKEY_AudioEngine_OEMFormat = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 3834056230, Data2: 15557, Data3: 19666, Data4: [8]byte{186, 70, 202, 10, 154, 112, 237, 4}}, Pid: 3}

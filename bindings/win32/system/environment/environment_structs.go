@@ -25,6 +25,13 @@ type ENCLAVE_INFORMATION struct {
 	Identity    ENCLAVE_IDENTITY
 }
 
+// ENCLAVE_PACKAGE_IDENTITY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENCLAVE_PACKAGE_IDENTITY struct {
+	Data [40]byte
+}
+
 type ENCLAVE_VBS_BASIC_KEY_REQUEST struct {
 	RequestSize        uint32
 	Flags              uint32
@@ -103,6 +110,11 @@ type VBS_ENCLAVE_REPORT struct {
 // field through an unsafe.Pointer cast.
 type VBS_ENCLAVE_REPORT_MODULE struct {
 	Data [110]byte
+}
+
+type VBS_ENCLAVE_REPORT_PACKAGE_ID struct {
+	Header          VBS_ENCLAVE_REPORT_VARDATA_HEADER
+	PackageIdentity ENCLAVE_PACKAGE_IDENTITY
 }
 
 // VBS_ENCLAVE_REPORT_PKG_HEADER: https://learn.microsoft.com/windows/win32/api/ntenclv/ns-ntenclv-vbs_enclave_report_pkg_header

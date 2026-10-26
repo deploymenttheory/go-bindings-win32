@@ -44,6 +44,8 @@ var (
 	procGetPackageDependencyInformation                 = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("GetPackageDependencyInformation")
 	procGetProcessesUsingPackageDependency              = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("GetProcessesUsingPackageDependency")
 	procGetResolvedPackageFullNameForPackageDependency2 = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("GetResolvedPackageFullNameForPackageDependency2")
+	procGetStagedPackageOrigin2                         = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("GetStagedPackageOrigin2")
+	procIsPackageFeatureSupported                       = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("IsPackageFeatureSupported")
 	procTryCreatePackageDependency2                     = modapi_ms_win_appmodel_runtime_l1_1_7.NewProc("TryCreatePackageDependency2")
 	procActivatePackageVirtualizationContext            = modKERNEL32.NewProc("ActivatePackageVirtualizationContext")
 	procAppPolicyGetClrCompat                           = modKERNEL32.NewProc("AppPolicyGetClrCompat")
@@ -153,8 +155,10 @@ var Procs = struct {
 	GetResolvedPackageFullNameForPackageDependency  *win32.Proc
 	GetResolvedPackageFullNameForPackageDependency2 *win32.Proc
 	GetStagedPackageOrigin                          *win32.Proc
+	GetStagedPackageOrigin2                         *win32.Proc
 	GetStagedPackagePathByFullName                  *win32.Proc
 	GetStagedPackagePathByFullName2                 *win32.Proc
+	IsPackageFeatureSupported                       *win32.Proc
 	OpenPackageInfoByFullName                       *win32.Proc
 	OpenPackageInfoByFullNameForUser                *win32.Proc
 	PackageFamilyNameFromFullName                   *win32.Proc
@@ -225,8 +229,10 @@ var Procs = struct {
 	GetResolvedPackageFullNameForPackageDependency:  procGetResolvedPackageFullNameForPackageDependency,
 	GetResolvedPackageFullNameForPackageDependency2: procGetResolvedPackageFullNameForPackageDependency2,
 	GetStagedPackageOrigin:                          procGetStagedPackageOrigin,
+	GetStagedPackageOrigin2:                         procGetStagedPackageOrigin2,
 	GetStagedPackagePathByFullName:                  procGetStagedPackagePathByFullName,
 	GetStagedPackagePathByFullName2:                 procGetStagedPackagePathByFullName2,
+	IsPackageFeatureSupported:                       procIsPackageFeatureSupported,
 	OpenPackageInfoByFullName:                       procOpenPackageInfoByFullName,
 	OpenPackageInfoByFullNameForUser:                procOpenPackageInfoByFullNameForUser,
 	PackageFamilyNameFromFullName:                   procPackageFamilyNameFromFullName,
@@ -637,6 +643,13 @@ func GetStagedPackageOrigin(packageFullName string, origin *PackageOrigin) found
 	return foundation.WIN32_ERROR(r1)
 }
 
+// GetStagedPackageOrigin2 calls api-ms-win-appmodel-runtime-l1-1-7!GetStagedPackageOrigin2.
+func GetStagedPackageOrigin2(packageFullName string, origin *PackageOrigin2) error {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procGetStagedPackageOrigin2.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(origin)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetStagedPackagePathByFullName calls KERNEL32!GetStagedPackagePathByFullName.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getstagedpackagepathbyfullname
 // Minimum OS: windows8.1.
@@ -653,6 +666,12 @@ func GetStagedPackagePathByFullName2(packageFullName string, packagePathType Pac
 	_packageFullName := win32.UTF16Ptr(packageFullName)
 	r1, _, _ := syscall.SyscallN(procGetStagedPackagePathByFullName2.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(packagePathType), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
 	return foundation.WIN32_ERROR(r1)
+}
+
+// IsPackageFeatureSupported calls api-ms-win-appmodel-runtime-l1-1-7!IsPackageFeatureSupported.
+func IsPackageFeatureSupported(feature AppModelPackageFeature) bool {
+	r1, _, _ := syscall.SyscallN(procIsPackageFeatureSupported.Addr(), uintptr(feature))
+	return r1 != 0
 }
 
 // OpenPackageInfoByFullName calls KERNEL32!OpenPackageInfoByFullName.

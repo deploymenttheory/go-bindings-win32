@@ -584,7 +584,18 @@ func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.
 	}
 	// Value + SetLastError with a known failure sentinel → clean (T, error).
 	if function.SetLastError {
-		if checks := g.failureChecks(resolved); len(checks) > 0 {
+		checks := g.failureChecks(resolved)
+		// LocalFree/GlobalFree return the unfreed handle on failure and NULL
+		// on success. The handle typedef's InvalidHandleValue metadata describes
+		// acquisition, not these function-specific deallocation contracts.
+		// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-localfree
+		// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalfree
+		if meta.Namespace == "Foundation" &&
+			(function.Name == "LocalFree" || function.Name == "GlobalFree") &&
+			resolved.Kind == typemap.KindHandleTypedef {
+			checks = []string{"ret != 0"}
+		}
+		if len(checks) > 0 {
 			model.ReturnKind = view.RetValErr
 			model.ReturnSig = "(" + resolved.GoType + ", error)"
 			model.FailureChecks = checks

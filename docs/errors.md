@@ -32,6 +32,13 @@ h, err := threading.OpenEvent(access, false, "name")
 if err != nil { /* ... */ }
 ```
 
+`LocalFree` and `GlobalFree` are exceptions to the allocation-handle rule:
+they return `(0, nil)` after a successful free (including a NULL input). A
+nonzero result is the unfreed handle and comes with an error. The generator
+uses these functions' documented return contracts rather than the handle
+typedef's allocation failure sentinels. Do not retry a successful free based
+on an unrelated thread-local last-error value.
+
 You can match specific codes with `errors.Is` — against the standard
 library's `syscall.ERROR_*` set, or `golang.org/x/sys/windows`' larger one
 (its constants are typed `syscall.Errno`, so both work; the bindings link

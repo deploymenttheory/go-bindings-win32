@@ -163,7 +163,7 @@ func GetLastError() WIN32_ERROR {
 func GlobalFree(hMem HGLOBAL) (HGLOBAL, error) {
 	r1, _, e1 := syscall.SyscallN(procGlobalFree.Addr(), uintptr(hMem))
 	ret := HGLOBAL(r1)
-	if ret == ^HGLOBAL(0) || ret == 0 {
+	if ret != 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -175,7 +175,7 @@ func GlobalFree(hMem HGLOBAL) (HGLOBAL, error) {
 func LocalFree(hMem HLOCAL) (HLOCAL, error) {
 	r1, _, e1 := syscall.SyscallN(procLocalFree.Addr(), uintptr(hMem))
 	ret := HLOCAL(r1)
-	if ret == ^HLOCAL(0) || ret == 0 {
+	if ret != 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil

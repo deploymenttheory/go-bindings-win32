@@ -1769,8 +1769,8 @@ func DsRoleFreeMemory(Buffer unsafe.Pointer) {
 // DsRoleGetPrimaryDomainInformation calls NETAPI32!DsRoleGetPrimaryDomainInformation.
 // https://learn.microsoft.com/windows/win32/api/dsrole/nf-dsrole-dsrolegetprimarydomaininformation
 // Minimum OS: windows6.0.6000.
-func DsRoleGetPrimaryDomainInformation(lpServer string, InfoLevel DSROLE_PRIMARY_DOMAIN_INFO_LEVEL, Buffer **byte) uint32 {
-	_lpServer := win32.UTF16Ptr(lpServer)
+func DsRoleGetPrimaryDomainInformation(lpServer *string, InfoLevel DSROLE_PRIMARY_DOMAIN_INFO_LEVEL, Buffer **byte) uint32 {
+	_lpServer := win32.UTF16PtrOrNil(lpServer)
 	r1, _, _ := syscall.SyscallN(procDsRoleGetPrimaryDomainInformation.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(InfoLevel), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }

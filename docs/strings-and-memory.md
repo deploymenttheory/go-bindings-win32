@@ -27,6 +27,15 @@ event, _ := threading.CreateEvent(nil, true, false, nil)                  // unn
 named, _ := threading.CreateEvent(nil, true, false, win32.Str("my-event")) // L"my-event"
 ```
 
+`activedirectory.DsRoleGetPrimaryDomainInformation` also takes `lpServer
+*string`. Its native contract allows NULL for the local computer even though
+the current metadata omits `[Optional]`. Pass `nil` for the local computer or
+`win32.Str(server)` for an explicit name; `win32.Str("")` still passes an empty
+string, not NULL. Existing calls that supplied `server` as a Go string must
+change that argument to `win32.Str(server)`. The returned `uint32` remains the
+native status (zero is success), and the returned buffer must be released with
+`DsRoleFreeMemory`. See the [native API contract](https://learn.microsoft.com/en-us/windows/win32/api/dsrole/nf-dsrole-dsrolegetprimarydomaininformation).
+
 **Output/buffer strings** stay `PWSTR` (they're memory you provide), and you
 convert with the runtime. The idiom is *size-probe then fill*:
 

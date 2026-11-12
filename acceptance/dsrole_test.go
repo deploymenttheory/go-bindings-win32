@@ -50,8 +50,12 @@ func readPrimaryDomainRole(t *testing.T, server *string) primaryDomainRole {
 	if info.MachineRole < activedirectory.DsRole_RoleStandaloneWorkstation || info.MachineRole > activedirectory.DsRole_RolePrimaryDomainController {
 		t.Fatalf("invalid machine role %d", info.MachineRole)
 	}
+	var guid win32.GUID
+	if info.Flags&activedirectory.DSROLE_PRIMARY_DOMAIN_GUID_PRESENT != 0 {
+		guid = info.DomainGuid
+	}
 	return primaryDomainRole{
-		role: info.MachineRole, flags: info.Flags, guid: info.DomainGuid,
+		role: info.MachineRole, flags: info.Flags, guid: guid,
 		flat: win32.UTF16ToString(info.DomainNameFlat),
 		dns:  win32.UTF16ToString(info.DomainNameDns), forest: win32.UTF16ToString(info.DomainForestName),
 	}

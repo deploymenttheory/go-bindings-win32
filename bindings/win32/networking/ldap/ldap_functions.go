@@ -1086,10 +1086,9 @@ func Ldap_bind_sA(ld *LDAP, dn foundation.PSTR, cred foundation.PSTR, method uin
 // Ldap_bind_sW calls WLDAP32!ldap_bind_sW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_bind_sw
 // Minimum OS: windows6.0.6000.
-func Ldap_bind_sW(ld *LDAP, dn *string, cred *string, method uint32) uint32 {
+func Ldap_bind_sW(ld *LDAP, dn *string, cred foundation.PWSTR, method uint32) uint32 {
 	_dn := win32.UTF16PtrOrNil(dn)
-	_cred := win32.UTF16PtrOrNil(cred)
-	r1, _, _ := syscall.SyscallN(procLdap_bind_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_cred)), uintptr(method))
+	r1, _, _ := syscall.SyscallN(procLdap_bind_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(cred)), uintptr(method))
 	return uint32(r1)
 }
 

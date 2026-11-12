@@ -142,6 +142,32 @@ method. Ordinary DN conversion and asynchronous SIMPLE bind are unchanged.
 See Microsoft's [bind contract](https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_bind_sw)
 and [Unicode identity layout](https://learn.microsoft.com/windows/win32/api/sspi/ns-sspi-sec_winnt_auth_identity_w).
 
+## LDAP client-certificate callbacks
+
+`Ldap_set_client_certificate(connection, callback)` is a typed helper over
+`ldap_set_optionW` with `LDAP_OPT_CLIENT_CERTIFICATE`. The native option consumes
+the `QUERYCLIENTCERT` code pointer by value. Passing `&callback` to the generic
+pointer-valued option setter would install the address of Go data as executable
+code. The helper dispatches the callback word directly and reuses the existing
+`Procs.Ldap_set_optionW` availability probe; it adds no native export.
+
+Use `syscall.NewCallbackCDecl` with the documented callback shape. Keep callbacks
+and any referenced state valid through connection cleanup; Go callback thunks
+are not released, so prefer a process-wide callback for a fixed policy. A zero
+callback removes the selection routine. This helper does not implement client
+certificate selection or choose a transport/authentication policy.
+
+A callback that returns false declines a client certificate. WinLDAP derives
+`SCH_CRED_NO_DEFAULT_CREDS` versus `SCH_CRED_USE_DEFAULT_CREDS` from whether a
+client-certificate routine is installed, independently of automatic server
+certificate validation. Native, network-free tests verify that the actual code
+address round-trips through the option and that a callback preserves requested
+automatic validation and no-default-credential flags. They do not prove a TLS
+handshake or certificate validation. See Microsoft's
+[callback contract](https://learn.microsoft.com/windows/win32/api/winldap/nc-winldap-queryclientcert),
+[Schannel option behavior](https://learn.microsoft.com/previous-versions/windows/desktop/ldap/session-options),
+and [.NET's callback-by-value adapter](https://github.com/dotnet/runtime/blob/main/src/libraries/Common/src/Interop/Windows/Wldap32/Interop.Ldap.cs).
+
 ## Handles and closers
 
 Handles are opaque `uintptr`-backed types (`HANDLE`, `HKEY`, …). Where the

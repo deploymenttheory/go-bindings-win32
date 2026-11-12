@@ -245,7 +245,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 			continue
 		}
 
-		shaped, ok := g.shapeParam(paramNames[i], param, resolved)
+		shaped, ok := g.shapeFunctionParam(meta.Namespace, function.Name, paramNames[i], param, resolved)
 		if !ok {
 			g.diag("function %s: param %s not marshalable (%s), function skipped",
 				function.Name, param.Name, resolved.GoType)

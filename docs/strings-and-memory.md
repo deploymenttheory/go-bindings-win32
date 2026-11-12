@@ -90,6 +90,27 @@ info := (*netmanagement.USER_INFO_1)(unsafe.Pointer(buf))
 Common frees: `NetApiBufferFree`, `LocalFree`, `CoTaskMemFree`,
 `SysFreeString`.
 
+LDAP's `Ldap_memfreeW` takes the original `foundation.PWSTR` returned by
+the LDAP library. Although its metadata calls this an input string, the
+pointer identifies the allocation to release. Do not convert it to a Go
+string and back before freeing it, or pass a Go-owned UTF-16 buffer.
+
+```go
+name := ldap.Ldap_dn2ufnW("CN=Example,DC=example,DC=test")
+if name != nil {
+    text := win32.UTF16ToString(name)
+    ldap.Ldap_memfreeW(name)
+    // text is a Go copy; name is no longer valid.
+    _ = text
+}
+```
+
+The generator preserves this pointer explicitly. Versions through v0.6.0
+incorrectly accepted a Go string for `Ldap_memfreeW`; callers must migrate
+to passing the original LDAP pointer. See Microsoft's
+[allocation contract](https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_dn2ufnw)
+and [deallocation contract](https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_memfreew).
+
 ## Handles and closers
 
 Handles are opaque `uintptr`-backed types (`HANDLE`, `HKEY`, …). Where the

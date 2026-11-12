@@ -1886,9 +1886,8 @@ func Ldap_memfreeA(Block foundation.PSTR) {
 // Ldap_memfreeW calls WLDAP32!ldap_memfreeW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_memfreew
 // Minimum OS: windows6.0.6000.
-func Ldap_memfreeW(Block string) {
-	_Block := win32.UTF16Ptr(Block)
-	syscall.SyscallN(procLdap_memfreeW.Addr(), uintptr(unsafe.Pointer(_Block)))
+func Ldap_memfreeW(Block foundation.PWSTR) {
+	syscall.SyscallN(procLdap_memfreeW.Addr(), uintptr(unsafe.Pointer(Block)))
 }
 
 // Ldap_modify calls WLDAP32!ldap_modify.

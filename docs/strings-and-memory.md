@@ -111,6 +111,37 @@ to passing the original LDAP pointer. See Microsoft's
 [allocation contract](https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_dn2ufnw)
 and [deallocation contract](https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_memfreew).
 
+## LDAP credentials depend on the bind method
+
+`Ldap_bind_sW` takes `cred foundation.PWSTR`, preserving the original nullable
+pointer. Its C signature names a wide-character pointer, but the bind method
+determines what it points to. For current-identity Negotiate, pass `nil` for both
+DN and credentials. For explicit Negotiate, pass a pointer to a correctly
+initialized `rpc.SEC_WINNT_AUTH_IDENTITY_W` (or a supported extended identity)
+with Unicode buffers, character counts, and the Unicode flag. Never reinterpret
+a Go string as that structure.
+
+```go
+// identity and its buffers are caller-owned and initialized for Unicode.
+credential := foundation.PWSTR(unsafe.Pointer(&identity))
+status := ldap.Ldap_bind_sW(connection, nil, credential, negotiateMethod)
+runtime.KeepAlive(&identity)
+```
+
+Keep all referenced storage alive through the synchronous native call and
+follow the authentication provider's lifetime contract. The binding neither
+constructs nor frees the identity or its buffers. Callers must protect and clear
+sensitive storage when it is no longer required. This pointer also supports
+SIMPLE's password-buffer contract; choose appropriate transport protection
+before using that method. The binding does not choose authentication policy.
+
+Versions through v0.6.0 incorrectly accepted `cred *string` and created a new
+UTF-16 string. Current-identity calls with `nil` remain source compatible.
+Explicit callers must supply the native pointer appropriate for their selected
+method. Ordinary DN conversion and asynchronous SIMPLE bind are unchanged.
+See Microsoft's [bind contract](https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_bind_sw)
+and [Unicode identity layout](https://learn.microsoft.com/windows/win32/api/sspi/ns-sspi-sec_winnt_auth_identity_w).
+
 ## Handles and closers
 
 Handles are opaque `uintptr`-backed types (`HANDLE`, `HKEY`, …). Where the

@@ -585,6 +585,14 @@ func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.
 	// Value + SetLastError with a known failure sentinel → clean (T, error).
 	if function.SetLastError {
 		checks := g.failureChecks(resolved)
+		// WinMD projects this opaque pointer as an integer typedef without a
+		// failure sentinel. NULL is failure; a valid search block is success
+		// even if LastError was not cleared. Preserve the public (T, error) shape.
+		// https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_search_init_pagew
+		if meta.Namespace == "Networking.Ldap" && resolved.GoType == "PLDAPSearch" &&
+			(function.Name == "ldap_search_init_page" || function.Name == "ldap_search_init_pageA" || function.Name == "ldap_search_init_pageW") {
+			checks = []string{"ret == 0"}
+		}
 		// LocalFree/GlobalFree return the unfreed handle on failure and NULL
 		// on success. The handle typedef's InvalidHandleValue metadata describes
 		// acquisition, not these function-specific deallocation contracts.

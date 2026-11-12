@@ -2498,10 +2498,11 @@ func Ldap_search_ext_sW(ld *LDAP, base *string, scope uint32, filter string, att
 // Minimum OS: windows6.0.6000.
 func Ldap_search_init_page(ExternalHandle *LDAP, DistinguishedName foundation.PSTR, ScopeOfSearch uint32, SearchFilter foundation.PSTR, AttributeList **int8, AttributesOnly uint32, ServerControls **LDAPControlA, ClientControls **LDAPControlA, PageTimeLimit uint32, TotalSizeLimit uint32, SortKeys **LDAPSortKeyA) (PLDAPSearch, error) {
 	r1, _, e1 := syscall.SyscallN(procLdap_search_init_page.Addr(), uintptr(unsafe.Pointer(ExternalHandle)), uintptr(unsafe.Pointer(DistinguishedName)), uintptr(ScopeOfSearch), uintptr(unsafe.Pointer(SearchFilter)), uintptr(unsafe.Pointer(AttributeList)), uintptr(AttributesOnly), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)), uintptr(PageTimeLimit), uintptr(TotalSizeLimit), uintptr(unsafe.Pointer(SortKeys)))
-	if e1 != 0 {
-		return PLDAPSearch(r1), e1
+	ret := PLDAPSearch(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
 	}
-	return PLDAPSearch(r1), nil
+	return ret, nil
 }
 
 // Ldap_search_init_pageA calls WLDAP32!ldap_search_init_pageA.
@@ -2509,10 +2510,11 @@ func Ldap_search_init_page(ExternalHandle *LDAP, DistinguishedName foundation.PS
 // Minimum OS: windows6.0.6000.
 func Ldap_search_init_pageA(ExternalHandle *LDAP, DistinguishedName foundation.PSTR, ScopeOfSearch uint32, SearchFilter foundation.PSTR, AttributeList **int8, AttributesOnly uint32, ServerControls **LDAPControlA, ClientControls **LDAPControlA, PageTimeLimit uint32, TotalSizeLimit uint32, SortKeys **LDAPSortKeyA) (PLDAPSearch, error) {
 	r1, _, e1 := syscall.SyscallN(procLdap_search_init_pageA.Addr(), uintptr(unsafe.Pointer(ExternalHandle)), uintptr(unsafe.Pointer(DistinguishedName)), uintptr(ScopeOfSearch), uintptr(unsafe.Pointer(SearchFilter)), uintptr(unsafe.Pointer(AttributeList)), uintptr(AttributesOnly), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)), uintptr(PageTimeLimit), uintptr(TotalSizeLimit), uintptr(unsafe.Pointer(SortKeys)))
-	if e1 != 0 {
-		return PLDAPSearch(r1), e1
+	ret := PLDAPSearch(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
 	}
-	return PLDAPSearch(r1), nil
+	return ret, nil
 }
 
 // Ldap_search_init_pageW calls WLDAP32!ldap_search_init_pageW.
@@ -2522,10 +2524,11 @@ func Ldap_search_init_pageW(ExternalHandle *LDAP, DistinguishedName string, Scop
 	_DistinguishedName := win32.UTF16Ptr(DistinguishedName)
 	_SearchFilter := win32.UTF16Ptr(SearchFilter)
 	r1, _, e1 := syscall.SyscallN(procLdap_search_init_pageW.Addr(), uintptr(unsafe.Pointer(ExternalHandle)), uintptr(unsafe.Pointer(_DistinguishedName)), uintptr(ScopeOfSearch), uintptr(unsafe.Pointer(_SearchFilter)), uintptr(unsafe.Pointer(AttributeList)), uintptr(AttributesOnly), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)), uintptr(PageTimeLimit), uintptr(TotalSizeLimit), uintptr(unsafe.Pointer(SortKeys)))
-	if e1 != 0 {
-		return PLDAPSearch(r1), e1
+	ret := PLDAPSearch(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
 	}
-	return PLDAPSearch(r1), nil
+	return ret, nil
 }
 
 // Ldap_search_s calls WLDAP32!ldap_search_s.

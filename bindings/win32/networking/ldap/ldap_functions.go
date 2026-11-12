@@ -2786,3 +2786,13 @@ func Ldap_value_free_len(vals **LDAP_BERVAL) uint32 {
 	r1, _, _ := syscall.SyscallN(procLdap_value_free_len.Addr(), uintptr(unsafe.Pointer(vals)))
 	return uint32(r1)
 }
+
+// Ldap_set_client_certificate sets LDAP_OPT_CLIENT_CERTIFICATE through ldap_set_optionW.
+// callback is passed by value; zero removes the callback. Probe Procs.Ldap_set_optionW for availability.
+// Create QUERYCLIENTCERT callbacks with syscall.NewCallbackCDecl and retain their state for the connection lifetime.
+// Returning false selects anonymous TLS client credentials; this does not change server certificate validation.
+// https://learn.microsoft.com/windows/win32/api/winldap/nc-winldap-queryclientcert
+func Ldap_set_client_certificate(ld *LDAP, callback QUERYCLIENTCERT) uint32 {
+	r1, _, _ := syscall.SyscallN(procLdap_set_optionW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(LDAP_OPT_CLIENT_CERTIFICATE), uintptr(callback))
+	return uint32(r1)
+}

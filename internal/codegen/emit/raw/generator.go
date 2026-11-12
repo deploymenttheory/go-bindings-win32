@@ -354,6 +354,9 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	functions, dlls, procTable := g.buildFunctionModels(meta, funcImports)
 	coverage.Functions = g.functionCandidates(meta)
 	coverage.FunctionsEmitted = len(functions)
+	// Typed option helpers reuse an existing export and do not increase the
+	// count of metadata APIs emitted in the native-coverage report.
+	functions = append(functions, g.buildLDAPOptionHelpers(meta, procTable, funcImports)...)
 	var funcBody strings.Builder
 	if len(dlls) > 0 {
 		block, err := render.DLL(dlls)

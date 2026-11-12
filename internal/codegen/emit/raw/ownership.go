@@ -6,7 +6,7 @@ import (
 )
 
 // shapeFunctionParam preserves native pointer identity where string shaping
-// would change an API's ownership or method-dependent credential semantics.
+// would change an API's ownership, credential, or nullable-input semantics.
 // WinMD describes ldap_memfreeW.Block as an input PWSTR but does not encode
 // ownership transfer. Treating it as a string would free a fresh Go UTF-16
 // buffer instead of the LDAP allocation. Keep the mapper's original pointer
@@ -17,6 +17,18 @@ import (
 // the structure as a Go string. DN remains an ordinary optional string.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_bind_sw
 func (g *Generator) shapeFunctionParam(namespace, function, name string, param *win32meta.Param, resolved typemap.Resolved) (shapedParam, bool) {
+	// WinMD omits Optional here, but NULL explicitly selects the local computer.
+	// Correct only the gather input; other functions and shared metadata retain
+	// their original contract. An explicit empty string must remain non-NULL.
+	// https://learn.microsoft.com/windows/win32/api/dsrole/nf-dsrole-dsrolegetprimarydomaininformation
+	if namespace == "Networking.ActiveDirectory" && function == "DsRoleGetPrimaryDomainInformation" && param.Name == "lpServer" {
+		if !isWideStringPtr(resolved) || param.IsOut || param.IsReserved {
+			return shapedParam{}, false
+		}
+		optional := *param
+		optional.IsOptional = true
+		return g.shapeParam(name, &optional, resolved)
+	}
 	if namespace == "Networking.Ldap" {
 		switch function + "." + param.Name {
 		case "ldap_memfreeW.Block", "ldap_bind_sW.cred":

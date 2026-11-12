@@ -13,7 +13,8 @@ func TestLDAPPagingReturnChecksHandle(t *testing.T) {
 		for _, name := range []string{"ldap_search_init_page", "ldap_search_init_pageA", "ldap_search_init_pageW", "other_function"} {
 			t.Run(namespace+"."+name, func(t *testing.T) {
 				metaDir, outDir := t.TempDir(), t.TempDir()
-				meta := &win32meta.NamespaceMeta{Namespace: namespace,
+				meta := &win32meta.NamespaceMeta{
+					Namespace: namespace,
 					Typedefs:  map[string]win32meta.Typedef{"PLDAPSearch": {Underlying: native("IntPtr")}},
 					Functions: []win32meta.Function{withLastError(function(name, "WLDAP32.dll", apiRef(namespace, "PLDAPSearch", "Typedef")))},
 				}

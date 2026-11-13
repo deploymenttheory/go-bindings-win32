@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.6.0...v0.7.0) (2026-11-13)
+
+
+### Features
+
+* **activedirectory:** add mutable UTF-16 credential inputs ([#74](https://github.com/deploymenttheory/go-bindings-win32/issues/74)) ([4ea6257](https://github.com/deploymenttheory/go-bindings-win32/commit/4ea6257adf15a5dbd9f74b7d1c9fdf44d8aca7b1))
+
+
+### Bug Fixes
+
+* **activedirectory:** allow NULL domain-role server ([#72](https://github.com/deploymenttheory/go-bindings-win32/issues/72)) ([fa6dc8c](https://github.com/deploymenttheory/go-bindings-win32/commit/fa6dc8c4593e557cddc4756cf8b079e00381dcc9))
+* **ldap:** check paging initialization handle before reporting success ([#70](https://github.com/deploymenttheory/go-bindings-win32/issues/70)) ([582eab7](https://github.com/deploymenttheory/go-bindings-win32/commit/582eab713e7e8edd1591e448bacca9ba85796742))
+* **ldap:** generate a typed client certificate option helper ([#68](https://github.com/deploymenttheory/go-bindings-win32/issues/68)) ([ddca7e2](https://github.com/deploymenttheory/go-bindings-win32/commit/ddca7e22ef8377d21d78a2eb36c190dcd0a4d43d))
+* **ldap:** preserve native credential identity pointers ([#66](https://github.com/deploymenttheory/go-bindings-win32/issues/66)) ([45a8b4c](https://github.com/deploymenttheory/go-bindings-win32/commit/45a8b4c3930787ea267ed94758252d73a383d6d1))
+* **ldap:** preserve native pointer ownership when freeing strings ([#63](https://github.com/deploymenttheory/go-bindings-win32/issues/63)) ([d700834](https://github.com/deploymenttheory/go-bindings-win32/commit/d7008342e26461ec00ae19cf7dc50b8d64d141e8))
+* **netmanagement:** support nullable managed-account credentials ([#76](https://github.com/deploymenttheory/go-bindings-win32/issues/76)) ([c3441bc](https://github.com/deploymenttheory/go-bindings-win32/commit/c3441bced47d5a07f6031a8a1c121ea655d90763))
+
 ## [0.6.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.5.0...v0.6.0) (2026-11-11)
 
 

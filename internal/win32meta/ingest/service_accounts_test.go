@@ -27,6 +27,7 @@ func TestManagedServiceAccountModules(t *testing.T) {
 		}
 	}
 }
+
 func TestManagedServiceAccountCorrectionScope(t *testing.T) {
 	for _, tc := range []struct{ ns, name, dll, want string }{{"Other", "NetAddServiceAccount", "NETAPI32.dll", "NETAPI32.dll"}, {"NetworkManagement.NetManagement", "Other", "NETAPI32.dll", "NETAPI32.dll"}, {"NetworkManagement.NetManagement", "NetAddServiceAccount", "other.dll", "other.dll"}, {"NetworkManagement.NetManagement", "NetAddServiceAccount", "Netapi32.DLL", "LOGONCLI.dll"}} {
 		fn := win32meta.Function{Name: tc.name, DLL: tc.dll}

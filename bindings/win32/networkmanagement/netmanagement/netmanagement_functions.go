@@ -14,12 +14,17 @@ import (
 )
 
 var (
+	modLOGONCLI = win32.NewDLL("LOGONCLI.dll")
 	modmstask   = win32.NewDLL("mstask.dll")
 	modNETAPI32 = win32.NewDLL("NETAPI32.dll")
 	modrtutils  = win32.NewDLL("rtutils.dll")
 )
 
 var (
+	procNetAddServiceAccount                 = modLOGONCLI.NewProc("NetAddServiceAccount")
+	procNetEnumerateServiceAccounts          = modLOGONCLI.NewProc("NetEnumerateServiceAccounts")
+	procNetIsServiceAccount                  = modLOGONCLI.NewProc("NetIsServiceAccount")
+	procNetRemoveServiceAccount              = modLOGONCLI.NewProc("NetRemoveServiceAccount")
 	procGetNetScheduleAccountInformation     = modmstask.NewProc("GetNetScheduleAccountInformation")
 	procSetNetScheduleAccountInformation     = modmstask.NewProc("SetNetScheduleAccountInformation")
 	procI_NetLogonControl2                   = modNETAPI32.NewProc("I_NetLogonControl2")
@@ -30,7 +35,6 @@ var (
 	procNetAccessGetUserPerms                = modNETAPI32.NewProc("NetAccessGetUserPerms")
 	procNetAccessSetInfo                     = modNETAPI32.NewProc("NetAccessSetInfo")
 	procNetAddAlternateComputerName          = modNETAPI32.NewProc("NetAddAlternateComputerName")
-	procNetAddServiceAccount                 = modNETAPI32.NewProc("NetAddServiceAccount")
 	procNetAlertRaise                        = modNETAPI32.NewProc("NetAlertRaise")
 	procNetAlertRaiseEx                      = modNETAPI32.NewProc("NetAlertRaiseEx")
 	procNetApiBufferAllocate                 = modNETAPI32.NewProc("NetApiBufferAllocate")
@@ -45,7 +49,6 @@ var (
 	procNetConfigSet                         = modNETAPI32.NewProc("NetConfigSet")
 	procNetCreateProvisioningPackage         = modNETAPI32.NewProc("NetCreateProvisioningPackage")
 	procNetEnumerateComputerNames            = modNETAPI32.NewProc("NetEnumerateComputerNames")
-	procNetEnumerateServiceAccounts          = modNETAPI32.NewProc("NetEnumerateServiceAccounts")
 	procNetErrorLogClear                     = modNETAPI32.NewProc("NetErrorLogClear")
 	procNetErrorLogRead                      = modNETAPI32.NewProc("NetErrorLogRead")
 	procNetErrorLogWrite                     = modNETAPI32.NewProc("NetErrorLogWrite")
@@ -65,7 +68,6 @@ var (
 	procNetGroupGetUsers                     = modNETAPI32.NewProc("NetGroupGetUsers")
 	procNetGroupSetInfo                      = modNETAPI32.NewProc("NetGroupSetInfo")
 	procNetGroupSetUsers                     = modNETAPI32.NewProc("NetGroupSetUsers")
-	procNetIsServiceAccount                  = modNETAPI32.NewProc("NetIsServiceAccount")
 	procNetIsServiceAccount2                 = modNETAPI32.NewProc("NetIsServiceAccount2")
 	procNetJoinDomain                        = modNETAPI32.NewProc("NetJoinDomain")
 	procNetLocalGroupAdd                     = modNETAPI32.NewProc("NetLocalGroupAdd")
@@ -90,7 +92,6 @@ var (
 	procNetRemoteComputerSupports            = modNETAPI32.NewProc("NetRemoteComputerSupports")
 	procNetRemoteTOD                         = modNETAPI32.NewProc("NetRemoteTOD")
 	procNetRemoveAlternateComputerName       = modNETAPI32.NewProc("NetRemoveAlternateComputerName")
-	procNetRemoveServiceAccount              = modNETAPI32.NewProc("NetRemoveServiceAccount")
 	procNetRenameMachineInDomain             = modNETAPI32.NewProc("NetRenameMachineInDomain")
 	procNetReplExportDirAdd                  = modNETAPI32.NewProc("NetReplExportDirAdd")
 	procNetReplExportDirDel                  = modNETAPI32.NewProc("NetReplExportDirDel")
@@ -695,7 +696,7 @@ func NetAddAlternateComputerName(Server *string, AlternateName string, DomainAcc
 	return uint32(r1)
 }
 
-// NetAddServiceAccount calls NETAPI32!NetAddServiceAccount.
+// NetAddServiceAccount calls LOGONCLI!NetAddServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaddserviceaccount
 // Minimum OS: windows6.1.
 func NetAddServiceAccount(ServerName *string, AccountName string, Password string, Flags uint32) foundation.NTSTATUS {
@@ -830,7 +831,7 @@ func NetEnumerateComputerNames(Server *string, NameType NET_COMPUTER_NAME_TYPE, 
 	return uint32(r1)
 }
 
-// NetEnumerateServiceAccounts calls NETAPI32!NetEnumerateServiceAccounts.
+// NetEnumerateServiceAccounts calls LOGONCLI!NetEnumerateServiceAccounts.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netenumerateserviceaccounts
 // Minimum OS: windows6.1.
 func NetEnumerateServiceAccounts(ServerName *string, Flags uint32, AccountsCount *uint32, Accounts ***uint16) foundation.NTSTATUS {
@@ -1022,7 +1023,7 @@ func NetGroupSetUsers(servername *string, groupname string, level uint32, buf *b
 	return uint32(r1)
 }
 
-// NetIsServiceAccount calls NETAPI32!NetIsServiceAccount.
+// NetIsServiceAccount calls LOGONCLI!NetIsServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netisserviceaccount
 // Minimum OS: windows6.1.
 func NetIsServiceAccount(ServerName *string, AccountName string, IsService *foundation.BOOL) foundation.NTSTATUS {
@@ -1270,7 +1271,7 @@ func NetRemoveAlternateComputerName(Server *string, AlternateName string, Domain
 	return uint32(r1)
 }
 
-// NetRemoveServiceAccount calls NETAPI32!NetRemoveServiceAccount.
+// NetRemoveServiceAccount calls LOGONCLI!NetRemoveServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netremoveserviceaccount
 // Minimum OS: windows6.1.
 func NetRemoveServiceAccount(ServerName *string, AccountName string, Flags uint32) foundation.NTSTATUS {
@@ -2111,4 +2112,16 @@ func TraceVprintfEx(dwTraceID uint32, dwFlags uint32, lpszFormat string, arglist
 func TraceVprintfExA(dwTraceID uint32, dwFlags uint32, lpszFormat foundation.PSTR, arglist *int8) uint32 {
 	r1, _, _ := syscall.SyscallN(procTraceVprintfExA.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszFormat)), uintptr(unsafe.Pointer(arglist)))
 	return uint32(r1)
+}
+
+// NetAddServiceAccountUTF16 calls LOGONCLI!NetAddServiceAccount with caller-owned UTF-16 buffers.
+// ServerName must be NULL: this API acts on the executing Windows host.
+// AccountName is required and NUL-terminated. Password may be NULL; this wrapper creates no hidden string copies.
+// Keep buffers alive through the synchronous call and clear sensitive buffers afterward. Inputs remain caller-owned.
+// The return value is the native NTSTATUS, not a Win32 last-error code. Probe Procs.NetAddServiceAccount before use.
+// Use documented account flags deliberately: the native default can create an sMSA directory object.
+// https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaddserviceaccount
+func NetAddServiceAccountUTF16(ServerName foundation.PWSTR, AccountName foundation.PWSTR, Password foundation.PWSTR, Flags uint32) foundation.NTSTATUS {
+	r1, _, _ := syscall.SyscallN(procNetAddServiceAccount.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(AccountName)), uintptr(unsafe.Pointer(Password)), uintptr(Flags))
+	return foundation.NTSTATUS(r1)
 }

@@ -1920,3 +1920,15 @@ func SecurityDescriptorToBinarySD(vVarSecDes systemvariant.VARIANT, ppSecurityDe
 	r1, _, _ := win32.Call(procSecurityDescriptorToBinarySD.Addr(), specSecurityDescriptorToBinarySD, nil, uintptr(unsafe.Pointer(&vVarSecDes)), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(pdwSDLength)), uintptr(unsafe.Pointer(_pszServerName)), uintptr(unsafe.Pointer(_userName)), uintptr(unsafe.Pointer(_passWord)), uintptr(dwFlags)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
+
+// DsMakePasswordCredentialsUTF16 calls DsMakePasswordCredentialsW with caller-owned UTF-16 input buffers.
+// Inputs are nullable NUL-terminated buffers; no Go string or hidden UTF-16 copy is created by this wrapper.
+// All three NULL inputs select default credentials. Otherwise User is required; NULL Domain requires a fully qualified User.
+// Keep inputs alive through the call, then clear sensitive buffers. The native credential has its own allocation.
+// Retain the returned credential until every binding using it is unbound, then call DsFreePasswordCredentials.
+// The returned uint32 is the native status (zero is success). Probe Procs.DsMakePasswordCredentials for availability.
+// https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsmakepasswordcredentialsw
+func DsMakePasswordCredentialsUTF16(User foundation.PWSTR, Domain foundation.PWSTR, Password foundation.PWSTR, pAuthIdentity *unsafe.Pointer) uint32 {
+	r1, _, _ := syscall.SyscallN(procDsMakePasswordCredentials.Addr(), uintptr(unsafe.Pointer(User)), uintptr(unsafe.Pointer(Domain)), uintptr(unsafe.Pointer(Password)), uintptr(unsafe.Pointer(pAuthIdentity)))
+	return uint32(r1)
+}

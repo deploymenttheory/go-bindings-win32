@@ -54,6 +54,21 @@ a struct field; it panics on an embedded NUL), `win32.UTF16PtrOrNil(*string)`
 (nil → NULL), `win32.Str(s) *string`, and `win32.UTF16ToString(*uint16) string`
 (UTF-16 → Go).
 
+For credential lifetimes, `activedirectory.DsMakePasswordCredentialsUTF16`
+adds a buffer-based companion to the existing `DsMakePasswordCredentials`
+string API. Pass nullable NUL-terminated `foundation.PWSTR` inputs and an
+output `*unsafe.Pointer`. The companion passes the pointers directly to the
+same Unicode export; it creates no hidden string conversion buffers. Keep the
+inputs alive through the synchronous call, then clear sensitive buffers. The
+all-NULL input selects default credentials; otherwise provide a user, with a
+domain or a fully qualified user such as a UPN. The
+returned opaque native credential owns separate storage. Keep it alive until
+all associated bindings have been unbound, then release it exactly once with
+`DsFreePasswordCredentials`. Do not cast it to a guessed identity struct or
+free caller-owned buffers with that function. This is an additive lifetime
+capability; the existing API's signature and native status semantics remain
+unchanged. See the [native credential contract](https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsmakepasswordcredentialsw).
+
 ## Structs
 
 Generated structs match the C layout exactly (amd64/arm64 LLP64), so you can

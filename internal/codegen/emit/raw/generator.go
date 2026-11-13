@@ -358,6 +358,7 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	// count of metadata APIs emitted in the native-coverage report.
 	functions = append(functions, g.buildLDAPOptionHelpers(meta, procTable, funcImports)...)
 	functions = append(functions, g.buildDSCredentialHelpers(meta, procTable, funcImports)...)
+	functions = append(functions, g.buildServiceAccountHelpers(meta, procTable, funcImports)...)
 	var funcBody strings.Builder
 	if len(dlls) > 0 {
 		block, err := render.DLL(dlls)

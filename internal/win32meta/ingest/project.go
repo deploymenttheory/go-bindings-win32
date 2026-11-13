@@ -279,6 +279,7 @@ func (in *Ingester) projectApis(meta *win32meta.NamespaceMeta, typeDef *winmd.Ty
 			Params:       in.paramsOf(method, &sig),
 			Availability: in.availabilityOf(target),
 		}
+		correctServiceAccountModule(meta.Namespace, &function)
 		if implMap.ImportName != method.Name {
 			function.EntryPoint = implMap.ImportName
 		}

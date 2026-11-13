@@ -1,13 +1,16 @@
 # Native managed service-account bindings
 
-The ingester corrects five managed-account exports from the metadata's
-`NETAPI32.dll` to `LOGONCLI.dll`: Add, Remove, Is, Query and Enumerate. Microsoft's
+The ingester corrects four managed-account exports from the metadata's
+`NETAPI32.dll` to `LOGONCLI.dll`: Add, Remove, Is and Enumerate. Microsoft's
 [Add](https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaddserviceaccount),
 [Remove](https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netremoveserviceaccount)
-and [Is](https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netisserviceaccount)
+and [Is](https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netisserviceaccount),
+plus [Enumerate](https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netenumerateserviceaccounts),
 remarks explicitly identify Logoncli, despite contradictory requirements tables.
 Read-only inspection of the installed ActiveDirectory module also identifies
-Logoncli for its Add/Remove/Is/Query P/Invokes. Both DLLs resolve these exports on
+Logoncli for its Add/Remove/Is/Query P/Invokes. Query retains its documented
+Netapi32 mapping because its public contract has no Logoncli requirement.
+Both DLLs resolve these exports on
 the development host; this change follows the documented implementation DLL
 rather than claiming Netapi32 forwarding is universally absent.
 

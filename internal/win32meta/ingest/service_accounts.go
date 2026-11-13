@@ -18,7 +18,7 @@ func correctServiceAccountModule(namespace string, function *win32meta.Function)
 		return
 	}
 	switch function.Name {
-	case "NetAddServiceAccount", "NetRemoveServiceAccount", "NetIsServiceAccount", "NetQueryServiceAccount", "NetEnumerateServiceAccounts":
+	case "NetAddServiceAccount", "NetRemoveServiceAccount", "NetIsServiceAccount", "NetEnumerateServiceAccounts":
 		function.DLL = "LOGONCLI.dll"
 	}
 }

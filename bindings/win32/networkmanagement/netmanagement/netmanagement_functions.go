@@ -24,7 +24,6 @@ var (
 	procNetAddServiceAccount                 = modLOGONCLI.NewProc("NetAddServiceAccount")
 	procNetEnumerateServiceAccounts          = modLOGONCLI.NewProc("NetEnumerateServiceAccounts")
 	procNetIsServiceAccount                  = modLOGONCLI.NewProc("NetIsServiceAccount")
-	procNetQueryServiceAccount               = modLOGONCLI.NewProc("NetQueryServiceAccount")
 	procNetRemoveServiceAccount              = modLOGONCLI.NewProc("NetRemoveServiceAccount")
 	procGetNetScheduleAccountInformation     = modmstask.NewProc("GetNetScheduleAccountInformation")
 	procSetNetScheduleAccountInformation     = modmstask.NewProc("SetNetScheduleAccountInformation")
@@ -89,6 +88,7 @@ var (
 	procNetMessageNameGetInfo                = modNETAPI32.NewProc("NetMessageNameGetInfo")
 	procNetProvisionComputerAccount          = modNETAPI32.NewProc("NetProvisionComputerAccount")
 	procNetQueryDisplayInformation           = modNETAPI32.NewProc("NetQueryDisplayInformation")
+	procNetQueryServiceAccount               = modNETAPI32.NewProc("NetQueryServiceAccount")
 	procNetRemoteComputerSupports            = modNETAPI32.NewProc("NetRemoteComputerSupports")
 	procNetRemoteTOD                         = modNETAPI32.NewProc("NetRemoteTOD")
 	procNetRemoveAlternateComputerName       = modNETAPI32.NewProc("NetRemoveAlternateComputerName")
@@ -1231,7 +1231,7 @@ func NetQueryDisplayInformation(ServerName string, Level uint32, Index uint32, E
 	return uint32(r1)
 }
 
-// NetQueryServiceAccount calls LOGONCLI!NetQueryServiceAccount.
+// NetQueryServiceAccount calls NETAPI32!NetQueryServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netqueryserviceaccount
 // Minimum OS: windows6.1.
 func NetQueryServiceAccount(ServerName *string, AccountName string, InfoLevel uint32, Buffer **byte) foundation.NTSTATUS {

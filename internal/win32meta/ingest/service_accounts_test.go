@@ -9,7 +9,7 @@ import (
 func TestManagedServiceAccountModules(t *testing.T) {
 	namespaces, _ := ingestAll(t)
 	meta := namespaceByName(t, namespaces, "NetworkManagement.NetManagement")
-	want := map[string]bool{"NetAddServiceAccount": false, "NetRemoveServiceAccount": false, "NetIsServiceAccount": false, "NetQueryServiceAccount": false, "NetEnumerateServiceAccounts": false}
+	want := map[string]bool{"NetAddServiceAccount": false, "NetRemoveServiceAccount": false, "NetIsServiceAccount": false, "NetEnumerateServiceAccounts": false}
 	for _, fn := range meta.Functions {
 		if _, ok := want[fn.Name]; ok {
 			if fn.DLL != "LOGONCLI.dll" {
@@ -17,7 +17,7 @@ func TestManagedServiceAccountModules(t *testing.T) {
 			}
 			want[fn.Name] = true
 		}
-		if fn.Name == "NetUserAdd" && fn.DLL != "NETAPI32.dll" {
+		if (fn.Name == "NetUserAdd" || fn.Name == "NetQueryServiceAccount") && fn.DLL != "NETAPI32.dll" {
 			t.Fatal("unrelated export moved", fn.DLL)
 		}
 	}
